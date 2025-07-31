@@ -23,7 +23,7 @@ const VotingPage: React.FC<VotingPageProps> = ({ voter }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [, setLocation] = useLocation();
-const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/api/validate`;
+const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/api/submit`;
 
   useEffect(() => {
     axios.get('/nominees.json')
