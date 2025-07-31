@@ -23,6 +23,7 @@ const VotingPage: React.FC<VotingPageProps> = ({ voter }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [, setLocation] = useLocation();
+const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/api/validate`;
 
   useEffect(() => {
     axios.get('/nominees.json')
@@ -50,7 +51,7 @@ const VotingPage: React.FC<VotingPageProps> = ({ voter }) => {
     const choices = Object.entries(selections).map(([categoryId, nomineeName]) => ({ categoryId, nomineeName }));
 
     try {
-      await axios.post('https://ules-voting-backend.onrender.com/api/submit', {
+      await axios.post('apiUrl, {
         fullName: voter.fullName,
         matricNumber: voter.matricNumber,
         choices: choices,
