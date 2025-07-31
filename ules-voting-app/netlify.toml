@@ -1,0 +1,18 @@
+# netlify.toml
+
+# This is the main build configuration for Netlify
+[build]
+  # This tells Netlify where your final built site will be located.
+  # For Vite projects, it's always the 'dist' folder.
+  publish = "dist"
+  # The command to build your site.
+  command = "npm run build"
+
+# This is the crucial redirect rule for Single-Page Applications
+[[redirects]]
+  # The source path: '*' is a wildcard for any path
+  from = "/*"
+  # The destination: serve the main index.html file
+  to = "/index.html"
+  # The status code: 200 means "OK", which handles the rewrite correctly for SPAs
+  status = 200
