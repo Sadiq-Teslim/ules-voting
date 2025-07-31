@@ -50,7 +50,7 @@ const VotingPage: React.FC<VotingPageProps> = ({ voter }) => {
     const choices = Object.entries(selections).map(([categoryId, nomineeName]) => ({ categoryId, nomineeName }));
 
     try {
-      await axios.post('http://ules-voting-backend.onrender.com/api/submit', {
+      await axios.post('https://ules-voting-backend.onrender.com/api/submit', {
         fullName: voter.fullName,
         matricNumber: voter.matricNumber,
         choices: choices,
