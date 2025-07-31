@@ -1,0 +1,36 @@
+{
+    "categories": [{
+            "title": "Most Influential Student (Male)",
+            "id": "influential-male",
+            "nominees": [
+                { "id": "jm1", "name": "John Doe", "image": "john-doe.jpg" },
+                { "id": "pj1", "name": "Peter Jones", "image": "peter-jones.jpg" },
+                { "id": "mr1", "name": "Mike Ross", "image": null }
+            ]
+        },
+        {
+            "title": "Most Influential Student (Female)",
+            "id": "influential-female",
+            "nominees": [
+                { "id": "js2", "name": "Jane Smith", "image": "jane-smith.jpg" },
+                { "id": "ew2", "name": "Emily White", "image": "emily-white.jpg" }
+            ]
+        },
+        {
+            "title": "Best Use of LinkedIn",
+            "id": "linkedin-pro",
+            "nominees": [
+                { "id": "dc3", "name": "David Chan", "image": "david-chan.jpg" },
+                { "id": "sl3", "name": "Sarah Lee", "image": "sarah-lee.jpg" }
+            ]
+        },
+        {
+            "title": "Entrepreneur of the Year",
+            "id": "entrepreneur-of-the-year",
+            "nominees": [
+                { "id": "ab4", "name": "Alice Brown", "image": null },
+                { "id": "bg4", "name": "Ben Green", "image": "ben-green.jpg" }
+            ]
+        }
+    ]
+}
