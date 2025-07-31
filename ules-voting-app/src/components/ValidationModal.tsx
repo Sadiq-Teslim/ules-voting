@@ -15,6 +15,7 @@ const ValidationModal: React.FC<ValidationModalProps> = ({ isOpen, onClose, onSu
   // State for handling loading and error messages
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/api/validate`;
 
   const handleValidation = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,7 +25,7 @@ const ValidationModal: React.FC<ValidationModalProps> = ({ isOpen, onClose, onSu
     try {
       // --- API Call to Your Backend ---
       // NOTE: For production, you would use your live Render URL
-      const response = await axios.post('https://ules-voting-backend.onrender.com/api/validate', {
+      const response = await axios.post(apiUrl, {
         matricNumber: matricNumber,
       });
 
