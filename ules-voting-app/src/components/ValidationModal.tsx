@@ -24,7 +24,7 @@ const ValidationModal: React.FC<ValidationModalProps> = ({ isOpen, onClose, onSu
     try {
       // --- API Call to Your Backend ---
       // NOTE: For production, you would use your live Render URL
-      const response = await axios.post('http://ules-voting-backend.onrender.com/api/validate', {
+      const response = await axios.post('https://ules-voting-backend.onrender.com/api/validate', {
         matricNumber: matricNumber,
       });
 
