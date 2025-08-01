@@ -121,6 +121,10 @@ const AdminPage = () => {
       setIsRefreshing(false);
     }
   }, [API_BASE_URL, password]);
+  
+  useEffect(() => {
+    document.title = "ADMIN DASHBOARD | ULES AWARDS";
+  }, []);
 
   useEffect(() => {
     if (!isAuthenticated) return;
