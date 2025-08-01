@@ -41,7 +41,7 @@ interface NomineeResult {
   votes: number;
 }
 interface CategoryResult {
-  categoryId: string;
+  category: string;
   nominees: NomineeResult[];
 }
 interface CategoryInfo {
@@ -68,9 +68,9 @@ const AdminPage = () => {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const getCategoryTitle = useCallback(
-    (categoryId: string) => {
+    (category: string) => {
       return (
-        categories.find((c) => c.id === categoryId)?.title || "Unknown Category"
+        categories.find((c) => c.id === category)?.title || "Unknown Category"
       );
     },
     [categories]
@@ -141,7 +141,7 @@ const AdminPage = () => {
     const totalCategories = categories.length;
     const totalNominees = categories.reduce(
       (sum, category) => {
-        const categoryData = results.find(r => r.categoryId === category.id);
+        const categoryData = results.find(r => r.category === category.id);
         return sum + (categoryData?.nominees.length || 0);
       },
       0
@@ -283,7 +283,7 @@ const AdminPage = () => {
         </div>
         {results.map((result) => (
           <div
-            key={result.categoryId}
+            key={result.category}
             style={{ marginBottom: "30px", pageBreakInside: "avoid" }}
           >
             <h2
@@ -295,7 +295,7 @@ const AdminPage = () => {
                 marginBottom: "10px",
               }}
             >
-              {getCategoryTitle(result.categoryId)}
+              {getCategoryTitle(result.category)}
             </h2>
             <ul style={{ listStyle: "none", padding: 0 }}>
               {result.nominees
@@ -404,12 +404,12 @@ const AdminPage = () => {
 
           return (
             <section
-              key={result.categoryId}
+              key={result.category}
               className="bg-slate-800 p-6 rounded-lg border border-slate-700"
             >
               <div className="border-b border-slate-700 pb-4 mb-6">
                 <h2 className="text-2xl font-bold text-cyan-400">
-                  {getCategoryTitle(result.categoryId)}
+                  {getCategoryTitle(result.category)}
                 </h2>
                 {winner && (
                   <div className="mt-2 inline-flex items-center space-x-2 bg-yellow-500/10 border border-yellow-500/30 px-3 py-1 rounded-full">
