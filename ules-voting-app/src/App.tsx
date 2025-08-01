@@ -5,6 +5,7 @@ import LandingPage from "./pages/LandingPage";
 import VotingPage from "./pages/VotingPage";
 import SuccessPage from "./pages/SuccessPage";
 import AdminPage from "./pages/AdminPage";
+import NominationPage from "./pages/NominationPage";
 
 // Define a type for our voter data
 export interface VoterInfo {
@@ -27,7 +28,7 @@ function App() {
           {voter ? <VotingPage voter={voter} /> : <Redirect to="/" />}
         </Route>
 
-        {/* You can uncomment these as you build them */}
+        <Route path="/nominate" component={NominationPage} />
         <Route path="/success" component={SuccessPage} />
         <Route path="/admin" component={AdminPage} />
 
