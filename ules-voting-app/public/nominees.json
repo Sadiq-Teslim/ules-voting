@@ -9,6 +9,15 @@
             ]
         },
         {
+            "title": "Most Influential Student (Fresher)",
+            "id": "influential-fresher",
+            "nominees": [
+                { "id": "jm1", "name": "Khadijat Olokodanna", "image": null },
+                { "id": "pj1", "name": "Peter Janet", "image": null },
+                { "id": "mr1", "name": "Mike Bethie", "image": null }
+            ]
+        },
+        {
             "title": "Most Influential Student (Female)",
             "id": "influential-female",
             "nominees": [
