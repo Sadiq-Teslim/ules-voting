@@ -271,7 +271,7 @@ const AdminPage = () => {
           }}
         >
           <img
-            src="/nobguleslogo.png"
+            src="/nobgules-logo.png"
             alt="ULES Logo"
             style={{ width: "80px", height: "auto", marginRight: "20px" }}
           />
