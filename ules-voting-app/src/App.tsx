@@ -1,9 +1,9 @@
 // src/App.tsx
-import React, { useState } from "react";
+import { useState } from "react";
 import { Switch, Route, Redirect } from "wouter";
 import LandingPage from "./pages/LandingPage";
 import VotingPage from "./pages/VotingPage";
-import SuccessPage from "./pages/SuccessPage"; 
+import SuccessPage from "./pages/SuccessPage";
 import AdminPage from "./pages/AdminPage";
 
 // Define a type for our voter data
@@ -18,19 +18,17 @@ function App() {
   return (
     <div className="min-h-screen bg-slate-900 text-white flex items-center justify-center p-4 font-sans">
       <Switch>
-        {/* The LandingPage now receives the 'setVoter' function to update the state */}
         <Route path="/">
           <LandingPage setVoter={setVoter} />
         </Route>
 
-        {/* The VotingPage is now protected. It only renders if a voter is set. */}
         <Route path="/vote">
+          {/* This is the key change: Pass the 'voter' object as a prop */}
           {voter ? <VotingPage voter={voter} /> : <Redirect to="/" />}
         </Route>
 
-        {/* The SuccessPage will show after a successful vote */}
+        {/* You can uncomment these as you build them */}
         <Route path="/success" component={SuccessPage} />
-
         <Route path="/admin" component={AdminPage} />
 
         <Route>404: Page Not Found!</Route>
