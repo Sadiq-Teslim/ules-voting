@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // src/pages/VotingPage.tsx
-import { useState, useEffect, type ClassType } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation, Redirect } from "wouter";
 import type { VoterInfo } from "../App"; // Import the VoterInfo type
