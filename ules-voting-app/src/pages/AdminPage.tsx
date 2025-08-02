@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import axios from "axios";
-import { Bar } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2"; 
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -17,13 +17,11 @@ import {
   Download,
   LogOut,
   Trophy,
-  Users,
-  Award,
-  Star,
   RefreshCw,
   Eye,
   EyeOff,
-  Crown,
+  Settings,
+  ShieldAlert,
 } from "lucide-react";
 
 ChartJS.register(
@@ -35,64 +33,135 @@ ChartJS.register(
   Legend
 );
 
-// --- Types ---
+// --- TypeScript Types ---
 interface NomineeResult {
   name: string;
   votes: number;
 }
 interface CategoryResult {
-  category: string;
+  categoryId: string;
   nominees: NomineeResult[];
 }
 interface CategoryInfo {
   id: string;
   title: string;
+  nominees: { id: string; name: string; imageUrl?: string }[];
+}
+interface Nomination {
+  _id: string;
+  fullName: string;
+  popularName?: string;
+  category: string;
+  imageUrl?: string;
+}
+interface ResetModalState {
+  isOpen: boolean;
+  title: string;
+  message: string;
+  onConfirm: () => void;
+  confirmText: string;
 }
 
-// --- Chart Colors to match your image ---
-const chartColors = ["rgba(59, 130, 246, 0.8)", "rgba(16, 185, 129, 0.8)"];
-const chartBorderColors = ["rgb(59, 130, 246)", "rgb(16, 185, 129)"];
+// --- Reusable Confirmation Modal ---
+const ConfirmationModal: React.FC<
+  ResetModalState & { onClose: () => void; isProcessing: boolean }
+> = ({
+  isOpen,
+  onClose,
+  onConfirm,
+  title,
+  message,
+  confirmText,
+  isProcessing,
+}) => {
+  if (!isOpen) return null;
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+      <div className="bg-slate-800 rounded-lg p-8 max-w-md w-full border border-slate-700">
+        <h2 className="text-xl font-bold text-white mb-4">{title}</h2>
+        <p className="text-slate-300 mb-8">{message}</p>
+        <div className="flex justify-end gap-4">
+          <button
+            onClick={onClose}
+            disabled={isProcessing}
+            className="bg-slate-600 hover:bg-slate-500 text-white font-semibold py-2 px-5 rounded-lg"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={onConfirm}
+            disabled={isProcessing}
+            className="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-5 rounded-lg disabled:cursor-wait"
+          >
+            {isProcessing ? "Processing..." : confirmText}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const AdminPage = () => {
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [results, setResults] = useState<CategoryResult[]>([]);
   const [categories, setCategories] = useState<CategoryInfo[]>([]);
+  const [pendingNominations, setPendingNominations] = useState<Nomination[]>(
+    []
+  );
+  const [electionStatus, setElectionStatus] = useState<"open" | "closed">(
+    "closed"
+  );
   const [error, setError] = useState("");
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [isInitialLoading, setIsInitialLoading] = useState(true);
   const [isDownloading, setIsDownloading] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [activeTab, setActiveTab] = useState("results");
+  const [modalState, setModalState] = useState<ResetModalState>({
+    isOpen: false,
+    title: "",
+    message: "",
+    onConfirm: () => {},
+    confirmText: "",
+  });
+  const [isProcessingModal, setIsProcessingModal] = useState(false);
 
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const getCategoryTitle = useCallback(
-    (category: string) => {
-      return (
-        categories.find((c) => c.id === category)?.title || "Unknown Category"
-      );
-    },
+    (categoryId: string) =>
+      categories.find((c) => c.id === categoryId)?.title || categoryId,
     [categories]
   );
 
-  const fetchAllData = useCallback(
+  const fetchAllAdminData = useCallback(
     async (currentPassword: string) => {
-      // Don't set loading to true here, handle it in login
+      setIsInitialLoading(true);
       try {
-        const [resultsRes, categoriesRes] = await Promise.all([
-          axios.post(`${API_BASE_URL}/api/results`, {
-            password: currentPassword,
-          }),
-          axios.get("/nominees.json"),
-        ]);
+        const [resultsRes, nominationsRes, categoriesRes, statusRes] =
+          await Promise.all([
+            axios.post(`${API_BASE_URL}/api/results`, {
+              password: currentPassword,
+            }),
+            axios.post(`${API_BASE_URL}/api/pending-nominations`, {
+              password: currentPassword,
+            }),
+            axios.get("/nominees.json"),
+            axios.get(`${API_BASE_URL}/api/election-status`),
+          ]);
         setResults(resultsRes.data);
+        setPendingNominations(nominationsRes.data);
         setCategories(categoriesRes.data.categories);
+        setElectionStatus(statusRes.data.status);
         return true;
       } catch (err) {
         setError("Access Denied. Invalid Password.");
         setIsAuthenticated(false);
         return false;
+      } finally {
+        setIsInitialLoading(false);
       }
     },
     [API_BASE_URL]
@@ -102,33 +171,30 @@ const AdminPage = () => {
     e.preventDefault();
     setIsLoggingIn(true);
     setError("");
-    const success = await fetchAllData(password);
-    if (success) {
-      setIsAuthenticated(true);
-      setIsInitialLoading(false);
-    }
+    const success = await fetchAllAdminData(password);
+    if (success) setIsAuthenticated(true);
     setIsLoggingIn(false);
   };
 
   const handleRefresh = useCallback(async () => {
     setIsRefreshing(true);
     try {
-      const res = await axios.post(`${API_BASE_URL}/api/results`, { password });
-      setResults(res.data);
+      const [resultsRes, nominationsRes] = await Promise.all([
+        axios.post(`${API_BASE_URL}/api/results`, { password }),
+        axios.post(`${API_BASE_URL}/api/pending-nominations`, { password }),
+      ]);
+      setResults(resultsRes.data);
+      setPendingNominations(nominationsRes.data);
     } catch (err) {
       console.error("Refresh failed:", err);
     } finally {
       setIsRefreshing(false);
     }
   }, [API_BASE_URL, password]);
-  
-  useEffect(() => {
-    document.title = "ADMIN DASHBOARD | ULES AWARDS";
-  }, []);
 
   useEffect(() => {
     if (!isAuthenticated) return;
-    const interval = setInterval(handleRefresh, 15000); // Poll every 15 seconds
+    const interval = setInterval(handleRefresh, 15000);
     return () => clearInterval(interval);
   }, [isAuthenticated, handleRefresh]);
 
@@ -144,10 +210,7 @@ const AdminPage = () => {
     );
     const totalCategories = categories.length;
     const totalNominees = categories.reduce(
-      (sum, category) => {
-        const categoryData = results.find(r => r.category === category.id);
-        return sum + (categoryData?.nominees.length || 0);
-      },
+      (sum, category) => sum + category.nominees.length,
       0
     );
     return { totalVotes, totalCategories, totalNominees };
@@ -180,7 +243,37 @@ const AdminPage = () => {
     }
   };
 
-  // --- LOGIN SCREEN ---
+  const handleToggleElectionStatus = async () => {
+    setIsProcessingModal(true);
+    try {
+      const res = await axios.post(`${API_BASE_URL}/api/toggle-election`, {
+        password,
+      });
+      setElectionStatus(res.data.newStatus);
+    } catch (err) {
+      alert("Failed to change status.");
+    } finally {
+      setIsProcessingModal(false);
+      setModalState({ ...modalState, isOpen: false });
+    }
+  };
+
+  const handleDeleteAllNominations = async () => {
+    setIsProcessingModal(true);
+    try {
+      const res = await axios.post(`${API_BASE_URL}/api/delete-nominations`, {
+        password,
+      });
+      alert(res.data.message);
+      setPendingNominations([]);
+    } catch (err) {
+      alert("Failed to delete nominations.");
+    } finally {
+      setIsProcessingModal(false);
+      setModalState({ ...modalState, isOpen: false });
+    }
+  };
+
   if (!isAuthenticated) {
     return (
       <div className="w-full max-w-md mx-auto">
@@ -241,8 +334,7 @@ const AdminPage = () => {
     );
   }
 
-  // --- LOADING SCREEN (FIXES RACE CONDITION) ---
-  if (isInitialLoading || categories.length === 0) {
+  if (isInitialLoading) {
     return (
       <div className="text-center text-xl text-slate-400">
         Loading Dashboard...
@@ -250,10 +342,14 @@ const AdminPage = () => {
     );
   }
 
-  // --- MAIN DASHBOARD ---
   return (
     <div className="w-full max-w-7xl mx-auto p-4 sm:p-6 bg-slate-900 text-white">
-      {/* Hidden div for PDF generation */}
+      <ConfirmationModal
+        {...modalState}
+        onClose={() => setModalState({ ...modalState, isOpen: false })}
+        isProcessing={isProcessingModal}
+      />
+
       <div
         id="pdf-report"
         style={{
@@ -275,7 +371,7 @@ const AdminPage = () => {
           }}
         >
           <img
-            src="/nobgules-logo.png"
+            src="/nobguleslogo.png"
             alt="ULES Logo"
             style={{ width: "80px", height: "auto", marginRight: "20px" }}
           />
@@ -287,7 +383,7 @@ const AdminPage = () => {
         </div>
         {results.map((result) => (
           <div
-            key={result.category}
+            key={result.categoryId}
             style={{ marginBottom: "30px", pageBreakInside: "avoid" }}
           >
             <h2
@@ -299,7 +395,7 @@ const AdminPage = () => {
                 marginBottom: "10px",
               }}
             >
-              {getCategoryTitle(result.category)}
+              {getCategoryTitle(result.categoryId)}
             </h2>
             <ul style={{ listStyle: "none", padding: 0 }}>
               {result.nominees
@@ -393,116 +489,213 @@ const AdminPage = () => {
         </div>
       </div>
 
-      <div className="space-y-8">
-        {results.map((result) => {
-          const totalVotesInCategory = result.nominees.reduce(
-            (sum, nominee) => sum + nominee.votes,
-            0
-          );
-          const winner =
-            totalVotesInCategory > 0
-              ? result.nominees.reduce((prev, current) =>
-                  prev.votes > current.votes ? prev : current
-                )
-              : null;
-
-          return (
-            <section
-              key={result.category}
-              className="bg-slate-800 p-6 rounded-lg border border-slate-700"
-            >
-              <div className="border-b border-slate-700 pb-4 mb-6">
-                <h2 className="text-2xl font-bold text-cyan-400">
-                  {getCategoryTitle(result.category)}
-                </h2>
-                {winner && (
-                  <div className="mt-2 inline-flex items-center space-x-2 bg-yellow-500/10 border border-yellow-500/30 px-3 py-1 rounded-full">
-                    <Crown className="w-4 h-4 text-yellow-400" />
-                    <span className="text-yellow-300 text-sm font-medium">
-                      Leading: {winner.name} ({winner.votes} votes)
-                    </span>
-                  </div>
-                )}
-              </div>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div>
-                  <h3 className="text-lg font-semibold text-white mb-4">
-                    Vote Tally
-                  </h3>
-                  <ul className="space-y-2">
-                    {result.nominees
-                      .sort((a, b) => b.votes - a.votes)
-                      .map((nominee) => {
-                        const percentage =
-                          totalVotesInCategory > 0
-                            ? (nominee.votes / totalVotesInCategory) * 100
-                            : 0;
-                        return (
-                          <li
-                            key={nominee.name}
-                            className="relative bg-slate-700/50 p-3 rounded-lg overflow-hidden"
-                          >
-                            <div
-                              className="absolute top-0 left-0 h-full bg-cyan-500/20"
-                              style={{ width: `${percentage}%` }}
-                            />
-                            <div className="relative flex justify-between items-center">
-                              <div>
-                                <span className="font-medium text-white">
-                                  {nominee.name}
-                                </span>
-                                <p className="text-xs text-slate-400">
-                                  {percentage.toFixed(1)}%
-                                </p>
-                              </div>
-                              <span className="font-bold text-lg text-cyan-300">
-                                {nominee.votes.toLocaleString()}
-                              </span>
-                            </div>
-                          </li>
-                        );
-                      })}
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-white mb-4">
-                    Chart
-                  </h3>
-                  <div className="h-64">
-                    <Bar
-                      data={{
-                        labels: result.nominees.map((n) => n.name),
-                        datasets: [
-                          {
-                            data: result.nominees.map((n) => n.votes),
-                            backgroundColor: chartColors,
-                            borderColor: chartBorderColors,
-                            borderWidth: 1,
-                            borderRadius: 4,
-                          },
-                        ],
-                      }}
-                      options={{
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        indexAxis: "x",
-                        scales: {
-                          y: {
-                            beginAtZero: true,
-                            ticks: { color: "#cbd5e1", stepSize: 1 },
-                          },
-                          x: { ticks: { color: "#cbd5e1" } },
-                        },
-                        plugins: { legend: { display: false } },
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-            </section>
-          );
-        })}
+      <div className="mb-8 border-b border-slate-700">
+        <nav className="flex space-x-6">
+          <button
+            onClick={() => setActiveTab("results")}
+            className={`py-4 px-1 font-semibold ${
+              activeTab === "results"
+                ? "text-cyan-400 border-b-2 border-cyan-400"
+                : "text-slate-400"
+            }`}
+          >
+            Live Results
+          </button>
+          <button
+            onClick={() => setActiveTab("nominations")}
+            className={`py-4 px-1 font-semibold relative ${
+              activeTab === "nominations"
+                ? "text-cyan-400 border-b-2 border-cyan-400"
+                : "text-slate-400"
+            }`}
+          >
+            Manage Nominations{" "}
+            {pendingNominations.length > 0 && (
+              <span className="absolute top-3 -right-4 bg-red-500 text-white text-xs w-5 h-5 rounded-full">
+                {pendingNominations.length}
+              </span>
+            )}
+          </button>
+          <button
+            onClick={() => setActiveTab("settings")}
+            className={`py-4 px-1 font-semibold ${
+              activeTab === "settings"
+                ? "text-cyan-400 border-b-2 border-cyan-400"
+                : "text-slate-400"
+            }`}
+          >
+            Settings
+          </button>
+        </nav>
       </div>
+
+      {activeTab === "results" && (
+        <div className="space-y-8">
+          {results.map((result) => (
+            <div key={result.categoryId}>
+              <h3 className="font-bold text-xl text-cyan-400 mb-2">
+                {getCategoryTitle(result.categoryId)}
+              </h3>
+              <Bar
+                data={{
+                  labels: result.nominees.map(n => n.name),
+                  datasets: [{
+                    label: getCategoryTitle(result.categoryId),
+                    data: result.nominees.map(n => n.votes),
+                    backgroundColor: 'rgba(14, 165, 233, 0.5)',
+                    borderColor: 'rgb(14, 165, 233)',
+                    borderWidth: 1
+                  }]
+                }}
+                options={{
+                  responsive: true,
+                  plugins: {
+                    legend: {
+                      display: false
+                    },
+                    title: {
+                      display: false
+                    }
+                  },
+                  scales: {
+                    y: {
+                      beginAtZero: true,
+                      ticks: {
+                        stepSize: 1
+                      }
+                    }
+                  }
+                }}
+              />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {activeTab === "nominations" && (
+        <section>
+          <h2 className="text-3xl font-bold text-cyan-400 mb-4">
+            Review Nominations
+          </h2>
+          {pendingNominations.length === 0 ? (
+            <p className="text-slate-400 bg-slate-800 p-6 rounded-lg">
+              No pending nominations.
+            </p>
+          ) : (
+            <div className="bg-slate-800 p-4 rounded-lg">
+              <div className="space-y-4">
+                {Object.entries(
+                  pendingNominations.reduce((acc, nom) => {
+                    (acc[nom.category] = acc[nom.category] || []).push(nom);
+                    return acc;
+                  }, {} as Record<string, Nomination[]>)
+                ).map(([categoryId, noms]) => (
+                  <div key={categoryId}>
+                    <h3 className="font-bold text-xl text-cyan-400 mb-2">
+                      {getCategoryTitle(categoryId)} ({noms.length})
+                    </h3>
+                    <ul className="space-y-2">
+                      {noms.map((nom) => (
+                        <li
+                          key={nom._id}
+                          className="flex items-center gap-4 bg-slate-700 p-2 rounded"
+                        >
+                          <img
+                            src={nom.imageUrl || "/placeholder.png"}
+                            alt={nom.fullName}
+                            className="w-12 h-12 rounded-full object-cover"
+                          />
+                          <span className="font-semibold">
+                            {nom.fullName}{" "}
+                            {nom.popularName && `(${nom.popularName})`}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </section>
+      )}
+
+      {activeTab === "settings" && (
+        <section>
+          <h2 className="text-3xl font-bold text-cyan-400">
+            Election Settings
+          </h2>
+          <div className="mt-6 space-y-6">
+            <div className="bg-slate-800 p-6 rounded-lg border border-slate-700">
+              <h3 className="text-lg font-semibold flex items-center gap-2">
+                <Settings className="text-cyan-400" /> Election Status
+              </h3>
+              <p className="text-sm text-slate-400 mt-2">
+                Control whether students can access the voting page.
+              </p>
+              <p className="mt-4">
+                Current Status:{" "}
+                <span
+                  className={`font-bold px-2 py-1 rounded-full text-sm ${
+                    electionStatus === "open"
+                      ? "bg-green-500/20 text-green-400"
+                      : "bg-red-500/20 text-red-400"
+                  }`}
+                >
+                  {electionStatus.toUpperCase()}
+                </span>
+              </p>
+              <button
+                onClick={() =>
+                  setModalState({
+                    isOpen: true,
+                    title: `Confirm: ${
+                      electionStatus === "closed" ? "Open" : "Close"
+                    } Election`,
+                    message: `Are you sure you want to ${
+                      electionStatus === "closed" ? "OPEN" : "CLOSE"
+                    } the election for all users?`,
+                    onConfirm: handleToggleElectionStatus,
+                    confirmText: `Yes, ${
+                      electionStatus === "closed" ? "Open" : "Close"
+                    } Election`,
+                  })
+                }
+                className={`mt-4 font-semibold py-2 px-4 rounded-lg ${
+                  electionStatus === "closed" ? "bg-green-600" : "bg-yellow-600"
+                }`}
+              >
+                {electionStatus === "closed"
+                  ? "Open Election"
+                  : "Close Election"}
+              </button>
+            </div>
+            <div className="bg-slate-800 p-6 rounded-lg border border-red-500/30">
+              <h3 className="text-lg font-semibold text-red-400 flex items-center gap-2">
+                <ShieldAlert /> Danger Zone
+              </h3>
+              <p className="text-sm text-slate-400 mt-2">
+                This action is permanent and cannot be undone.
+              </p>
+              <button
+                onClick={() =>
+                  setModalState({
+                    isOpen: true,
+                    title: "Confirm: Delete All Nominations",
+                    message:
+                      "This will permanently delete ALL pending nominations. This is useful for clearing out old data before a new election. Are you sure?",
+                    onConfirm: handleDeleteAllNominations,
+                    confirmText: "Yes, Delete All",
+                  })
+                }
+                className="mt-4 bg-red-700 text-white font-semibold py-2 px-4 rounded-lg"
+              >
+                Delete All Pending Nominations
+              </button>
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 };
