@@ -1,8 +1,11 @@
 // src/pages/SuccessPage.tsx
-import React from 'react';
+import { useEffect } from 'react';
 import { Link } from "wouter";
 
 const SuccessPage = () => {
+  useEffect(() => {
+    document.title = "Successful Voting | ULES Awards  ";
+  }, []);
   return (
     <div className="text-center bg-slate-800/50 p-8 rounded-lg border border-slate-700">
       <h1 className="text-4xl font-bold text-green-400 mb-4">Vote Submitted!</h1>
@@ -15,5 +18,7 @@ const SuccessPage = () => {
     </div>
   );
 };
+
+
 
 export default SuccessPage;

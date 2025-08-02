@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from "wouter";
 import ValidationModal from '../components/ValidationModal';
 import { Trophy, Users, Award, ArrowRight, Sparkles, Crown, Star } from 'lucide-react';
@@ -12,6 +12,10 @@ interface LandingPageProps {
 const LandingPage: React.FC<LandingPageProps> = ({ setVoter }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [, setLocation] = useLocation();
+
+  useEffect(() => {
+    document.title = "ULES Awards | Home";
+  }, []);
 
   const handleValidationSuccess = (matricNumber: string, fullName: string) => {
     setVoter({ fullName, matricNumber });

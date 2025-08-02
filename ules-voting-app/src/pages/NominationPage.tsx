@@ -35,11 +35,11 @@ const NominationPage = () => {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    document.title = "ULES Awards | Nomination";
-    axios
-      .get("/nominees.json")
-      .then((res) => setCategories(res.data.categories));
-  }, []);
+  document.title = "ULES Awards | Nomination";
+  axios
+    .get("/nominees.json")
+    .then((res) => setCategories(res.data.categories));
+}, []);
 
   const handleInputChange = (
     id: number,
@@ -69,9 +69,7 @@ const NominationPage = () => {
     ]);
   const removeNominationForm = (id: number) =>
     setNominationForms((forms) => forms.filter((form) => form.id !== id));
-  useEffect(() => {
-    document.title = "ADMIN DASHBOARD | ULES AWARDS";
-  }, []);
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");

@@ -215,7 +215,9 @@ const AdminPage = () => {
     );
     return { totalVotes, totalCategories, totalNominees };
   }, [results, categories]);
-
+  useEffect(() => {
+    document.title = "ULES Awards | Admin Dashboard";
+  }, []);
   const handleDownloadPdf = async () => {
     const reportElement = document.getElementById("pdf-report");
     if (!reportElement) return alert("Could not generate PDF.");
@@ -701,3 +703,4 @@ const AdminPage = () => {
 };
 
 export default AdminPage;
+
