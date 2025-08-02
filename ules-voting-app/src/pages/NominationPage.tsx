@@ -106,7 +106,8 @@ const NominationPage = () => {
       setMessage("Finalizing submission...");
       const response = await axios.post(
         `${import.meta.env.VITE_API_BASE_URL}/api/nominate`,
-nominationsData
+        { nominations: nominationsData },
+        { headers: { "Content-Type": "application/json" } }
       );
       console.log("Nomination POST status:", response.status, response.data);
       setStatus("success");
