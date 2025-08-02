@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import axios from "axios";
-import { Bar } from "react-chartjs-2"; 
+import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -23,23 +23,21 @@ import {
   Settings,
   ShieldAlert,
 } from "lucide-react";
-
 ChartJS.register(
   CategoryScale,
-  LinearScale,
+  LinearScale, // This was the missing piece
   BarElement,
   Title,
   Tooltip,
   Legend
 );
-
 // --- TypeScript Types ---
 interface NomineeResult {
   name: string;
   votes: number;
 }
 interface CategoryResult {
-  categoryId: string;
+  category: string;
   nominees: NomineeResult[];
 }
 interface CategoryInfo {
@@ -61,7 +59,6 @@ interface ResetModalState {
   onConfirm: () => void;
   confirmText: string;
 }
-
 // --- Reusable Confirmation Modal ---
 const ConfirmationModal: React.FC<
   ResetModalState & { onClose: () => void; isProcessing: boolean }
@@ -102,6 +99,7 @@ const ConfirmationModal: React.FC<
 };
 
 const AdminPage = () => {
+  // --- (All state variables remain the same as your code) ---
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [results, setResults] = useState<CategoryResult[]>([]);
@@ -131,8 +129,8 @@ const AdminPage = () => {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const getCategoryTitle = useCallback(
-    (categoryId: string) =>
-      categories.find((c) => c.id === categoryId)?.title || categoryId,
+    (category: string) =>
+      categories.find((c) => c.id === category)?.title || category,
     [categories]
   );
 
@@ -224,7 +222,9 @@ const AdminPage = () => {
     setIsDownloading(true);
     try {
       const canvas = await html2canvas(reportElement, { scale: 2 });
-      const imgData = canvas.toDataURL("image/png");
+      // Use JPEG format for compression
+      const imgData = canvas.toDataURL("image/jpeg", 0.9); // 0.9 is quality level
+
       const pdf = new jsPDF({
         orientation: "portrait",
         unit: "mm",
@@ -233,7 +233,18 @@ const AdminPage = () => {
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const imgWidth = pdfWidth - 20;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
+
+      // Use JPEG compression in the PDF itself
+      pdf.addImage(
+        imgData,
+        "JPEG",
+        10,
+        10,
+        imgWidth,
+        imgHeight,
+        undefined,
+        "FAST"
+      );
       pdf.save(
         `ules-awards-results-${new Date().toISOString().slice(0, 10)}.pdf`
       );
@@ -385,7 +396,7 @@ const AdminPage = () => {
         </div>
         {results.map((result) => (
           <div
-            key={result.categoryId}
+            key={result.category}
             style={{ marginBottom: "30px", pageBreakInside: "avoid" }}
           >
             <h2
@@ -397,7 +408,7 @@ const AdminPage = () => {
                 marginBottom: "10px",
               }}
             >
-              {getCategoryTitle(result.categoryId)}
+              {getCategoryTitle(result.category)}
             </h2>
             <ul style={{ listStyle: "none", padding: 0 }}>
               {result.nominees
@@ -534,39 +545,41 @@ const AdminPage = () => {
       {activeTab === "results" && (
         <div className="space-y-8">
           {results.map((result) => (
-            <div key={result.categoryId}>
+            <div key={result.category}>
               <h3 className="font-bold text-xl text-cyan-400 mb-2">
-                {getCategoryTitle(result.categoryId)}
+                {getCategoryTitle(result.category)}
               </h3>
               <Bar
                 data={{
-                  labels: result.nominees.map(n => n.name),
-                  datasets: [{
-                    label: getCategoryTitle(result.categoryId),
-                    data: result.nominees.map(n => n.votes),
-                    backgroundColor: 'rgba(14, 165, 233, 0.5)',
-                    borderColor: 'rgb(14, 165, 233)',
-                    borderWidth: 1
-                  }]
+                  labels: result.nominees.map((n) => n.name),
+                  datasets: [
+                    {
+                      label: getCategoryTitle(result.category),
+                      data: result.nominees.map((n) => n.votes),
+                      backgroundColor: "rgba(14, 165, 233, 0.5)",
+                      borderColor: "rgb(14, 165, 233)",
+                      borderWidth: 1,
+                    },
+                  ],
                 }}
                 options={{
                   responsive: true,
                   plugins: {
                     legend: {
-                      display: false
+                      display: false,
                     },
                     title: {
-                      display: false
-                    }
+                      display: false,
+                    },
                   },
                   scales: {
                     y: {
                       beginAtZero: true,
                       ticks: {
-                        stepSize: 1
-                      }
-                    }
-                  }
+                        stepSize: 1,
+                      },
+                    },
+                  },
                 }}
               />
             </div>
@@ -591,10 +604,10 @@ const AdminPage = () => {
                     (acc[nom.category] = acc[nom.category] || []).push(nom);
                     return acc;
                   }, {} as Record<string, Nomination[]>)
-                ).map(([categoryId, noms]) => (
-                  <div key={categoryId}>
+                ).map(([category, noms]) => (
+                  <div key={category}>
                     <h3 className="font-bold text-xl text-cyan-400 mb-2">
-                      {getCategoryTitle(categoryId)} ({noms.length})
+                      {getCategoryTitle(category)} ({noms.length})
                     </h3>
                     <ul className="space-y-2">
                       {noms.map((nom) => (
@@ -703,4 +716,3 @@ const AdminPage = () => {
 };
 
 export default AdminPage;
-

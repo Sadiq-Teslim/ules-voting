@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-// import { Link } from "wouter";
+import { Link } from "wouter"; 
 import {
   Send,
   Loader2,
-  // CheckCircle,
+  CheckCircle, 
   UploadCloud,
   Trophy,
   PlusCircle,
   Trash2,
+  Home,
 } from "lucide-react";
 
 interface Category {
@@ -35,11 +36,11 @@ const NominationPage = () => {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-  document.title = "ULES Awards | Nomination";
-  axios
-    .get("/nominees.json")
-    .then((res) => setCategories(res.data.categories));
-}, []);
+    document.title = "ULES Awards | Nomination";
+    axios
+      .get("/nominees.json")
+      .then((res) => setCategories(res.data.categories));
+  }, []);
 
   const handleInputChange = (
     id: number,
@@ -69,7 +70,7 @@ const NominationPage = () => {
     ]);
   const removeNominationForm = (id: number) =>
     setNominationForms((forms) => forms.filter((form) => form.id !== id));
-  
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
@@ -79,7 +80,7 @@ const NominationPage = () => {
         nominationForms.map(async (form) => {
           let imageUrl;
           if (form.imageFile) {
-            setMessage("Uploading images...");
+            setMessage(`Uploading image for ${form.fullName || "nominee"}...`);
             const formData = new FormData();
             formData.append("file", form.imageFile);
             formData.append(
@@ -102,7 +103,7 @@ const NominationPage = () => {
           };
         })
       );
-      setMessage("Submitting nominations...");
+      setMessage("Finalizing submission...");
       const backendRes = await axios.post(
         `${import.meta.env.VITE_API_BASE_URL}/api/nominate`,
         { nominations: nominationsData }
@@ -113,7 +114,7 @@ const NominationPage = () => {
       setStatus("error");
       if (err.code === "ERR_NETWORK") {
         setMessage(
-          "Connection failed. Please check your network or try again later."
+          "Connection failed. Please check your network and try again."
         );
       } else {
         setMessage(
@@ -124,7 +125,36 @@ const NominationPage = () => {
   };
 
   if (status === "success") {
-    /* Return your success JSX here */
+    if (status === "success") {
+      return (
+        <div className="text-center bg-slate-800 p-8 rounded-lg max-w-lg mx-auto border border-slate-700">
+          <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
+          <h1 className="text-2xl font-bold text-white">
+            Submission Successful!
+          </h1>
+          <p className="text-slate-300 mt-2">{message}</p>
+          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+            <button
+              onClick={() => {
+                setNominationForms([
+                  { id: Date.now(), fullName: "", category: "" },
+                ]);
+                setStatus("idle");
+              }}
+              className="flex items-center justify-center gap-2 bg-cyan-500 hover:bg-cyan-400 transition-colors text-white font-bold py-3 px-6 rounded-lg"
+            >
+              <PlusCircle size={20} /> Submit Another
+            </button>
+            <Link
+              href="/"
+              className="flex items-center justify-center gap-2 bg-slate-600 hover:bg-slate-500 transition-colors text-white font-semibold py-3 px-6 rounded-lg"
+            >
+              <Home size={20} /> Back to Home
+            </Link>
+          </div>
+        </div>
+      );
+    }
   }
 
   return (

@@ -1,8 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useLocation } from "wouter";
-import ValidationModal from '../components/ValidationModal';
-import { Trophy, Users, Award, ArrowRight, Sparkles, Crown, Star } from 'lucide-react';
-import type { VoterInfo } from '../App'; // Ensure this path is correct
+import ValidationModal from "../components/ValidationModal";
+import {
+  Trophy,
+  Users,
+  Award,
+  ArrowRight,
+  Sparkles,
+  Crown,
+  Star,
+  XCircle
+} from "lucide-react";
+import type { VoterInfo } from "../App"; // Ensure this path is correct
 
 // Define the props for this component
 interface LandingPageProps {
@@ -12,10 +22,22 @@ interface LandingPageProps {
 const LandingPage: React.FC<LandingPageProps> = ({ setVoter }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [, setLocation] = useLocation();
+  const [electionStatus, setElectionStatus] = useState<
+    "open" | "closed" | "loading"
+  >("loading");
 
   useEffect(() => {
     document.title = "ULES Awards | Home";
   }, []);
+  axios
+    .get(`${import.meta.env.VITE_API_BASE_URL}/api/election-status`)
+    .then((res) => {
+      setElectionStatus(res.data.status);
+    })
+    .catch((err) => {
+      console.error("Failed to fetch election status:", err);
+      setElectionStatus("closed"); // Default to closed on error
+    });
 
   const handleValidationSuccess = (matricNumber: string, fullName: string) => {
     setVoter({ fullName, matricNumber });
@@ -40,7 +62,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ setVoter }) => {
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
                 animationDelay: `${Math.random() * 5}s`,
-                animationDuration: `${5 + Math.random() * 5}s`
+                animationDuration: `${5 + Math.random() * 5}s`,
               }}
             />
           ))}
@@ -66,60 +88,88 @@ const LandingPage: React.FC<LandingPageProps> = ({ setVoter }) => {
               ULES Annual Awards
             </span>
           </h1>
-          
+
           <p className="text-xl sm:text-2xl text-slate-300 font-light">
             Official Voting Portal
           </p>
 
           <div className="mt-4 inline-flex items-center space-x-2 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 px-4 py-2 rounded-full">
             <Award className="w-5 h-5 text-cyan-400" />
-            <span className="text-slate-300 text-sm font-medium">University of Lagos Engineering Society</span>
+            <span className="text-slate-300 text-sm font-medium">
+              University of Lagos Engineering Society
+            </span>
           </div>
         </header>
-        
+
         {/* Main Content */}
         <main className="space-y-12">
           {/* Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 p-6 rounded-2xl hover:border-cyan-500/50 transition-colors duration-300 transform hover:-translate-y-2">
-              <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-xl mb-4 mx-auto"><Users className="w-6 h-6 text-white" /></div>
-              <h3 className="text-lg font-semibold text-white mb-1">Eligible Voters</h3>
-              <p className="text-slate-400 text-sm">Engineering Students 2016-2024</p>
+              <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-xl mb-4 mx-auto">
+                <Users className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-1">
+                Eligible Voters
+              </h3>
+              <p className="text-slate-400 text-sm">
+                Engineering Students 2016-2024
+              </p>
             </div>
             <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 p-6 rounded-2xl hover:border-purple-500/50 transition-colors duration-300 transform hover:-translate-y-2">
-              <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl mb-4 mx-auto"><Crown className="w-6 h-6 text-white" /></div>
-              <h3 className="text-lg font-semibold text-white mb-1">Award Categories</h3>
+              <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl mb-4 mx-auto">
+                <Crown className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-1">
+                Award Categories
+              </h3>
               <p className="text-slate-400 text-sm">Recognizing Excellence</p>
             </div>
             <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 p-6 rounded-2xl hover:border-yellow-500/50 transition-colors duration-300 transform hover:-translate-y-2">
-              <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-xl mb-4 mx-auto"><Star className="w-6 h-6 text-white" /></div>
-              <h3 className="text-lg font-semibold text-white mb-1">One Vote, One Voice</h3>
-              <p className="text-slate-400 text-sm">Per Category, Final Decision</p>
+              <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-xl mb-4 mx-auto">
+                <Star className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-1">
+                One Vote, One Voice
+              </h3>
+              <p className="text-slate-400 text-sm">
+                Per Category, Final Decision
+              </p>
             </div>
           </div>
 
           {/* Call to Action */}
           <div className="pt-8">
-            <button 
-              onClick={() => setIsModalOpen(true)} 
-              className="group relative w-full sm:w-auto bg-gradient-to-r from-cyan-500 via-purple-500 to-yellow-500 hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 text-white font-bold text-lg py-4 px-12 rounded-xl"
+            <button
+              onClick={() => setIsModalOpen(true)}
+              disabled={electionStatus !== "open"}
+              className="group relative w-full sm:w-auto bg-gradient-to-r from-cyan-500 via-purple-500 to-yellow-500 hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 text-white font-bold text-lg py-4 px-12 rounded-xl disabled:from-slate-600 disabled:to-slate-700 disabled:cursor-not-allowed disabled:shadow-none"
             >
               <span className="relative z-10 flex items-center justify-center space-x-3">
-                <span>Proceed to Vote</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                {electionStatus === "closed" && <XCircle className="w-5 h-5" />}
+                <span>
+                  {electionStatus === "loading" && "Checking Status..."}
+                  {electionStatus === "open" && "Proceed to Vote"}
+                  {electionStatus === "closed" && "Voting is Currently Closed"}
+                </span>
+                {electionStatus === "open" && (
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                )}
               </span>
             </button>
             <p className="mt-4 text-slate-500 text-xs">
-              🔒 Your vote is secure and anonymous.
+              {electionStatus === "open"
+                ? "🔒 Your vote is secure and anonymous."
+                : "Please check back later or contact the committee."}
             </p>
           </div>
         </main>
       </div>
-      
-      <ValidationModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-        onSuccess={handleValidationSuccess} 
+
+      <ValidationModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSuccess={handleValidationSuccess}
       />
     </div>
   );
