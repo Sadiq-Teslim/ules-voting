@@ -174,6 +174,10 @@ const AdminPage = () => {
     setIsLoggingIn(false);
   };
 
+  // Timer reference for auto-refresh
+  // Removed unused refreshTimer ref
+
+  // Fetch data function
   const handleRefresh = useCallback(async () => {
     setIsRefreshing(true);
     try {
@@ -182,7 +186,15 @@ const AdminPage = () => {
         axios.post(`${API_BASE_URL}/api/pending-nominations`, { password }),
       ]);
       setResults(resultsRes.data);
-      setPendingNominations(nominationsRes.data);
+      const response = await axios.post(
+        `${API_BASE_URL}/api/pending-nominations`,
+        { password }
+      );
+      setPendingNominations(response.data.nominations || []);
+      console.log("Fetched pending nominations:", response.data.nominations);
+      console.log(resultsRes.data);
+
+      console.log(nominationsRes.data);
     } catch (err) {
       console.error("Refresh failed:", err);
     } finally {
@@ -192,8 +204,8 @@ const AdminPage = () => {
 
   useEffect(() => {
     if (!isAuthenticated) return;
-    const interval = setInterval(handleRefresh, 15000);
-    return () => clearInterval(interval);
+    const interval = setInterval(handleRefresh, 180000);
+    return () => clearInterval(interval); // Cleanup on component unmount
   }, [isAuthenticated, handleRefresh]);
 
   const stats = useMemo(() => {
@@ -384,7 +396,7 @@ const AdminPage = () => {
           }}
         >
           <img
-            src="/nobguleslogo.png"
+            src="/nobgules-logo.png"
             alt="ULES Logo"
             style={{ width: "80px", height: "auto", marginRight: "20px" }}
           />
@@ -716,3 +728,6 @@ const AdminPage = () => {
 };
 
 export default AdminPage;
+
+// Replace any existing auto-refresh or useEffect logic with the above pattern.
+// Update the refresh button's onClick to use handleManualRefresh.

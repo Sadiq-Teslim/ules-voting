@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "wouter"; 
+import { Link } from "wouter";
 import {
   Send,
   Loader2,
-  CheckCircle, 
+  CheckCircle,
   UploadCloud,
   Trophy,
   PlusCircle,
@@ -104,12 +104,13 @@ const NominationPage = () => {
         })
       );
       setMessage("Finalizing submission...");
-      const backendRes = await axios.post(
+      const response = await axios.post(
         `${import.meta.env.VITE_API_BASE_URL}/api/nominate`,
-        { nominations: nominationsData }
+nominationsData
       );
+      console.log("Nomination POST status:", response.status, response.data);
       setStatus("success");
-      setMessage(backendRes.data.message);
+      setMessage(response.data.message);
     } catch (err: any) {
       setStatus("error");
       if (err.code === "ERR_NETWORK") {
