@@ -1,45 +1,288 @@
 {
     "categories": [{
-            "title": "Most Influential Student (Male)",
-            "id": "influential-male",
-            "nominees": [
-                { "id": "jm1", "name": "John Doe", "image": null },
-                { "id": "pj1", "name": "Peter Jones", "image": null },
-                { "id": "mr1", "name": "Mike Ross", "image": null }
-            ]
+            "title": "Most Beautiful (Undergraduate)",
+            "id": "ug-most-beautiful",
+            "nominees": []
         },
         {
-            "title": "Most Influential Student (Fresher)",
-            "id": "influential-fresher",
-            "nominees": [
-                { "id": "jm1", "name": "Khadijat Olokodanna", "image": null },
-                { "id": "pj1", "name": "Peter Janet", "image": null },
-                { "id": "mr1", "name": "Mike Bethie", "image": null }
-            ]
+            "title": "Most Handsome (Undergraduate)",
+            "id": "ug-most-handsome",
+            "nominees": []
         },
         {
-            "title": "Most Influential Student (Female)",
-            "id": "influential-female",
-            "nominees": [
-                { "id": "js2", "name": "Jane Smith", "image": null },
-                { "id": "ew2", "name": "Emily White", "image": null }
-            ]
+            "title": "Most Influential (Undergraduate)",
+            "id": "ug-most-influential",
+            "nominees": []
         },
         {
-            "title": "Best Use of LinkedIn",
-            "id": "linkedin-pro",
-            "nominees": [
-                { "id": "dc3", "name": "David Chan", "image": null },
-                { "id": "sl3", "name": "Sarah Lee", "image": null }
-            ]
+            "title": "Socialite of the Year (Undergraduate)",
+            "id": "ug-socialite-of-the-year",
+            "nominees": []
         },
         {
-            "title": "Entrepreneur of the Year",
-            "id": "entrepreneur-of-the-year",
-            "nominees": [
-                { "id": "ab4", "name": "Alice Brown", "image": null },
-                { "id": "bg4", "name": "Ben Green", "image": null }
-            ]
+            "title": "Best Dressed – Male (Undergraduate)",
+            "id": "ug-best-dressed-male",
+            "nominees": []
+        },
+        {
+            "title": "Best Dressed – Female (Undergraduate)",
+            "id": "ug-best-dressed-female",
+            "nominees": []
+        },
+        {
+            "title": "Tech Personality (Undergraduate)",
+            "id": "ug-tech-personality",
+            "nominees": []
+        },
+        {
+            "title": "Clique of the Year (Undergraduate)",
+            "id": "ug-clique-of-the-year",
+            "nominees": []
+        },
+        {
+            "title": "Entrepreneur of the Year (Undergraduate)",
+            "id": "ug-entrepreneur-of-the-year",
+            "nominees": []
+        },
+        {
+            "title": "Creative of the Year (Undergraduate)",
+            "id": "ug-creative-of-the-year",
+            "nominees": []
+        },
+        {
+            "title": "Student Entertainer of the Year (Undergraduate)",
+            "id": "ug-student-entertainer-of-the-year",
+            "nominees": []
+        },
+        {
+            "title": "Social Impact Award (General)",
+            "id": "gen-social-impact-award",
+            "nominees": []
+        },
+        {
+            "title": "Innovation Award (Start-up Visionary) (General)",
+            "id": "gen-innovation-award",
+            "nominees": []
+        },
+        {
+            "title": "Student Leader of the Year (General)",
+            "id": "gen-student-leader-of-the-year",
+            "nominees": []
+        },
+        {
+            "title": "Content Creator of the Year (General)",
+            "id": "gen-content-creator-of-the-year",
+            "nominees": []
+        },
+        {
+            "title": "Academic Impact Award (General)",
+            "id": "gen-academic-impact-award",
+            "nominees": []
+        },
+        {
+            "title": "Student Brand of the Year (General)",
+            "id": "gen-student-brand-of-the-year",
+            "nominees": []
+        },
+        {
+            "title": "ULES Tutor of the Year (General)",
+            "id": "gen-ules-tutor-of-the-year",
+            "nominees": []
+        },
+        {
+            "title": "ULES Volunteer of the Year (General)",
+            "id": "gen-ules-volunteer-of-the-year",
+            "nominees": []
+        },
+        {
+            "title": "ULES Person of the Year (General)",
+            "id": "gen-ules-person-of-the-year",
+            "nominees": []
+        },
+        {
+            "title": "Rookie of the Year (General)",
+            "id": "gen-rookie-of-the-year",
+            "nominees": []
+        },
+        {
+            "title": "Sophomore of the Year (General)",
+            "id": "gen-sophomore-of-the-year",
+            "nominees": []
+        },
+        {
+            "title": "Face of Year 3 (General)",
+            "id": "gen-face-of-year-3",
+            "nominees": []
+        },
+        {
+            "title": "Face of Year 4 (General)",
+            "id": "gen-face-of-year-4",
+            "nominees": []
+        },
+        {
+            "title": "Finalist of the Year (General)",
+            "id": "gen-finalist-of-the-year",
+            "nominees": []
+        },
+        {
+            "title": "ULES Exco of the Year (General)",
+            "id": "gen-ules-exco-of-the-year",
+            "nominees": []
+        },
+        {
+            "title": "Student Organization of the Year (General)",
+            "id": "gen-student-organization-of-the-year",
+            "nominees": []
+        },
+        {
+            "title": "Exco Body of the Year (General)",
+            "id": "gen-exco-body-of-the-year",
+            "nominees": []
+        },
+        {
+            "title": "Couple of the Year (Finalist)",
+            "id": "fin-couple-of-the-year",
+            "nominees": []
+        },
+        {
+            "title": "Sports Person of the Year (Finalist)",
+            "id": "fin-sports-person-of-the-year",
+            "nominees": []
+        },
+        {
+            "title": "Creative of the Year (Finalist)",
+            "id": "fin-creative-of-the-year",
+            "nominees": []
+        },
+        {
+            "title": "Entrepreneur of the Year (Finalist)",
+            "id": "fin-entrepreneur-of-the-year",
+            "nominees": []
+        },
+        {
+            "title": "Clique of the Year (Finalist)",
+            "id": "fin-clique-of-the-year",
+            "nominees": []
+        },
+        {
+            "title": "Tech Personality – Male (Finalist)",
+            "id": "fin-tech-personality-male",
+            "nominees": []
+        },
+        {
+            "title": "Tech Personality – Female (Finalist)",
+            "id": "fin-tech-personality-female",
+            "nominees": []
+        },
+        {
+            "title": "Most Handsome (Finalist)",
+            "id": "fin-most-handsome",
+            "nominees": []
+        },
+        {
+            "title": "Most Beautiful (Finalist)",
+            "id": "fin-most-beautiful",
+            "nominees": []
+        },
+        {
+            "title": "Most Influential (Finalist)",
+            "id": "fin-most-influential",
+            "nominees": []
+        },
+        {
+            "title": "Most Popular (Finalist)",
+            "id": "fin-most-popular",
+            "nominees": []
         }
+    ]
+}, {
+    "title": "Departmental Awards - Mechanical Engineering",
+    "id": "dept-mechanical",
+    "subcategories": [
+        { "title": "Departmental Image Award", "id": "dept-mechanical-image-award", "nominees": [] },
+        { "title": "Outstanding Academic Performance Award", "id": "dept-mechanical-academic-performance-award", "nominees": [] },
+        { "title": "Athlete of the Year - Male", "id": "dept-mechanical-athlete-male", "nominees": [] },
+        { "title": "Athlete of the Year - Female", "id": "dept-mechanical-athlete-female", "nominees": [] }
+    ]
+}, {
+    "title": "Departmental Awards - Biomedical Engineering",
+    "id": "dept-biomedical",
+    "subcategories": [
+        { "title": "Departmental Image Award", "id": "dept-biomedical-image-award", "nominees": [] },
+        { "title": "Outstanding Academic Performance Award", "id": "dept-biomedical-academic-performance-award", "nominees": [] },
+        { "title": "Athlete of the Year - Male", "id": "dept-biomedical-athlete-male", "nominees": [] },
+        { "title": "Athlete of the Year - Female", "id": "dept-biomedical-athlete-female", "nominees": [] }
+    ]
+}, {
+    "title": "Departmental Awards - Electrical & Electronics Engineering",
+    "id": "dept-electrical-electronics",
+    "subcategories": [
+        { "title": "Departmental Image Award", "id": "dept-electrical-electronics-image-award", "nominees": [] },
+        { "title": "Outstanding Academic Performance Award", "id": "dept-electrical-electronics-academic-performance-award", "nominees": [] },
+        { "title": "Athlete of the Year - Male", "id": "dept-electrical-electronics-athlete-male", "nominees": [] },
+        { "title": "Athlete of the Year - Female", "id": "dept-electrical-electronics-athlete-female", "nominees": [] }
+    ]
+}, {
+    "title": "Departmental Awards - Surveying & Geoinformatics Engineering",
+    "id": "dept-surveying-geoinformatics",
+    "subcategories": [
+        { "title": "Departmental Image Award", "id": "dept-surveying-geoinformatics-image-award", "nominees": [] },
+        { "title": "Outstanding Academic Performance Award", "id": "dept-surveying-geoinformatics-academic-performance-award", "nominees": [] },
+        { "title": "Athlete of the Year - Male", "id": "dept-surveying-geoinformatics-athlete-male", "nominees": [] },
+        { "title": "Athlete of the Year - Female", "id": "dept-surveying-geoinformatics-athlete-female", "nominees": [] }
+    ]
+}, {
+    "title": "Departmental Awards - Computer Engineering",
+    "id": "dept-computer",
+    "subcategories": [
+        { "title": "Departmental Image Award", "id": "dept-computer-image-award", "nominees": [] },
+        { "title": "Outstanding Academic Performance Award", "id": "dept-computer-academic-performance-award", "nominees": [] },
+        { "title": "Athlete of the Year - Male", "id": "dept-computer-athlete-male", "nominees": [] },
+        { "title": "Athlete of the Year - Female", "id": "dept-computer-athlete-female", "nominees": [] }
+    ]
+}, {
+    "title": "Departmental Awards - Chemical Engineering",
+    "id": "dept-chemical",
+    "subcategories": [
+        { "title": "Departmental Image Award", "id": "dept-chemical-image-award", "nominees": [] },
+        { "title": "Outstanding Academic Performance Award", "id": "dept-chemical-academic-performance-award", "nominees": [] },
+        { "title": "Athlete of the Year - Male", "id": "dept-chemical-athlete-male", "nominees": [] },
+        { "title": "Athlete of the Year - Female", "id": "dept-chemical-athlete-female", "nominees": [] }
+    ]
+}, {
+    "title": "Departmental Awards - Petroleum & Gas Engineering",
+    "id": "dept-petroleum-gas",
+    "subcategories": [
+        { "title": "Departmental Image Award", "id": "dept-petroleum-gas-image-award", "nominees": [] },
+        { "title": "Outstanding Academic Performance Award", "id": "dept-petroleum-gas-academic-performance-award", "nominees": [] },
+        { "title": "Athlete of the Year - Male", "id": "dept-petroleum-gas-athlete-male", "nominees": [] },
+        { "title": "Athlete of the Year - Female", "id": "dept-petroleum-gas-athlete-female", "nominees": [] }
+    ]
+}, {
+    "title": "Departmental Awards - Civil Engineering",
+    "id": "dept-civil",
+    "subcategories": [
+        { "title": "Departmental Image Award", "id": "dept-civil-image-award", "nominees": [] },
+        { "title": "Outstanding Academic Performance Award", "id": "dept-civil-academic-performance-award", "nominees": [] },
+        { "title": "Athlete of the Year - Male", "id": "dept-civil-athlete-male", "nominees": [] },
+        { "title": "Athlete of the Year - Female", "id": "dept-civil-athlete-female", "nominees": [] }
+    ]
+}, {
+    "title": "Departmental Awards - Systems Engineering",
+    "id": "dept-systems",
+    "subcategories": [
+        { "title": "Departmental Image Award", "id": "dept-systems-image-award", "nominees": [] },
+        { "title": "Outstanding Academic Performance Award", "id": "dept-systems-academic-performance-award", "nominees": [] },
+        { "title": "Athlete of the Year - Male", "id": "dept-systems-athlete-male", "nominees": [] },
+        { "title": "Athlete of the Year - Female", "id": "dept-systems-athlete-female", "nominees": [] }
+    ]
+}, {
+    "title": "Departmental Awards - Metallurgical & Materials Engineering",
+    "id": "dept-metallurgical-materials",
+    "subcategories": [
+        { "title": "Departmental Image Award", "id": "dept-metallurgical-materials-image-award", "nominees": [] },
+        { "title": "Outstanding Academic Performance Award", "id": "dept-metallurgical-materials-academic-performance-award", "nominees": [] },
+        { "title": "Athlete of the Year - Male", "id": "dept-metallurgical-materials-athlete-male", "nominees": [] },
+        { "title": "Athlete of the Year - Female", "id": "dept-metallurgical-materials-athlete-female", "nominees": [] }
     ]
 }
