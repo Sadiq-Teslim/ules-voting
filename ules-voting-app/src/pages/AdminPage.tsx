@@ -23,14 +23,16 @@ import {
   Settings,
   ShieldAlert,
 } from "lucide-react";
+
 ChartJS.register(
   CategoryScale,
-  LinearScale, // This was the missing piece
+  LinearScale,
   BarElement,
   Title,
   Tooltip,
   Legend
 );
+
 // --- TypeScript Types ---
 interface NomineeResult {
   name: string;
@@ -40,11 +42,26 @@ interface CategoryResult {
   category: string;
   nominees: NomineeResult[];
 }
+
+// Types for your nominees.json structure
 interface CategoryInfo {
   id: string;
   title: string;
   nominees: { id: string; name: string; imageUrl?: string }[];
 }
+
+interface SubCategoryInfo {
+  id: string;
+  title: string;
+  nominees: [];
+}
+
+interface DepartmentInfo {
+  id: string;
+  title: string;
+  subcategories: SubCategoryInfo[];
+}
+
 interface Nomination {
   _id: string;
   fullName: string;
@@ -99,11 +116,14 @@ const ConfirmationModal: React.FC<
 };
 
 const AdminPage = () => {
-  // --- (All state variables remain the same as your code) ---
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [results, setResults] = useState<CategoryResult[]>([]);
+
+  // FIX 1: Add state for both categories and departments
   const [categories, setCategories] = useState<CategoryInfo[]>([]);
+  const [departments, setDepartments] = useState<DepartmentInfo[]>([]);
+
   const [pendingNominations, setPendingNominations] = useState<Nomination[]>(
     []
   );
@@ -128,10 +148,32 @@ const AdminPage = () => {
 
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
+  // FIX 3: Replace the old getCategoryTitle with this robust version
   const getCategoryTitle = useCallback(
-    (category: string) =>
-      categories.find((c) => c.id === category)?.title || category,
-    [categories]
+    (categoryId: string) => {
+      // First, search in the top-level categories
+      const topLevelCategory = categories.find((c) => c.id === categoryId);
+      if (topLevelCategory) {
+        return topLevelCategory.title;
+      }
+
+      // If not found, search in the departmental subcategories
+      for (const department of departments) {
+        const subCategory = department.subcategories.find(
+          (sc) => sc.id === categoryId
+        );
+        if (subCategory) {
+          // Return a more descriptive title
+          return `${department.title.replace("Departmental Awards - ", "")}: ${
+            subCategory.title
+          }`;
+        }
+      }
+
+      // Fallback to the ID if no match is found anywhere
+      return categoryId;
+    },
+    [categories, departments] // Add 'departments' to the dependency array
   );
 
   const fetchAllAdminData = useCallback(
@@ -151,7 +193,11 @@ const AdminPage = () => {
           ]);
         setResults(resultsRes.data);
         setPendingNominations(nominationsRes.data);
+
+        // FIX 2: Set BOTH categories and departments from the JSON file
         setCategories(categoriesRes.data.categories);
+        setDepartments(categoriesRes.data.departments);
+
         setElectionStatus(statusRes.data.status);
         return true;
       } catch (err) {
@@ -174,10 +220,6 @@ const AdminPage = () => {
     setIsLoggingIn(false);
   };
 
-  // Timer reference for auto-refresh
-  // Removed unused refreshTimer ref
-
-  // Fetch data function
   const handleRefresh = useCallback(async () => {
     setIsRefreshing(true);
     try {
@@ -186,15 +228,7 @@ const AdminPage = () => {
         axios.post(`${API_BASE_URL}/api/pending-nominations`, { password }),
       ]);
       setResults(resultsRes.data);
-      const response = await axios.post(
-        `${API_BASE_URL}/api/pending-nominations`,
-        { password }
-      );
-      setPendingNominations(response.data.nominations || []);
-      console.log("Fetched pending nominations:", response.data.nominations);
-      console.log(resultsRes.data);
-
-      console.log(nominationsRes.data);
+      setPendingNominations(nominationsRes.data.nominations || []);
     } catch (err) {
       console.error("Refresh failed:", err);
     } finally {
@@ -205,7 +239,7 @@ const AdminPage = () => {
   useEffect(() => {
     if (!isAuthenticated) return;
     const interval = setInterval(handleRefresh, 180000);
-    return () => clearInterval(interval); // Cleanup on component unmount
+    return () => clearInterval(interval);
   }, [isAuthenticated, handleRefresh]);
 
   const stats = useMemo(() => {
@@ -218,24 +252,40 @@ const AdminPage = () => {
         ),
       0
     );
-    const totalCategories = categories.length;
-    const totalNominees = categories.reduce(
-      (sum, category) => sum + category.nominees.length,
-      0
-    );
+    // Calculate total categories from both arrays
+    const totalCategories =
+      categories.length +
+      departments.reduce((sum, dept) => sum + dept.subcategories.length, 0);
+
+    // Calculate total nominees from both arrays (assuming they might be populated later)
+    const totalNominees =
+      categories.reduce((sum, category) => sum + category.nominees.length, 0) +
+      departments.reduce(
+        (deptSum, dept) =>
+          deptSum +
+          dept.subcategories.reduce(
+            (subSum, sub) => subSum + sub.nominees.length,
+            0
+          ),
+        0
+      );
+
     return { totalVotes, totalCategories, totalNominees };
-  }, [results, categories]);
+  }, [results, categories, departments]); // Add 'departments' to dependency array
+
   useEffect(() => {
     document.title = "ULES Awards | Admin Dashboard";
   }, []);
+
+  // No changes needed below this line, everything should work now
+
   const handleDownloadPdf = async () => {
     const reportElement = document.getElementById("pdf-report");
     if (!reportElement) return alert("Could not generate PDF.");
     setIsDownloading(true);
     try {
       const canvas = await html2canvas(reportElement, { scale: 2 });
-      // Use JPEG format for compression
-      const imgData = canvas.toDataURL("image/jpeg", 0.9); // 0.9 is quality level
+      const imgData = canvas.toDataURL("image/jpeg", 0.9);
 
       const pdf = new jsPDF({
         orientation: "portrait",
@@ -246,7 +296,6 @@ const AdminPage = () => {
       const imgWidth = pdfWidth - 20;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-      // Use JPEG compression in the PDF itself
       pdf.addImage(
         imgData,
         "JPEG",
@@ -301,67 +350,71 @@ const AdminPage = () => {
 
   if (!isAuthenticated) {
     return (
-      <div className="w-full max-w-md mx-auto">
-        <form
-          onSubmit={handleLogin}
-          className="bg-slate-800/90 backdrop-blur-xl p-8 rounded-2xl shadow-2xl border border-slate-700/50"
-        >
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-full mb-4 shadow-lg">
-              <Trophy className="w-8 h-8 text-white" />
+      <div className="flex items-center justify-center min-h-screen bg-slate-900 p-4">
+        <div className="w-full max-w-md mx-auto">
+          <form
+            onSubmit={handleLogin}
+            className="bg-slate-800/90 backdrop-blur-xl p-8 rounded-2xl shadow-2xl border border-slate-700/50"
+          >
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-full mb-4 shadow-lg">
+                <Trophy className="w-8 h-8 text-white" />
+              </div>
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-2">
+                Admin Dashboard
+              </h1>
+              <p className="text-slate-400 text-sm">
+                ULES Annual Awards System
+              </p>
             </div>
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-2">
-              Admin Dashboard
-            </h1>
-            <p className="text-slate-400 text-sm">ULES Annual Awards System</p>
-          </div>
-          <div className="relative mb-6">
-            <input
-              type={showPassword ? "text" : "password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter Admin Password"
-              className="w-full bg-slate-700/50 border border-slate-600/50 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20"
-            />
+            <div className="relative mb-6">
+              <input
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter Admin Password"
+                className="w-full bg-slate-700/50 border border-slate-600/50 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-cyan-400"
+              >
+                {showPassword ? (
+                  <EyeOff className="w-5 h-5" />
+                ) : (
+                  <Eye className="w-5 h-5" />
+                )}
+              </button>
+            </div>
             <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-cyan-400"
+              type="submit"
+              disabled={isLoggingIn}
+              className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 disabled:from-slate-600 text-white font-semibold py-3 rounded-xl shadow-lg"
             >
-              {showPassword ? (
-                <EyeOff className="w-5 h-5" />
+              {isLoggingIn ? (
+                <div className="flex items-center justify-center space-x-2">
+                  <RefreshCw className="w-4 h-4 animate-spin" />
+                  <span>Verifying...</span>
+                </div>
               ) : (
-                <Eye className="w-5 h-5" />
+                "Access Dashboard"
               )}
             </button>
-          </div>
-          <button
-            type="submit"
-            disabled={isLoggingIn}
-            className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 disabled:from-slate-600 text-white font-semibold py-3 rounded-xl shadow-lg"
-          >
-            {isLoggingIn ? (
-              <div className="flex items-center justify-center space-x-2">
-                <RefreshCw className="w-4 h-4 animate-spin" />
-                <span>Verifying...</span>
+            {error && (
+              <div className="mt-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg">
+                <p className="text-red-400 text-sm text-center">{error}</p>
               </div>
-            ) : (
-              "Access Dashboard"
             )}
-          </button>
-          {error && (
-            <div className="mt-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg">
-              <p className="text-red-400 text-sm text-center">{error}</p>
-            </div>
-          )}
-        </form>
+          </form>
+        </div>
       </div>
     );
   }
 
   if (isInitialLoading) {
     return (
-      <div className="text-center text-xl text-slate-400">
+      <div className="flex items-center justify-center min-h-screen text-center text-xl text-slate-400">
         Loading Dashboard...
       </div>
     );
@@ -536,7 +589,7 @@ const AdminPage = () => {
           >
             Manage Nominations{" "}
             {pendingNominations.length > 0 && (
-              <span className="absolute top-3 -right-4 bg-red-500 text-white text-xs w-5 h-5 rounded-full">
+              <span className="absolute top-3 -right-4 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
                 {pendingNominations.length}
               </span>
             )}
@@ -728,6 +781,3 @@ const AdminPage = () => {
 };
 
 export default AdminPage;
-
-// Replace any existing auto-refresh or useEffect logic with the above pattern.
-// Update the refresh button's onClick to use handleManualRefresh.

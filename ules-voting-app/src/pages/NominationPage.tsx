@@ -13,6 +13,7 @@ import {
   Home,
 } from "lucide-react";
 
+// --- TypeScript Types ---
 interface Category {
   id: string;
   title: string;
@@ -37,9 +38,25 @@ const NominationPage = () => {
 
   useEffect(() => {
     document.title = "ULES Awards | Nomination";
-    axios
-      .get("/nominees.json")
-      .then((res) => setCategories(res.data.categories));
+    // Fetch and flatten the categories from the local JSON file
+    axios.get("/nominees.json").then((res) => {
+      const allCategoriesFlat: Category[] = [];
+      // 1. Add main categories
+      res.data.categories.forEach((cat: Category) => {
+        allCategoriesFlat.push(cat);
+      });
+      // 2. Add and format departmental subcategories
+      res.data.departments.forEach((dept: any) => {
+        const deptName = dept.title.replace("Departmental Awards - ", "");
+        dept.subcategories.forEach((subCat: Category) => {
+          allCategoriesFlat.push({
+            id: subCat.id,
+            title: `${deptName} - ${subCat.title}`,
+          });
+        });
+      });
+      setCategories(allCategoriesFlat);
+    });
   }, []);
 
   const handleInputChange = (
@@ -52,29 +69,36 @@ const NominationPage = () => {
       )
     );
   };
+
   const handleFileChange = (
     id: number,
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    if (e.target.files?.[0])
+    if (e.target.files?.[0]) {
       setNominationForms((forms) =>
         forms.map((form) =>
           form.id === id ? { ...form, imageFile: e.target.files[0] } : form
         )
       );
+    }
   };
-  const addNominationForm = () =>
+
+  const addNominationForm = () => {
     setNominationForms((forms) => [
       ...forms,
       { id: Date.now(), fullName: "", category: "" },
     ]);
-  const removeNominationForm = (id: number) =>
+  };
+
+  const removeNominationForm = (id: number) => {
     setNominationForms((forms) => forms.filter((form) => form.id !== id));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
-    setMessage("Processing...");
+    setMessage("Preparing nominations...");
+
     try {
       const nominationsData = await Promise.all(
         nominationForms.map(async (form) => {
@@ -87,6 +111,7 @@ const NominationPage = () => {
               "upload_preset",
               import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET
             );
+
             const res = await axios.post(
               `https://api.cloudinary.com/v1_1/${
                 import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
@@ -104,14 +129,15 @@ const NominationPage = () => {
         })
       );
       setMessage("Finalizing submission...");
-      const response = await axios.post(
+      const backendRes = await axios.post(
         `${import.meta.env.VITE_API_BASE_URL}/api/nominate`,
-        { nominations: nominationsData },
-        { headers: { "Content-Type": "application/json" } }
+        { nominations: nominationsData }
       );
-      console.log("Nomination POST status:", response.status, response.data);
       setStatus("success");
-      setMessage(response.data.message);
+      setMessage(
+        backendRes.data.message ||
+          "Your nomination has been submitted for review."
+      );
     } catch (err: any) {
       setStatus("error");
       if (err.code === "ERR_NETWORK") {
@@ -126,10 +152,11 @@ const NominationPage = () => {
     }
   };
 
+  // --- Success View ---
   if (status === "success") {
-    if (status === "success") {
-      return (
-        <div className="text-center bg-slate-800 p-8 rounded-lg max-w-lg mx-auto border border-slate-700">
+    return (
+      <div className="flex items-center justify-center min-h-screen p-4">
+        <div className="text-center bg-slate-800 p-8 rounded-lg max-w-lg mx-auto border border-slate-700 w-full">
           <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-white">
             Submission Successful!
@@ -143,22 +170,23 @@ const NominationPage = () => {
                 ]);
                 setStatus("idle");
               }}
-              className="flex items-center justify-center gap-2 bg-cyan-500 hover:bg-cyan-400 transition-colors text-white font-bold py-3 px-6 rounded-lg"
+              className="flex items-center justify-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-white font-bold py-3 px-6 rounded-lg w-full sm:w-auto"
             >
               <PlusCircle size={20} /> Submit Another
             </button>
             <Link
               href="/"
-              className="flex items-center justify-center gap-2 bg-slate-600 hover:bg-slate-500 transition-colors text-white font-semibold py-3 px-6 rounded-lg"
+              className="flex items-center justify-center gap-2 bg-slate-600 hover:bg-slate-500 text-white font-semibold py-3 px-6 rounded-lg w-full sm:w-auto"
             >
               <Home size={20} /> Back to Home
             </Link>
           </div>
         </div>
-      );
-    }
+      </div>
+    );
   }
 
+  // --- Main Nomination Form View ---
   return (
     <div className="w-full max-w-3xl mx-auto p-4 sm:p-8 text-white">
       <header className="text-center mb-10">
@@ -167,32 +195,34 @@ const NominationPage = () => {
             <Trophy className="w-8 h-8 text-white" />
           </div>
         </div>
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+        <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
           ULES Awards Nomination
         </h1>
         <p className="text-slate-400 mt-2">
           Nominate deserving individuals. Submissions are subject to review.
         </p>
       </header>
+
       <form onSubmit={handleSubmit} className="space-y-8">
         {nominationForms.map((form, index) => (
           <div
             key={form.id}
             className="bg-slate-800 p-6 rounded-lg border border-slate-700 relative"
           >
-            <h3 className="text-lg font-semibold text-cyan-400 mb-4">
+            <h3 className="text-lg font-semibold text-cyan-400 mb-6">
               Nomination #{index + 1}
             </h3>
             {nominationForms.length > 1 && (
               <button
                 type="button"
                 onClick={() => removeNominationForm(form.id)}
-                className="absolute top-4 right-4 text-slate-500 hover:text-red-500"
+                className="absolute top-4 right-4 text-slate-500 hover:text-red-500 p-1 rounded-full transition-colors"
+                aria-label="Remove nomination"
               >
                 <Trash2 size={18} />
               </button>
             )}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
               <div>
                 <label className="block text-sm font-medium mb-1">
                   Full Name *
@@ -203,7 +233,7 @@ const NominationPage = () => {
                   value={form.fullName}
                   onChange={(e) => handleInputChange(form.id, e)}
                   required
-                  className="w-full bg-slate-700 rounded p-2"
+                  className="w-full bg-slate-700 border border-slate-600 rounded p-2 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none"
                 />
               </div>
               <div>
@@ -215,7 +245,7 @@ const NominationPage = () => {
                   name="popularName"
                   value={form.popularName}
                   onChange={(e) => handleInputChange(form.id, e)}
-                  className="w-full bg-slate-700 rounded p-2"
+                  className="w-full bg-slate-700 border border-slate-600 rounded p-2 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none"
                 />
               </div>
             </div>
@@ -228,9 +258,9 @@ const NominationPage = () => {
                 value={form.category}
                 onChange={(e) => handleInputChange(form.id, e)}
                 required
-                className="w-full bg-slate-700 rounded p-2"
+                className="w-full bg-slate-700 border border-slate-600 rounded p-2 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none"
               >
-                <option value="">-- Select --</option>
+                <option value="">-- Select a Category --</option>
                 {categories.map((cat) => (
                   <option key={cat.id} value={cat.id}>
                     {cat.title}
@@ -245,7 +275,7 @@ const NominationPage = () => {
               <div className="mt-2 flex justify-center rounded-lg border border-dashed border-slate-600 px-6 py-8">
                 <div className="text-center">
                   <UploadCloud className="mx-auto h-10 w-10 text-slate-500" />
-                  <div className="mt-4 flex text-sm">
+                  <div className="mt-4 flex text-sm justify-center">
                     <label
                       htmlFor={`file-upload-${form.id}`}
                       className="cursor-pointer font-semibold text-cyan-400 hover:text-cyan-300"
@@ -256,41 +286,52 @@ const NominationPage = () => {
                         type="file"
                         className="sr-only"
                         onChange={(e) => handleFileChange(form.id, e)}
-                        accept="image/*"
+                        accept="image/png, image/jpeg"
                       />
                     </label>
                   </div>
-                  <p className="text-xs text-slate-500">
-                    {form.imageFile ? form.imageFile.name : "PNG, JPG"}
+                  <p className="text-xs text-slate-500 mt-1 truncate max-w-xs mx-auto">
+                    {form.imageFile
+                      ? form.imageFile.name
+                      : "PNG, JPG up to 5MB"}
                   </p>
                 </div>
               </div>
             </div>
           </div>
         ))}
-        <div className="flex justify-between items-center pt-4 border-t border-slate-700">
+
+        <div className="pt-6 border-t border-slate-700 flex flex-col-reverse sm:flex-row sm:justify-between sm:items-center gap-4">
           <button
             type="button"
             onClick={addNominationForm}
-            className="flex items-center gap-2 text-cyan-400 font-semibold hover:text-cyan-300"
+            className="flex items-center justify-center gap-2 text-cyan-400 font-semibold hover:text-cyan-300 transition-colors py-2"
           >
             <PlusCircle size={20} /> Add Another Nomination
           </button>
           <button
             type="submit"
             disabled={status === "loading"}
-            className="flex items-center justify-center gap-2 bg-cyan-500 font-bold py-3 px-6 rounded-lg disabled:bg-slate-600"
+            className="flex items-center justify-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-white font-bold py-3 px-6 rounded-lg disabled:bg-slate-600 disabled:cursor-wait w-full sm:w-auto transition-colors"
           >
             {status === "loading" ? (
               <Loader2 className="animate-spin" />
             ) : (
               <Send />
             )}
-            {status === "loading" ? message : "Submit All Nominations"}
+            {status === "loading" ? "Submitting..." : "Submit All Nominations"}
           </button>
         </div>
+
+        {status === "loading" && (
+          <p className="text-cyan-300 text-sm text-center animate-pulse">
+            {message}
+          </p>
+        )}
         {status === "error" && (
-          <p className="text-red-400 text-sm text-center">{message}</p>
+          <p className="text-red-400 text-sm text-center p-3 bg-red-500/10 rounded-md">
+            {message}
+          </p>
         )}
       </form>
     </div>
