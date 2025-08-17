@@ -194,95 +194,106 @@
             "id": "fin-most-popular",
             "nominees": []
         }
-    ]
-}, {
-    "title": "Departmental Awards - Mechanical Engineering",
-    "id": "dept-mechanical",
-    "subcategories": [
-        { "title": "Departmental Image Award", "id": "dept-mechanical-image-award", "nominees": [] },
-        { "title": "Outstanding Academic Performance Award", "id": "dept-mechanical-academic-performance-award", "nominees": [] },
-        { "title": "Athlete of the Year - Male", "id": "dept-mechanical-athlete-male", "nominees": [] },
-        { "title": "Athlete of the Year - Female", "id": "dept-mechanical-athlete-female", "nominees": [] }
-    ]
-}, {
-    "title": "Departmental Awards - Biomedical Engineering",
-    "id": "dept-biomedical",
-    "subcategories": [
-        { "title": "Departmental Image Award", "id": "dept-biomedical-image-award", "nominees": [] },
-        { "title": "Outstanding Academic Performance Award", "id": "dept-biomedical-academic-performance-award", "nominees": [] },
-        { "title": "Athlete of the Year - Male", "id": "dept-biomedical-athlete-male", "nominees": [] },
-        { "title": "Athlete of the Year - Female", "id": "dept-biomedical-athlete-female", "nominees": [] }
-    ]
-}, {
-    "title": "Departmental Awards - Electrical & Electronics Engineering",
-    "id": "dept-electrical-electronics",
-    "subcategories": [
-        { "title": "Departmental Image Award", "id": "dept-electrical-electronics-image-award", "nominees": [] },
-        { "title": "Outstanding Academic Performance Award", "id": "dept-electrical-electronics-academic-performance-award", "nominees": [] },
-        { "title": "Athlete of the Year - Male", "id": "dept-electrical-electronics-athlete-male", "nominees": [] },
-        { "title": "Athlete of the Year - Female", "id": "dept-electrical-electronics-athlete-female", "nominees": [] }
-    ]
-}, {
-    "title": "Departmental Awards - Surveying & Geoinformatics Engineering",
-    "id": "dept-surveying-geoinformatics",
-    "subcategories": [
-        { "title": "Departmental Image Award", "id": "dept-surveying-geoinformatics-image-award", "nominees": [] },
-        { "title": "Outstanding Academic Performance Award", "id": "dept-surveying-geoinformatics-academic-performance-award", "nominees": [] },
-        { "title": "Athlete of the Year - Male", "id": "dept-surveying-geoinformatics-athlete-male", "nominees": [] },
-        { "title": "Athlete of the Year - Female", "id": "dept-surveying-geoinformatics-athlete-female", "nominees": [] }
-    ]
-}, {
-    "title": "Departmental Awards - Computer Engineering",
-    "id": "dept-computer",
-    "subcategories": [
-        { "title": "Departmental Image Award", "id": "dept-computer-image-award", "nominees": [] },
-        { "title": "Outstanding Academic Performance Award", "id": "dept-computer-academic-performance-award", "nominees": [] },
-        { "title": "Athlete of the Year - Male", "id": "dept-computer-athlete-male", "nominees": [] },
-        { "title": "Athlete of the Year - Female", "id": "dept-computer-athlete-female", "nominees": [] }
-    ]
-}, {
-    "title": "Departmental Awards - Chemical Engineering",
-    "id": "dept-chemical",
-    "subcategories": [
-        { "title": "Departmental Image Award", "id": "dept-chemical-image-award", "nominees": [] },
-        { "title": "Outstanding Academic Performance Award", "id": "dept-chemical-academic-performance-award", "nominees": [] },
-        { "title": "Athlete of the Year - Male", "id": "dept-chemical-athlete-male", "nominees": [] },
-        { "title": "Athlete of the Year - Female", "id": "dept-chemical-athlete-female", "nominees": [] }
-    ]
-}, {
-    "title": "Departmental Awards - Petroleum & Gas Engineering",
-    "id": "dept-petroleum-gas",
-    "subcategories": [
-        { "title": "Departmental Image Award", "id": "dept-petroleum-gas-image-award", "nominees": [] },
-        { "title": "Outstanding Academic Performance Award", "id": "dept-petroleum-gas-academic-performance-award", "nominees": [] },
-        { "title": "Athlete of the Year - Male", "id": "dept-petroleum-gas-athlete-male", "nominees": [] },
-        { "title": "Athlete of the Year - Female", "id": "dept-petroleum-gas-athlete-female", "nominees": [] }
-    ]
-}, {
-    "title": "Departmental Awards - Civil Engineering",
-    "id": "dept-civil",
-    "subcategories": [
-        { "title": "Departmental Image Award", "id": "dept-civil-image-award", "nominees": [] },
-        { "title": "Outstanding Academic Performance Award", "id": "dept-civil-academic-performance-award", "nominees": [] },
-        { "title": "Athlete of the Year - Male", "id": "dept-civil-athlete-male", "nominees": [] },
-        { "title": "Athlete of the Year - Female", "id": "dept-civil-athlete-female", "nominees": [] }
-    ]
-}, {
-    "title": "Departmental Awards - Systems Engineering",
-    "id": "dept-systems",
-    "subcategories": [
-        { "title": "Departmental Image Award", "id": "dept-systems-image-award", "nominees": [] },
-        { "title": "Outstanding Academic Performance Award", "id": "dept-systems-academic-performance-award", "nominees": [] },
-        { "title": "Athlete of the Year - Male", "id": "dept-systems-athlete-male", "nominees": [] },
-        { "title": "Athlete of the Year - Female", "id": "dept-systems-athlete-female", "nominees": [] }
-    ]
-}, {
-    "title": "Departmental Awards - Metallurgical & Materials Engineering",
-    "id": "dept-metallurgical-materials",
-    "subcategories": [
-        { "title": "Departmental Image Award", "id": "dept-metallurgical-materials-image-award", "nominees": [] },
-        { "title": "Outstanding Academic Performance Award", "id": "dept-metallurgical-materials-academic-performance-award", "nominees": [] },
-        { "title": "Athlete of the Year - Male", "id": "dept-metallurgical-materials-athlete-male", "nominees": [] },
-        { "title": "Athlete of the Year - Female", "id": "dept-metallurgical-materials-athlete-female", "nominees": [] }
+    ],
+    "departments": [{
+            "title": "Departmental Awards - Mechanical Engineering",
+            "id": "dept-mechanical",
+            "subcategories": [
+                { "title": "Departmental Image Award", "id": "dept-mechanical-image-award", "nominees": [] },
+                { "title": "Outstanding Academic Performance Award", "id": "dept-mechanical-academic-performance-award", "nominees": [] },
+                { "title": "Athlete of the Year - Male", "id": "dept-mechanical-athlete-male", "nominees": [] },
+                { "title": "Athlete of the Year - Female", "id": "dept-mechanical-athlete-female", "nominees": [] }
+            ]
+        },
+        {
+            "title": "Departmental Awards - Biomedical Engineering",
+            "id": "dept-biomedical",
+            "subcategories": [
+                { "title": "Departmental Image Award", "id": "dept-biomedical-image-award", "nominees": [] },
+                { "title": "Outstanding Academic Performance Award", "id": "dept-biomedical-academic-performance-award", "nominees": [] },
+                { "title": "Athlete of the Year - Male", "id": "dept-biomedical-athlete-male", "nominees": [] },
+                { "title": "Athlete of the Year - Female", "id": "dept-biomedical-athlete-female", "nominees": [] }
+            ]
+        },
+        {
+            "title": "Departmental Awards - Electrical & Electronics Engineering",
+            "id": "dept-electrical-electronics",
+            "subcategories": [
+                { "title": "Departmental Image Award", "id": "dept-electrical-electronics-image-award", "nominees": [] },
+                { "title": "Outstanding Academic Performance Award", "id": "dept-electrical-electronics-academic-performance-award", "nominees": [] },
+                { "title": "Athlete of the Year - Male", "id": "dept-electrical-electronics-athlete-male", "nominees": [] },
+                { "title": "Athlete of the Year - Female", "id": "dept-electrical-electronics-athlete-female", "nominees": [] }
+            ]
+        },
+        {
+            "title": "Departmental Awards - Surveying & Geoinformatics Engineering",
+            "id": "dept-surveying-geoinformatics",
+            "subcategories": [
+                { "title": "Departmental Image Award", "id": "dept-surveying-geoinformatics-image-award", "nominees": [] },
+                { "title": "Outstanding Academic Performance Award", "id": "dept-surveying-geoinformatics-academic-performance-award", "nominees": [] },
+                { "title": "Athlete of the Year - Male", "id": "dept-surveying-geoinformatics-athlete-male", "nominees": [] },
+                { "title": "Athlete of the Year - Female", "id": "dept-surveying-geoinformatics-athlete-female", "nominees": [] }
+            ]
+        },
+        {
+            "title": "Departmental Awards - Computer Engineering",
+            "id": "dept-computer",
+            "subcategories": [
+                { "title": "Departmental Image Award", "id": "dept-computer-image-award", "nominees": [] },
+                { "title": "Outstanding Academic Performance Award", "id": "dept-computer-academic-performance-award", "nominees": [] },
+                { "title": "Athlete of the Year - Male", "id": "dept-computer-athlete-male", "nominees": [] },
+                { "title": "Athlete of the Year - Female", "id": "dept-computer-athlete-female", "nominees": [] }
+            ]
+        },
+        {
+            "title": "Departmental Awards - Chemical Engineering",
+            "id": "dept-chemical",
+            "subcategories": [
+                { "title": "Departmental Image Award", "id": "dept-chemical-image-award", "nominees": [] },
+                { "title": "Outstanding Academic Performance Award", "id": "dept-chemical-academic-performance-award", "nominees": [] },
+                { "title": "Athlete of the Year - Male", "id": "dept-chemical-athlete-male", "nominees": [] },
+                { "title": "Athlete of the Year - Female", "id": "dept-chemical-athlete-female", "nominees": [] }
+            ]
+        },
+        {
+            "title": "Departmental Awards - Petroleum & Gas Engineering",
+            "id": "dept-petroleum-gas",
+            "subcategories": [
+                { "title": "Departmental Image Award", "id": "dept-petroleum-gas-image-award", "nominees": [] },
+                { "title": "Outstanding Academic Performance Award", "id": "dept-petroleum-gas-academic-performance-award", "nominees": [] },
+                { "title": "Athlete of the Year - Male", "id": "dept-petroleum-gas-athlete-male", "nominees": [] },
+                { "title": "Athlete of the Year - Female", "id": "dept-petroleum-gas-athlete-female", "nominees": [] }
+            ]
+        },
+        {
+            "title": "Departmental Awards - Civil Engineering",
+            "id": "dept-civil",
+            "subcategories": [
+                { "title": "Departmental Image Award", "id": "dept-civil-image-award", "nominees": [] },
+                { "title": "Outstanding Academic Performance Award", "id": "dept-civil-academic-performance-award", "nominees": [] },
+                { "title": "Athlete of the Year - Male", "id": "dept-civil-athlete-male", "nominees": [] },
+                { "title": "Athlete of the Year - Female", "id": "dept-civil-athlete-female", "nominees": [] }
+            ]
+        },
+        {
+            "title": "Departmental Awards - Systems Engineering",
+            "id": "dept-systems",
+            "subcategories": [
+                { "title": "Departmental Image Award", "id": "dept-systems-image-award", "nominees": [] },
+                { "title": "Outstanding Academic Performance Award", "id": "dept-systems-academic-performance-award", "nominees": [] },
+                { "title": "Athlete of the Year - Male", "id": "dept-systems-athlete-male", "nominees": [] },
+                { "title": "Athlete of the Year - Female", "id": "dept-systems-athlete-female", "nominees": [] }
+            ]
+        },
+        {
+            "title": "Departmental Awards - Metallurgical & Materials Engineering",
+            "id": "dept-metallurgical-materials",
+            "subcategories": [
+                { "title": "Departmental Image Award", "id": "dept-metallurgical-materials-image-award", "nominees": [] },
+                { "title": "Outstanding Academic Performance Award", "id": "dept-metallurgical-materials-academic-performance-award", "nominees": [] },
+                { "title": "Athlete of the Year - Male", "id": "dept-metallurgical-materials-athlete-male", "nominees": [] },
+                { "title": "Athlete of the Year - Female", "id": "dept-metallurgical-materials-athlete-female", "nominees": [] }
+            ]
+        }
     ]
 }
