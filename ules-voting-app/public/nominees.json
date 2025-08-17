@@ -20,19 +20,23 @@
             "nominees": []
         },
         {
-            "title": "Best Dressed – Male (Undergraduate)",
+            "title": "Best Dressed - Male (Undergraduate)",
             "id": "ug-best-dressed-male",
             "nominees": []
         },
         {
-            "title": "Best Dressed – Female (Undergraduate)",
+            "title": "Best Dressed - Female (Undergraduate)",
             "id": "ug-best-dressed-female",
             "nominees": []
         },
         {
             "title": "Tech Personality (Undergraduate)",
             "id": "ug-tech-personality",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Clique of the Year (Undergraduate)",

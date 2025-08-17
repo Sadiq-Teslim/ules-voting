@@ -94,7 +94,7 @@ const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/api/validate`;
                 required
                 maxLength={9}
                 className="w-full bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500"
-                placeholder="e.g., 240404035"
+                placeholder="e.g., **04*****"
               />
             </div>
           </div>
