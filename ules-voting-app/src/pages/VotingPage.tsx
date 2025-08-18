@@ -1,18 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
-import { useLocation, Redirect } from "wouter";
+import { Redirect } from "wouter";
 import type { VoterInfo } from "../App";
-import {
-  Check,
-  Loader,
-  ArrowLeft,
-  Trophy,
-  ShieldCheck,
-  Home,
-} from "lucide-react";
+import { Check, Loader, ArrowLeft, ShieldCheck } from "lucide-react";
 
-// --- TypeScript Types ---
+// --- TypeScript Types (no change) ---
 interface Nominee {
   id: string;
   name: string;
@@ -33,7 +26,7 @@ interface GroupedCategories {
 }
 type MainCategoryKey = keyof GroupedCategories;
 
-// --- UPDATED Modal Component ---
+// --- Modal Component (no change) ---
 const SuccessModal = ({
   isOpen,
   onGoToHome,
@@ -77,7 +70,6 @@ const SuccessModal = ({
 
 const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
   const { matricNumber, fullName } = voter;
-  const [, setLocation] = useLocation();
 
   const [view, setView] = useState<"hub" | "voting">("hub");
   const [currentMainCategory, setCurrentMainCategory] =
@@ -85,14 +77,14 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
   const [groupedCategories, setGroupedCategories] = useState<GroupedCategories>(
     { undergraduate: [], general: [], finalist: [], departmental: [] }
   );
-  const [votedCategories, setVotedCategories] = useState<string[]>([]);
-  const [selections, setSelections] = useState<Selections>({});
 
+  // CRITICAL CHANGE: State now tracks individual sub-category IDs
+  const [votedSubCategoryIds, setVotedSubCategoryIds] = useState<string[]>([]);
+
+  const [selections, setSelections] = useState<Selections>({});
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  // NEW: State for the dynamic modal
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [nextCategoryToVote, setNextCategoryToVote] = useState<{
@@ -127,7 +119,6 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
     },
   ];
 
-  // --- Data fetching logic remains the same, it is correct. ---
   useEffect(() => {
     document.title = "ULES Awards | Cast Your Vote";
     const fetchData = async () => {
@@ -164,7 +155,9 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
           finalist: fin.filter(filterEmpty),
           departmental: deptCats.filter(filterEmpty),
         });
-        setVotedCategories(statusRes.data.votedCategories);
+
+        // Set the new state with the correct data from the backend
+        setVotedSubCategoryIds(statusRes.data.votedSubCategoryIds);
       } catch (err) {
         setError("Could not load voting data. Please try refreshing.");
       } finally {
@@ -174,7 +167,6 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
     fetchData();
   }, [matricNumber]);
 
-  // --- Navigation and Submission Logic ---
   const handleSelectCategory = (key: MainCategoryKey) => {
     setCurrentMainCategory(key);
     setView("voting");
@@ -190,18 +182,20 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
     setSelections((prev) => ({ ...prev, [categoryId]: nomineeName }));
   };
 
-  const findNextCategoryToVote = (updatedVotedCategories: string[]) => {
+  const findNextCategoryToVote = (updatedVotedIds: string[]) => {
     return (
-      mainCategories.find((mc) => !updatedVotedCategories.includes(mc.key)) ||
-      null
+      mainCategories.find((mc) => {
+        const totalInCat = groupedCategories[mc.key].length;
+        const votedInCat = groupedCategories[mc.key].filter((cat) =>
+          updatedVotedIds.includes(cat.id)
+        ).length;
+        return votedInCat < totalInCat; // Find a category that isn't fully voted for
+      }) || null
     );
   };
 
   const handleSubmitVote = async () => {
-    if (!currentMainCategory || Object.keys(selections).length === 0) {
-      alert("Please select at least one nominee to submit your vote.");
-      return;
-    }
+    if (!currentMainCategory || Object.keys(selections).length === 0) return;
     setIsSubmitting(true);
     setError(null);
     try {
@@ -218,18 +212,13 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
         }
       );
 
-      const updatedVotedList = res.data.votedCategories;
-      setVotedCategories(updatedVotedList);
+      const updatedVotedList = res.data.votedSubCategoryIds;
+      setVotedSubCategoryIds(updatedVotedList);
 
       const nextCat = findNextCategoryToVote(updatedVotedList);
       setNextCategoryToVote(nextCat);
 
-      const remaining = mainCategories.length - updatedVotedList.length;
-      setModalMessage(
-        remaining > 0
-          ? `You can still vote in ${remaining} other categories.`
-          : "You have voted in all available categories. Thank you!"
-      );
+      setModalMessage("Your selections for this category have been recorded.");
       setIsModalOpen(true);
     } catch (err: any) {
       setError(
@@ -250,7 +239,6 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
     handleBackToHub();
   };
 
-  // --- Loading/Error states ---
   if (!matricNumber || !fullName) return <Redirect to="/" />;
   if (isLoading)
     return (
@@ -271,109 +259,127 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
 
   return (
     <div className="w-full min-h-screen font-sans bg-gradient-to-br from-sky-100 to-indigo-200">
-      <div className="w-full min-h-screen bg-black/5">
-        <SuccessModal
-          isOpen={isModalOpen}
-          onGoToHome={closeModalAndGoHome}
-          onGoToNext={handleGoToNextCategory}
-          nextCategory={nextCategoryToVote}
-          message={modalMessage}
-        />
+      <SuccessModal
+        isOpen={isModalOpen}
+        onGoToHome={closeModalAndGoHome}
+        onGoToNext={handleGoToNextCategory}
+        nextCategory={nextCategoryToVote}
+        message={modalMessage}
+      />
+      <div className="max-w-5xl mx-auto p-4 sm:p-8 w-full">
+        {view === "hub" ? (
+          <>
+            <header className="text-center mb-10 bg-white/70 backdrop-blur-lg rounded-xl shadow-md p-6 border border-white/50">
+              <h1 className="text-3xl sm:text-4xl font-bold text-slate-800 tracking-tight">
+                Select a Category to Vote
+              </h1>
+              <p className="text-slate-600 mt-2">
+                Welcome,{" "}
+                <span className="font-semibold text-slate-900">{fullName}</span>
+                .
+              </p>
+            </header>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+              {mainCategories.map(({ key, title, description }) => {
+                const totalInCat = groupedCategories[key]?.length || 0;
+                const votedInCat = useMemo(
+                  () =>
+                    groupedCategories[key]?.filter((cat) =>
+                      votedSubCategoryIds.includes(cat.id)
+                    ).length || 0,
+                  [groupedCategories, key, votedSubCategoryIds]
+                );
+                const isComplete = totalInCat > 0 && votedInCat === totalInCat;
+                if (totalInCat === 0) return null; // Don't show categories with no nominees
 
-        <div className="max-w-5xl mx-auto p-4 sm:p-8 w-full">
-          {view === "hub" ? (
-            <>
-              <header className="text-center mb-10 bg-white/70 backdrop-blur-lg rounded-xl shadow-md p-6 border border-white/50">
-                <h1 className="text-3xl sm:text-4xl font-bold text-slate-800 tracking-tight">
-                  Select a Category to Vote
-                </h1>
-                <p className="text-slate-600 mt-2">
-                  Welcome,{" "}
-                  <span className="font-semibold text-slate-900">
-                    {fullName}
-                  </span>
-                  .
-                </p>
-              </header>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
-                {mainCategories.map(({ key, title, description }) => {
-                  const isVoted = votedCategories.includes(key);
-                  const awardsInCategory = groupedCategories[key]?.length || 0;
-                  const canVote = awardsInCategory > 0 && !isVoted;
-                  return (
-                    <button
-                      key={key}
-                      onClick={() => handleSelectCategory(key)}
-                      disabled={!canVote}
-                      className="bg-white rounded-xl shadow-md p-5 text-left transition-all duration-300 transform hover:-translate-y-1.5 hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none disabled:hover:shadow-md flex items-center gap-5"
+                return (
+                  <button
+                    key={key}
+                    onClick={() => handleSelectCategory(key)}
+                    disabled={isComplete}
+                    className="bg-white rounded-xl shadow-md p-5 text-left transition-all duration-300 transform hover:-translate-y-1.5 hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none disabled:hover:shadow-md flex items-center gap-5"
+                  >
+                    <div
+                      className={`flex-shrink-0 w-16 h-16 rounded-lg flex items-center justify-center ${
+                        isComplete ? "bg-green-100" : "bg-amber-100"
+                      }`}
                     >
-                      <div
-                        className={`flex-shrink-0 w-16 h-16 rounded-lg flex items-center justify-center ${
-                          isVoted ? "bg-green-100" : "bg-amber-100"
+                      <img
+                        src="/nobg-ules.png"
+                        alt="ULES Icon"
+                        className="w-12 h-12"
+                      />
+                    </div>
+                    <div className="flex-grow">
+                      <h2 className="text-lg sm:text-xl font-bold text-slate-800">
+                        {title}
+                      </h2>
+                      <p className="text-slate-600 text-sm mt-1">
+                        {description}
+                      </p>
+                      <div className="text-sm font-semibold text-slate-600 mt-2">
+                        {isComplete ? (
+                          <span className="text-green-600 flex items-center gap-1.5">
+                            <ShieldCheck size={16} /> COMPLETED
+                          </span>
+                        ) : (
+                          <span>
+                            Voted {votedInCat} of {totalInCat}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </>
+        ) : (
+          currentMainCategory && (
+            <>
+              <header className="mb-8">
+                <button
+                  onClick={handleBackToHub}
+                  className="flex items-center gap-2 text-slate-700 font-semibold mb-4 bg-white/50 hover:bg-white/80 px-4 py-2 rounded-lg transition-colors shadow-sm"
+                >
+                  <ArrowLeft size={18} /> Back to Categories
+                </button>
+                <div className="text-center bg-white/70 backdrop-blur-lg rounded-xl shadow-md p-6 border border-white/50">
+                  <h1 className="text-3xl sm:text-4xl font-bold text-slate-800 tracking-tight">
+                    {
+                      mainCategories.find(
+                        (mc) => mc.key === currentMainCategory
+                      )?.title
+                    }
+                  </h1>
+                  <p className="text-slate-600 mt-2">
+                    You can vote for nominees in any award you haven't voted for
+                    yet.
+                  </p>
+                </div>
+              </header>
+              <div className="space-y-12">
+                {(groupedCategories[currentMainCategory] || []).map(
+                  (category) => {
+                    const isCategoryVoted = votedSubCategoryIds.includes(
+                      category.id
+                    );
+                    return (
+                      <section
+                        key={category.id}
+                        className={`transition-opacity ${
+                          isCategoryVoted ? "opacity-60" : ""
                         }`}
                       >
-                        <img
-                          src="/nobgules-logo.png"
-                          alt="ULES Icon"
-                          className={`w-12 h-12 transition-transform duration-300 ${
-                            isVoted ? "" : "group-hover:scale-110"
-                          }`}
-                        />
-                      </div>
-                      <div className="flex-grow">
-                        <h2 className="text-lg sm:text-xl font-bold text-slate-800">
-                          {title}
-                        </h2>
-                        <p className="text-slate-600 text-sm mt-1">
-                          {description}
-                        </p>
-                        {isVoted && (
-                          <p className="text-sm font-semibold text-green-600 mt-2 flex items-center gap-1.5">
-                            <ShieldCheck size={16} /> VOTED
-                          </p>
-                        )}
-                        {awardsInCategory === 0 && (
-                          <p className="text-sm font-semibold text-slate-500 mt-2">
-                            No nominees in this category yet.
-                          </p>
-                        )}
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            </>
-          ) : (
-            currentMainCategory && (
-              <>
-                <header className="mb-8">
-                  <button
-                    onClick={handleBackToHub}
-                    className="flex items-center gap-2 text-slate-700 font-semibold mb-4 bg-white/50 hover:bg-white/80 px-4 py-2 rounded-lg transition-colors shadow-sm"
-                  >
-                    <ArrowLeft size={18} /> Back to Categories
-                  </button>
-                  <div className="text-center bg-white/70 backdrop-blur-lg rounded-xl shadow-md p-6 border border-white/50">
-                    <h1 className="text-3xl sm:text-4xl font-bold text-slate-800 tracking-tight">
-                      {
-                        mainCategories.find(
-                          (mc) => mc.key === currentMainCategory
-                        )?.title
-                      }
-                    </h1>
-                    <p className="text-slate-600 mt-2">
-                      Voting is optional for each award below.
-                    </p>
-                  </div>
-                </header>
-                <div className="space-y-12">
-                  {(groupedCategories[currentMainCategory] || []).map(
-                    (category) => (
-                      <section key={category.id}>
-                        <div className="text-center mb-6">
+                        <div className="text-center mb-6 relative">
                           <h2 className="text-2xl font-bold text-slate-800">
                             {category.title}
                           </h2>
+                          {isCategoryVoted && (
+                            <p className="text-sm font-semibold text-green-700 mt-1">
+                              You have already voted in this award
+                            </p>
+                          )}
                         </div>
                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
                           {category.nominees.map((nominee) => {
@@ -382,10 +388,20 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                             return (
                               <div
                                 key={nominee.id}
-                                onClick={() =>
-                                  handleSelectNominee(category.id, nominee.name)
+                                onClick={
+                                  isCategoryVoted
+                                    ? undefined
+                                    : () =>
+                                        handleSelectNominee(
+                                          category.id,
+                                          nominee.name
+                                        )
                                 }
-                                className={`bg-white rounded-xl shadow-md p-3 text-center cursor-pointer transition-all duration-300 transform hover:-translate-y-1.5 hover:shadow-xl ${
+                                className={`bg-white rounded-xl shadow-md p-3 text-center transition-all duration-300 ${
+                                  isCategoryVoted
+                                    ? "cursor-not-allowed"
+                                    : "cursor-pointer transform hover:-translate-y-1.5 hover:shadow-xl"
+                                } ${
                                   isSelected
                                     ? "ring-4 ring-amber-400 shadow-lg"
                                     : "ring-1 ring-black/5"
@@ -412,10 +428,16 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                                   className={`w-full mt-auto py-2 px-3 rounded-lg font-semibold text-xs transition-all duration-300 flex items-center justify-center gap-2 border ${
                                     isSelected
                                       ? "bg-amber-500 text-white border-amber-500"
+                                      : isCategoryVoted
+                                      ? "bg-slate-100 text-slate-400 border-slate-200"
                                       : "bg-transparent text-slate-600 border-slate-300"
                                   }`}
                                 >
-                                  {isSelected ? (
+                                  {isCategoryVoted ? (
+                                    <>
+                                      <Check size={14} /> Voted
+                                    </>
+                                  ) : isSelected ? (
                                     <>
                                       <Check size={14} /> Selected
                                     </>
@@ -428,29 +450,24 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                           })}
                         </div>
                       </section>
-                    )
-                  )}
-                </div>
-                <footer className="text-center mt-12">
-                  <button
-                    onClick={handleSubmitVote}
-                    disabled={
-                      isSubmitting || Object.keys(selections).length === 0
-                    }
-                    className="bg-green-600 hover:bg-green-700 disabled:bg-slate-400 disabled:cursor-not-allowed text-white font-bold py-4 px-12 rounded-xl text-lg transition-all duration-300 shadow-lg hover:shadow-green-600/30 w-full sm:w-auto"
-                  >
-                    {isSubmitting
-                      ? "Submitting..."
-                      : `Submit Votes for ${
-                          currentMainCategory.charAt(0).toUpperCase() +
-                          currentMainCategory.slice(1)
-                        }`}
-                  </button>
-                </footer>
-              </>
-            )
-          )}
-        </div>
+                    );
+                  }
+                )}
+              </div>
+              <footer className="text-center mt-12">
+                <button
+                  onClick={handleSubmitVote}
+                  disabled={
+                    isSubmitting || Object.keys(selections).length === 0
+                  }
+                  className="bg-green-600 hover:bg-green-700 disabled:bg-slate-400 disabled:cursor-not-allowed text-white font-bold py-4 px-12 rounded-xl text-lg transition-all duration-300 shadow-lg hover:shadow-green-600/30 w-full sm:w-auto"
+                >
+                  {isSubmitting ? "Submitting..." : `Submit Votes`}
+                </button>
+              </footer>
+            </>
+          )
+        )}
       </div>
     </div>
   );
