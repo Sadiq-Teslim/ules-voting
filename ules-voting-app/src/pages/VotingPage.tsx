@@ -77,10 +77,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
   const [groupedCategories, setGroupedCategories] = useState<GroupedCategories>(
     { undergraduate: [], general: [], finalist: [], departmental: [] }
   );
-
-  // CRITICAL CHANGE: State now tracks individual sub-category IDs
   const [votedSubCategoryIds, setVotedSubCategoryIds] = useState<string[]>([]);
-
   const [selections, setSelections] = useState<Selections>({});
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -155,8 +152,6 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
           finalist: fin.filter(filterEmpty),
           departmental: deptCats.filter(filterEmpty),
         });
-
-        // Set the new state with the correct data from the backend
         setVotedSubCategoryIds(statusRes.data.votedSubCategoryIds);
       } catch (err) {
         setError("Could not load voting data. Please try refreshing.");
@@ -186,10 +181,11 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
     return (
       mainCategories.find((mc) => {
         const totalInCat = groupedCategories[mc.key].length;
+        if (totalInCat === 0) return false;
         const votedInCat = groupedCategories[mc.key].filter((cat) =>
           updatedVotedIds.includes(cat.id)
         ).length;
-        return votedInCat < totalInCat; // Find a category that isn't fully voted for
+        return votedInCat < totalInCat;
       }) || null
     );
   };
@@ -214,10 +210,8 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
 
       const updatedVotedList = res.data.votedSubCategoryIds;
       setVotedSubCategoryIds(updatedVotedList);
-
       const nextCat = findNextCategoryToVote(updatedVotedList);
       setNextCategoryToVote(nextCat);
-
       setModalMessage("Your selections for this category have been recorded.");
       setIsModalOpen(true);
     } catch (err: any) {
@@ -282,13 +276,13 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
               {mainCategories.map(({ key, title, description }) => {
                 const totalInCat = groupedCategories[key]?.length || 0;
-                const votedInCat = useMemo(
-                  () =>
-                    groupedCategories[key]?.filter((cat) =>
-                      votedSubCategoryIds.includes(cat.id)
-                    ).length || 0,
-                  [groupedCategories, key, votedSubCategoryIds]
-                );
+
+                // CRITICAL FIX: Removed useMemo from inside the loop.
+                const votedInCat =
+                  groupedCategories[key]?.filter((cat) =>
+                    votedSubCategoryIds.includes(cat.id)
+                  ).length || 0;
+
                 const isComplete = totalInCat > 0 && votedInCat === totalInCat;
                 if (totalInCat === 0) return null; // Don't show categories with no nominees
 
@@ -305,7 +299,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                       }`}
                     >
                       <img
-                        src="/nobg-ules.png"
+                        src="/nobgules-logo.png"
                         alt="ULES Icon"
                         className="w-12 h-12"
                       />
