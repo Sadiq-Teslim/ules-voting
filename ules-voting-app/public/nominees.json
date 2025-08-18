@@ -2,32 +2,56 @@
     "categories": [{
             "title": "Most Beautiful (Undergraduate)",
             "id": "ug-most-beautiful",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Most Handsome (Undergraduate)",
             "id": "ug-most-handsome",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Most Influential (Undergraduate)",
             "id": "ug-most-influential",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Socialite of the Year (Undergraduate)",
             "id": "ug-socialite-of-the-year",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Best Dressed - Male (Undergraduate)",
             "id": "ug-best-dressed-male",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Best Dressed - Female (Undergraduate)",
             "id": "ug-best-dressed-female",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Tech Personality (Undergraduate)",
@@ -41,162 +65,290 @@
         {
             "title": "Clique of the Year (Undergraduate)",
             "id": "ug-clique-of-the-year",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Entrepreneur of the Year (Undergraduate)",
             "id": "ug-entrepreneur-of-the-year",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Creative of the Year (Undergraduate)",
             "id": "ug-creative-of-the-year",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Student Entertainer of the Year (Undergraduate)",
             "id": "ug-student-entertainer-of-the-year",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Social Impact Award (General)",
             "id": "gen-social-impact-award",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Innovation Award (Start-up Visionary) (General)",
             "id": "gen-innovation-award",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Student Leader of the Year (General)",
             "id": "gen-student-leader-of-the-year",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Content Creator of the Year (General)",
             "id": "gen-content-creator-of-the-year",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Academic Impact Award (General)",
             "id": "gen-academic-impact-award",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Student Brand of the Year (General)",
             "id": "gen-student-brand-of-the-year",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "ULES Tutor of the Year (General)",
             "id": "gen-ules-tutor-of-the-year",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "ULES Volunteer of the Year (General)",
             "id": "gen-ules-volunteer-of-the-year",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "ULES Person of the Year (General)",
             "id": "gen-ules-person-of-the-year",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Rookie of the Year (General)",
             "id": "gen-rookie-of-the-year",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Sophomore of the Year (General)",
             "id": "gen-sophomore-of-the-year",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Face of Year 3 (General)",
             "id": "gen-face-of-year-3",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Face of Year 4 (General)",
             "id": "gen-face-of-year-4",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Finalist of the Year (General)",
             "id": "gen-finalist-of-the-year",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "ULES Exco of the Year (General)",
             "id": "gen-ules-exco-of-the-year",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Student Organization of the Year (General)",
             "id": "gen-student-organization-of-the-year",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Exco Body of the Year (General)",
             "id": "gen-exco-body-of-the-year",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Couple of the Year (Finalist)",
             "id": "fin-couple-of-the-year",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Sports Person of the Year (Finalist)",
             "id": "fin-sports-person-of-the-year",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Creative of the Year (Finalist)",
             "id": "fin-creative-of-the-year",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Entrepreneur of the Year (Finalist)",
             "id": "fin-entrepreneur-of-the-year",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Clique of the Year (Finalist)",
             "id": "fin-clique-of-the-year",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Tech Personality – Male (Finalist)",
             "id": "fin-tech-personality-male",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Tech Personality – Female (Finalist)",
             "id": "fin-tech-personality-female",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Most Handsome (Finalist)",
             "id": "fin-most-handsome",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Most Beautiful (Finalist)",
             "id": "fin-most-beautiful",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Most Influential (Finalist)",
             "id": "fin-most-influential",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         },
         {
             "title": "Most Popular (Finalist)",
             "id": "fin-most-popular",
-            "nominees": []
+            "nominees": [{
+                "id": "st1",
+                "name": "Sadiq Teslim",
+                "image": null
+            }]
         }
     ],
     "departments": [{
@@ -205,22 +357,38 @@
             "subcategories": [{
                     "title": "Departmental Image Award",
                     "id": "dept-mechanical-image-award",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Outstanding Academic Performance Award",
                     "id": "dept-mechanical-academic-performance-award",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Athlete of the Year - Male",
                     "id": "dept-mechanical-athlete-male",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Athlete of the Year - Female",
                     "id": "dept-mechanical-athlete-female",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 }
             ]
         },
@@ -230,22 +398,38 @@
             "subcategories": [{
                     "title": "Departmental Image Award",
                     "id": "dept-biomedical-image-award",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Outstanding Academic Performance Award",
                     "id": "dept-biomedical-academic-performance-award",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Athlete of the Year - Male",
                     "id": "dept-biomedical-athlete-male",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Athlete of the Year - Female",
                     "id": "dept-biomedical-athlete-female",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 }
             ]
         },
@@ -255,22 +439,38 @@
             "subcategories": [{
                     "title": "Departmental Image Award",
                     "id": "dept-electrical-electronics-image-award",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Outstanding Academic Performance Award",
                     "id": "dept-electrical-electronics-academic-performance-award",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Athlete of the Year - Male",
                     "id": "dept-electrical-electronics-athlete-male",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Athlete of the Year - Female",
                     "id": "dept-electrical-electronics-athlete-female",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 }
             ]
         },
@@ -280,22 +480,38 @@
             "subcategories": [{
                     "title": "Departmental Image Award",
                     "id": "dept-surveying-geoinformatics-image-award",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Outstanding Academic Performance Award",
                     "id": "dept-surveying-geoinformatics-academic-performance-award",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Athlete of the Year - Male",
                     "id": "dept-surveying-geoinformatics-athlete-male",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Athlete of the Year - Female",
                     "id": "dept-surveying-geoinformatics-athlete-female",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 }
             ]
         },
@@ -305,22 +521,38 @@
             "subcategories": [{
                     "title": "Departmental Image Award",
                     "id": "dept-computer-image-award",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Outstanding Academic Performance Award",
                     "id": "dept-computer-academic-performance-award",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Athlete of the Year - Male",
                     "id": "dept-computer-athlete-male",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Athlete of the Year - Female",
                     "id": "dept-computer-athlete-female",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 }
             ]
         },
@@ -330,22 +562,38 @@
             "subcategories": [{
                     "title": "Departmental Image Award",
                     "id": "dept-chemical-image-award",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Outstanding Academic Performance Award",
                     "id": "dept-chemical-academic-performance-award",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Athlete of the Year - Male",
                     "id": "dept-chemical-athlete-male",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Athlete of the Year - Female",
                     "id": "dept-chemical-athlete-female",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 }
             ]
         },
@@ -355,22 +603,38 @@
             "subcategories": [{
                     "title": "Departmental Image Award",
                     "id": "dept-petroleum-gas-image-award",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Outstanding Academic Performance Award",
                     "id": "dept-petroleum-gas-academic-performance-award",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Athlete of the Year - Male",
                     "id": "dept-petroleum-gas-athlete-male",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Athlete of the Year - Female",
                     "id": "dept-petroleum-gas-athlete-female",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 }
             ]
         },
@@ -380,22 +644,38 @@
             "subcategories": [{
                     "title": "Departmental Image Award",
                     "id": "dept-civil-image-award",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Outstanding Academic Performance Award",
                     "id": "dept-civil-academic-performance-award",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Athlete of the Year - Male",
                     "id": "dept-civil-athlete-male",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Athlete of the Year - Female",
                     "id": "dept-civil-athlete-female",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 }
             ]
         },
@@ -405,22 +685,38 @@
             "subcategories": [{
                     "title": "Departmental Image Award",
                     "id": "dept-systems-image-award",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Outstanding Academic Performance Award",
                     "id": "dept-systems-academic-performance-award",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Athlete of the Year - Male",
                     "id": "dept-systems-athlete-male",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Athlete of the Year - Female",
                     "id": "dept-systems-athlete-female",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 }
             ]
         },
@@ -430,22 +726,38 @@
             "subcategories": [{
                     "title": "Departmental Image Award",
                     "id": "dept-metallurgical-materials-image-award",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Outstanding Academic Performance Award",
                     "id": "dept-metallurgical-materials-academic-performance-award",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Athlete of the Year - Male",
                     "id": "dept-metallurgical-materials-athlete-male",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 },
                 {
                     "title": "Athlete of the Year - Female",
                     "id": "dept-metallurgical-materials-athlete-female",
-                    "nominees": []
+                    "nominees": [{
+                        "id": "st1",
+                        "name": "Sadiq Teslim",
+                        "image": null
+                    }]
                 }
             ]
         }
