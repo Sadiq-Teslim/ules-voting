@@ -3,258 +3,420 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation, Redirect } from "wouter";
 import type { VoterInfo } from "../App";
-import ConfirmationModal from "../components/ConfirmationModal";
-import { Check } from "lucide-react";
+import { Check, Loader, ArrowLeft, Trophy, ShieldCheck } from "lucide-react";
 
 // --- TypeScript Types ---
 interface Nominee {
-  id: string; // The unique ID from your JSON file
+  id: string;
   name: string;
   image: string | null;
   description?: string;
 }
 interface Category {
   title: string;
-  id: string; // The category ID (e.g., 'ug-most-beautiful')
+  id: string;
   nominees: Nominee[];
 }
-type Selections = Record<string, string>; // Key: categoryId, Value: nomineeName
-
-interface VotingPageProps {
-  voter: VoterInfo;
+type Selections = Record<string, string>;
+interface GroupedCategories {
+  undergraduate: Category[];
+  general: Category[];
+  finalist: Category[];
+  departmental: Category[];
 }
+type MainCategoryKey = keyof GroupedCategories;
 
-const VotingPage: React.FC<VotingPageProps> = ({ voter }) => {
+// Reusable Modal Component
+const SuccessModal = ({
+  isOpen,
+  onClose,
+  message,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  message: string;
+}) => {
+  if (!isOpen) return null;
+  return (
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-xl shadow-2xl p-8 max-w-md w-full text-center">
+        <ShieldCheck className="w-16 h-16 text-green-500 mx-auto mb-4" />
+        <h2 className="text-2xl font-bold text-slate-800">Vote Submitted!</h2>
+        <p className="text-slate-600 mt-2 mb-6">{message}</p>
+        <button
+          onClick={onClose}
+          className="bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-8 rounded-lg w-full"
+        >
+          OK
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
   const { matricNumber, fullName } = voter;
   const [, setLocation] = useLocation();
 
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [view, setView] = useState<"hub" | "voting">("hub");
+  const [currentMainCategory, setCurrentMainCategory] =
+    useState<MainCategoryKey | null>(null);
+
+  const [groupedCategories, setGroupedCategories] = useState<GroupedCategories>(
+    { undergraduate: [], general: [], finalist: [], departmental: [] }
+  );
+  const [votedCategories, setVotedCategories] = useState<string[]>([]);
   const [selections, setSelections] = useState<Selections>({});
+
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+
+  const mainCategories: {
+    key: MainCategoryKey;
+    title: string;
+    description: string;
+  }[] = [
+    {
+      key: "undergraduate",
+      title: "Undergraduate Awards",
+      description: "Recognizing outstanding undergraduate students.",
+    },
+    {
+      key: "general",
+      title: "General Awards",
+      description: "Awards open to students across all years.",
+    },
+    {
+      key: "finalist",
+      title: "Finalist Awards",
+      description: "Celebrating the achievements of the graduating class.",
+    },
+    {
+      key: "departmental",
+      title: "Departmental Awards",
+      description: "Honoring excellence within each engineering department.",
+    },
+  ];
 
   useEffect(() => {
     document.title = "ULES Awards | Cast Your Vote";
-  }, []);
-
-  // --- CORRECTED DATA FETCHING (from local nominees.json only) ---
-  useEffect(() => {
-    const fetchAndPrepareCategories = async () => {
+    const fetchData = async () => {
       setIsLoading(true);
       try {
-        // Step 1: Fetch the single source of truth: your nominees.json file
-        const response = await axios.get("/nominees.json");
-        const jsonData = response.data;
+        const [structureRes, statusRes] = await Promise.all([
+          axios.get("/nominees.json"),
+          axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/voter-status`, {
+            matricNumber,
+          }),
+        ]);
 
-        const allCategoriesFlat: Category[] = [];
+        // Process categories from JSON
+        const jsonData = structureRes.data;
+        const ug: Category[] = [],
+          gen: Category[] = [],
+          fin: Category[] = [];
+        const deptCats: Category[] = [];
+        jsonData.categories.forEach((cat: Category) => {
+          if (cat.id.startsWith("ug-")) ug.push(cat);
+          else if (cat.id.startsWith("gen-")) gen.push(cat);
+          else if (cat.id.startsWith("fin-")) fin.push(cat);
+        });
+        jsonData.departments.forEach((dept: any) => {
+          const deptName = dept.title.replace("Departmental Awards - ", "");
+          dept.subcategories.forEach((subCat: any) =>
+            deptCats.push({ ...subCat, title: `${deptName} - ${subCat.title}` })
+          );
+        });
+        const filterEmpty = (c: Category) =>
+          c.nominees && c.nominees.length > 0;
+        setGroupedCategories({
+          undergraduate: ug.filter(filterEmpty),
+          general: gen.filter(filterEmpty),
+          finalist: fin.filter(filterEmpty),
+          departmental: deptCats.filter(filterEmpty),
+        });
 
-        // Step 2: Add the main, top-level categories directly
-        if (jsonData.categories && Array.isArray(jsonData.categories)) {
-          allCategoriesFlat.push(...jsonData.categories);
-        }
-
-        // Step 3: Flatten the departmental subcategories
-        if (jsonData.departments && Array.isArray(jsonData.departments)) {
-          jsonData.departments.forEach((dept: any) => {
-            const deptName = dept.title.replace("Departmental Awards - ", "");
-            if (dept.subcategories && Array.isArray(dept.subcategories)) {
-              const formattedSubcategories = dept.subcategories.map(
-                (subCat: any) => ({
-                  ...subCat,
-                  title: `${deptName} - ${subCat.title}`, // Create user-friendly title
-                })
-              );
-              allCategoriesFlat.push(...formattedSubcategories);
-            }
-          });
-        }
-
-        // Step 4: Set the final state, filtering out any categories with no nominees
-        setCategories(
-          allCategoriesFlat.filter(
-            (cat) => cat.nominees && cat.nominees.length > 0
-          )
-        );
+        // Set voted status from API
+        setVotedCategories(statusRes.data.votedCategories);
       } catch (err) {
-        setError(
-          "Could not load voting categories. Please check the nominees file and try refreshing."
-        );
-        console.error("Data fetching error:", err);
+        setError("Could not load voting data. Please try refreshing.");
       } finally {
         setIsLoading(false);
       }
     };
-    fetchAndPrepareCategories();
-  }, []);
+    fetchData();
+  }, [matricNumber]);
 
-  // --- Event Handlers (No changes needed here) ---
+  const handleSelectCategory = (key: MainCategoryKey) => {
+    setCurrentMainCategory(key);
+    setView("voting");
+  };
+
+  const handleBackToHub = () => {
+    setView("hub");
+    setCurrentMainCategory(null);
+    setSelections({}); // Clear selections when leaving a category
+  };
+
   const handleSelectNominee = (categoryId: string, nomineeName: string) => {
     setSelections((prev) => ({ ...prev, [categoryId]: nomineeName }));
   };
 
   const handleSubmitVote = async () => {
+    if (!currentMainCategory || Object.keys(selections).length === 0) {
+      alert("Please select at least one nominee to submit your vote.");
+      return;
+    }
     setIsSubmitting(true);
     setError(null);
     try {
-      const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/api/submit`;
       const choices = Object.entries(selections).map(
         ([categoryId, nomineeName]) => ({ categoryId, nomineeName })
       );
-      await axios.post(apiUrl, { fullName, matricNumber, choices });
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_BASE_URL}/api/submit`,
+        {
+          fullName,
+          matricNumber,
+          choices,
+          mainCategory: currentMainCategory,
+        }
+      );
 
-      setLocation("/success", { state: { selections, categories, fullName } });
+      setVotedCategories(res.data.votedCategories); // Update voted state from backend response
+
+      const remaining = mainCategories.length - res.data.votedCategories.length;
+      setModalMessage(
+        remaining > 0
+          ? `You can still vote in ${remaining} other main categories.`
+          : "You have now voted in all available categories. Thank you!"
+      );
+      setIsModalOpen(true);
     } catch (err: any) {
       setError(
         err.response?.data?.message || "An error occurred while submitting."
       );
-      setIsModalOpen(false);
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+    handleBackToHub();
+  };
+
   if (!matricNumber || !fullName) return <Redirect to="/" />;
-
-  const allCategoriesVoted =
-    categories.length > 0 &&
-    Object.keys(selections).length === categories.length;
-
   if (isLoading)
     return (
-      <div className="flex items-center justify-center min-h-screen bg-vote-bg text-xl animate-pulse text-slate-500">
-        Loading Voting Portal...
+      <div className="flex flex-col items-center justify-center min-h-screen bg-slate-100 text-slate-500">
+        <Loader className="w-10 h-10 animate-spin mb-4" />
+        <p className="text-xl">Loading Portal...</p>
       </div>
     );
-
   if (error)
     return (
-      <div className="flex items-center justify-center min-h-screen bg-vote-bg p-4">
-        <div className="p-6 bg-red-100 border border-red-300 rounded-lg text-red-700 text-center">
+      <div className="flex items-center justify-center min-h-screen bg-slate-100 p-4">
+        <div className="p-6 bg-red-50 border border-red-200 rounded-lg text-red-800 text-center shadow-md">
           <h3 className="font-bold text-lg mb-2">An Error Occurred</h3>
           <p>{error}</p>
         </div>
       </div>
     );
 
-  if (categories.length === 0)
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-vote-bg text-xl text-slate-500 p-4 text-center">
-        Voting is not yet open or no nominees are available.
-      </div>
-    );
-
-  // --- RENDER LOGIC (Mobile-Optimized) ---
   return (
-    <div className="w-full min-h-screen bg-vote-bg font-sans text-vote-text-dark">
-      <ConfirmationModal
-        isOpen={isModalOpen}
-        onRequestClose={() => setIsModalOpen(false)}
-        onConfirm={handleSubmitVote}
-        title="Confirm Your Vote"
-        message="Please double-check your choices. This action is final and cannot be changed."
-        confirmText="Yes, Submit Vote"
-        isProcessing={isSubmitting}
-      />
+    <div
+      className="w-full min-h-screen font-sans bg-cover bg-center bg-fixed"
+      style={{
+        backgroundImage:
+          "url('https://images.unsplash.com/photo-1531685250784-7569952593d2?q=80&w=2574&auto=format&fit=crop')",
+      }}
+    >
+      <div className="w-full min-h-screen bg-black/40 backdrop-blur-sm flex flex-col">
+        <SuccessModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          message={modalMessage}
+        />
 
-      <div className="max-w-5xl mx-auto p-4 sm:p-8">
-        <header className="text-center mb-12 sm:mb-16">
-          <h1 className="text-3xl sm:text-5xl font-bold text-vote-primary">
-            YOU MAY NOW CAST YOUR VOTES!
-          </h1>
-          <p className="text-slate-500 mt-2">
-            Welcome,{" "}
-            <span className="font-semibold text-vote-text-dark">
-              {fullName}
-            </span>
-            .
-          </p>
-        </header>
-
-        <div className="space-y-12 sm:space-y-16">
-          {categories.map((category) => (
-            <section key={category.id}>
-              <div className="text-center mb-6 sm:mb-8">
-                <h2 className="text-2xl sm:text-3xl font-bold text-vote-text-dark">
-                  {category.title}
-                </h2>
-                <p className="text-vote-text-light mt-1 text-sm sm:text-base">
-                  You can only vote for one candidate
+        <div className="max-w-5xl mx-auto p-4 sm:p-8 w-full flex-grow">
+          {view === "hub" ? (
+            <>
+              <header className="text-center mb-10 bg-white/60 backdrop-blur-md rounded-xl shadow-lg p-6 border border-white/30">
+                <h1 className="text-3xl sm:text-4xl font-bold text-slate-800 tracking-tight">
+                  Select a Category to Vote
+                </h1>
+                <p className="text-slate-600 mt-2">
+                  Welcome,{" "}
+                  <span className="font-semibold text-slate-900">
+                    {fullName}
+                  </span>
+                  . Choose a category to cast your votes.
                 </p>
-              </div>
-              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
-                {category.nominees.map((nominee) => {
-                  const isSelected = selections[category.id] === nominee.name;
-                  return (
-                    <div
-                      key={nominee.id} // Correct key for React loops
-                      className={`
-                        bg-gradient-to-br from-white to-slate-100/50 rounded-2xl shadow-lg p-4 sm:p-6 text-center
-                        transition-all duration-300 transform hover:-translate-y-2 relative
-                        ${isSelected ? "ring-2 ring-vote-gold" : ""}
-                      `}
-                    >
-                      <div className="w-28 h-28 sm:w-32 sm:h-32 mx-auto rounded-full overflow-hidden border-4 border-white shadow-md mb-4">
-                        <img
-                          src={
-                            nominee.image
-                              ? `/nominees/${nominee.image}`
-                              : `/placeholder.png`
-                          } // Correct image path
-                          alt={nominee.name}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <h3 className="text-lg sm:text-xl font-bold text-vote-text-dark truncate">
-                        {nominee.name}
-                      </h3>
-                      <p className="text-vote-text-light text-sm h-5">
-                        {nominee.description || ""}
-                      </p>
+              </header>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {mainCategories.map(({ key, title, description }) => {
+                  const isVoted = votedCategories.includes(key);
+                  const awardsInCategory = groupedCategories[key]?.length || 0;
+                  const canVote = awardsInCategory > 0 && !isVoted;
 
-                      <button
-                        onClick={() =>
-                          handleSelectNominee(category.id, nominee.name)
-                        }
-                        disabled={isSelected}
-                        className={`
-                          w-full mt-6 py-3 px-4 rounded-lg font-semibold text-sm transition-all duration-300 flex items-center justify-center gap-2
-                          ${
-                            isSelected
-                              ? "bg-vote-primary text-white cursor-default"
-                              : "bg-slate-200 text-slate-700 hover:bg-slate-300"
-                          }
-                        `}
+                  return (
+                    <button
+                      key={key}
+                      onClick={() => handleSelectCategory(key)}
+                      disabled={!canVote}
+                      className={`bg-white rounded-xl shadow-md p-6 text-left transition-all duration-300 transform hover:-translate-y-1.5 hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:shadow-md flex items-center gap-6 ${
+                        canVote ? "cursor-pointer" : ""
+                      }`}
+                    >
+                      <div
+                        className={`flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center ${
+                          isVoted
+                            ? "bg-green-100 text-green-600"
+                            : "bg-amber-100 text-amber-600"
+                        }`}
                       >
-                        {isSelected ? (
-                          <>
-                            <Check size={16} /> Voted
-                          </>
+                        {isVoted ? (
+                          <ShieldCheck size={32} />
                         ) : (
-                          "Vote"
+                          <Trophy size={32} />
                         )}
-                      </button>
-                    </div>
+                      </div>
+                      <div>
+                        <h2 className="text-xl font-bold text-slate-800">
+                          {title}
+                        </h2>
+                        <p className="text-slate-600 text-sm mt-1">
+                          {description}
+                        </p>
+                        {isVoted && (
+                          <p className="text-sm font-semibold text-green-600 mt-2">
+                            VOTED
+                          </p>
+                        )}
+                        {awardsInCategory === 0 && (
+                          <p className="text-sm font-semibold text-slate-500 mt-2">
+                            No nominees in this category yet.
+                          </p>
+                        )}
+                      </div>
+                    </button>
                   );
                 })}
               </div>
-            </section>
-          ))}
+            </>
+          ) : (
+            currentMainCategory && (
+              <>
+                <header className="mb-8">
+                  <button
+                    onClick={handleBackToHub}
+                    className="flex items-center gap-2 text-white font-semibold mb-4 bg-black/20 hover:bg-black/40 px-4 py-2 rounded-lg transition-colors"
+                  >
+                    <ArrowLeft size={18} /> Back to Categories
+                  </button>
+                  <div className="text-center bg-white/60 backdrop-blur-md rounded-xl shadow-lg p-6 border border-white/30">
+                    <h1 className="text-3xl sm:text-4xl font-bold text-slate-800 tracking-tight">
+                      {
+                        mainCategories.find(
+                          (mc) => mc.key === currentMainCategory
+                        )?.title
+                      }
+                    </h1>
+                    <p className="text-slate-600 mt-2">
+                      Select your choice for each award below. Voting is
+                      optional for each.
+                    </p>
+                  </div>
+                </header>
+                <div className="space-y-12">
+                  {(groupedCategories[currentMainCategory] || []).map(
+                    (category) => (
+                      <section key={category.id}>
+                        <div className="text-center mb-6">
+                          <h2 className="text-2xl font-bold text-white text-shadow-md">
+                            {category.title}
+                          </h2>
+                        </div>
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                          {category.nominees.map((nominee) => {
+                            const isSelected =
+                              selections[category.id] === nominee.name;
+                            return (
+                              <div
+                                key={nominee.id}
+                                onClick={() =>
+                                  handleSelectNominee(category.id, nominee.name)
+                                }
+                                className={`bg-white rounded-xl shadow-md p-3 text-center cursor-pointer transition-all duration-300 transform hover:-translate-y-1.5 hover:shadow-xl ${
+                                  isSelected
+                                    ? "ring-4 ring-amber-400 shadow-lg"
+                                    : "ring-1 ring-black/5"
+                                }`}
+                              >
+                                <div className="w-24 h-24 sm:w-28 sm:h-28 mx-auto rounded-full overflow-hidden border-4 border-white shadow-sm mb-3">
+                                  <img
+                                    src={
+                                      nominee.image
+                                        ? `/nominees/${nominee.image}`
+                                        : `/placeholder.png`
+                                    }
+                                    alt={nominee.name}
+                                    className="w-full h-full object-cover"
+                                  />
+                                </div>
+                                <h3 className="text-sm sm:text-base font-bold text-slate-800 truncate">
+                                  {nominee.name}
+                                </h3>
+                                <p className="text-slate-500 text-xs h-4 mb-3">
+                                  {nominee.description || ""}
+                                </p>
+                                <div
+                                  className={`w-full mt-auto py-2 px-3 rounded-lg font-semibold text-xs transition-all duration-300 flex items-center justify-center gap-2 border ${
+                                    isSelected
+                                      ? "bg-amber-500 text-white border-amber-500"
+                                      : "bg-transparent text-slate-600 border-slate-300"
+                                  }`}
+                                >
+                                  {isSelected ? (
+                                    <>
+                                      <Check size={14} /> Selected
+                                    </>
+                                  ) : (
+                                    "Select"
+                                  )}
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </section>
+                    )
+                  )}
+                </div>
+                <footer className="text-center mt-12">
+                  <button
+                    onClick={handleSubmitVote}
+                    disabled={
+                      isSubmitting || Object.keys(selections).length === 0
+                    }
+                    className="bg-green-600 hover:bg-green-700 disabled:bg-slate-400 disabled:cursor-not-allowed text-white font-bold py-4 px-12 rounded-xl text-lg transition-all duration-300 shadow-lg hover:shadow-green-600/30 w-full sm:w-auto"
+                  >
+                    {isSubmitting
+                      ? "Submitting..."
+                      : `Submit Votes for ${
+                          currentMainCategory.charAt(0).toUpperCase() +
+                          currentMainCategory.slice(1)
+                        }`}
+                  </button>
+                </footer>
+              </>
+            )
+          )}
         </div>
-
-        <footer className="text-center mt-16 sm:mt-20">
-          <p className="text-vote-text-light text-sm mb-4">
-            Double check your choices before submitting your votes.
-          </p>
-          <button
-            onClick={() => setIsModalOpen(true)}
-            disabled={!allCategoriesVoted || isSubmitting}
-            className="bg-vote-primary hover:bg-vote-primary-hover disabled:bg-slate-400 disabled:cursor-not-allowed text-white font-bold py-4 px-12 sm:px-16 rounded-xl text-lg transition-all duration-300 shadow-lg hover:shadow-xl w-full sm:w-auto"
-          >
-            SUBMIT VOTE
-          </button>
-        </footer>
       </div>
     </div>
   );
