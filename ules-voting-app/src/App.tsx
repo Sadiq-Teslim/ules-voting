@@ -11,6 +11,7 @@ import NominationPage from "./pages/NominationPage";
 export interface VoterInfo {
   fullName: string;
   matricNumber: string;
+  departmentId: string;
 }
 
 function App() {

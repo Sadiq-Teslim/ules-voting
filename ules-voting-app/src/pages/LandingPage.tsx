@@ -12,7 +12,7 @@ import {
   Star,
   XCircle
 } from "lucide-react";
-import type { VoterInfo } from "../App"; // Ensure this path is correct
+import type { VoterInfo } from "../App";
 
 // Define the props for this component
 interface LandingPageProps {
@@ -39,8 +39,8 @@ const LandingPage: React.FC<LandingPageProps> = ({ setVoter }) => {
       setElectionStatus("closed"); // Default to closed on error
     });
 
-  const handleValidationSuccess = (matricNumber: string, fullName: string) => {
-    setVoter({ fullName, matricNumber });
+  const handleValidationSuccess = (voterInfo: VoterInfo) => {
+    setVoter(voterInfo);
     setLocation("/vote");
   };
 

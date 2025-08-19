@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import type {VoterInfo} from "../../src/App"
 
 // Define the props the component will accept
 interface ValidationModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSuccess: (matricNumber: string, fullName: string) => void;
+  onSuccess: (voterInfo: VoterInfo) => void;
 }
 
 const ValidationModal: React.FC<ValidationModalProps> = ({ isOpen, onClose, onSuccess }) => {
@@ -31,7 +32,11 @@ const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/api/validate`;
 
       if (response.data.valid) {
         // If validation is successful, call the onSuccess function passed from the parent
-        onSuccess(matricNumber, fullName);
+        onSuccess({
+          matricNumber,
+          fullName,
+          departmentId: response.data.departmentId,
+        });
       }
     } catch (err: Error | unknown) {
       // If the API returns an error (e.g., 400, 403), set the error message

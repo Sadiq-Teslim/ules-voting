@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Redirect } from "wouter";
 import type { VoterInfo } from "../App";
 import { Check, Loader, ArrowLeft, ShieldCheck } from "lucide-react";
 
-// --- TypeScript Types (no change) ---
+// --- TypeScript Types ---
 interface Nominee {
   id: string;
   name: string;
@@ -26,7 +27,7 @@ interface GroupedCategories {
 }
 type MainCategoryKey = keyof GroupedCategories;
 
-// --- Modal Component (no change) ---
+// --- Success Modal Component ---
 const SuccessModal = ({
   isOpen,
   onGoToHome,
@@ -69,7 +70,7 @@ const SuccessModal = ({
 };
 
 const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
-  const { matricNumber, fullName } = voter;
+  const { matricNumber, fullName, departmentId } = voter;
 
   const [view, setView] = useState<"hub" | "voting">("hub");
   const [currentMainCategory, setCurrentMainCategory] =
@@ -112,7 +113,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
     {
       key: "departmental",
       title: "Departmental Awards",
-      description: "Honoring excellence within each engineering department.",
+      description: "Honoring excellence within your department.",
     },
   ];
 
@@ -132,26 +133,38 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
         const ug: Category[] = [],
           gen: Category[] = [],
           fin: Category[] = [];
-        const deptCats: Category[] = [];
+        let deptCats: Category[] = [];
+
+        const userDepartment = jsonData.departments.find(
+          (dept: any) => dept.id === departmentId
+        );
+        if (userDepartment) {
+          const deptName = userDepartment.title.replace(
+            "Departmental Awards - ",
+            ""
+          );
+          deptCats = userDepartment.subcategories.map((subCat: any) => ({
+            ...subCat,
+            title: `${deptName} - ${subCat.title}`,
+          }));
+        }
+
         jsonData.categories.forEach((cat: Category) => {
           if (cat.id.startsWith("ug-")) ug.push(cat);
           else if (cat.id.startsWith("gen-")) gen.push(cat);
           else if (cat.id.startsWith("fin-")) fin.push(cat);
         });
-        jsonData.departments.forEach((dept: any) => {
-          const deptName = dept.title.replace("Departmental Awards - ", "");
-          dept.subcategories.forEach((subCat: any) =>
-            deptCats.push({ ...subCat, title: `${deptName} - ${subCat.title}` })
-          );
-        });
-        const filterEmpty = (c: Category) =>
-          c.nominees && c.nominees.length > 0;
+
+        // CRITICAL FIX: The filter was too aggressive. We still want to show the category
+        // button on the hub, even if the nominees array is empty. The `filterEmpty`
+        // function will now only be applied *inside* the voting view.
         setGroupedCategories({
-          undergraduate: ug.filter(filterEmpty),
-          general: gen.filter(filterEmpty),
-          finalist: fin.filter(filterEmpty),
-          departmental: deptCats.filter(filterEmpty),
+          undergraduate: ug,
+          general: gen,
+          finalist: fin,
+          departmental: deptCats,
         });
+
         setVotedSubCategoryIds(statusRes.data.votedSubCategoryIds);
       } catch (err) {
         setError("Could not load voting data. Please try refreshing.");
@@ -160,7 +173,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
       }
     };
     fetchData();
-  }, [matricNumber]);
+  }, [matricNumber, departmentId]);
 
   const handleSelectCategory = (key: MainCategoryKey) => {
     setCurrentMainCategory(key);
@@ -180,7 +193,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
   const findNextCategoryToVote = (updatedVotedIds: string[]) => {
     return (
       mainCategories.find((mc) => {
-        const totalInCat = groupedCategories[mc.key].length;
+        const totalInCat = groupedCategories[mc.key]?.length || 0;
         if (totalInCat === 0) return false;
         const votedInCat = groupedCategories[mc.key].filter((cat) =>
           updatedVotedIds.includes(cat.id)
@@ -225,7 +238,9 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
 
   const handleGoToNextCategory = (key: MainCategoryKey) => {
     setIsModalOpen(false);
-    handleSelectCategory(key);
+    setView("voting");
+    setCurrentMainCategory(key);
+    setSelections({});
   };
 
   const closeModalAndGoHome = () => {
@@ -252,6 +267,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
     );
 
   return (
+    // UI FIX: The background gradient is now the direct parent.
     <div className="w-full min-h-screen font-sans bg-gradient-to-br from-sky-100 to-indigo-200">
       <SuccessModal
         isOpen={isModalOpen}
@@ -263,35 +279,33 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
       <div className="max-w-5xl mx-auto p-4 sm:p-8 w-full">
         {view === "hub" ? (
           <>
-            <header className="text-center mb-10 bg-white/70 backdrop-blur-lg rounded-xl shadow-md p-6 border border-white/50">
-              <h1 className="text-3xl sm:text-4xl font-bold text-slate-800 tracking-tight">
+            <header className="text-center mb-10 bg-black/10 backdrop-blur-lg rounded-xl shadow-md p-6 border border-white/30">
+              <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight text-shadow-md">
                 Select a Category to Vote
               </h1>
-              <p className="text-slate-600 mt-2">
+              <p className="text-indigo-100 mt-2">
                 Welcome,{" "}
-                <span className="font-semibold text-slate-900">{fullName}</span>
-                .
+                <span className="font-semibold text-white">{fullName}</span>.
               </p>
             </header>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
               {mainCategories.map(({ key, title, description }) => {
                 const totalInCat = groupedCategories[key]?.length || 0;
-
-                // CRITICAL FIX: Removed useMemo from inside the loop.
                 const votedInCat =
                   groupedCategories[key]?.filter((cat) =>
                     votedSubCategoryIds.includes(cat.id)
                   ).length || 0;
-
                 const isComplete = totalInCat > 0 && votedInCat === totalInCat;
-                if (totalInCat === 0) return null; // Don't show categories with no nominees
+
+                // CRITICAL FIX: Always show the button, but disable if there are no categories inside.
+                const canVote = totalInCat > 0 && !isComplete;
 
                 return (
                   <button
                     key={key}
                     onClick={() => handleSelectCategory(key)}
-                    disabled={isComplete}
-                    className="bg-white rounded-xl shadow-md p-5 text-left transition-all duration-300 transform hover:-translate-y-1.5 hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none disabled:hover:shadow-md flex items-center gap-5"
+                    disabled={!canVote}
+                    className="bg-white/70 backdrop-blur-lg rounded-xl shadow-md p-5 text-left transition-all duration-300 transform hover:-translate-y-1.5 hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none disabled:hover:shadow-md flex items-center gap-5 group"
                   >
                     <div
                       className={`flex-shrink-0 w-16 h-16 rounded-lg flex items-center justify-center ${
@@ -301,7 +315,9 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                       <img
                         src="/nobgules-logo.png"
                         alt="ULES Icon"
-                        className="w-12 h-12"
+                        className={`w-12 h-12 transition-transform duration-300 ${
+                          isComplete ? "" : "group-hover:scale-110"
+                        }`}
                       />
                     </div>
                     <div className="flex-grow">
@@ -316,9 +332,13 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                           <span className="text-green-600 flex items-center gap-1.5">
                             <ShieldCheck size={16} /> COMPLETED
                           </span>
-                        ) : (
+                        ) : totalInCat > 0 ? (
                           <span>
                             Voted {votedInCat} of {totalInCat}
+                          </span>
+                        ) : (
+                          <span className="text-slate-500">
+                            No awards available yet
                           </span>
                         )}
                       </div>
@@ -334,27 +354,29 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
               <header className="mb-8">
                 <button
                   onClick={handleBackToHub}
-                  className="flex items-center gap-2 text-slate-700 font-semibold mb-4 bg-white/50 hover:bg-white/80 px-4 py-2 rounded-lg transition-colors shadow-sm"
+                  className="flex items-center gap-2 text-white font-semibold mb-4 bg-black/20 hover:bg-black/40 px-4 py-2 rounded-lg transition-colors shadow-sm"
                 >
                   <ArrowLeft size={18} /> Back to Categories
                 </button>
-                <div className="text-center bg-white/70 backdrop-blur-lg rounded-xl shadow-md p-6 border border-white/50">
-                  <h1 className="text-3xl sm:text-4xl font-bold text-slate-800 tracking-tight">
+                <div className="text-center bg-black/10 backdrop-blur-lg rounded-xl shadow-md p-6 border border-white/30">
+                  <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight text-shadow-md">
                     {
                       mainCategories.find(
                         (mc) => mc.key === currentMainCategory
                       )?.title
                     }
                   </h1>
-                  <p className="text-slate-600 mt-2">
+                  <p className="text-indigo-100 mt-2">
                     You can vote for nominees in any award you haven't voted for
                     yet.
                   </p>
                 </div>
               </header>
               <div className="space-y-12">
-                {(groupedCategories[currentMainCategory] || []).map(
-                  (category) => {
+                {/* CRITICAL FIX: Apply the nominee filter HERE, not during the initial data load. */}
+                {(groupedCategories[currentMainCategory] || [])
+                  .filter((c) => c.nominees && c.nominees.length > 0)
+                  .map((category) => {
                     const isCategoryVoted = votedSubCategoryIds.includes(
                       category.id
                     );
@@ -366,7 +388,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                         }`}
                       >
                         <div className="text-center mb-6 relative">
-                          <h2 className="text-2xl font-bold text-slate-800">
+                          <h2 className="text-2xl font-bold text-slate-800 text-shadow-md">
                             {category.title}
                           </h2>
                           {isCategoryVoted && (
@@ -445,8 +467,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                         </div>
                       </section>
                     );
-                  }
-                )}
+                  })}
               </div>
               <footer className="text-center mt-12">
                 <button
