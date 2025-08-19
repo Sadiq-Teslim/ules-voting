@@ -22,6 +22,8 @@ import {
   EyeOff,
   Settings,
   ShieldAlert,
+  Search,
+  ChevronDown,
 } from "lucide-react";
 
 ChartJS.register(
@@ -115,10 +117,76 @@ const ConfirmationModal: React.FC<
   );
 };
 
+// --- NEW: Accordion Component for grouping results ---
+const ResultsAccordion = ({
+  title,
+  results,
+  getCategoryTitle,
+}: {
+  title: string;
+  results: CategoryResult[];
+  getCategoryTitle: (id: string) => string;
+}) => {
+  const [isOpen, setIsOpen] = useState(true); // Default to open
+
+  if (results.length === 0) {
+    return null; // Don't render the accordion if there are no results in this group (e.g., due to search filter)
+  }
+
+  return (
+    <div className="bg-slate-800/50 border border-slate-700 rounded-lg">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex justify-between items-center p-4"
+      >
+        <h2 className="text-2xl font-bold text-purple-400">
+          {title} ({results.length})
+        </h2>
+        <ChevronDown
+          className={`w-6 h-6 text-slate-400 transition-transform duration-300 ${
+            isOpen ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+      {isOpen && (
+        <div className="p-4 sm:p-6 space-y-8 border-t border-slate-700">
+          {results.map((result) => (
+            <div key={result.category}>
+              <h3 className="font-bold text-xl text-cyan-400 mb-2">
+                {getCategoryTitle(result.category)}
+              </h3>
+              <Bar
+                data={{
+                  labels: result.nominees.map((n) => n.name),
+                  datasets: [
+                    {
+                      label: "Votes",
+                      data: result.nominees.map((n) => n.votes),
+                      backgroundColor: "rgba(14, 165, 233, 0.5)",
+                      borderColor: "rgb(14, 165, 233)",
+                      borderWidth: 1,
+                    },
+                  ],
+                }}
+                options={{
+                  responsive: true,
+                  plugins: { legend: { display: false } },
+                  scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } },
+                }}
+              />
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const AdminPage = () => {
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [results, setResults] = useState<CategoryResult[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   // FIX 1: Add state for both categories and departments
   const [categories, setCategories] = useState<CategoryInfo[]>([]);
@@ -210,6 +278,29 @@ const AdminPage = () => {
     },
     [API_BASE_URL]
   );
+  // --- NEW: Memoized logic to filter and group results ---
+  const groupedAndFilteredResults = useMemo(() => {
+    const filtered = results.filter(result =>
+      getCategoryTitle(result.category).toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    const grouped = {
+        undergraduate: [] as CategoryResult[],
+        general: [] as CategoryResult[],
+        finalist: [] as CategoryResult[],
+        departmental: [] as CategoryResult[],
+    };
+
+    for (const result of filtered) {
+        if (result.category.startsWith('ug-')) grouped.undergraduate.push(result);
+        else if (result.category.startsWith('gen-')) grouped.general.push(result);
+        else if (result.category.startsWith('fin-')) grouped.finalist.push(result);
+        else if (result.category.startsWith('dept-')) grouped.departmental.push(result);
+    }
+    
+    return grouped;
+
+  }, [results, searchTerm, getCategoryTitle]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -608,49 +699,41 @@ const AdminPage = () => {
       </div>
 
       {activeTab === "results" && (
-        <div className="space-y-8">
-          {results.map((result) => (
-            <div key={result.category}>
-              <h3 className="font-bold text-xl text-cyan-400 mb-2">
-                {getCategoryTitle(result.category)}
-              </h3>
-              <Bar
-                data={{
-                  labels: result.nominees.map((n) => n.name),
-                  datasets: [
-                    {
-                      label: getCategoryTitle(result.category),
-                      data: result.nominees.map((n) => n.votes),
-                      backgroundColor: "rgba(14, 165, 233, 0.5)",
-                      borderColor: "rgb(14, 165, 233)",
-                      borderWidth: 1,
-                    },
-                  ],
-                }}
-                options={{
-                  responsive: true,
-                  plugins: {
-                    legend: {
-                      display: false,
-                    },
-                    title: {
-                      display: false,
-                    },
-                  },
-                  scales: {
-                    y: {
-                      beginAtZero: true,
-                      ticks: {
-                        stepSize: 1,
-                      },
-                    },
-                  },
-                }}
+        <section>
+          {/* NEW: Search Bar */}
+          <div className="mb-8">
+            <label htmlFor="search" className="sr-only">Search Categories</label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <Search className="w-5 h-5 text-slate-400" />
+              </div>
+              <input
+                type="text"
+                id="search"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Search for an award category..."
+                className="w-full bg-slate-800 border border-slate-700 rounded-lg py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-cyan-500"
               />
             </div>
-          ))}
-        </div>
+          </div>
+
+          {/* NEW: Grouped Accordions */}
+          <div className="space-y-6">
+            <ResultsAccordion title="Undergraduate Awards" results={groupedAndFilteredResults.undergraduate} getCategoryTitle={getCategoryTitle} />
+            <ResultsAccordion title="General Awards" results={groupedAndFilteredResults.general} getCategoryTitle={getCategoryTitle} />
+            <ResultsAccordion title="Finalist Awards" results={groupedAndFilteredResults.finalist} getCategoryTitle={getCategoryTitle} />
+            <ResultsAccordion title="Departmental Awards" results={groupedAndFilteredResults.departmental} getCategoryTitle={getCategoryTitle} />
+
+            {results.length > 0 && Object.values(groupedAndFilteredResults).every(arr => arr.length === 0) && (
+                 <div className="text-center py-10 bg-slate-800/50 rounded-lg">
+                    <p className="text-slate-400">No results found for "{searchTerm}".</p>
+                 </div>
+            )}
+          </div>
+        </section>
       )}
+
 
       {activeTab === "nominations" && (
         <section>
