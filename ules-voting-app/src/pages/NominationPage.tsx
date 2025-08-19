@@ -1,3 +1,5 @@
+// src/pages/NominationPage.tsx
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
@@ -58,7 +60,6 @@ const NominationPage = () => {
   >("idle");
   const [message, setMessage] = useState("");
 
-  // --- Data fetching logic is unchanged and correct ---
   useEffect(() => {
     document.title = "ULES Awards | Nomination";
     axios.get("/nominees.json").then((res) => {
@@ -111,6 +112,7 @@ const NominationPage = () => {
       })
     );
   };
+
   const handleFileChange = (
     id: number,
     e: React.ChangeEvent<HTMLInputElement>
@@ -123,6 +125,7 @@ const NominationPage = () => {
       );
     }
   };
+
   const addNominationForm = () => {
     setNominationForms((forms) => [
       ...forms,
@@ -135,30 +138,28 @@ const NominationPage = () => {
       },
     ]);
   };
+
   const removeNominationForm = (id: number) => {
     setNominationForms((forms) => forms.filter((form) => form.id !== id));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    // --- CRITICAL FIX: Add validation before submitting ---
     for (const [index, form] of nominationForms.entries()) {
       if (!form.fullName || !form.mainCategory || !form.subCategory) {
         alert(
           `Please fill out all required fields for Nomination #${index + 1}.`
         );
-        return; // Stop the submission
+        return;
       }
       if (
         form.mainCategory === "Departmental Awards" &&
         !form.selectedDepartment
       ) {
         alert(`Please select a department for Nomination #${index + 1}.`);
-        return; // Stop the submission
+        return;
       }
     }
-
     setStatus("loading");
     setMessage("Preparing nominations...");
     try {
@@ -190,16 +191,12 @@ const NominationPage = () => {
         })
       );
       setMessage("Finalizing submission...");
-      const backendRes = await axios.post(
-        `${import.meta.env.VITE_API_BASE_URL}/api/nominate`,
-        { nominations: nominationsData }
-      );
-
-      // This part will now be reached correctly
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/nominate`, {
+        nominations: nominationsData,
+      });
       setStatus("success");
       setMessage(
-        backendRes.data.message ||
-          "Your nomination has been submitted for review."
+        "Your nomination(s) have been successfully submitted for review."
       );
     } catch (err: any) {
       setStatus("error");
@@ -211,9 +208,9 @@ const NominationPage = () => {
 
   if (status === "success") {
     return (
-      <div className="flex items-center justify-center min-h-screen p-4 bg-slate-900">
-        <div className="text-center bg-slate-800 p-8 rounded-lg max-w-lg mx-auto border border-slate-700 w-full">
-          <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
+      <div className="flex items-center justify-center min-h-screen p-4 bg-black">
+        <div className="text-center bg-black/40 backdrop-blur-md border border-white/20 p-8 rounded-xl max-w-lg mx-auto w-full">
+          <CheckCircle className="w-16 h-16 text-green-400 mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-white">
             Submission Successful!
           </h1>
@@ -232,13 +229,13 @@ const NominationPage = () => {
                 ]);
                 setStatus("idle");
               }}
-              className="flex items-center justify-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-white font-bold py-3 px-6 rounded-lg w-full sm:w-auto"
+              className="flex items-center justify-center gap-2 bg-white hover:bg-gray-200 text-black font-bold py-3 px-6 rounded-lg w-full sm:w-auto"
             >
               <PlusCircle size={20} /> Submit Another
             </button>
             <Link
               href="/"
-              className="flex items-center justify-center gap-2 bg-slate-600 hover:bg-slate-500 text-white font-semibold py-3 px-6 rounded-lg w-full sm:w-auto"
+              className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold py-3 px-6 rounded-lg w-full sm:w-auto border border-white/20"
             >
               <Home size={20} /> Back to Home
             </Link>
@@ -249,23 +246,20 @@ const NominationPage = () => {
   }
 
   return (
-    <div className="w-full min-h-screen bg-slate-900 text-white">
-      <div className="w-full max-w-3xl mx-auto p-4 sm:p-8">
+    <div
+      className="min-h-screen w-full bg-black relative overflow-hidden bg-cover bg-center bg-fixed"
+      style={{ backgroundImage: "url('/ornate_frame_bg.jpg')" }}
+    >
+      <div className="absolute inset-0 bg-black/80 backdrop-blur-md"></div>
+      <div className="relative z-10 w-full max-w-3xl mx-auto p-4 sm:p-8 text-white">
         <header className="text-center mb-10">
-          <div className="flex justify-center mb-4">
-            <div className="flex items-center justify-center w-20 h-20 bg-slate-800 rounded-full shadow-lg filter drop-shadow-[0_0_8px_rgba(0,220,255,0.4)]">
-              <img
-                src="/nobgules-logo.png"
-                alt="ULES Logo"
-                className="w-16 h-16"
-              />
-            </div>
-          </div>
-          <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-            ULES 24/25 DINNER NOMINATIONS
-          </h1>
-          <p className="text-slate-400 mt-2">
-            Nominate deserving individuals. Submissions are subject to review.
+          <img
+            src="/ules_dinner_banner.png"
+            alt="Ules Dinner & Awards 2025"
+            className="mx-auto w-full max-w-md mb-4"
+          />
+          <p className="text-slate-300 mt-2 text-lg">
+            Nominate deserving individuals for the awards.
           </p>
         </header>
 
@@ -289,24 +283,23 @@ const NominationPage = () => {
             return (
               <div
                 key={form.id}
-                className="bg-slate-800 p-6 rounded-lg border border-slate-700 relative"
+                className="bg-black/40 border border-white/20 p-6 rounded-xl relative"
               >
-                <h3 className="text-lg font-semibold text-cyan-400 mb-6">
+                <h3 className="text-lg font-semibold text-white mb-6">
                   Nomination #{index + 1}
                 </h3>
                 {nominationForms.length > 1 && (
                   <button
                     type="button"
                     onClick={() => removeNominationForm(form.id)}
-                    className="absolute top-4 right-4 text-slate-500 hover:text-red-500 p-1 rounded-full transition-colors"
-                    aria-label="Remove nomination"
+                    className="absolute top-4 right-4 text-slate-400 hover:text-red-400 p-1 rounded-full transition-colors"
                   >
                     <Trash2 size={18} />
                   </button>
                 )}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
                   <div>
-                    <label className="block text-sm font-medium mb-1">
+                    <label className="block text-sm font-medium mb-1 text-slate-300">
                       Full Name *
                     </label>
                     <input
@@ -315,11 +308,11 @@ const NominationPage = () => {
                       value={form.fullName}
                       onChange={(e) => handleInputChange(form.id, e)}
                       required
-                      className="w-full bg-slate-700 border border-slate-600 rounded p-2 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none"
+                      className="w-full bg-black/30 border border-white/20 rounded-md p-2.5 text-white focus:ring-2 focus:ring-white/50 focus:border-white/50 outline-none"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-1">
+                    <label className="block text-sm font-medium mb-1 text-slate-300">
                       Popular Name (Optional)
                     </label>
                     <input
@@ -327,22 +320,22 @@ const NominationPage = () => {
                       name="popularName"
                       value={form.popularName}
                       onChange={(e) => handleInputChange(form.id, e)}
-                      className="w-full bg-slate-700 border border-slate-600 rounded p-2 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none"
+                      className="w-full bg-black/30 border border-white/20 rounded-md p-2.5 text-white focus:ring-2 focus:ring-white/50 focus:border-white/50 outline-none"
                     />
                   </div>
                 </div>
 
                 <div className="mt-4 grid grid-cols-1 gap-4">
                   <div>
-                    <label className="block text-sm font-medium mb-1">
-                      Main Category *
+                    <label className="block text-sm font-medium mb-1 text-slate-300">
+                      Category *
                     </label>
                     <select
                       name="mainCategory"
                       value={form.mainCategory}
                       onChange={(e) => handleInputChange(form.id, e)}
                       required
-                      className="w-full bg-slate-700 border border-slate-600 rounded p-2 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none"
+                      className="w-full bg-black/30 border border-white/20 rounded-md p-2.5 text-white focus:ring-2 focus:ring-white/50 focus:border-white/50 outline-none"
                     >
                       <option value="">-- Select --</option>
                       {categories &&
@@ -358,10 +351,9 @@ const NominationPage = () => {
                       )}
                     </select>
                   </div>
-
                   {form.mainCategory === "Departmental Awards" && (
                     <div>
-                      <label className="block text-sm font-medium mb-1">
+                      <label className="block text-sm font-medium mb-1 text-slate-300">
                         Department *
                       </label>
                       <select
@@ -369,7 +361,7 @@ const NominationPage = () => {
                         value={form.selectedDepartment}
                         onChange={(e) => handleInputChange(form.id, e)}
                         required
-                        className="w-full bg-slate-700 border border-slate-600 rounded p-2 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none"
+                        className="w-full bg-black/30 border border-white/20 rounded-md p-2.5 text-white focus:ring-2 focus:ring-white/50 focus:border-white/50 outline-none"
                       >
                         <option value="">-- Select Department --</option>
                         {departmentsData.map((dept) => (
@@ -380,9 +372,8 @@ const NominationPage = () => {
                       </select>
                     </div>
                   )}
-
                   <div>
-                    <label className="block text-sm font-medium mb-1">
+                    <label className="block text-sm font-medium mb-1 text-slate-300">
                       Specific Award *
                     </label>
                     <select
@@ -391,7 +382,7 @@ const NominationPage = () => {
                       onChange={(e) => handleInputChange(form.id, e)}
                       required
                       disabled={subCategoryOptions.length === 0}
-                      className="w-full bg-slate-700 border border-slate-600 rounded p-2 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none disabled:bg-slate-800 disabled:cursor-not-allowed"
+                      className="w-full bg-black/30 border border-white/20 rounded-md p-2.5 text-white focus:ring-2 focus:ring-white/50 focus:border-white/50 outline-none disabled:bg-black/20 disabled:cursor-not-allowed"
                     >
                       <option value="">-- Select Above First --</option>
                       {subCategoryOptions.map((subCat) => (
@@ -404,16 +395,16 @@ const NominationPage = () => {
                 </div>
 
                 <div className="mt-4">
-                  <label className="block text-sm font-medium mb-1">
+                  <label className="block text-sm font-medium mb-1 text-slate-300">
                     Profile Picture (Optional)
                   </label>
-                  <div className="mt-2 flex justify-center rounded-lg border border-dashed border-slate-600 px-6 py-8">
+                  <div className="mt-2 flex justify-center rounded-lg border border-dashed border-white/30 px-6 py-8">
                     <div className="text-center">
-                      <UploadCloud className="mx-auto h-10 w-10 text-slate-500" />
+                      <UploadCloud className="mx-auto h-10 w-10 text-slate-400" />
                       <div className="mt-4 flex text-sm justify-center">
                         <label
                           htmlFor={`file-upload-${form.id}`}
-                          className="cursor-pointer font-semibold text-cyan-400 hover:text-cyan-300"
+                          className="cursor-pointer font-semibold text-gray-300 hover:text-white"
                         >
                           <span>Upload a file</span>
                           <input
@@ -437,32 +428,30 @@ const NominationPage = () => {
             );
           })}
 
-          <div className="pt-6 border-t border-slate-700 flex flex-col-reverse sm:flex-row sm:justify-between sm:items-center gap-4">
+          <div className="pt-6 border-t border-white/20 flex flex-col-reverse sm:flex-row sm:justify-between sm:items-center gap-4">
             <button
               type="button"
               onClick={addNominationForm}
-              className="flex items-center justify-center gap-2 text-cyan-400 font-semibold hover:text-cyan-300 transition-colors py-2"
+              className="flex items-center justify-center gap-2 text-gray-300 font-semibold hover:text-white transition-colors py-2"
             >
               <PlusCircle size={20} /> Add Another Nomination
             </button>
             <button
               type="submit"
               disabled={status === "loading"}
-              className="flex items-center justify-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-white font-bold py-3 px-6 rounded-lg disabled:bg-slate-600 disabled:cursor-wait w-full sm:w-auto transition-colors"
+              className="flex items-center justify-center gap-2 bg-white hover:bg-gray-200 text-black font-bold py-3 px-6 rounded-lg disabled:bg-gray-600 disabled:text-gray-400 disabled:cursor-wait w-full sm:w-auto transition-colors"
             >
               {status === "loading" ? (
                 <Loader2 className="animate-spin" />
               ) : (
                 <Send />
               )}
-              {status === "loading"
-                ? "Submitting..."
-                : "Submit All Nominations"}
+              {status === "loading" ? "Submitting..." : "Submit Nominations"}
             </button>
           </div>
 
           {status === "loading" && (
-            <p className="text-cyan-300 text-sm text-center animate-pulse">
+            <p className="text-slate-300 text-sm text-center animate-pulse">
               {message}
             </p>
           )}
