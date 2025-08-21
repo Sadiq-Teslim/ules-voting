@@ -78,7 +78,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ setVoter }) => {
                 Eligible Voters
               </h3>
               <p className="text-xs md:text-sm text-slate-400">
-                Engineering Students 2016-2024
+                Engineering Students 2018-2024
               </p>
             </div>
 
