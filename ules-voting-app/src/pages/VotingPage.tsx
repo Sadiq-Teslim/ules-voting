@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Redirect } from "wouter";
 import type { VoterInfo } from "../App";
-import { Check, Loader, ArrowLeft, ShieldCheck } from "lucide-react";
+import { Check, Loader2, ArrowLeft, ShieldCheck } from "lucide-react";
 
 // --- TypeScript Types ---
 interface Nominee {
@@ -27,7 +27,7 @@ interface GroupedCategories {
 }
 type MainCategoryKey = keyof GroupedCategories;
 
-// --- Success Modal Component (Restyled) ---
+// --- Success Modal Component (Unchanged, already well-styled) ---
 const SuccessModal = ({
   isOpen,
   onGoToHome,
@@ -44,7 +44,7 @@ const SuccessModal = ({
   if (!isOpen) return null;
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-black/40 backdrop-blur-md border border-white/20 rounded-xl shadow-2xl p-6 sm:p-8 max-w-md w-full text-center">
+      <div className="bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md w-full text-center">
         <ShieldCheck className="w-16 h-16 text-green-400 mx-auto mb-4" />
         <h2 className="text-2xl font-bold text-white">Vote Submitted!</h2>
         <p className="text-slate-300 mt-2 mb-8">{message}</p>
@@ -52,14 +52,14 @@ const SuccessModal = ({
           {nextCategory && (
             <button
               onClick={() => onGoToNext(nextCategory.key)}
-              className="bg-white hover:bg-gray-200 text-black font-bold py-3 px-6 rounded-lg w-full transition-colors"
+              className="w-full bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-500 transition-all duration-300 text-black font-bold py-3 rounded-lg"
             >
               Go to {nextCategory.title}
             </button>
           )}
           <button
             onClick={onGoToHome}
-            className="bg-white/10 hover:bg-white/20 text-white font-semibold py-3 px-6 rounded-lg w-full transition-colors border border-white/20"
+            className="bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 px-6 rounded-lg w-full transition-colors border border-slate-600"
           >
             Go to Home
           </button>
@@ -72,6 +72,7 @@ const SuccessModal = ({
 const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
   const { matricNumber, fullName, departmentId } = voter;
 
+  // ... (State declarations are unchanged)
   const [view, setView] = useState<"hub" | "voting">("hub");
   const [currentMainCategory, setCurrentMainCategory] =
     useState<MainCategoryKey | null>(null);
@@ -117,7 +118,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
     },
   ];
 
-  // --- Data fetching and logic functions are unchanged and correct ---
+  // --- Data fetching and logic functions are unchanged ---
   useEffect(() => {
     document.title = "ULES Dinner & Awards | Voting";
     const fetchData = async () => {
@@ -229,13 +230,28 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
   };
 
   if (!matricNumber || !fullName) return <Redirect to="/" />;
+
+  // --- 1. NEW LOADING STATE UI ---
   if (isLoading)
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-black text-slate-400">
-        <Loader className="w-10 h-10 animate-spin mb-4" />
-        <p className="text-xl">Loading Portal...</p>
+      <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50 backdrop-blur-md">
+        <div className="relative p-[2px] rounded-2xl bg-gradient-to-br from-amber-400/50 via-gray-800 to-amber-500/50">
+          <div className="bg-slate-900 rounded-xl p-8 w-full relative shadow-2xl text-center">
+            <img
+              src="/yin_yang_logo.png"
+              alt="Loading"
+              className="w-16 h-16 mx-auto mb-6 animate-spin"
+              style={{ animationDuration: "3s" }}
+            />
+            <h2 className="text-2xl font-bold bg-gradient-to-r from-amber-200 to-amber-500 bg-clip-text text-transparent">
+              Preparing the Ballot
+            </h2>
+            <p className="text-slate-400 mt-2">Please wait a moment...</p>
+          </div>
+        </div>
       </div>
     );
+
   if (error)
     return (
       <div className="flex items-center justify-center min-h-screen bg-black p-4">
@@ -259,7 +275,8 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
         nextCategory={nextCategoryToVote}
         message={modalMessage}
       />
-      <div className="relative z-10 max-w-5xl mx-auto p-4 sm:p-8 w-full">
+      {/* --- 2. ADDED PADDING FOR FIXED FOOTER --- */}
+      <div className="relative z-10 max-w-5xl mx-auto p-4 sm:p-8 w-full pb-32">
         {view === "hub" ? (
           <>
             <header className="text-center mb-12">
@@ -270,7 +287,10 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
               />
               <p className="text-slate-300 text-lg">
                 Welcome,{" "}
-                <span className="font-semibold text-white">{fullName}</span>.
+                <span className="font-semibold bg-gradient-to-r from-amber-200 to-amber-500 bg-clip-text text-transparent">
+                  {fullName}
+                </span>
+                .
               </p>
             </header>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -285,14 +305,14 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                   <button
                     key={key}
                     onClick={() => handleSelectCategory(key)}
-                    disabled={isComplete}
-                    className="bg-black/40 backdrop-blur-md border border-white/20 rounded-xl p-6 text-left transition-all duration-300 transform hover:border-white/40 hover:-translate-y-1.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center gap-5 group"
+                    disabled={isComplete || totalInCat === 0}
+                    className="bg-slate-900/50 border border-slate-700 rounded-xl p-6 text-left transition-all duration-300 transform hover:border-amber-400/50 hover:-translate-y-1.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center gap-5 group"
                   >
                     <div
-                      className={`flex-shrink-0 w-16 h-16 rounded-lg flex items-center justify-center border ${
+                      className={`flex-shrink-0 w-16 h-16 rounded-lg flex items-center justify-center border transition-colors ${
                         isComplete
-                          ? "bg-green-500/10 border-green-500/30"
-                          : "bg-white/5 border-white/20"
+                          ? "bg-amber-500/10 border-amber-500/30"
+                          : "bg-slate-800 border-slate-600"
                       }`}
                     >
                       <img
@@ -310,7 +330,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                       </p>
                       <div className="text-sm font-semibold text-slate-400 mt-2">
                         {isComplete ? (
-                          <span className="text-green-400 flex items-center gap-1.5">
+                          <span className="text-amber-400 flex items-center gap-1.5">
                             <ShieldCheck size={16} /> COMPLETED
                           </span>
                         ) : totalInCat > 0 ? (
@@ -318,7 +338,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                             Voted {votedInCat} of {totalInCat}
                           </span>
                         ) : (
-                          <span>No awards available yet</span>
+                          <span>No awards available</span>
                         )}
                       </div>
                     </div>
@@ -333,21 +353,22 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
               <header className="mb-8">
                 <button
                   onClick={handleBackToHub}
-                  className="flex items-center gap-2 text-slate-300 font-semibold mb-4 bg-black/30 hover:bg-black/50 px-4 py-2 rounded-lg transition-colors border border-white/20"
+                  className="flex items-center gap-2 text-slate-300 font-semibold mb-6 bg-slate-800/50 hover:bg-slate-700/50 px-4 py-2 rounded-lg transition-colors border border-slate-600"
                 >
                   <ArrowLeft size={18} /> Back to Categories
                 </button>
-                <div className="text-center bg-black/40 backdrop-blur-md rounded-xl shadow-lg p-6 border border-white/20">
-                  <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+                <div className="text-center bg-slate-900/50 backdrop-blur-md rounded-xl shadow-lg p-6 border border-slate-700">
+                  {/* --- 3. GOLD GRADIENT TITLE --- */}
+                  <h1 className="text-3xl sm:text-4xl font-bold tracking-tight bg-gradient-to-r from-amber-200 to-amber-500 bg-clip-text text-transparent">
                     {
                       mainCategories.find(
                         (mc) => mc.key === currentMainCategory
                       )?.title
                     }
                   </h1>
-                  <p className="text-slate-400 mt-2">
-                    You can vote for nominees in any award you haven't voted for
-                    yet.
+                  <p className="text-slate-400 mt-2 max-w-2xl mx-auto">
+                    Select one nominee for each available award below. Your
+                    choices are saved when you submit.
                   </p>
                 </div>
               </header>
@@ -367,7 +388,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                       <section
                         key={category.id}
                         className={`transition-opacity ${
-                          isCategoryVoted ? "opacity-50" : ""
+                          isCategoryVoted ? "opacity-60" : ""
                         }`}
                       >
                         <div className="text-center mb-6 relative">
@@ -375,7 +396,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                             {category.title}
                           </h2>
                           {isCategoryVoted && (
-                            <p className="text-sm font-semibold text-green-400 mt-1">
+                            <p className="text-sm font-semibold text-amber-400 mt-1">
                               You have already voted in this award
                             </p>
                           )}
@@ -385,6 +406,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                             const isSelected =
                               selections[category.id] === nominee.name;
                             return (
+                              // --- 3. REVAMPED NOMINEE CARD ---
                               <div
                                 key={nominee.id}
                                 onClick={
@@ -396,13 +418,23 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                                           nominee.name
                                         )
                                 }
-                                className={`bg-black/40 border rounded-xl p-3 text-center transition-all duration-300 ${
+                                className={`bg-slate-900/50 border rounded-xl p-3 text-center transition-all duration-300 relative group ${
                                   isCategoryVoted
-                                    ? "cursor-not-allowed border-white/20"
-                                    : "cursor-pointer border-white/20 hover:border-white/50 hover:-translate-y-1.5"
-                                } ${isSelected ? "ring-4 ring-white" : ""}`}
+                                    ? "cursor-not-allowed border-slate-700"
+                                    : "cursor-pointer border-slate-700 hover:border-amber-400/50 hover:-translate-y-1"
+                                } ${
+                                  isSelected
+                                    ? "border-amber-400 ring-2 ring-amber-400"
+                                    : ""
+                                }`}
                               >
-                                <div className="w-24 h-24 mx-auto rounded-full overflow-hidden border-4 border-slate-700 shadow-sm mb-3">
+                                <div
+                                  className={`w-24 h-24 mx-auto rounded-full overflow-hidden border-4 shadow-sm mb-3 transition-colors ${
+                                    isSelected
+                                      ? "border-amber-400"
+                                      : "border-slate-600"
+                                  }`}
+                                >
                                   <img
                                     src={
                                       nominee.image
@@ -422,10 +454,10 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                                 <div
                                   className={`w-full mt-auto py-2 px-3 rounded-lg font-semibold text-xs transition-all duration-300 flex items-center justify-center gap-2 border ${
                                     isSelected
-                                      ? "bg-white text-black border-white"
+                                      ? "bg-gradient-to-r from-amber-500 to-amber-400 text-black border-amber-400"
                                       : isCategoryVoted
                                       ? "bg-slate-700 text-slate-400 border-slate-600"
-                                      : "bg-white/10 text-slate-300 border-white/20"
+                                      : "bg-slate-800 text-slate-300 border-slate-600"
                                   }`}
                                 >
                                   {isCategoryVoted ? (
@@ -448,16 +480,26 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                     );
                   })}
               </div>
-              <footer className="text-center mt-12">
-                <button
-                  onClick={handleSubmitVote}
-                  disabled={
-                    isSubmitting || Object.keys(selections).length === 0
-                  }
-                  className="bg-white hover:bg-gray-200 disabled:bg-gray-600 disabled:text-gray-400 disabled:cursor-not-allowed text-black font-bold py-4 px-12 rounded-xl text-lg transition-all duration-300 w-full sm:w-auto"
-                >
-                  {isSubmitting ? "Submitting..." : `Submit Votes`}
-                </button>
+              {/* --- 2. NEW FIXED FOOTER FOR SUBMIT BUTTON --- */}
+              <footer className="fixed bottom-0 left-0 right-0 z-20 bg-black/50 backdrop-blur-md border-t border-white/10 p-4">
+                <div className="max-w-5xl mx-auto flex items-center justify-center">
+                  <button
+                    onClick={handleSubmitVote}
+                    disabled={
+                      isSubmitting || Object.keys(selections).length === 0
+                    }
+                    className="w-full sm:w-auto bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-500 disabled:from-slate-600 disabled:to-slate-700 disabled:text-slate-400 disabled:cursor-not-allowed transition-all duration-300 text-black font-bold py-3 px-12 rounded-lg flex items-center justify-center gap-2 shadow-lg"
+                  >
+                    {isSubmitting ? (
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                    ) : null}
+                    {isSubmitting
+                      ? "Submitting..."
+                      : `Submit ${
+                          Object.keys(selections).length
+                        } Vote(s)`}
+                  </button>
+                </div>
               </footer>
             </>
           )
