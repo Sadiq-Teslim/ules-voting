@@ -1,5 +1,5 @@
 // src/App.tsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Switch, Route, Redirect } from "wouter";
 import LandingPage from "./pages/LandingPage";
 import VotingPage from "./pages/VotingPage";
@@ -15,7 +15,22 @@ export interface VoterInfo {
 }
 
 function App() {
-  const [voter, setVoter] = useState<VoterInfo | null>(null);
+  const [voter, setVoter] = useState<VoterInfo | null>(() => {
+    try {
+      const raw = sessionStorage.getItem("voter");
+      return raw ? (JSON.parse(raw) as VoterInfo) : null;
+    } catch {
+      return null;
+    }
+  });
+
+  useEffect(() => {
+    if (voter) {
+      sessionStorage.setItem("voter", JSON.stringify(voter));
+    } else {
+      sessionStorage.removeItem("voter");
+    }
+  }, [voter]);
 
   return (
     <div className="min-h-screen bg-slate-900 text-white flex items-center justify-center p-4 font-sans">
