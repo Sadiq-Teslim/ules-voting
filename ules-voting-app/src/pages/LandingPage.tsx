@@ -47,13 +47,13 @@ const LandingPage: React.FC<LandingPageProps> = ({ setVoter }) => {
   return (
     // Background remains the same for consistency
     <div
-      className="h-screen w-full bg-black relative overflow-hidden bg-cover bg-center"
-      style={{ backgroundImage: "url('/ornate_frame_bg.jpg')" }}
+      className="h-screen w-full relative overflow-hidden bg-cover bg-center"
+      // style={{ background: "linear-gradient(158deg, black, #000000b8, black)" }}
     >
-      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+      <div className="absolute"></div>
 
       {/* Container remains the same */}
-      <div className="relative z-10 text-center w-full max-w-md mx-auto px-4 h-full flex flex-col justify-around py-6 md:max-w-5xl md:justify-center md:py-16">
+      <div className="relative z-10 text-center w-full max-w-md mx-auto h-full flex flex-col justify-around md:max-w-5xl md:justify-center md:py-16">
         
         <header className="mb-6 md:mb-12">
           <img

@@ -43,8 +43,8 @@ const SuccessModal = ({
 }) => {
   if (!isOpen) return null;
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md w-full text-center">
+    <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="border border-slate-700 rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md w-full text-center">
         <ShieldCheck className="w-16 h-16 text-green-400 mx-auto mb-4" />
         <h2 className="text-2xl font-bold text-white">Vote Submitted!</h2>
         <p className="text-slate-300 mt-2 mb-8">{message}</p>
@@ -234,7 +234,8 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
   // --- 1. NEW LOADING STATE UI ---
   if (isLoading)
     return (
-      <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50 backdrop-blur-md">
+      <div className="fixed inset-0 flex items-center justify-center p-4 z-50 backdrop-blur-md"
+      style={{background: "linear-gradient(158deg, #000000, #000000b8, black)", backgroundColor: "#00000057"}}>
         <div className="relative p-[2px] rounded-2xl bg-gradient-to-br from-amber-400/50 via-gray-800 to-amber-500/50">
           <div className="bg-slate-900 rounded-xl p-8 w-full relative shadow-2xl text-center">
             <img
@@ -254,7 +255,8 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
 
   if (error)
     return (
-      <div className="flex items-center justify-center min-h-screen bg-black p-4">
+      <div className="flex items-center justify-center min-h-screen p-4"
+      style={{background: "linear-gradient(158deg, #000000, #000000b8, black)", backgroundColor: "#00000057"}}>
         <div className="p-6 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-center shadow-md">
           <h3 className="font-bold text-lg mb-2">An Error Occurred</h3>
           <p>{error}</p>
@@ -264,10 +266,10 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
 
   return (
     <div
-      className="min-h-screen w-full bg-black relative overflow-hidden bg-cover bg-center bg-fixed"
-      style={{ backgroundImage: "url('/ornate_frame_bg.jpg')" }}
+      className="min-h-screen w-full relative overflow-hidden bg-cover bg-center bg-fixed"
+      // style={{ backgroundImage: "url('/ornate_frame_bg.jpg')" }}
     >
-      <div className="absolute inset-0 bg-black/80 backdrop-blur-md"></div>
+      <div className="absolute inset-0 bg-transparent backdrop-blur-md"></div>
       <SuccessModal
         isOpen={isModalOpen}
         onGoToHome={closeModalAndGoHome}
@@ -276,7 +278,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
         message={modalMessage}
       />
       {/* --- 2. ADDED PADDING FOR FIXED FOOTER --- */}
-      <div className="relative z-10 max-w-5xl mx-auto p-4 sm:p-8 w-full pb-32">
+      <div className="relative z-10 max-w-5xl mx-auto sm:p-8 w-full pb-32">
         {view === "hub" ? (
           <>
             <header className="text-center mb-12">
