@@ -5,10 +5,10 @@
             "nominees": [
                 { "id": "ug-mb-1", "name": "Amara Chukwu", "image": "image1.jpg" },
                 { "id": "ug-mb-2", "name": "Fatima Bello", "image": "image2.jpg" },
-                { "id": "ug-mb-3", "name": "Fatima Bello", "image": "image2.jpg" },
-                { "id": "ug-mb-4", "name": "Fatima Bello", "image": "image2.jpg" },
-                { "id": "ug-mb-6", "name": "Fatima Bello", "image": "image2.jpg" },
-                { "id": "ug-mb-5", "name": "Fatima Bello", "image": "image2.jpg" }
+                { "id": "ug-mb-3", "name": "Fatima Bello2", "image": "image2.jpg" },
+                { "id": "ug-mb-4", "name": "Fatima Bello3", "image": "image2.jpg" },
+                { "id": "ug-mb-6", "name": "Fatima Bello4", "image": "image2.jpg" },
+                { "id": "ug-mb-5", "name": "Fatima Bello5", "image": "image2.jpg" }
             ]
         },
         {
