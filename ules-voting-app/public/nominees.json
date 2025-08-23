@@ -5,10 +5,10 @@
             "nominees": [
                 { "id": "ug-mb-1", "name": "Amara Chukwu", "image": "image1.jpg" },
                 { "id": "ug-mb-2", "name": "Fatima Bello", "image": "image2.jpg" },
-                { "id": "ug-mb-2", "name": "Fatima Bello", "image": "image2.jpg" },
-                { "id": "ug-mb-2", "name": "Fatima Bello", "image": "image2.jpg" },
-                { "id": "ug-mb-2", "name": "Fatima Bello", "image": "image2.jpg" },
-                { "id": "ug-mb-2", "name": "Fatima Bello", "image": "image2.jpg" }
+                { "id": "ug-mb-3", "name": "Fatima Bello", "image": "image2.jpg" },
+                { "id": "ug-mb-4", "name": "Fatima Bello", "image": "image2.jpg" },
+                { "id": "ug-mb-6", "name": "Fatima Bello", "image": "image2.jpg" },
+                { "id": "ug-mb-5", "name": "Fatima Bello", "image": "image2.jpg" }
             ]
         },
         {
@@ -57,9 +57,9 @@
             "nominees": [
                 { "id": "ug-tp-1", "name": "Olumide Johnson", "image": "image12.jpg" },
                 { "id": "ug-tp-2", "name": "Chioma Nwosu", "image": "image13.jpg" },
-                { "id": "ug-tp-2", "name": "Sadiq Teslim Adetola", "image": "image13.jpg" },
-                { "id": "ug-tp-2", "name": "Chioma Nwosu", "image": "image13.jpg" },
-                { "id": "ug-tp-2", "name": "Chioma Nwosu", "image": "image13.jpg" }
+                { "id": "ug-tp-3", "name": "Sadiq Teslim Adetola", "image": "image13.jpg" },
+                { "id": "ug-tp-4", "name": "Chioma Nwosu", "image": "image13.jpg" },
+                { "id": "ug-tp-5", "name": "Chioma Nwosu", "image": "image13.jpg" }
             ]
         },
         {
