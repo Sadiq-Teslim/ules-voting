@@ -22,6 +22,7 @@ import ResetElectionModal from "../components/admin/modals/ResetElectionModal";
 import ResultsTab from "../components/admin/tabs/ResultsTab";
 import NominationsTab from "../components/admin/tabs/NominationsTab";
 import SettingsTab from "../components/admin/tabs/SettingsTab";
+import TabularResultsTab from "../components/admin/tabs/TabularResultsTab";
 
 // Import types from the central types file
 import type {
@@ -472,6 +473,16 @@ const AdminPage = () => {
               Live Results
             </button>
             <button
+              onClick={() => setActiveTab("tabular")}
+              className={`py-4 px-1 font-semibold whitespace-nowrap ${
+                activeTab === "tabular"
+                  ? "text-amber-400 border-b-2 border-amber-400"
+                  : "text-slate-400"
+              }`}
+            >
+              Tabular Results
+            </button>
+            <button
               onClick={() => setActiveTab("nominations")}
               className={`py-4 px-1 font-semibold relative ${
                 activeTab === "nominations"
@@ -501,6 +512,15 @@ const AdminPage = () => {
 
         {activeTab === "results" && (
           <ResultsTab
+            searchTerm={searchTerm}
+            onSearchChange={setSearchTerm}
+            results={results}
+            groupedAndFilteredResults={groupedAndFilteredResults}
+            getCategoryTitle={getCategoryTitle}
+          />
+        )}
+        {activeTab === "tabular" && (
+          <TabularResultsTab
             searchTerm={searchTerm}
             onSearchChange={setSearchTerm}
             results={results}
