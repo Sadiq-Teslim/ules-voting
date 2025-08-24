@@ -5,6 +5,16 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { Download, LogOut, RefreshCw } from "lucide-react";
 
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
 // Import your new components
 import AdminLogin from "../components/admin/AdminLogin";
 import ConfirmationModal from "../components/admin/modals/ConfirmationModal";
@@ -21,6 +31,15 @@ import type {
   Nomination,
   ModalState,
 } from "../types/admin";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const AdminPage = () => {
   // --- STATE MANAGEMENT ---
