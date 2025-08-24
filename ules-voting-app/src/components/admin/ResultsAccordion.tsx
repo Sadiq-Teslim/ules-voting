@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Bar } from "react-chartjs-2";
 import { ChevronDown } from "lucide-react";
-import type { CategoryResult } from "../../types/admin"; // Corrected import path
+import type { CategoryResult } from "../../types/admin";
 
 const ResultsAccordion = ({
   title,
@@ -37,23 +37,41 @@ const ResultsAccordion = ({
                 {getCategoryTitle(result.category)}
               </h3>
               <Bar
+                redraw={true}
                 data={{
-                  labels: result.nominees.map((n) => n.name), // Removed unnecessary 'any' type
+                  labels: result.nominees.map((n) => n.name),
                   datasets: [
                     {
                       label: "Votes",
-                      data: result.nominees.map((n) => n.votes), // Removed unnecessary 'any' type
+                      data: result.nominees.map((n) => n.votes),
                       backgroundColor: "rgba(252, 211, 77, 0.5)",
                       borderColor: "rgb(251, 191, 36)",
                       borderWidth: 1,
+                      // --- FIX 2: Makes the bars slimmer ---
+                      barPercentage: 0.4,
                     },
                   ],
                 }}
-                options={
-                  {
-                    /* ... options ... */
-                  }
-                }
+                options={{
+                  responsive: true,
+                  plugins: { legend: { display: false } },
+                  scales: {
+                    y: {
+                      beginAtZero: true,
+                      ticks: {
+                        color: "#94a3b8",
+                        // --- FIX 1: Forces the Y-axis to only display whole numbers ---
+                        precision: 0,
+                      },
+                      grid: { color: "#334155" },
+                    },
+                    x: {
+                      ticks: {
+                        color: "#94a3b8",
+                      },
+                    },
+                  },
+                }}
               />
             </div>
           ))}
