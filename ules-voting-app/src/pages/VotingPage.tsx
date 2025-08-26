@@ -298,7 +298,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
         message={modalMessage}
       />
 
-      <div className="relative z-10 max-w-5xl mx-auto p-4 sm:p-8 w-full pt-28 sm:pt-24 pb-32">
+      <div className="relative z-10 max-w-5xl mx-auto p-4 sm:p-8 w-full pt-28 sm:pt-24 pb-48">
         {view === "hub" ? (
           <>
             <header className="text-center mb-12">
@@ -398,7 +398,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
               </header>
 
               <main>
-                <div className="text-center bg-slate-900/50 backdrop-blur-md rounded-xl shadow-lg p-6 border border-slate-700 mb-12">
+                <div className="text-center mt-10 bg-slate-900/50 backdrop-blur-md rounded-xl shadow-lg p-6 border border-slate-700 mb-12">
                   <h1 className="text-3xl sm:text-4xl font-bold tracking-tight bg-gradient-to-r from-amber-200 to-amber-500 bg-clip-text text-transparent">
                     {
                       mainCategories.find(

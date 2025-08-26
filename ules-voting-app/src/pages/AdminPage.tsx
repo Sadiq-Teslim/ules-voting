@@ -46,6 +46,7 @@ const AdminPage = () => {
   // --- STATE MANAGEMENT ---
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
   const [results, setResults] = useState<CategoryResult[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [categories, setCategories] = useState<CategoryInfo[]>([]);
@@ -74,6 +75,32 @@ const AdminPage = () => {
 
   // --- FIX: Using your provided backend URL ---
   const API_BASE_URL = "https://ules-voting-backend.onrender.com";
+
+  // --- NEW: useEffect to check for persisted session on component mount ---
+  useEffect(() => {
+    const storedPassword = sessionStorage.getItem("adminPassword");
+    const storedTimestamp = sessionStorage.getItem("loginTimestamp");
+
+    if (storedPassword && storedTimestamp) {
+      const loginTime = parseInt(storedTimestamp, 10);
+      const now = Date.now();
+      const minutesElapsed = (now - loginTime) / (1000 * 60);
+
+      // Check if the session is less than 25 minutes old
+      if (minutesElapsed < 25) {
+        // If valid, restore the session
+        setPassword(storedPassword);
+        setIsAuthenticated(true);
+        fetchAllAdminData(storedPassword); // Re-fetch data
+      } else {
+        // If expired, clear storage
+        sessionStorage.removeItem("adminPassword");
+        sessionStorage.removeItem("loginTimestamp");
+      }
+    }
+    // Finished checking, we can now show either login or dashboard
+    setIsCheckingAuth(false);
+  }, []);
 
   // --- LOGIC & DATA HANDLING ---
 
@@ -138,11 +165,16 @@ const AdminPage = () => {
   );
 
   const handleLogin = async (submittedPassword: string) => {
-    setPassword(submittedPassword); // Store password for future API calls
     setIsLoggingIn(true);
     setError("");
     const success = await fetchAllAdminData(submittedPassword);
-    if (success) setIsAuthenticated(true);
+    if (success) {
+      setPassword(submittedPassword);
+      setIsAuthenticated(true);
+      // --- NEW: Persist session to Session Storage on successful login ---
+      sessionStorage.setItem('adminPassword', submittedPassword);
+      sessionStorage.setItem('loginTimestamp', Date.now().toString());
+    }
     setIsLoggingIn(false);
   };
 
@@ -164,7 +196,7 @@ const AdminPage = () => {
 
   useEffect(() => {
     if (!isAuthenticated) return;
-    const interval = setInterval(handleRefresh, 180000); // Auto-refresh every 3 minutes
+    const interval = setInterval(handleRefresh, 300000); // Auto-refresh every 3 minutes
     return () => clearInterval(interval);
   }, [isAuthenticated, handleRefresh]);
 
