@@ -3,35 +3,35 @@
             "title": "Most Beautiful (Undergraduate)",
             "id": "ug-most-beautiful",
             "nominees": [
-                { "id": "ug-mb-1", "name": "Amara Chukwu", "image": "image1.jpg" },
-                { "id": "ug-mb-2", "name": "Fatima Bello", "image": "image2.jpg" },
-                { "id": "ug-mb-3", "name": "Fatima Bello2", "image": "image2.jpg" },
-                { "id": "ug-mb-4", "name": "Fatima Bello3", "image": "image2.jpg" },
-                { "id": "ug-mb-6", "name": "Fatima Bello4", "image": "image2.jpg" },
-                { "id": "ug-mb-5", "name": "Fatima Bello5", "image": "image2.jpg" }
+                { "id": "ug-mb-1", "name": "Amara Chukwu", "image": null },
+                { "id": "ug-mb-2", "name": "Fatima Bello", "image": null },
+                { "id": "ug-mb-3", "name": "Fatima Bello2", "image": null },
+                { "id": "ug-mb-4", "name": "Fatima Bello3", "image": null },
+                { "id": "ug-mb-6", "name": "Fatima Bello4", "image": null },
+                { "id": "ug-mb-5", "name": "Fatima Bello5", "image": null }
             ]
         },
         {
             "title": "Most Handsome (Undergraduate)",
             "id": "ug-most-handsome",
             "nominees": [
-                { "id": "ug-mh-1", "name": "Adebayo Williams", "image": "image3.jpg" },
-                { "id": "ug-mh-2", "name": "Chinedu Okoro", "image": "image4.jpg" }
+                { "id": "ug-mh-1", "name": "Adebayo Williams", "image": null },
+                { "id": "ug-mh-2", "name": "Chinedu Okoro", "image": null }
             ]
         },
         {
             "title": "Most Influential (Undergraduate)",
             "id": "ug-most-influential",
             "nominees": [
-                { "id": "ug-mi-1", "name": "Ngozi Eze", "image": "image5.jpg" },
-                { "id": "ug-mi-2", "name": "Emeka Adekunle", "image": "image6.jpg" }
+                { "id": "ug-mi-1", "name": "Ngozi Eze", "image": null },
+                { "id": "ug-mi-2", "name": "Emeka Adekunle", "image": null }
             ]
         },
         {
             "title": "Socialite of the Year (Undergraduate)",
             "id": "ug-socialite-of-the-year",
             "nominees": [
-                { "id": "ug-soty-1", "name": "Funke Adeleke", "image": "image7.jpg" },
+                { "id": "ug-soty-1", "name": "Funke Adeleke", "image": null },
                 { "id": "ug-soty-2", "name": "Tunde Bakare", "image": null }
             ]
         },
@@ -39,31 +39,31 @@
             "title": "Best Dressed - Male (Undergraduate)",
             "id": "ug-best-dressed-male",
             "nominees": [
-                { "id": "ug-bdm-1", "name": "Femi Alabi", "image": "image8.jpg" },
-                { "id": "ug-bdm-2", "name": "Lanre Sodiq", "image": "image9.jpg" }
+                { "id": "ug-bdm-1", "name": "Femi Alabi", "image": null },
+                { "id": "ug-bdm-2", "name": "Lanre Sodiq", "image": null }
             ]
         },
         {
             "title": "Best Dressed - Female (Undergraduate)",
             "id": "ug-best-dressed-female",
             "nominees": [
-                { "id": "ug-bdf-1", "name": "Zainab Ibrahim", "image": "image10.jpg" },
-                { "id": "ug-bdf-2", "name": "Tola Adeyemi", "image": "image11.jpg" }
+                { "id": "ug-bdf-1", "name": "Zainab Ibrahim", "image": null },
+                { "id": "ug-bdf-2", "name": "Tola Adeyemi", "image": null }
             ]
         },
         {
             "title": "Tech Personality (Undergraduate)",
             "id": "ug-tech-personality",
             "nominees": [
-                { "id": "ug-tp-1", "name": "Olumide Johnson", "image": "image12.jpg" },
-                { "id": "ug-tp-2", "name": "Chioma Nwosu", "image": "image13.jpg" },
+                { "id": "ug-tp-1", "name": "Olumide Johnson", "image": null },
+                { "id": "ug-tp-2", "name": "Chioma Nwosu", "image": null },
                 {
                     "id": "ug-tp-3",
                     "name": "Sadiq Teslim Adetola",
-                    "image": "image13.jpg"
+                    "image": null
                 },
-                { "id": "ug-tp-4", "name": "Chioma Nwosu", "image": "image13.jpg" },
-                { "id": "ug-tp-5", "name": "Chioma Nwosu", "image": "image13.jpg" }
+                { "id": "ug-tp-4", "name": "Chioma Nwosu", "image": null },
+                { "id": "ug-tp-5", "name": "Chioma Nwosu", "image": null }
             ]
         },
         {
@@ -78,8 +78,8 @@
             "title": "Entrepreneur of the Year (Undergraduate)",
             "id": "ug-entrepreneur-of-the-year",
             "nominees": [
-                { "id": "ug-eoy-1", "name": "Bolanle Davis", "image": "image14.jpg" },
-                { "id": "ug-eoy-2", "name": "Ibrahim Musa", "image": "image15.jpg" }
+                { "id": "ug-eoy-1", "name": "Bolanle Davis", "image": null },
+                { "id": "ug-eoy-2", "name": "Ibrahim Musa", "image": null }
             ]
         },
         {
@@ -121,9 +121,9 @@
             "nominees": [{
                     "id": "gen-sloy-1",
                     "name": "Adebayo Williams",
-                    "image": "image3.jpg"
+                    "image": null
                 },
-                { "id": "gen-sloy-2", "name": "Ngozi Eze", "image": "image5.jpg" }
+                { "id": "gen-sloy-2", "name": "Ngozi Eze", "image": null }
             ]
         },
         {
@@ -138,7 +138,7 @@
             "title": "Academic Impact Award (General)",
             "id": "gen-academic-impact-award",
             "nominees": [
-                { "id": "gen-aia-1", "name": "Chioma Nwosu", "image": "image13.jpg" }
+                { "id": "gen-aia-1", "name": "Chioma Nwosu", "image": null }
             ]
         },
         {
@@ -150,19 +150,66 @@
             ]
         },
         {
-            "title": "ULES Tutor of the Year (General)",
+            "title": "ULES Tutor of the Year",
             "id": "gen-ules-tutor-of-the-year",
             "nominees": [{
-                "id": "gen-utoy-1",
-                "name": "Olumide Johnson",
-                "image": "image12.jpg"
-            }]
+                    "id": "gen-utoy-1",
+                    "name": "Olaniran Joshua (Explicit)",
+                    "image": null
+                },
+                {
+                    "id": "gen-utoy-2",
+                    "name": "Damilare",
+                    "image": null
+                },
+
+                {
+                    "id": "gen-utoy-3",
+                    "name": "Ugochukwu Ndujekwu",
+                    "image": null
+                },
+                {
+                    "id": "gen-utoy-4",
+                    "name": "Samuel (Mercury)",
+                    "image": null
+                },
+                {
+                    "id": "gen-utoy-5",
+                    "name": "Favour Ononobi (Phenyl)",
+                    "image": null
+                },
+                {
+                    "id": "gen-utoy-6",
+                    "name": "Oluwatobi Ogunyemi",
+                    "image": null
+                },
+                {
+                    "id": "gen-utoy-7",
+                    "name": "Fortune Oyepitan",
+                    "image": null
+                },
+                {
+                    "id": "gen-utoy-8",
+                    "name": "Godswill Azubuike",
+                    "image": null
+                },
+                {
+                    "id": "gen-utoy-9",
+                    "name": "Basit Ismail",
+                    "image": null
+                },
+                {
+                    "id": "gen-utoy-10",
+                    "name": "Paul Ndulue",
+                    "image": null
+                }
+            ]
         },
         {
             "title": "ULES Volunteer of the Year (General)",
             "id": "gen-ules-volunteer-of-the-year",
             "nominees": [
-                { "id": "gen-uvoy-1", "name": "Tola Adeyemi", "image": "image11.jpg" }
+                { "id": "gen-uvoy-1", "name": "Tola Adeyemi", "image": null }
             ]
         },
         {
@@ -297,12 +344,38 @@
         {
             "title": "Face of Year 3 (General)",
             "id": "gen-face-of-year-3",
-            "nominees": [{ "id": "gen-fy3-1", "name": "Year 3 Face", "image": null }]
+            "nominees": [
+                { "id": "gen-fy3-1", "name": "Damilare Aribisala", "image": null },
+                { "id": "gen-fy3-2", "name": "David Fadeyi", "image": null },
+                {
+                    "id": "gen-fy3-3",
+                    "name": "Chisom Nwosu",
+                    "image": null
+                },
+                { "id": "gen-fy3-4", "name": "Hannah Ekot", "image": null },
+                { "id": "gen-fy3-5", "name": "Augusta Obi", "image": null },
+                { "id": "gen-fy3-6", "name": "Abidemi Olukoya (Star", "image": null },
+                { "id": "gen-fy3-", "name": "Olamide Ade-Olunusi", "image": null },
+                { "id": "gen-fy3-8", "name": "Abolaji Adesina", "image": null },
+                { "id": "gen-fy3-9", "name": "Seyi Abe", "image": null },
+                { "id": "gen-fy3-10", "name": "Roqeeb Akintola", "image": null }
+            ]
         },
         {
             "title": "Face of Year 4 (General)",
             "id": "gen-face-of-year-4",
-            "nominees": [{ "id": "gen-fy4-1", "name": "Year 4 Face", "image": null }]
+            "nominees": [
+                { "id": "gen-fy4-1", "name": "Olawale Ayoola", "image": null },
+                { "id": "gen-fy4-2", "name": "Seun Ajayi", "image": null },
+                { "id": "gen-fy4-3", "name": "Temitope Jinadu", "image": null },
+                { "id": "gen-fy4-4", "name": "Olakunle Olatunji", "image": null },
+                { "id": "gen-fy4-5", "name": "Halima Ozemoka", "image": null },
+                { "id": "gen-fy4-6", "name": "Precious Jacob", "image": null },
+                { "id": "gen-fy4-7", "name": "Anthony Ihejiamatu", "image": null },
+                { "id": "gen-fy4-8", "name": "Samuel Uko", "image": null },
+                { "id": "gen-fy4-9", "name": "Korede Joda", "image": null },
+                { "id": "gen-fy4-10", "name": "Ugochukwu Ndujekwu", "image": null }
+            ]
         },
         {
             "title": "Finalist of the Year (General)",
@@ -393,42 +466,42 @@
             "title": "Tech Personality – Male (Finalist)",
             "id": "fin-tech-personality-male",
             "nominees": [
-                { "id": "fin-tpm-1", "name": "Femi Alabi", "image": "image8.jpg" }
+                { "id": "fin-tpm-1", "name": "Femi Alabi", "image": null }
             ]
         },
         {
             "title": "Tech Personality – Female (Finalist)",
             "id": "fin-tech-personality-female",
             "nominees": [
-                { "id": "fin-tpf-1", "name": "Amara Chukwu", "image": "image1.jpg" }
+                { "id": "fin-tpf-1", "name": "Amara Chukwu", "image": null }
             ]
         },
         {
             "title": "Most Handsome (Finalist)",
             "id": "fin-most-handsome",
             "nominees": [
-                { "id": "fin-mh-1", "name": "Ibrahim Musa", "image": "image15.jpg" }
+                { "id": "fin-mh-1", "name": "Ibrahim Musa", "image": null }
             ]
         },
         {
             "title": "Most Beautiful (Finalist)",
             "id": "fin-most-beautiful",
             "nominees": [
-                { "id": "fin-mb-1", "name": "Zainab Ibrahim", "image": "image10.jpg" }
+                { "id": "fin-mb-1", "name": "Zainab Ibrahim", "image": null }
             ]
         },
         {
             "title": "Most Influential (Finalist)",
             "id": "fin-most-influential",
             "nominees": [
-                { "id": "fin-mi-1", "name": "Adebayo Williams", "image": "image3.jpg" }
+                { "id": "fin-mi-1", "name": "Adebayo Williams", "image": null }
             ]
         },
         {
             "title": "Most Popular (Finalist)",
             "id": "fin-most-popular",
             "nominees": [
-                { "id": "fin-mp-1", "name": "Funke Adeleke", "image": "image7.jpg" }
+                { "id": "fin-mp-1", "name": "Funke Adeleke", "image": null }
             ]
         }
     ],
@@ -557,7 +630,7 @@
                     "nominees": [{
                         "id": "d-comp-1",
                         "name": "Comp Engr Nominee A",
-                        "image": "image1.jpg"
+                        "image": null
                     }]
                 },
                 {
@@ -566,7 +639,7 @@
                     "nominees": [{
                         "id": "d-comp-2",
                         "name": "Comp Engr Nominee B",
-                        "image": "image2.jpg"
+                        "image": null
                     }]
                 },
                 {
@@ -575,7 +648,7 @@
                     "nominees": [{
                         "id": "d-comp-3",
                         "name": "Comp Engr Nominee C",
-                        "image": "image3.jpg"
+                        "image": null
                     }]
                 },
                 {
@@ -584,7 +657,7 @@
                     "nominees": [{
                         "id": "d-comp-4",
                         "name": "Comp Engr Nominee D",
-                        "image": "image4.jpg"
+                        "image": null
                     }]
                 }
             ]
