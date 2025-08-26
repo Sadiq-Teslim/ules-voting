@@ -238,8 +238,20 @@
             "title": "Student Brand of the Year ",
             "id": "gen-student-brand-of-the-year",
             "nominees": [
-                { "id": "gen-sboy-1", "name": "Crave Bites", "image": "brand1.jpg" },
-                { "id": "gen-sboy-2", "name": "Kicks Republic", "image": "brand2.jpg" }
+                { "id": "gen-sboy-1", "name": "Leeyah Hair", "image": null },
+                { "id": "gen-sboy-2", "name": "Fazzy D", "image": null },
+                { "id": "gen-sboy-3", "name": "Hair cess", "image": null },
+                {
+                    "id": "gen-sboy-4",
+                    "name": "Divine Utibe-Ubon (Dynamix Gadget)",
+                    "image": null
+                },
+                { "id": "gen-sboy-5", "name": "Estaz", "image": null },
+                { "id": "gen-sboy-6", "name": "EZY Gadgets", "image": null },
+                { "id": "gen-sboy-7", "name": "The Grand Accessories", "image": null },
+                { "id": "gen-sboy-8", "name": "Chef Reynolds", "image": null },
+                { "id": "gen-sboy-9", "name": "AB Gadgets", "image": null },
+                { "id": "gen-sboy-10", "name": "Mhydeh Gadgets", "image": null }
             ]
         },
         {
