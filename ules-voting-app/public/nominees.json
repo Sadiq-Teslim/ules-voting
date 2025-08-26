@@ -169,17 +169,21 @@
             "title": "ULES Person of the Year (General)",
             "id": "gen-ules-person-of-the-year",
             "nominees": [
-                { "id": "gen-upoy-1", "name": "Emeka Adekunle", "image": null },
-                { "id": "gen-upoy-1", "name": "Emeka Adekunle", "image": null },
-                { "id": "gen-upoy-1", "name": "Emeka Adekunle", "image": null },
-                { "id": "gen-upoy-1", "name": "Emeka Adekunle", "image": null },
-                { "id": "gen-upoy-1", "name": "Emeka Adekunle", "image": null },
-                { "id": "gen-upoy-1", "name": "Emeka Adekunle", "image": null },
-                { "id": "gen-upoy-1", "name": "Emeka Adekunle", "image": null },
-                { "id": "gen-upoy-1", "name": "Emeka Adekunle", "image": null },
-                { "id": "gen-upoy-1", "name": "Emeka Adekunle", "image": null },
-                { "id": "gen-upoy-1", "name": "Emeka Adekunle", "image": null },
-                { "id": "gen-upoy-1", "name": "Emeka Adekunle", "image": null }
+                { "id": "gen-upoy-1", "name": "Solomon Madufor", "image": null },
+                { "id": "gen-upoy-1", "name": "Olusanya Ifedapo Ijulu", "image": null },
+                { "id": "gen-upoy-1", "name": "Demilade Adekunle", "image": null },
+                { "id": "gen-upoy-1", "name": "Olawale Ayoola", "image": null },
+                { "id": "gen-upoy-1", "name": "Adeniyi Adebayo", "image": null },
+                { "id": "gen-upoy-1", "name": "Nofisat Sanni", "image": null },
+                { "id": "gen-upoy-1", "name": "Uko Samuel", "image": null },
+                {
+                    "id": "gen-upoy-1",
+                    "name": "Onakoya Emmanuel Ayodeji (DEJ)",
+                    "image": null
+                },
+                { "id": "gen-upoy-1", "name": "Adeolu Adeniji", "image": null },
+                { "id": "gen-upoy-1", "name": "Izuchukwu Nwogu", "image": null },
+                { "id": "gen-upoy-1", "name": "Funmi Oladapo", "image": null }
             ]
         },
         {
@@ -303,13 +307,33 @@
         {
             "title": "Finalist of the Year (General)",
             "id": "gen-finalist-of-the-year",
-            "nominees": [{ "id": "gen-foy-1", "name": "Top Finalist", "image": null }]
+            "nominees": [
+                { "id": "gen-foy-1", "name": "Ginika Olua", "image": null },
+                { "id": "gen-foy-2", "name": "Nofisat Sanni", "image": null },
+                { "id": "gen-foy-3", "name": "Olusanya Ifedapo Ijulu", "image": null },
+                { "id": "gen-foy-4", "name": "Sunmisola Ganikale", "image": null },
+                { "id": "gen-foy-5", "name": "Adeniyi Adebayo", "image": null },
+                { "id": "gen-foy-6", "name": "Solomon Madufor", "image": null },
+                { "id": "gen-foy-7", "name": "Ayomide Oyewole", "image": null },
+                { "id": "gen-foy-8", "name": "Boluwatife Idowu", "image": null },
+                { "id": "gen-foy-9", "name": "Nusaybah Fuad-Gafar", "image": null },
+                { "id": "gen-foy-10", "name": "Funmi Oladapo", "image": null }
+            ]
         },
         {
-            "title": "ULES Exco of the Year (General)",
+            "title": "ULES Exco of the Year",
             "id": "gen-ules-exco-of-the-year",
             "nominees": [
-                { "id": "gen-ueoy-1", "name": "Exco Member X", "image": null }
+                { "id": "gen-ueoy-1", "name": "Solomon Madufor", "image": null },
+                { "id": "gen-ueoy-2", "name": "Seun Ajayi", "image": null },
+                { "id": "gen-ueoy-3", "name": "Demilade Adekunle", "image": null },
+                { "id": "gen-ueoy-4", "name": "Olawale Ayoola", "image": null },
+                { "id": "gen-ueoy-5", "name": "Damilare Aribisala", "image": null },
+                { "id": "gen-ueoy-6", "name": "Olusanya Ifedapo Ijulu", "image": null },
+                { "id": "gen-ueoy-7", "name": "Adeniji Adeolu", "image": null },
+                { "id": "gen-ueoy-8", "name": "Izuchukwu Nwogu", "image": null },
+                { "id": "gen-ueoy-9", "name": "Victor Matthias", "image": null },
+                { "id": "gen-ueoy-10", "name": "Abidemi Olukoya", "image": null }
             ]
         },
         {
