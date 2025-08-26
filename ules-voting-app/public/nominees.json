@@ -103,17 +103,46 @@
             "title": "Social Impact Award ",
             "id": "gen-social-impact-award",
             "nominees": [
-                { "id": "gen-sia-1", "name": "Hope Initiative", "image": "impact1.jpg" }
+                { "id": "gen-sia-1", "name": "Emmanuel Arowesan", "image": null },
+                { "id": "gen-sia-2", "name": "Yinka Atobiloye", "image": null },
+                { "id": "gen-sia-3", "name": "Kolawale Temitope", "image": null },
+                { "id": "gen-sia-4", "name": "Zainab Bello", "image": null },
+                { "id": "gen-sia-5", "name": "Salim Oyinlola", "image": null },
+                { "id": "gen-sia-6", "name": "Nusaybah Fuad-Gafar", "image": null },
+                { "id": "gen-sia-7", "name": "Hassanat Busari", "image": null },
+                { "id": "gen-sia-8", "name": "Kamal Adebayo", "image": null },
+                { "id": "gen-sia-9", "name": "Justice Esiri", "image": null },
+                { "id": "gen-sia-10", "name": "Sunmisola Ganikale", "image": null }
             ]
         },
         {
             "title": "Innovation Award (Start-up Visionary) ",
             "id": "gen-innovation-award",
-            "nominees": [{
-                "id": "gen-ia-1",
-                "name": "Fintech Solutions",
-                "image": "startup1.jpg"
-            }]
+            "nominees": [
+                { "id": "gen-ia-1", "name": "Demitchy (Deseralize)", "image": null },
+                { "id": "gen-ia-2", "name": "Ojo Daniel (Cyber Chari)", "image": null },
+                {
+                    "id": "gen-ia-3",
+                    "name": "Olamilekan Arimoro (Crest Study)",
+                    "image": null
+                },
+                {
+                    "id": "gen-ia-4",
+                    "name": "Kolawole Temitope (School Aide)",
+                    "image": null
+                },
+                { "id": "gen-ia-5", "name": "Saheed Azeez (YarnGPT)", "image": null },
+                {
+                    "id": "gen-ia-6",
+                    "name": "Folakemi Saka (Farmceries)",
+                    "image": null
+                },
+                {
+                    "id": "gen-ia-7",
+                    "name": "Wekoya",
+                    "image": null
+                }
+            ]
         },
         {
             "title": "Student Leader of the Year ",
@@ -165,14 +194,45 @@
             "title": "Content Creator of the Year ",
             "id": "gen-content-creator-of-the-year",
             "nominees": [
-                { "id": "gen-ccoy-1", "name": "Tech Vlogs", "image": "content1.jpg" },
-                { "id": "gen-ccoy-2", "name": "Campus Gist", "image": null }
+                { "id": "gen-ccoy-1", "name": "Rukayat Orekoya", "image": null },
+                {
+                    "id": "gen-ccoy-2",
+                    "name": "Ayorinde Bolarinwa (Ajasa)",
+                    "image": null
+                },
+                { "id": "gen-ccoy-3", "name": "Chisom Nwosu", "image": null },
+                { "id": "gen-ccoy-4", "name": "Halimat Ozemoka", "image": null },
+                {
+                    "id": "gen-ccoy-5",
+                    "name": "Aileru Abdulsamad (Berry)",
+                    "image": null
+                },
+                { "id": "gen-ccoy-6", "name": "Abidemi Olukoya (Star)", "image": null },
+                {
+                    "id": "gen-ccoy-7",
+                    "name": "David Duyile (Dave the creator)",
+                    "image": null
+                },
+                { "id": "gen-ccoy-8", "name": "Hannah Oshinowo", "image": null },
+                { "id": "gen-ccoy-9", "name": "Darasimi Obayemi", "image": null },
+                { "id": "gen-ccoy-10", "name": "Winifred Udebhulu", "image": null }
             ]
         },
         {
             "title": "Academic Impact Award ",
             "id": "gen-academic-impact-award",
-            "nominees": [{ "id": "gen-aia-1", "name": "Chioma Nwosu", "image": null }]
+            "nominees": [
+                { "id": "gen-aia-1", "name": "Adedeji Yakub", "image": null },
+                { "id": "gen-aia-2", "name": "Olubunmi Peace", "image": null },
+                { "id": "gen-aia-3", "name": "Blessing Adewuyi", "image": null },
+                { "id": "gen-aia-4", "name": "Godswill Orogbo", "image": null },
+                { "id": "gen-aia-5", "name": "Azubuike Godswill", "image": null },
+                { "id": "gen-aia-6", "name": "Semilore Adelaja", "image": null },
+                { "id": "gen-aia-7", "name": "Clinton Mekwunye", "image": null },
+                { "id": "gen-aia-8", "name": "Sadiq Daniel", "image": null },
+                { "id": "gen-aia-9", "name": "Ugochukwu Ndujekwu", "image": null },
+                { "id": "gen-aia-10", "name": "Kolawole Temitope", "image": null }
+            ]
         },
         {
             "title": "Student Brand of the Year ",
@@ -242,7 +302,16 @@
             "title": "ULES Volunteer of the Year ",
             "id": "gen-ules-volunteer-of-the-year",
             "nominees": [
-                { "id": "gen-uvoy-1", "name": "Tola Adeyemi", "image": null }
+                { "id": "gen-uvoy-1", "name": "Abdulazeez Adesina", "image": null },
+                { "id": "gen-uvoy-2", "name": "Victor Aifediyi", "image": null },
+                { "id": "gen-uvoy-3", "name": "Nusaybah Fuad-Gafar", "image": null },
+                { "id": "gen-uvoy-4", "name": "Hassanat Busari", "image": null },
+                { "id": "gen-uvoy-5", "name": "Augusta Obi", "image": null },
+                { "id": "gen-uvoy-6", "name": "Kitan Banjoko", "image": null },
+                { "id": "gen-uvoy-7", "name": "Eniola Awosika", "image": null },
+                { "id": "gen-uvoy-8", "name": "Tofarati Olabukunmi", "image": null },
+                { "id": "gen-uvoy-9", "name": "Fadeyi David", "image": null },
+                { "id": "gen-uvoy-10", "name": "Moyinoluwa Ajibola", "image": null }
             ]
         },
         {
