@@ -64,16 +64,23 @@
             "title": "Best Dressed - Male (Undergraduate)",
             "id": "ug-best-dressed-male",
             "nominees": [
-                { "id": "ug-bdm-1", "name": "Nil", "image": null },
-                { "id": "ug-bdm-2", "name": "Nil", "image": null }
+                { "id": "ug-bdm-1", "name": "Blacko", "image": null },
+                { "id": "ug-bdm-2", "name": "Kabiokwu Khalid", "image": null },
+                { "id": "ug-bdm-3", "name": "Bunmi-Oladeide Moyosore", "image": null },
+                { "id": "ug-bdm-4", "name": "Oladipo David", "image": null },
+                { "id": "ug-bdm-5", "name": "Ayomide Oni", "image": null },
+                { "id": "ug-bdm-6", "name": "Fareed Afolabi", "image": null },
+                { "id": "ug-bdm-7", "name": "Biyi Lawal", "image": null }
             ]
         },
         {
             "title": "Best Dressed - Female (Undergraduate)",
             "id": "ug-best-dressed-female",
             "nominees": [
-                { "id": "ug-bdf-1", "name": "Nil", "image": null },
-                { "id": "ug-bdf-2", "name": "Nil", "image": null }
+                { "id": "ug-bdf-1", "name": "Olatunji Yadah", "image": null },
+                { "id": "ug-bdf-2", "name": "Mistura Adeogun", "image": null },
+                { "id": "ug-bdf-3", "name": "Winifred Udebhulu", "image": null },
+                { "id": "ug-bdf-4", "name": "Wadidah", "image": null }
             ]
         },
         {
@@ -81,21 +88,21 @@
             "id": "ug-tech-personality",
             "nominees": [
                 { "id": "ug-tp-1", "name": "Sadiq Teslim Adetola", "image": null },
-                { "id": "ug-tp-2", "name": "Nil", "image": null },
+                { "id": "ug-tp-2", "name": "Motunrayo Sanyaolu", "image": null },
                 {
                     "id": "ug-tp-3",
-                    "name": "Nil",
+                    "name": "Demitchy",
                     "image": null
                 },
-                { "id": "ug-tp-4", "name": "Chioma Nwosu", "image": null },
-                { "id": "ug-tp-5", "name": "Chioma Nwosu", "image": null }
+                { "id": "ug-tp-4", "name": "Peter Ademola", "image": null },
+                { "id": "ug-tp-5", "name": "Fuad (Aliphatic)", "image": null }
             ]
         },
         {
             "title": "Clique of the Year (Undergraduate)",
             "id": "ug-clique-of-the-year",
             "nominees": [
-                { "id": "ug-coy-1", "name": "The Alpha Squad", "image": "clique1.jpg" },
+                { "id": "ug-coy-1", "name": "The Room", "image": "clique1.jpg" },
                 { "id": "ug-coy-2", "name": "The Mavericks", "image": null }
             ]
         },
