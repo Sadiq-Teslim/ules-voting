@@ -100,14 +100,14 @@
             ]
         },
         {
-            "title": "Social Impact Award (General)",
+            "title": "Social Impact Award ",
             "id": "gen-social-impact-award",
             "nominees": [
                 { "id": "gen-sia-1", "name": "Hope Initiative", "image": "impact1.jpg" }
             ]
         },
         {
-            "title": "Innovation Award (Start-up Visionary) (General)",
+            "title": "Innovation Award (Start-up Visionary) ",
             "id": "gen-innovation-award",
             "nominees": [{
                 "id": "gen-ia-1",
@@ -116,7 +116,7 @@
             }]
         },
         {
-            "title": "Student Leader of the Year (General)",
+            "title": "Student Leader of the Year ",
             "id": "gen-student-leader-of-the-year",
             "nominees": [{
                     "id": "gen-sloy-1",
@@ -127,7 +127,7 @@
             ]
         },
         {
-            "title": "Content Creator of the Year (General)",
+            "title": "Content Creator of the Year ",
             "id": "gen-content-creator-of-the-year",
             "nominees": [
                 { "id": "gen-ccoy-1", "name": "Tech Vlogs", "image": "content1.jpg" },
@@ -135,14 +135,14 @@
             ]
         },
         {
-            "title": "Academic Impact Award (General)",
+            "title": "Academic Impact Award ",
             "id": "gen-academic-impact-award",
             "nominees": [
                 { "id": "gen-aia-1", "name": "Chioma Nwosu", "image": null }
             ]
         },
         {
-            "title": "Student Brand of the Year (General)",
+            "title": "Student Brand of the Year ",
             "id": "gen-student-brand-of-the-year",
             "nominees": [
                 { "id": "gen-sboy-1", "name": "Crave Bites", "image": "brand1.jpg" },
@@ -206,14 +206,14 @@
             ]
         },
         {
-            "title": "ULES Volunteer of the Year (General)",
+            "title": "ULES Volunteer of the Year ",
             "id": "gen-ules-volunteer-of-the-year",
             "nominees": [
                 { "id": "gen-uvoy-1", "name": "Tola Adeyemi", "image": null }
             ]
         },
         {
-            "title": "ULES Person of the Year (General)",
+            "title": "ULES Person of the Year ",
             "id": "gen-ules-person-of-the-year",
             "nominees": [
                 { "id": "gen-upoy-1", "name": "Solomon Madufor", "image": null },
@@ -272,46 +272,41 @@
                 },
                 {
                     "id": "gen-roy-f-3",
-                    "name": "Esabu Blessing (Tech Sis)",
-                    "image": null
-                },
-                {
-                    "id": "gen-roy-f-4",
                     "name": "Obayemi Darasimi Jesse",
                     "image": null
                 },
                 {
-                    "id": "gen-roy-f-5",
+                    "id": "gen-roy-f-4",
                     "name": "Atiku Kehinde Rachae",
                     "image": null
                 },
                 {
-                    "id": "gen-roy-f-6",
+                    "id": "gen-roy-f-5",
                     "name": "Abolarinde Favor",
                     "image": null
                 },
                 {
-                    "id": "gen-roy-f-7",
+                    "id": "gen-roy-f-6",
                     "name": "Aaliyah Alagbala",
                     "image": null
                 },
                 {
-                    "id": "gen-roy-f-8",
+                    "id": "gen-roy-f-7",
                     "name": "Folashewa Adigun",
                     "image": null
                 },
                 {
-                    "id": "gen-roy-f-9",
+                    "id": "gen-roy-f-8",
                     "name": "Toritseju Ewarami",
                     "image": null
                 },
                 {
-                    "id": "gen-roy-f-10",
+                    "id": "gen-roy-f-9",
                     "name": "Aliyah Ogunyem",
                     "image": null
                 },
                 {
-                    "id": "gen-roy-f-11",
+                    "id": "gen-roy-f-10",
                     "name": "Eleora Akpupu",
                     "image": null
                 }
@@ -342,7 +337,7 @@
             ]
         },
         {
-            "title": "Face of Year 3 (General)",
+            "title": "Face of Year 3 ",
             "id": "gen-face-of-year-3",
             "nominees": [
                 { "id": "gen-fy3-1", "name": "Damilare Aribisala", "image": null },
@@ -362,7 +357,7 @@
             ]
         },
         {
-            "title": "Face of Year 4 (General)",
+            "title": "Face of Year 4 ",
             "id": "gen-face-of-year-4",
             "nominees": [
                 { "id": "gen-fy4-1", "name": "Olawale Ayoola", "image": null },
@@ -378,7 +373,7 @@
             ]
         },
         {
-            "title": "Finalist of the Year (General)",
+            "title": "Finalist of the Year ",
             "id": "gen-finalist-of-the-year",
             "nominees": [
                 { "id": "gen-foy-1", "name": "Ginika Olua", "image": null },
@@ -410,22 +405,83 @@
             ]
         },
         {
-            "title": "Student Organization of the Year (General)",
+            "title": "Student Organization of the Year ",
             "id": "gen-student-organization-of-the-year",
             "nominees": [{
-                "id": "gen-sooy-1",
-                "name": "Engineers for Change",
-                "image": "org1.jpg"
-            }]
+                    "id": "gen-sooy-5",
+                    "name": "Enginnering career Expo (ECX)",
+                    "image": null
+                },
+                {
+                    "id": "gen-sooy-1",
+                    "name": "Academic and Research Board (ARB)",
+                    "image": null
+                },
+                {
+                    "id": "gen-sooy-2",
+                    "name": "Engineering Ladies initiative (ELI)",
+                    "image": null
+                },
+                {
+                    "id": "gen-sooy-3",
+                    "name": "PAADC",
+                    "image": null
+                },
+                {
+                    "id": "gen-sooy-4",
+                    "name": "ULES OWLS",
+                    "image": null
+                }
+            ]
         },
         {
-            "title": "Exco Body of the Year (General)",
+            "title": "Exco Body of the Year",
             "id": "gen-exco-body-of-the-year",
             "nominees": [{
-                "id": "gen-eboy-1",
-                "name": "The Executive Council",
-                "image": "org2.jpg"
-            }]
+                    "id": "gen-eboy-1",
+                    "name": "NSChE",
+                    "image": null
+                }, {
+                    "id": "gen-eboy-2",
+                    "name": "SEES",
+                    "image": null
+                },
+                {
+                    "id": "gen-eboy-3",
+                    "name": "NIMechE",
+                    "image": null
+                },
+                {
+                    "id": "gen-eboy-4",
+                    "name": "CESS",
+                    "image": null
+                },
+                {
+                    "id": "gen-eboy-5",
+                    "name": "SPE",
+                    "image": null
+                },
+                {
+                    "id": "gen-eboy-6",
+                    "name": "NAMMES",
+                    "image": null
+                },
+                {
+                    "id": "gen-eboy-7",
+                    "name": "NISGS",
+                    "image": null
+                },
+                {
+                    "id": "gen-eboy-8",
+                    "name": "ASES",
+                    "image": null
+                },
+                {
+                    "id": "gen-eboy-9",
+                    "name": "BMESA",
+                    "image": null
+                }
+            ]
         },
         {
             "title": "Couple of the Year (Finalist)",
