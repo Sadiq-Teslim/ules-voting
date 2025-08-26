@@ -130,7 +130,7 @@
             "title": "Creative of the Year (Undergraduate)",
             "id": "ug-creative-of-the-year",
             "nominees": [
-                { "id": "ug-croy-1", "name": "DavetheCreator", "image": null },
+                { "id": "ug-croy-1", "name": "DaveTheCreator", "image": null },
                 { "id": "ug-croy-2", "name": "Ajasa", "image": null },
                 { "id": "ug-croy-3", "name": "Victor Aifediyi", "image": null },
                 { "id": "ug-croy-4", "name": "Halimat Ozemoka", "image": null },

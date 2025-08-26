@@ -76,6 +76,15 @@ const AdminPage = () => {
   // --- FIX: Using your provided backend URL ---
   const API_BASE_URL = "https://ules-voting-backend.onrender.com";
 
+
+    // Define group titles for the PDF
+  const groupTitles: Record<keyof typeof groupedAndFilteredResults, string> = {
+    undergraduate: "Undergraduate Awards",
+    general: "General Awards",
+    finalist: "Finalist Awards",
+    departmental: "Departmental Awards",
+  };
+
   // --- NEW: useEffect to check for persisted session on component mount ---
   useEffect(() => {
     const storedPassword = sessionStorage.getItem("adminPassword");
@@ -202,29 +211,49 @@ const AdminPage = () => {
 
   const handleDownloadPdf = async () => {
     const reportElement = document.getElementById("pdf-report");
-    if (!reportElement) return alert("Could not generate PDF.");
+    if (!reportElement) {
+      alert("Could not find the report element to generate PDF.");
+      return;
+    }
     setIsDownloading(true);
     try {
-      const canvas = await html2canvas(reportElement, { scale: 2 });
-      const imgData = canvas.toDataURL("image/jpeg", 0.9);
+      const canvas = await html2canvas(reportElement, {
+        scale: 2, // Higher scale for better quality
+        useCORS: true,
+      });
+
+      const imgData = canvas.toDataURL("image/jpeg", 0.95);
       const pdf = new jsPDF({
         orientation: "portrait",
         unit: "mm",
         format: "a4",
       });
+
       const pdfWidth = pdf.internal.pageSize.getWidth();
-      const imgWidth = pdfWidth - 20;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      pdf.addImage(
-        imgData,
-        "JPEG",
-        10,
-        10,
-        imgWidth,
-        imgHeight,
-        undefined,
-        "FAST"
-      );
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      
+      const canvasWidth = canvas.width;
+      const canvasHeight = canvas.height;
+
+      // Calculate the height of the image in the PDF's units
+      const ratio = canvasWidth / pdfWidth;
+      const imgHeight = canvasHeight / ratio;
+
+      let heightLeft = imgHeight;
+      let position = 0;
+
+      // Add the first page
+      pdf.addImage(imgData, "JPEG", 0, position, pdfWidth, imgHeight);
+      heightLeft -= pdfHeight;
+
+      // Loop to add subsequent pages
+      while (heightLeft > 0) {
+        position = position - pdfHeight; // Move the image "up" on the next page
+        pdf.addPage();
+        pdf.addImage(imgData, "JPEG", 0, position, pdfWidth, imgHeight);
+        heightLeft -= pdfHeight;
+      }
+
       pdf.save(
         `ules-awards-results-${new Date().toISOString().slice(0, 10)}.pdf`
       );
@@ -365,65 +394,48 @@ const AdminPage = () => {
             padding: "40px",
             backgroundColor: "white",
             color: "black",
+            fontFamily: "Helvetica, Arial, sans-serif",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              borderBottom: "2px solid #333",
-              paddingBottom: "20px",
-              marginBottom: "30px",
-            }}
-          >
-            <img
-              src="/yin_yang_logo.png"
-              alt="ULES Logo"
-              style={{ width: "80px", height: "auto", marginRight: "20px" }}
-            />
+          <div style={{ display: "flex", alignItems: "center", borderBottom: "2px solid #333", paddingBottom: "20px", marginBottom: "30px" }}>
+            <img src="/yin_yang_logo.png" alt="ULES Logo" style={{ width: "80px", height: "auto", marginRight: "20px" }}/>
             <h1 style={{ fontSize: "24px", fontWeight: "bold" }}>
-              ULES Dinner & Awards 2025
-              <br />
-              Annual Awards Results
+              ULES Dinner & Awards 2025<br />Annual Awards Results
             </h1>
           </div>
-          {results.map((result) => (
-            <div
-              key={result.category}
-              style={{ marginBottom: "30px", pageBreakInside: "avoid" }}
-            >
-              <h2
-                style={{
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                  borderBottom: "1px solid #ccc",
-                  paddingBottom: "5px",
-                  marginBottom: "10px",
-                }}
-              >
-                {getCategoryTitle(result.category)}
-              </h2>
-              <ul style={{ listStyle: "none", padding: 0 }}>
-                {result.nominees
-                  .sort((a, b) => b.votes - a.votes)
-                  .map((nominee) => (
-                    <li
-                      key={nominee.name}
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        padding: "5px 0",
-                        fontSize: "16px",
-                      }}
-                    >
-                      <span>{nominee.name}</span>
-                      <span style={{ fontWeight: "bold" }}>
-                        {nominee.votes} Votes
-                      </span>
-                    </li>
-                  ))}
-              </ul>
-            </div>
+          
+          {/* Loop through the groups (undergraduate, general, etc.) */}
+          {Object.entries(groupedAndFilteredResults).map(([groupKey, groupResults]) => (
+            // Only render the group section if it has results
+            groupResults.length > 0 && (
+              <div key={groupKey} style={{ marginBottom: '30px', pageBreakInside: 'avoid' }}>
+                {/* Main Group Title */}
+                <h2 style={{ fontSize: '22px', fontWeight: 'bold', color: '#111', borderBottom: '2px solid #555', paddingBottom: '10px', marginBottom: '20px', pageBreakAfter: 'avoid' }}>
+                  {groupTitles[groupKey as keyof typeof groupTitles]}
+                </h2>
+                
+                {/* Loop through each category result within the group */}
+                {groupResults.map((result) => (
+                  <div key={result.category} style={{ marginBottom: "30px", pageBreakInside: "avoid" }}>
+                    <h3 style={{ fontSize: "18px", fontWeight: "bold", borderBottom: "1px solid #ccc", paddingBottom: "5px", marginBottom: "10px" }}>
+                      {getCategoryTitle(result.category)}
+                    </h3>
+                    <ul style={{ listStyle: "none", padding: 0 }}>
+                      {result.nominees
+                        .sort((a, b) => b.votes - a.votes)
+                        .map((nominee) => (
+                          <li key={nominee.name} style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", fontSize: "16px", borderBottom: '1px solid #eee' }}>
+                            <span>{nominee.name}</span>
+                            <span style={{ fontWeight: "bold" }}>
+                              {nominee.votes} {nominee.votes === 1 ? 'Vote' : 'Votes'}
+                            </span>
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            )
           ))}
         </div>
 
