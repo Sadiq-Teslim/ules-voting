@@ -3,63 +3,88 @@
             "title": "Most Beautiful (Undergraduate)",
             "id": "ug-most-beautiful",
             "nominees": [
-                { "id": "ug-mb-1", "name": "Amara Chukwu", "image": null },
-                { "id": "ug-mb-2", "name": "Fatima Bello", "image": null },
-                { "id": "ug-mb-3", "name": "Fatima Bello2", "image": null },
-                { "id": "ug-mb-4", "name": "Fatima Bello3", "image": null },
-                { "id": "ug-mb-6", "name": "Fatima Bello4", "image": null },
-                { "id": "ug-mb-5", "name": "Fatima Bello5", "image": null }
+                { "id": "ug-mb-1", "name": "Winifred Udebhulu", "image": null },
+                { "id": "ug-mb-2", "name": "Adewuyi Oluwadamisola", "image": null },
+                { "id": "ug-mb-3", "name": "Seun Ajayi", "image": null },
+                { "id": "ug-mb-4", "name": "Ishang Goodness", "image": null },
+                { "id": "ug-mb-5", "name": "Rebecca Odutayo", "image": null },
+                { "id": "ug-mb-6", "name": "Dalegan Kareema Wuraola", "image": null },
+                { "id": "ug-mb-7", "name": "Valerie Akindele", "image": null },
+                { "id": "ug-mb-8", "name": "Aliyah Ogunyemi", "image": null },
+                { "id": "ug-mb-9", "name": "Abidemi Olukoya", "image": null },
+                { "id": "ug-mb-10", "name": "Mercy Emman-Okigbe", "image": null }
             ]
         },
         {
             "title": "Most Handsome (Undergraduate)",
             "id": "ug-most-handsome",
             "nominees": [
-                { "id": "ug-mh-1", "name": "Adebayo Williams", "image": null },
-                { "id": "ug-mh-2", "name": "Chinedu Okoro", "image": null }
+                { "id": "ug-mh-1", "name": "Coker John", "image": null },
+                { "id": "ug-mh-2", "name": "Adejumo Ibrahim", "image": null },
+                { "id": "ug-mh-3", "name": "Bunmi-Oladeide Moyosore", "image": null },
+                { "id": "ug-mh-4", "name": "Adegoke Abdulhakeem", "image": null },
+                { "id": "ug-mh-5", "name": "Kaka Ibrahim", "image": null },
+                { "id": "ug-mh-6", "name": "Ayomide Oni", "image": null },
+                { "id": "ug-mh-7", "name": "Fareed Afolabi", "image": null }
             ]
         },
         {
             "title": "Most Influential (Undergraduate)",
             "id": "ug-most-influential",
             "nominees": [
-                { "id": "ug-mi-1", "name": "Ngozi Eze", "image": null },
-                { "id": "ug-mi-2", "name": "Emeka Adekunle", "image": null }
+                { "id": "ug-mi-1", "name": "David Fadeyi", "image": null },
+                { "id": "ug-mi-2", "name": "Gideon Hassan", "image": null },
+                { "id": "ug-mi-3", "name": "Mary Ukpete", "image": null },
+                { "id": "ug-mi-4", "name": "Ebube Ezeani", "image": null },
+                { "id": "ug-mi-5", "name": "Olamide Lawal", "image": null },
+                { "id": "ug-mi-6", "name": "Damilare Aribisala", "image": null },
+                { "id": "ug-mi-7", "name": "Seun Ajayi", "image": null },
+                { "id": "ug-mi-8", "name": "Halimat Ozemoka", "image": null },
+                { "id": "ug-mi-9", "name": "Precious Jacob", "image": null },
+                { "id": "ug-mi-10", "name": "Lawal Farouk", "image": null }
             ]
         },
         {
             "title": "Socialite of the Year (Undergraduate)",
             "id": "ug-socialite-of-the-year",
             "nominees": [
-                { "id": "ug-soty-1", "name": "Funke Adeleke", "image": null },
-                { "id": "ug-soty-2", "name": "Tunde Bakare", "image": null }
+                { "id": "ug-soty-1", "name": "Moses Samson", "image": null },
+                { "id": "ug-soty-2", "name": "Halimat Ozemoka", "image": null },
+                { "id": "ug-soty-3", "name": "Khadeejah Bode-Sanusi", "image": null },
+                { "id": "ug-soty-4", "name": "Nirere", "image": null },
+                { "id": "ug-soty-5", "name": "Adeola Titilola", "image": null },
+                { "id": "ug-soty-6", "name": "HypemanZaddy", "image": null },
+                { "id": "ug-soty-7", "name": "Ramoney", "image": null },
+                { "id": "ug-soty-8", "name": "Oluwatobiloba Aminat", "image": null },
+                { "id": "ug-soty-9", "name": "Abolaji Adesina", "image": null },
+                { "id": "ug-soty-10", "name": "Michael Wellens", "image": null }
             ]
         },
         {
             "title": "Best Dressed - Male (Undergraduate)",
             "id": "ug-best-dressed-male",
             "nominees": [
-                { "id": "ug-bdm-1", "name": "Femi Alabi", "image": null },
-                { "id": "ug-bdm-2", "name": "Lanre Sodiq", "image": null }
+                { "id": "ug-bdm-1", "name": "Nil", "image": null },
+                { "id": "ug-bdm-2", "name": "Nil", "image": null }
             ]
         },
         {
             "title": "Best Dressed - Female (Undergraduate)",
             "id": "ug-best-dressed-female",
             "nominees": [
-                { "id": "ug-bdf-1", "name": "Zainab Ibrahim", "image": null },
-                { "id": "ug-bdf-2", "name": "Tola Adeyemi", "image": null }
+                { "id": "ug-bdf-1", "name": "Nil", "image": null },
+                { "id": "ug-bdf-2", "name": "Nil", "image": null }
             ]
         },
         {
             "title": "Tech Personality (Undergraduate)",
             "id": "ug-tech-personality",
             "nominees": [
-                { "id": "ug-tp-1", "name": "Olumide Johnson", "image": null },
-                { "id": "ug-tp-2", "name": "Chioma Nwosu", "image": null },
+                { "id": "ug-tp-1", "name": "Sadiq Teslim Adetola", "image": null },
+                { "id": "ug-tp-2", "name": "Nil", "image": null },
                 {
                     "id": "ug-tp-3",
-                    "name": "Sadiq Teslim Adetola",
+                    "name": "Nil",
                     "image": null
                 },
                 { "id": "ug-tp-4", "name": "Chioma Nwosu", "image": null },
@@ -78,25 +103,52 @@
             "title": "Entrepreneur of the Year (Undergraduate)",
             "id": "ug-entrepreneur-of-the-year",
             "nominees": [
-                { "id": "ug-eoy-1", "name": "Bolanle Davis", "image": null },
-                { "id": "ug-eoy-2", "name": "Ibrahim Musa", "image": null }
+                { "id": "ug-eoy-1", "name": "Deseralize (Demitchy)", "image": null },
+                { "id": "ug-eoy-2", "name": "Mosimiloluwa Okusanya", "image": null },
+                { "id": "ug-eoy-3", "name": "Adebayo Oluwatobi", "image": null },
+                { "id": "ug-eoy-4", "name": "Dami Shades", "image": null },
+                { "id": "ug-eoy-5", "name": "Mosturoh Adeogun", "image": null },
+                { "id": "ug-eoy-6", "name": "Augusta (Augies Kitchen)", "image": null },
+                { "id": "ug-eoy-7", "name": "Fazzy D", "image": null },
+                {
+                    "id": "ug-eoy-8",
+                    "name": "The Grand (Gideon Hassan)",
+                    "image": null
+                },
+                { "id": "ug-eoy-9", "name": "Bethie Enterprise", "image": null },
+                { "id": "ug-eoy-10", "name": "Sauce Gadgets", "image": null }
             ]
         },
         {
             "title": "Creative of the Year (Undergraduate)",
             "id": "ug-creative-of-the-year",
-            "nominees": [{
-                "id": "ug-croy-1",
-                "name": "Artify Studios",
-                "image": "creative1.jpg"
-            }]
+            "nominees": [
+                { "id": "ug-croy-1", "name": "DavetheCreator", "image": null },
+                { "id": "ug-croy-2", "name": "Ajasa", "image": null },
+                { "id": "ug-croy-3", "name": "Victor Aifediyi", "image": null },
+                { "id": "ug-croy-4", "name": "Halimat Ozemoka", "image": null },
+                { "id": "ug-croy-5", "name": "Kitan Banjoko", "image": null },
+                { "id": "ug-croy-6", "name": "Damilare Aribisala", "image": null },
+                { "id": "ug-croy-7", "name": "Tosin Adebayo (Tosin)", "image": null },
+                { "id": "ug-croy-8", "name": "Seyi Abe", "image": null },
+                { "id": "ug-croy-9", "name": "Folasewa Adigun", "image": null },
+                { "id": "ug-croy-10", "name": "Edward Vikram", "image": null }
+            ]
         },
         {
             "title": "Student Entertainer of the Year (Undergraduate)",
             "id": "ug-student-entertainer-of-the-year",
             "nominees": [
-                { "id": "ug-seoy-1", "name": "DJ Spark", "image": "entertainer1.jpg" },
-                { "id": "ug-seoy-2", "name": "MC Lively", "image": "entertainer2.jpg" }
+                { "id": "ug-seoy-1", "name": "Hypeman Zaddy", "image": null },
+                { "id": "ug-seoy-2", "name": "Sauce Kid", "image": null },
+                { "id": "ug-seoy-3", "name": "Ms Qing", "image": null },
+                { "id": "ug-seoy-4", "name": "Ajasa", "image": null },
+                { "id": "ug-seoy-5", "name": "MideBliz", "image": null },
+                { "id": "ug-seoy-6", "name": "Berry", "image": null },
+                { "id": "ug-seoy-7", "name": "DJ IFEH", "image": null },
+                { "id": "ug-seoy-8", "name": "Ackuit", "image": null },
+                { "id": "ug-seoy-9", "name": "DJ Newton", "image": null },
+                { "id": "ug-seoy-10", "name": "Toivo", "image": null }
             ]
         },
         {
@@ -376,22 +428,22 @@
             "id": "gen-rookie-of-the-year-female",
             "nominees": [{
                     "id": "gen-roy-f-1",
-                    "name": "Esabu Blessing (Tech Sis)",
-                    "image": null
-                },
-                {
-                    "id": "gen-roy-f-2",
-                    "name": "Tofarati Olabukunmi",
-                    "image": null
-                },
-                {
-                    "id": "gen-roy-f-3",
                     "name": "Obayemi Darasimi Jesse",
                     "image": null
                 },
                 {
+                    "id": "gen-roy-f-2",
+                    "name": "Atiku Kehinde Rachael",
+                    "image": null
+                },
+                {
+                    "id": "gen-roy-f-3",
+                    "name": "Esabu Blessing (Tech Sis)",
+                    "image": null
+                },
+                {
                     "id": "gen-roy-f-4",
-                    "name": "Atiku Kehinde Rachae",
+                    "name": "Tofarati Olabukunmi",
                     "image": null
                 },
                 {
@@ -416,7 +468,7 @@
                 },
                 {
                     "id": "gen-roy-f-9",
-                    "name": "Aliyah Ogunyem",
+                    "name": "Aliyah Ogunyemi",
                     "image": null
                 },
                 {
@@ -523,7 +575,7 @@
             "id": "gen-student-organization-of-the-year",
             "nominees": [{
                     "id": "gen-sooy-5",
-                    "name": "Enginnering career Expo (ECX)",
+                    "name": "Enginnering Career Expo (ECX)",
                     "image": null
                 },
                 {
@@ -602,7 +654,7 @@
             "title": "Couple of the Year (Finalist)",
             "id": "fin-couple-of-the-year",
             "nominees": [
-                { "id": "fin-coy-1", "name": "David & Sarah", "image": "couple1.jpg" }
+                { "id": "fin-coy-1", "name": "David & Sarah", "image": null }
             ]
         },
         {
@@ -616,14 +668,14 @@
             "title": "Creative of the Year (Finalist)",
             "id": "fin-creative-of-the-year",
             "nominees": [
-                { "id": "fin-croy-1", "name": "Final Year Creative", "image": null }
+                { "id": "ug-croy-1", "name": "DavetheCreator", "image": null }
             ]
         },
         {
             "title": "Entrepreneur of the Year (Finalist)",
             "id": "fin-entrepreneur-of-the-year",
             "nominees": [
-                { "id": "fin-eoy-1", "name": "Final Year Entrepreneur", "image": null }
+                { "id": "ug-eoy-1", "name": "Deseralize (Demitchy)", "image": null }
             ]
         },
         {
@@ -634,12 +686,12 @@
             ]
         },
         {
-            "title": "Tech Personality – Male (Finalist)",
+            "title": "Tech Personality - Male (Finalist)",
             "id": "fin-tech-personality-male",
             "nominees": [{ "id": "fin-tpm-1", "name": "Femi Alabi", "image": null }]
         },
         {
-            "title": "Tech Personality – Female (Finalist)",
+            "title": "Tech Personality - Female (Finalist)",
             "id": "fin-tech-personality-female",
             "nominees": [{ "id": "fin-tpf-1", "name": "Amara Chukwu", "image": null }]
         },
