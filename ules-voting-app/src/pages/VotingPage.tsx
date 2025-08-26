@@ -138,7 +138,7 @@ const NomineeCarousel = ({
       <div
         ref={scrollContainer}
         onScroll={handleScroll}
-        className="flex items-stretch gap-4 sm:gap-5 overflow-x-auto snap-x snap-mandatory px-2 py-2 scrollbar-hide"
+        className="flex items-stretch gap-4 sm:gap-5 overflow-x-auto snap-x snap-mandatory px-2 py-2 custom-scrollbar"
       >
         {category.nominees.map((nominee) => {
           const isSelected = selections[category.id] === nominee.name;

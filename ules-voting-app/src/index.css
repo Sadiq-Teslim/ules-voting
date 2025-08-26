@@ -32,3 +32,35 @@
     background-size: 200% 200%;
     animation: gradient 3s ease infinite;
 }
+
+.custom-scrollbar::-webkit-scrollbar {
+    height: 8px;
+    /* Height of the scrollbar */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background-color: #374151;
+    /* Dark gray track (gray-700) */
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #FBBF24;
+    /* Golden thumb (amber-400) */
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #FCD34D;
+    /* Lighter gold on hover (amber-300) */
+}
+
+
+/* Custom Scrollbar for Firefox */
+
+.custom-scrollbar {
+    scrollbar-width: thin;
+    /* Can be 'auto', 'thin', or 'none' */
+    scrollbar-color: #FBBF24 #374151;
+    /* thumb color | track color */
+}
