@@ -45,68 +45,67 @@ const LandingPage: React.FC<LandingPageProps> = ({ setVoter }) => {
   };
 
   return (
-    // Background remains the same for consistency
     <div
-      className="h-screen w-full bg-black relative overflow-hidden bg-cover bg-center"
+      className="h-screen w-full bg-black relative overflow-hidden bg-cover bg-center flex flex-col"
       style={{ backgroundImage: "url('/ornate_frame_bg.jpg')" }}
     >
       <div className="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
 
-      {/* Container remains the same */}
-      <div className="relative z-10 text-center w-full max-w-md mx-auto px-4 h-full flex flex-col justify-around py-6 md:max-w-5xl md:justify-center md:py-16">
-        
-        <header className="mb-6 md:mb-12">
+      {/* --- UPDATE: Main content is now in its own scrollable container --- */}
+      <main className="relative z-10 text-center w-full max-w-md mx-auto px-4 pt-8 sm:pt-16 md:max-w-5xl overflow-y-auto">
+        <header className="mb-8">
           <img
             src="/ules_dinner_banner.png"
             alt="Ules Dinner & Awards 2025"
-            className="mx-auto w-full max-w-[280px] sm:max-w-xs md:max-w-lg"
+            className="mx-auto w-full max-w-[240px] sm:max-w-xs md:max-w-lg"
           />
-          <p className="text-base sm:text-lg text-amber-100/80 font-light mt-2 md:mt-4">
+          <p className="text-sm sm:text-lg text-amber-100/80 font-light mt-2 md:mt-4">
             Official Voting Portal
           </p>
         </header>
 
-        <main className="space-y-6 md:space-y-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-8">
-            
-            {/* --- THEME CHANGE: GOLD ACCENTED CARDS --- */}
-            <div className="group bg-slate-900/50 border border-slate-700 p-4 md:p-6 rounded-2xl transition-all duration-300 hover:border-amber-400/50 hover:-translate-y-1">
-              <div className="flex items-center justify-center w-10 h-10 bg-slate-800 rounded-lg mb-3 md:mb-4 mx-auto border border-slate-600 transition-colors group-hover:border-amber-500/50">
+        <div className="space-y-4 md:space-y-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
+            <div className="group bg-slate-900/50 border border-slate-700 p-4 rounded-2xl transition-all duration-300 hover:border-amber-400/50 hover:-translate-y-1">
+              <div className="flex items-center justify-center w-10 h-10 bg-slate-800 rounded-lg mb-3 mx-auto border border-slate-600 transition-colors group-hover:border-amber-500/50">
                 <Users className="w-5 h-5 text-amber-400 transition-transform group-hover:scale-110" />
               </div>
-              <h3 className="text-base md:text-lg font-semibold text-amber-200 mb-1">
+              <h3 className="text-base font-semibold text-amber-200 mb-1">
                 Eligible Voters
               </h3>
-              <p className="text-xs md:text-sm text-slate-400">
+              <p className="text-xs text-slate-400">
                 Engineering Students 2018-2024
               </p>
             </div>
 
-            <div className="group bg-slate-900/50 border border-slate-700 p-4 md:p-6 rounded-2xl transition-all duration-300 hover:border-amber-400/50 hover:-translate-y-1">
-              <div className="flex items-center justify-center w-10 h-10 bg-slate-800 rounded-lg mb-3 md:mb-4 mx-auto border border-slate-600 transition-colors group-hover:border-amber-500/50">
+            <div className="group bg-slate-900/50 border border-slate-700 p-4 rounded-2xl transition-all duration-300 hover:border-amber-400/50 hover:-translate-y-1">
+              <div className="flex items-center justify-center w-10 h-10 bg-slate-800 rounded-lg mb-3 mx-auto border border-slate-600 transition-colors group-hover:border-amber-500/50">
                 <Crown className="w-5 h-5 text-amber-400 transition-transform group-hover:scale-110" />
               </div>
-              <h3 className="text-base md:text-lg font-semibold text-amber-200 mb-1">
+              <h3 className="text-base font-semibold text-amber-200 mb-1">
                 Award Categories
               </h3>
-              <p className="text-xs md:text-sm text-slate-400">Recognizing Excellence</p>
+              <p className="text-xs text-slate-400">Recognizing Excellence</p>
             </div>
             
-            <div className="group bg-slate-900/50 border border-slate-700 p-4 md:p-6 rounded-2xl transition-all duration-300 hover:border-amber-400/50 hover:-translate-y-1">
-              <div className="flex items-center justify-center w-10 h-10 bg-slate-800 rounded-lg mb-3 md:mb-4 mx-auto border border-slate-600 transition-colors group-hover:border-amber-500/50">
+            <div className="group bg-slate-900/50 border border-slate-700 p-4 rounded-2xl transition-all duration-300 hover:border-amber-400/50 hover:-translate-y-1">
+              <div className="flex items-center justify-center w-10 h-10 bg-slate-800 rounded-lg mb-3 mx-auto border border-slate-600 transition-colors group-hover:border-amber-500/50">
                 <Star className="w-5 h-5 text-amber-400 transition-transform group-hover:scale-110" />
               </div>
-              <h3 className="text-base md:text-lg font-semibold text-amber-200 mb-1">
+              <h3 className="text-base font-semibold text-amber-200 mb-1">
                 One Vote, One Voice
               </h3>
-              <p className="text-xs md:text-sm text-slate-400">
+              <p className="text-xs text-slate-400">
                 Per Award, Final Decision
               </p>
             </div>
           </div>
+        </div>
+      </main>
 
-          <div>
-            {/* --- THEME CHANGE: GOLD GRADIENT BUTTON --- */}
+      {/* --- UPDATE: New fixed footer to ensure the button is always accessible --- */}
+      <footer className="relative z-20 mt-auto w-full text-center p-6 bg-gradient-to-t from-black via-black/80 to-transparent">
+        <div className="max-w-md mx-auto">
             <button
               onClick={() => setIsModalOpen(true)}
               disabled={electionStatus !== "open"}
@@ -129,9 +128,8 @@ const LandingPage: React.FC<LandingPageProps> = ({ setVoter }) => {
                 ? "Your vote is secure and your choice is final."
                 : "Please check back later or contact the committee."}
             </p>
-          </div>
-        </main>
-      </div>
+        </div>
+      </footer>
 
       <ValidationModal
         isOpen={isModalOpen}
