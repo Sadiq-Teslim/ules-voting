@@ -74,10 +74,11 @@ const AdminPage = () => {
   const [isResetModalOpen, setIsResetModalOpen] = useState(false);
 
   // --- FIX: Using your provided backend URL ---
-  const API_BASE_URL = "https://ules-voting-backend.onrender.com";
-
-
-    // Define group titles for the PDF
+  const API_BASE_URL =
+    process.env.NODE_ENV === "production"
+      ? import.meta.env.VITE_API_BASE_URL
+      : "http://localhost:4000";
+  // Define group titles for the PDF
   const groupTitles: Record<keyof typeof groupedAndFilteredResults, string> = {
     undergraduate: "Undergraduate Awards",
     general: "General Awards",
@@ -181,8 +182,8 @@ const AdminPage = () => {
       setPassword(submittedPassword);
       setIsAuthenticated(true);
       // --- NEW: Persist session to Session Storage on successful login ---
-      sessionStorage.setItem('adminPassword', submittedPassword);
-      sessionStorage.setItem('loginTimestamp', Date.now().toString());
+      sessionStorage.setItem("adminPassword", submittedPassword);
+      sessionStorage.setItem("loginTimestamp", Date.now().toString());
     }
     setIsLoggingIn(false);
   };
@@ -231,7 +232,7 @@ const AdminPage = () => {
 
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = pdf.internal.pageSize.getHeight();
-      
+
       const canvasWidth = canvas.width;
       const canvasHeight = canvas.height;
 
@@ -398,57 +399,129 @@ const AdminPage = () => {
           }}
         >
           {/* Branded Header */}
-          <div style={{ backgroundColor: '#1E293B', color: 'white', padding: '30px 40px', display: 'flex', alignItems: 'center' }}>
-            <img src="/yin_yang_logo.png" alt="ULES Logo" style={{ width: "80px", height: "auto", marginRight: "20px" }}/>
+          <div
+            style={{
+              backgroundColor: "#1E293B",
+              color: "white",
+              padding: "30px 40px",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <img
+              src="/yin_yang_logo.png"
+              alt="ULES Logo"
+              style={{ width: "80px", height: "auto", marginRight: "20px" }}
+            />
             <div>
-              <h1 style={{ fontSize: "28px", fontWeight: "bold", margin: 0 }}>ULES Dinner & Awards 2025</h1>
-              <p style={{ fontSize: '20px', margin: '5px 0 0 0', color: '#CBD5E1' }}>Annual Awards Results</p>
+              <h1 style={{ fontSize: "28px", fontWeight: "bold", margin: 0 }}>
+                ULES Dinner & Awards 2025
+              </h1>
+              <p
+                style={{
+                  fontSize: "20px",
+                  margin: "5px 0 0 0",
+                  color: "#CBD5E1",
+                }}
+              >
+                Annual Awards Results
+              </p>
             </div>
           </div>
 
-          <div style={{ padding: '30px 40px' }}>
+          <div style={{ padding: "30px 40px" }}>
             {/* Loop through the groups */}
-            {Object.entries(groupedAndFilteredResults).map(([groupKey, groupResults]) => (
-              groupResults.length > 0 && (
-                <div key={groupKey} style={{ marginBottom: '30px', pageBreakInside: 'avoid' }}>
-                  {/* Main Group Title */}
-                  <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#D97706', borderBottom: '2px solid #FBBF24', paddingBottom: '10px', marginBottom: '20px', pageBreakAfter: 'avoid' }}>
-                    {groupTitles[groupKey as keyof typeof groupTitles]}
-                  </h2>
-                  
-                  {/* Loop through each category result within the group */}
-                  {groupResults.map((result) => (
-                    <div key={result.category} style={{ marginBottom: "30px", pageBreakInside: "avoid" }}>
-                      <h3 style={{ fontSize: "18px", fontWeight: "bold", color: '#374151', borderBottom: "1px solid #E5E7EB", paddingBottom: "8px", marginBottom: "12px" }}>
-                        {getCategoryTitle(result.category)}
-                      </h3>
-                      <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-                        {result.nominees
-                          .sort((a, b) => b.votes - a.votes)
-                          .map((nominee, index) => (
-                            <li key={nominee.name} style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              padding: "10px 12px",
-                              fontSize: "16px",
-                              borderRadius: '4px',
-                              // Highlight the winner and use zebra striping
-                              backgroundColor: index === 0 ? '#FFFBEB' : (index % 2 === 1 ? '#F9FAFB' : 'white')
-                            }}>
-                              <span style={{ fontWeight: index === 0 ? 'bold' : 'normal' }}>
-                                {index === 0 ? '🏆 ' : ''}{nominee.name}
-                              </span>
-                              <span style={{ fontWeight: "bold", color: '#4B5563' }}>
-                                {nominee.votes} {nominee.votes === 1 ? 'Vote' : 'Votes'}
-                              </span>
-                            </li>
-                          ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              )
-            ))}
+            {Object.entries(groupedAndFilteredResults).map(
+              ([groupKey, groupResults]) =>
+                groupResults.length > 0 && (
+                  <div
+                    key={groupKey}
+                    style={{ marginBottom: "30px", pageBreakInside: "avoid" }}
+                  >
+                    {/* Main Group Title */}
+                    <h2
+                      style={{
+                        fontSize: "24px",
+                        fontWeight: "bold",
+                        color: "#D97706",
+                        borderBottom: "2px solid #FBBF24",
+                        paddingBottom: "10px",
+                        marginBottom: "20px",
+                        pageBreakAfter: "avoid",
+                      }}
+                    >
+                      {groupTitles[groupKey as keyof typeof groupTitles]}
+                    </h2>
+
+                    {/* Loop through each category result within the group */}
+                    {groupResults.map((result) => (
+                      <div
+                        key={result.category}
+                        style={{
+                          marginBottom: "30px",
+                          pageBreakInside: "avoid",
+                        }}
+                      >
+                        <h3
+                          style={{
+                            fontSize: "18px",
+                            fontWeight: "bold",
+                            color: "#374151",
+                            borderBottom: "1px solid #E5E7EB",
+                            paddingBottom: "8px",
+                            marginBottom: "12px",
+                          }}
+                        >
+                          {getCategoryTitle(result.category)}
+                        </h3>
+                        <ul
+                          style={{ listStyle: "none", padding: 0, margin: 0 }}
+                        >
+                          {result.nominees
+                            .sort((a, b) => b.votes - a.votes)
+                            .map((nominee, index) => (
+                              <li
+                                key={nominee.name}
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "space-between",
+                                  padding: "10px 12px",
+                                  fontSize: "16px",
+                                  borderRadius: "4px",
+                                  // Highlight the winner and use zebra striping
+                                  backgroundColor:
+                                    index === 0
+                                      ? "#FFFBEB"
+                                      : index % 2 === 1
+                                      ? "#F9FAFB"
+                                      : "white",
+                                }}
+                              >
+                                <span
+                                  style={{
+                                    fontWeight: index === 0 ? "bold" : "normal",
+                                  }}
+                                >
+                                  {index === 0 ? "🏆 " : ""}
+                                  {nominee.name}
+                                </span>
+                                <span
+                                  style={{
+                                    fontWeight: "bold",
+                                    color: "#4B5563",
+                                  }}
+                                >
+                                  {nominee.votes}{" "}
+                                  {nominee.votes === 1 ? "Vote" : "Votes"}
+                                </span>
+                              </li>
+                            ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                )
+            )}
           </div>
         </div>
 
