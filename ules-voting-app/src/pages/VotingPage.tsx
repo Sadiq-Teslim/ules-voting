@@ -541,7 +541,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                       type="text"
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      placeholder="Search..."
+                      placeholder="Search for a nominee..."
                       className="w-full bg-slate-800 border border-slate-700 rounded-lg py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-amber-500"
                     />
                   </div>

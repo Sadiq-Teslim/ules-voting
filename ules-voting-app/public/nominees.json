@@ -170,20 +170,20 @@
             "id": "gen-ules-person-of-the-year",
             "nominees": [
                 { "id": "gen-upoy-1", "name": "Solomon Madufor", "image": null },
-                { "id": "gen-upoy-1", "name": "Olusanya Ifedapo Ijulu", "image": null },
-                { "id": "gen-upoy-1", "name": "Demilade Adekunle", "image": null },
-                { "id": "gen-upoy-1", "name": "Olawale Ayoola", "image": null },
-                { "id": "gen-upoy-1", "name": "Adeniyi Adebayo", "image": null },
-                { "id": "gen-upoy-1", "name": "Nofisat Sanni", "image": null },
-                { "id": "gen-upoy-1", "name": "Uko Samuel", "image": null },
+                { "id": "gen-upoy-2", "name": "Olusanya Ifedapo Ijulu", "image": null },
+                { "id": "gen-upoy-3", "name": "Demilade Adekunle", "image": null },
+                { "id": "gen-upoy-4", "name": "Olawale Ayoola", "image": null },
+                { "id": "gen-upoy-5", "name": "Adeniyi Adebayo", "image": null },
+                { "id": "gen-upoy-6", "name": "Nofisat Sanni", "image": null },
+                { "id": "gen-upoy-7", "name": "Uko Samuel", "image": null },
                 {
-                    "id": "gen-upoy-1",
+                    "id": "gen-upoy-8",
                     "name": "Onakoya Emmanuel Ayodeji (DEJ)",
                     "image": null
                 },
-                { "id": "gen-upoy-1", "name": "Adeolu Adeniji", "image": null },
-                { "id": "gen-upoy-1", "name": "Izuchukwu Nwogu", "image": null },
-                { "id": "gen-upoy-1", "name": "Funmi Oladapo", "image": null }
+                { "id": "gen-upoy-9", "name": "Adeolu Adeniji", "image": null },
+                { "id": "gen-upoy-10", "name": "Izuchukwu Nwogu", "image": null },
+                { "id": "gen-upoy-11", "name": "Funmi Oladapo", "image": null }
             ]
         },
         {
