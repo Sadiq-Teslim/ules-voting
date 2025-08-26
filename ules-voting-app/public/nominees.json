@@ -120,10 +120,45 @@
             "id": "gen-student-leader-of-the-year",
             "nominees": [{
                     "id": "gen-sloy-1",
-                    "name": "Adebayo Williams",
+                    "name": "Sunmisola Ganikale",
                     "image": null
                 },
-                { "id": "gen-sloy-2", "name": "Ngozi Eze", "image": null }
+                { "id": "gen-sloy-2", "name": "Justice Esiri", "image": null },
+                {
+                    "id": "gen-sloy-3",
+                    "name": "Nofisat Sanni",
+                    "image": null
+                },
+                {
+                    "id": "gen-sloy-4",
+                    "name": "Boluwatife Idowu",
+                    "image": null
+                },
+                {
+                    "id": "gen-sloy-5",
+                    "name": "Ayomide Oyewole",
+                    "image": null
+                },
+                {
+                    "id": "gen-sloy-6",
+                    "name": "Emmanuel Arowesan",
+                    "image": null
+                },
+                {
+                    "id": "gen-sloy-7",
+                    "name": "Dianne Okosun",
+                    "image": null
+                },
+                {
+                    "id": "gen-sloy-8",
+                    "name": "Onakoya Emmanuel Ayodeji",
+                    "image": null
+                },
+                {
+                    "id": "gen-sloy-9",
+                    "name": "Marvellous Oyegbile",
+                    "image": null
+                }
             ]
         },
         {
@@ -137,9 +172,7 @@
         {
             "title": "Academic Impact Award ",
             "id": "gen-academic-impact-award",
-            "nominees": [
-                { "id": "gen-aia-1", "name": "Chioma Nwosu", "image": null }
-            ]
+            "nominees": [{ "id": "gen-aia-1", "name": "Chioma Nwosu", "image": null }]
         },
         {
             "title": "Student Brand of the Year ",
@@ -441,7 +474,8 @@
                     "id": "gen-eboy-1",
                     "name": "NSChE",
                     "image": null
-                }, {
+                },
+                {
                     "id": "gen-eboy-2",
                     "name": "SEES",
                     "image": null
@@ -521,23 +555,17 @@
         {
             "title": "Tech Personality – Male (Finalist)",
             "id": "fin-tech-personality-male",
-            "nominees": [
-                { "id": "fin-tpm-1", "name": "Femi Alabi", "image": null }
-            ]
+            "nominees": [{ "id": "fin-tpm-1", "name": "Femi Alabi", "image": null }]
         },
         {
             "title": "Tech Personality – Female (Finalist)",
             "id": "fin-tech-personality-female",
-            "nominees": [
-                { "id": "fin-tpf-1", "name": "Amara Chukwu", "image": null }
-            ]
+            "nominees": [{ "id": "fin-tpf-1", "name": "Amara Chukwu", "image": null }]
         },
         {
             "title": "Most Handsome (Finalist)",
             "id": "fin-most-handsome",
-            "nominees": [
-                { "id": "fin-mh-1", "name": "Ibrahim Musa", "image": null }
-            ]
+            "nominees": [{ "id": "fin-mh-1", "name": "Ibrahim Musa", "image": null }]
         },
         {
             "title": "Most Beautiful (Finalist)",
@@ -556,9 +584,7 @@
         {
             "title": "Most Popular (Finalist)",
             "id": "fin-most-popular",
-            "nominees": [
-                { "id": "fin-mp-1", "name": "Funke Adeleke", "image": null }
-            ]
+            "nominees": [{ "id": "fin-mp-1", "name": "Funke Adeleke", "image": null }]
         }
     ],
     "departments": [{
