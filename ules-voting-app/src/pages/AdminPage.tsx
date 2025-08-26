@@ -391,52 +391,65 @@ const AdminPage = () => {
             position: "absolute",
             left: "-9999px",
             width: "800px",
-            padding: "40px",
+            padding: "0", // Padding is now handled internally
             backgroundColor: "white",
-            color: "black",
+            color: "#333", // Darker text for better readability
             fontFamily: "Helvetica, Arial, sans-serif",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", borderBottom: "2px solid #333", paddingBottom: "20px", marginBottom: "30px" }}>
+          {/* Branded Header */}
+          <div style={{ backgroundColor: '#1E293B', color: 'white', padding: '30px 40px', display: 'flex', alignItems: 'center' }}>
             <img src="/yin_yang_logo.png" alt="ULES Logo" style={{ width: "80px", height: "auto", marginRight: "20px" }}/>
-            <h1 style={{ fontSize: "24px", fontWeight: "bold" }}>
-              ULES Dinner & Awards 2025<br />Annual Awards Results
-            </h1>
+            <div>
+              <h1 style={{ fontSize: "28px", fontWeight: "bold", margin: 0 }}>ULES Dinner & Awards 2025</h1>
+              <p style={{ fontSize: '20px', margin: '5px 0 0 0', color: '#CBD5E1' }}>Annual Awards Results</p>
+            </div>
           </div>
-          
-          {/* Loop through the groups (undergraduate, general, etc.) */}
-          {Object.entries(groupedAndFilteredResults).map(([groupKey, groupResults]) => (
-            // Only render the group section if it has results
-            groupResults.length > 0 && (
-              <div key={groupKey} style={{ marginBottom: '30px', pageBreakInside: 'avoid' }}>
-                {/* Main Group Title */}
-                <h2 style={{ fontSize: '22px', fontWeight: 'bold', color: '#111', borderBottom: '2px solid #555', paddingBottom: '10px', marginBottom: '20px', pageBreakAfter: 'avoid' }}>
-                  {groupTitles[groupKey as keyof typeof groupTitles]}
-                </h2>
-                
-                {/* Loop through each category result within the group */}
-                {groupResults.map((result) => (
-                  <div key={result.category} style={{ marginBottom: "30px", pageBreakInside: "avoid" }}>
-                    <h3 style={{ fontSize: "18px", fontWeight: "bold", borderBottom: "1px solid #ccc", paddingBottom: "5px", marginBottom: "10px" }}>
-                      {getCategoryTitle(result.category)}
-                    </h3>
-                    <ul style={{ listStyle: "none", padding: 0 }}>
-                      {result.nominees
-                        .sort((a, b) => b.votes - a.votes)
-                        .map((nominee) => (
-                          <li key={nominee.name} style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", fontSize: "16px", borderBottom: '1px solid #eee' }}>
-                            <span>{nominee.name}</span>
-                            <span style={{ fontWeight: "bold" }}>
-                              {nominee.votes} {nominee.votes === 1 ? 'Vote' : 'Votes'}
-                            </span>
-                          </li>
-                        ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            )
-          ))}
+
+          <div style={{ padding: '30px 40px' }}>
+            {/* Loop through the groups */}
+            {Object.entries(groupedAndFilteredResults).map(([groupKey, groupResults]) => (
+              groupResults.length > 0 && (
+                <div key={groupKey} style={{ marginBottom: '30px', pageBreakInside: 'avoid' }}>
+                  {/* Main Group Title */}
+                  <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#D97706', borderBottom: '2px solid #FBBF24', paddingBottom: '10px', marginBottom: '20px', pageBreakAfter: 'avoid' }}>
+                    {groupTitles[groupKey as keyof typeof groupTitles]}
+                  </h2>
+                  
+                  {/* Loop through each category result within the group */}
+                  {groupResults.map((result) => (
+                    <div key={result.category} style={{ marginBottom: "30px", pageBreakInside: "avoid" }}>
+                      <h3 style={{ fontSize: "18px", fontWeight: "bold", color: '#374151', borderBottom: "1px solid #E5E7EB", paddingBottom: "8px", marginBottom: "12px" }}>
+                        {getCategoryTitle(result.category)}
+                      </h3>
+                      <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                        {result.nominees
+                          .sort((a, b) => b.votes - a.votes)
+                          .map((nominee, index) => (
+                            <li key={nominee.name} style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              padding: "10px 12px",
+                              fontSize: "16px",
+                              borderRadius: '4px',
+                              // Highlight the winner and use zebra striping
+                              backgroundColor: index === 0 ? '#FFFBEB' : (index % 2 === 1 ? '#F9FAFB' : 'white')
+                            }}>
+                              <span style={{ fontWeight: index === 0 ? 'bold' : 'normal' }}>
+                                {index === 0 ? '🏆 ' : ''}{nominee.name}
+                              </span>
+                              <span style={{ fontWeight: "bold", color: '#4B5563' }}>
+                                {nominee.votes} {nominee.votes === 1 ? 'Vote' : 'Votes'}
+                              </span>
+                            </li>
+                          ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              )
+            ))}
+          </div>
         </div>
 
         <header className="flex flex-col sm:flex-row justify-between sm:items-center mb-8 gap-4">
