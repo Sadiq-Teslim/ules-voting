@@ -57,7 +57,11 @@
             "nominees": [
                 { "id": "ug-tp-1", "name": "Olumide Johnson", "image": "image12.jpg" },
                 { "id": "ug-tp-2", "name": "Chioma Nwosu", "image": "image13.jpg" },
-                { "id": "ug-tp-3", "name": "Sadiq Teslim Adetola", "image": "image13.jpg" },
+                {
+                    "id": "ug-tp-3",
+                    "name": "Sadiq Teslim Adetola",
+                    "image": "image13.jpg"
+                },
                 { "id": "ug-tp-4", "name": "Chioma Nwosu", "image": "image13.jpg" },
                 { "id": "ug-tp-5", "name": "Chioma Nwosu", "image": "image13.jpg" }
             ]
@@ -81,9 +85,11 @@
         {
             "title": "Creative of the Year (Undergraduate)",
             "id": "ug-creative-of-the-year",
-            "nominees": [
-                { "id": "ug-croy-1", "name": "Artify Studios", "image": "creative1.jpg" }
-            ]
+            "nominees": [{
+                "id": "ug-croy-1",
+                "name": "Artify Studios",
+                "image": "creative1.jpg"
+            }]
         },
         {
             "title": "Student Entertainer of the Year (Undergraduate)",
@@ -103,15 +109,20 @@
         {
             "title": "Innovation Award (Start-up Visionary) (General)",
             "id": "gen-innovation-award",
-            "nominees": [
-                { "id": "gen-ia-1", "name": "Fintech Solutions", "image": "startup1.jpg" }
-            ]
+            "nominees": [{
+                "id": "gen-ia-1",
+                "name": "Fintech Solutions",
+                "image": "startup1.jpg"
+            }]
         },
         {
             "title": "Student Leader of the Year (General)",
             "id": "gen-student-leader-of-the-year",
-            "nominees": [
-                { "id": "gen-sloy-1", "name": "Adebayo Williams", "image": "image3.jpg" },
+            "nominees": [{
+                    "id": "gen-sloy-1",
+                    "name": "Adebayo Williams",
+                    "image": "image3.jpg"
+                },
                 { "id": "gen-sloy-2", "name": "Ngozi Eze", "image": "image5.jpg" }
             ]
         },
@@ -141,9 +152,11 @@
         {
             "title": "ULES Tutor of the Year (General)",
             "id": "gen-ules-tutor-of-the-year",
-            "nominees": [
-                { "id": "gen-utoy-1", "name": "Olumide Johnson", "image": "image12.jpg" }
-            ]
+            "nominees": [{
+                "id": "gen-utoy-1",
+                "name": "Olumide Johnson",
+                "image": "image12.jpg"
+            }]
         },
         {
             "title": "ULES Volunteer of the Year (General)",
@@ -156,44 +169,141 @@
             "title": "ULES Person of the Year (General)",
             "id": "gen-ules-person-of-the-year",
             "nominees": [
-                { "id": "gen-upoy-1", "name": "Emeka Adekunle", "image": "image6.jpg" },
-                { "id": "gen-upoy-2", "name": "Fatima Bello", "image": "image2.jpg" }
+                { "id": "gen-upoy-1", "name": "Emeka Adekunle", "image": null },
+                { "id": "gen-upoy-1", "name": "Emeka Adekunle", "image": null },
+                { "id": "gen-upoy-1", "name": "Emeka Adekunle", "image": null },
+                { "id": "gen-upoy-1", "name": "Emeka Adekunle", "image": null },
+                { "id": "gen-upoy-1", "name": "Emeka Adekunle", "image": null },
+                { "id": "gen-upoy-1", "name": "Emeka Adekunle", "image": null },
+                { "id": "gen-upoy-1", "name": "Emeka Adekunle", "image": null },
+                { "id": "gen-upoy-1", "name": "Emeka Adekunle", "image": null },
+                { "id": "gen-upoy-1", "name": "Emeka Adekunle", "image": null },
+                { "id": "gen-upoy-1", "name": "Emeka Adekunle", "image": null },
+                { "id": "gen-upoy-1", "name": "Emeka Adekunle", "image": null }
             ]
         },
         {
-            "title": "Rookie of the Year (General)",
-            "id": "gen-rookie-of-the-year",
+            "title": "Rookie of the Year (Male)",
+            "id": "gen-rookie-of-the-year-male",
             "nominees": [
-                { "id": "gen-roy-1", "name": "New Talent A", "image": null }
+                { "id": "gen-roy-m-1", "name": "Sadiq Teslim Adetola", "image": null },
+                {
+                    "id": "gen-roy-m-2",
+                    "name": "Lawal Muhammed (Twilight)",
+                    "image": null
+                },
+                { "id": "gen-roy-m-3", "name": "Mark Abiodun", "image": null },
+                { "id": "gen-roy-m-4", "name": "Dumebi Obi", "image": null },
+                { "id": "gen-roy-m-5", "name": "Temple Ezeakor", "image": null },
+                { "id": "gen-roy-m-6", "name": "Olajide Komolafe", "image": null },
+                { "id": "gen-roy-m-7", "name": "Ayokunle Babatunde", "image": null },
+                { "id": "gen-roy-m-8", "name": "George Nwaokolobia", "image": null },
+                {
+                    "id": "gen-roy-m-9",
+                    "name": "Ayorinde Bolarinwa (Ajasa)",
+                    "image": null
+                },
+                { "id": "gen-roy-m-10", "name": "Dada Majeed", "image": null }
             ]
         },
         {
-            "title": "Sophomore of the Year (General)",
+            "title": "Rookie of the Year (Female)",
+            "id": "gen-rookie-of-the-year-female",
+            "nominees": [{
+                    "id": "gen-roy-f-1",
+                    "name": "Esabu Blessing (Tech Sis)",
+                    "image": null
+                },
+                {
+                    "id": "gen-roy-f-2",
+                    "name": "Tofarati Olabukunmi",
+                    "image": null
+                },
+                {
+                    "id": "gen-roy-f-3",
+                    "name": "Esabu Blessing (Tech Sis)",
+                    "image": null
+                },
+                {
+                    "id": "gen-roy-f-4",
+                    "name": "Obayemi Darasimi Jesse",
+                    "image": null
+                },
+                {
+                    "id": "gen-roy-f-5",
+                    "name": "Atiku Kehinde Rachae",
+                    "image": null
+                },
+                {
+                    "id": "gen-roy-f-6",
+                    "name": "Abolarinde Favor",
+                    "image": null
+                },
+                {
+                    "id": "gen-roy-f-7",
+                    "name": "Aaliyah Alagbala",
+                    "image": null
+                },
+                {
+                    "id": "gen-roy-f-8",
+                    "name": "Folashewa Adigun",
+                    "image": null
+                },
+                {
+                    "id": "gen-roy-f-9",
+                    "name": "Toritseju Ewarami",
+                    "image": null
+                },
+                {
+                    "id": "gen-roy-f-10",
+                    "name": "Aliyah Ogunyem",
+                    "image": null
+                },
+                {
+                    "id": "gen-roy-f-11",
+                    "name": "Eleora Akpupu",
+                    "image": null
+                }
+            ]
+        },
+        {
+            "title": "Sophomore of the Year",
             "id": "gen-sophomore-of-the-year",
             "nominees": [
-                { "id": "gen-soy-1", "name": "Rising Star B", "image": null }
+                { "id": "gen-soy-1", "name": "Chinonso Akwari (Zeus)", "image": null },
+                {
+                    "id": "gen-soy-2",
+                    "name": "David Duyile (DaveTheCreator)",
+                    "image": null
+                },
+                { "id": "gen-soy-3", "name": "Khadeejah Bode-Sanusi", "image": null },
+                { "id": "gen-soy-4", "name": "Quadri Mariam Omobola", "image": null },
+                { "id": "gen-soy-5", "name": "Olamide Lawal", "image": null },
+                { "id": "gen-soy-6", "name": "Mercy Emman-Okigbe", "image": null },
+                { "id": "gen-soy-7", "name": "Qareeb Kako", "image": null },
+                {
+                    "id": "gen-soy-8",
+                    "name": "Olaoye Oluwanifemi Daniel",
+                    "image": null
+                },
+                { "id": "gen-soy-9", "name": "Buari Muhammedtoa O.", "image": null },
+                { "id": "gen-soy-10", "name": "Ihuoma Oparawilson", "image": null }
             ]
         },
         {
             "title": "Face of Year 3 (General)",
             "id": "gen-face-of-year-3",
-            "nominees": [
-                { "id": "gen-fy3-1", "name": "Year 3 Face", "image": null }
-            ]
+            "nominees": [{ "id": "gen-fy3-1", "name": "Year 3 Face", "image": null }]
         },
         {
             "title": "Face of Year 4 (General)",
             "id": "gen-face-of-year-4",
-            "nominees": [
-                { "id": "gen-fy4-1", "name": "Year 4 Face", "image": null }
-            ]
+            "nominees": [{ "id": "gen-fy4-1", "name": "Year 4 Face", "image": null }]
         },
         {
             "title": "Finalist of the Year (General)",
             "id": "gen-finalist-of-the-year",
-            "nominees": [
-                { "id": "gen-foy-1", "name": "Top Finalist", "image": null }
-            ]
+            "nominees": [{ "id": "gen-foy-1", "name": "Top Finalist", "image": null }]
         },
         {
             "title": "ULES Exco of the Year (General)",
@@ -205,16 +315,20 @@
         {
             "title": "Student Organization of the Year (General)",
             "id": "gen-student-organization-of-the-year",
-            "nominees": [
-                { "id": "gen-sooy-1", "name": "Engineers for Change", "image": "org1.jpg" }
-            ]
+            "nominees": [{
+                "id": "gen-sooy-1",
+                "name": "Engineers for Change",
+                "image": "org1.jpg"
+            }]
         },
         {
             "title": "Exco Body of the Year (General)",
             "id": "gen-exco-body-of-the-year",
-            "nominees": [
-                { "id": "gen-eboy-1", "name": "The Executive Council", "image": "org2.jpg" }
-            ]
+            "nominees": [{
+                "id": "gen-eboy-1",
+                "name": "The Executive Council",
+                "image": "org2.jpg"
+            }]
         },
         {
             "title": "Couple of the Year (Finalist)",
@@ -416,81 +530,164 @@
             "subcategories": [{
                     "title": "Departmental Image Award",
                     "id": "dept-computer-image-award",
-                    "nominees": [
-                        { "id": "d-comp-1", "name": "Comp Engr Nominee A", "image": "image1.jpg" }
-                    ]
+                    "nominees": [{
+                        "id": "d-comp-1",
+                        "name": "Comp Engr Nominee A",
+                        "image": "image1.jpg"
+                    }]
                 },
                 {
                     "title": "Outstanding Academic Performance Award",
                     "id": "dept-computer-academic-performance-award",
-                    "nominees": [
-                        { "id": "d-comp-2", "name": "Comp Engr Nominee B", "image": "image2.jpg" }
-                    ]
+                    "nominees": [{
+                        "id": "d-comp-2",
+                        "name": "Comp Engr Nominee B",
+                        "image": "image2.jpg"
+                    }]
                 },
                 {
                     "title": "Athlete of the Year - Male",
                     "id": "dept-computer-athlete-male",
-                    "nominees": [
-                        { "id": "d-comp-3", "name": "Comp Engr Nominee C", "image": "image3.jpg" }
-                    ]
+                    "nominees": [{
+                        "id": "d-comp-3",
+                        "name": "Comp Engr Nominee C",
+                        "image": "image3.jpg"
+                    }]
                 },
                 {
                     "title": "Athlete of the Year - Female",
                     "id": "dept-computer-athlete-female",
-                    "nominees": [
-                        { "id": "d-comp-4", "name": "Comp Engr Nominee D", "image": "image4.jpg" }
-                    ]
+                    "nominees": [{
+                        "id": "d-comp-4",
+                        "name": "Comp Engr Nominee D",
+                        "image": "image4.jpg"
+                    }]
                 }
             ]
         },
         {
             "title": "Departmental Awards - Chemical Engineering",
             "id": "dept-chemical",
-            "subcategories": [
-                { "title": "Departmental Image Award", "id": "dept-chem-1", "nominees": [] },
-                { "title": "Outstanding Academic Performance Award", "id": "dept-chem-2", "nominees": [] },
-                { "title": "Athlete of the Year - Male", "id": "dept-chem-3", "nominees": [] },
-                { "title": "Athlete of the Year - Female", "id": "dept-chem-4", "nominees": [] }
+            "subcategories": [{
+                    "title": "Departmental Image Award",
+                    "id": "dept-chem-1",
+                    "nominees": []
+                },
+                {
+                    "title": "Outstanding Academic Performance Award",
+                    "id": "dept-chem-2",
+                    "nominees": []
+                },
+                {
+                    "title": "Athlete of the Year - Male",
+                    "id": "dept-chem-3",
+                    "nominees": []
+                },
+                {
+                    "title": "Athlete of the Year - Female",
+                    "id": "dept-chem-4",
+                    "nominees": []
+                }
             ]
         },
         {
             "title": "Departmental Awards - Petroleum & Gas Engineering",
             "id": "dept-petroleum-gas",
-            "subcategories": [
-                { "title": "Departmental Image Award", "id": "dept-pet-1", "nominees": [] },
-                { "title": "Outstanding Academic Performance Award", "id": "dept-pet-2", "nominees": [] },
-                { "title": "Athlete of the Year - Male", "id": "dept-pet-3", "nominees": [] },
-                { "title": "Athlete of the Year - Female", "id": "dept-pet-4", "nominees": [] }
+            "subcategories": [{
+                    "title": "Departmental Image Award",
+                    "id": "dept-pet-1",
+                    "nominees": []
+                },
+                {
+                    "title": "Outstanding Academic Performance Award",
+                    "id": "dept-pet-2",
+                    "nominees": []
+                },
+                {
+                    "title": "Athlete of the Year - Male",
+                    "id": "dept-pet-3",
+                    "nominees": []
+                },
+                {
+                    "title": "Athlete of the Year - Female",
+                    "id": "dept-pet-4",
+                    "nominees": []
+                }
             ]
         },
         {
             "title": "Departmental Awards - Civil Engineering",
             "id": "dept-civil",
-            "subcategories": [
-                { "title": "Departmental Image Award", "id": "dept-civ-1", "nominees": [] },
-                { "title": "Outstanding Academic Performance Award", "id": "dept-civ-2", "nominees": [] },
-                { "title": "Athlete of the Year - Male", "id": "dept-civ-3", "nominees": [] },
-                { "title": "Athlete of the Year - Female", "id": "dept-civ-4", "nominees": [] }
+            "subcategories": [{
+                    "title": "Departmental Image Award",
+                    "id": "dept-civ-1",
+                    "nominees": []
+                },
+                {
+                    "title": "Outstanding Academic Performance Award",
+                    "id": "dept-civ-2",
+                    "nominees": []
+                },
+                {
+                    "title": "Athlete of the Year - Male",
+                    "id": "dept-civ-3",
+                    "nominees": []
+                },
+                {
+                    "title": "Athlete of the Year - Female",
+                    "id": "dept-civ-4",
+                    "nominees": []
+                }
             ]
         },
         {
             "title": "Departmental Awards - Systems Engineering",
             "id": "dept-systems",
-            "subcategories": [
-                { "title": "Departmental Image Award", "id": "dept-sys-1", "nominees": [] },
-                { "title": "Outstanding Academic Performance Award", "id": "dept-sys-2", "nominees": [] },
-                { "title": "Athlete of the Year - Male", "id": "dept-sys-3", "nominees": [] },
-                { "title": "Athlete of the Year - Female", "id": "dept-sys-4", "nominees": [] }
+            "subcategories": [{
+                    "title": "Departmental Image Award",
+                    "id": "dept-sys-1",
+                    "nominees": []
+                },
+                {
+                    "title": "Outstanding Academic Performance Award",
+                    "id": "dept-sys-2",
+                    "nominees": []
+                },
+                {
+                    "title": "Athlete of the Year - Male",
+                    "id": "dept-sys-3",
+                    "nominees": []
+                },
+                {
+                    "title": "Athlete of the Year - Female",
+                    "id": "dept-sys-4",
+                    "nominees": []
+                }
             ]
         },
         {
             "title": "Departmental Awards - Metallurgical & Materials Engineering",
             "id": "dept-metallurgical-materials",
-            "subcategories": [
-                { "title": "Departmental Image Award", "id": "dept-met-1", "nominees": [] },
-                { "title": "Outstanding Academic Performance Award", "id": "dept-met-2", "nominees": [] },
-                { "title": "Athlete of the Year - Male", "id": "dept-met-3", "nominees": [] },
-                { "title": "Athlete of the Year - Female", "id": "dept-met-4", "nominees": [] }
+            "subcategories": [{
+                    "title": "Departmental Image Award",
+                    "id": "dept-met-1",
+                    "nominees": []
+                },
+                {
+                    "title": "Outstanding Academic Performance Award",
+                    "id": "dept-met-2",
+                    "nominees": []
+                },
+                {
+                    "title": "Athlete of the Year - Male",
+                    "id": "dept-met-3",
+                    "nominees": []
+                },
+                {
+                    "title": "Athlete of the Year - Female",
+                    "id": "dept-met-4",
+                    "nominees": []
+                }
             ]
         }
     ]
