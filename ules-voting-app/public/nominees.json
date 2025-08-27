@@ -626,7 +626,7 @@
             "nominees": [{
                     "id": "gen-sooy-5",
                     "name": "Enginnering Career Expo (ECX)",
-                    "image": null
+                    "image": "images/ecx.png"
                 },
                 {
                     "id": "gen-sooy-1",
