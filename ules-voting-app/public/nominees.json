@@ -70,9 +70,9 @@
                 },
                 { "id": "ug-bdm-2", "name": "Kabiawu Khaalid", "image": null },
                 { "id": "ug-bdm-3", "name": "Bunmi-oladeide Moyosore", "image": null },
-                { "id": "ug-bdm-4", "name": "Oladipupo David", "image": null },
+                { "id": "ug-bdm-4", "name": "Fasanmoye Israel", "image": null },
                 { "id": "ug-bdm-5", "name": "Jedidiah Temitope", "image": null },
-                { "id": "ug-bdm-6", "name": "Fejiro", "image": null },
+                { "id": "ug-bdm-6", "name": "Oladipupo David ", "image": null },
                 { "id": "ug-bdm-7", "name": "Ayomide Oni", "image": null },
                 { "id": "ug-bdm-8", "name": "Fareed Afolabi", "image": null },
                 { "id": "ug-bdm-9", "name": "Biyi Lawal", "image": null },
@@ -626,7 +626,7 @@
             "nominees": [{
                     "id": "gen-sooy-5",
                     "name": "Enginnering Career Expo (ECX)",
-                    "image": "/ecx.png"
+                    "image": "https://drive.google.com/file/d/1TxvCsiTkbNP7iU4AaMwn9dF1fUeTfbRS/view?usp=drive_link"
                 },
                 {
                     "id": "gen-sooy-1",
