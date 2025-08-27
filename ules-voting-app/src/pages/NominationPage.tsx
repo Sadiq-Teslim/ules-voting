@@ -259,7 +259,8 @@ const NominationPage = () => {
             className="mx-auto w-full max-w-md mb-4"
           />
           <p className="text-slate-300 mt-2 text-lg">
-            Nominate deserving individuals for the awards.
+            {/* Nominate deserving individuals for the awards. */}
+            Update your nomination details below.
           </p>
         </header>
 
@@ -279,14 +280,15 @@ const NominationPage = () => {
                   categories[form.mainCategory as keyof StructuredCategories];
               }
             }
-
+            
             return (
               <div
                 key={form.id}
                 className="bg-black/40 border border-white/20 p-6 rounded-xl relative"
               >
                 <h3 className="text-lg font-semibold text-white mb-6">
-                  Nomination #{index + 1}
+                  Nomination Details
+                  {/* #{index + 1} */}
                 </h3>
                 {nominationForms.length > 1 && (
                   <button
@@ -430,13 +432,13 @@ const NominationPage = () => {
           })}
 
           <div className="pt-6 border-t border-white/20 flex flex-col-reverse sm:flex-row sm:justify-between sm:items-center gap-4">
-            <button
+            {/* <button
               type="button"
               onClick={addNominationForm}
               className="flex items-center justify-center gap-2 text-gray-300 font-semibold hover:text-white transition-colors py-2"
             >
               <PlusCircle size={20} /> Add Another Nomination
-            </button>
+            </button> */}
             <button
               type="submit"
               disabled={status === "loading"}
