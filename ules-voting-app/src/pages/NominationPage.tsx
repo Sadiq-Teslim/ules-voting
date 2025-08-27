@@ -8,7 +8,7 @@ import {
   Loader2,
   CheckCircle,
   UploadCloud,
-  PlusCircle,
+  // PlusCircle, 
   Trash2,
   Home,
 } from "lucide-react";
@@ -125,18 +125,18 @@ const NominationPage = () => {
     }
   };
 
-  const addNominationForm = () => {
-    setNominationForms((forms) => [
-      ...forms,
-      {
-        id: Date.now(),
-        fullName: "",
-        mainCategory: "",
-        selectedDepartment: "",
-        subCategory: "",
-      },
-    ]);
-  };
+  // const addNominationForm = () => {
+  //   setNominationForms((forms) => [
+  //     ...forms,
+  //     {
+  //       id: Date.now(),
+  //       fullName: "",
+  //       mainCategory: "",
+  //       selectedDepartment: "",
+  //       subCategory: "",
+  //     },
+  //   ]);
+  // };
 
   const removeNominationForm = (id: number) => {
     setNominationForms((forms) => forms.filter((form) => form.id !== id));
@@ -298,7 +298,10 @@ const NominationPage = () => {
                     <Trash2 size={18} />
                   </button>
                 )}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
+                <div className="grid grid-cols-1 
+                 
+                 gap-x-6 gap-y-4">
+                  {/* sm:grid-cols-2 */}
                   <div>
                     <label className="block text-sm font-medium mb-1 text-slate-300">
                       Full Name *
@@ -312,7 +315,7 @@ const NominationPage = () => {
                       className="w-full bg-black/30 border border-white/20 rounded-md p-2.5 text-white focus:ring-2 focus:ring-white/50 focus:border-white/50 outline-none"
                     />
                   </div>
-                  <div>
+                  {/* <div>
                     <label className="block text-sm font-medium mb-1 text-slate-300">
                       Popular Name (Optional)
                     </label>
@@ -323,7 +326,7 @@ const NominationPage = () => {
                       onChange={(e) => handleInputChange(form.id, e)}
                       className="w-full bg-black/30 border border-white/20 rounded-md p-2.5 text-white focus:ring-2 focus:ring-white/50 focus:border-white/50 outline-none"
                     />
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="mt-4 grid grid-cols-1 gap-4">
@@ -430,7 +433,8 @@ const NominationPage = () => {
             );
           })}
 
-          <div className="pt-6 border-t border-white/20 flex flex-col-reverse sm:flex-row sm:justify-between sm:items-center gap-4">
+          <div className="pt-6 border-t border-white/20 flex flex-col-reverse gap-4">
+          {/* sm:flex-row sm:justify-between sm:items-center  */}
             {/* <button
               type="button"
               onClick={addNominationForm}
