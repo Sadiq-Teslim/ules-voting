@@ -8,7 +8,7 @@ import {
   Loader2,
   CheckCircle,
   UploadCloud,
-  PlusCircle,  
+  PlusCircle,
   Trash2,
   Home,
 } from "lucide-react";
@@ -36,6 +36,7 @@ interface NominationFormState {
   selectedDepartment: string;
   subCategory: string;
   imageFile?: File;
+  imagePreviewUrl?: string; // For displaying the selected image
 }
 
 const NominationPage = () => {
@@ -116,13 +117,29 @@ const NominationPage = () => {
     id: number,
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    if (e.target.files?.[0]) {
+    const file = e.target.files?.[0];
+    if (file) {
+      const previewUrl = URL.createObjectURL(file);
       setNominationForms((forms) =>
         forms.map((form) =>
-          form.id === id ? { ...form, imageFile: e.target.files[0] } : form
+          form.id === id
+            ? { ...form, imageFile: file, imagePreviewUrl: previewUrl }
+            : form
         )
       );
     }
+  };
+
+  const handleRemoveImage = (id: number) => {
+    setNominationForms((forms) =>
+      forms.map((form) => {
+        if (form.id === id && form.imagePreviewUrl) {
+          URL.revokeObjectURL(form.imagePreviewUrl); // Clean up the object URL
+          return { ...form, imageFile: undefined, imagePreviewUrl: undefined };
+        }
+        return form;
+      })
+    );
   };
 
   // const addNominationForm = () => {
@@ -194,9 +211,7 @@ const NominationPage = () => {
         nominations: nominationsData,
       });
       setStatus("success");
-      setMessage(
-        "You have succesfully updated your details. Thank you."
-      );
+      setMessage("You have succesfully updated your details. Thank you.");
     } catch (err: any) {
       setStatus("error");
       setMessage(
@@ -279,7 +294,7 @@ const NominationPage = () => {
                   categories[form.mainCategory as keyof StructuredCategories];
               }
             }
-            
+
             return (
               <div
                 key={form.id}
@@ -298,9 +313,11 @@ const NominationPage = () => {
                     <Trash2 size={18} />
                   </button>
                 )}
-                <div className="grid grid-cols-1 
+                <div
+                  className="grid grid-cols-1 
                  
-                 gap-x-6 gap-y-4">
+                 gap-x-6 gap-y-4"
+                >
                   {/* sm:grid-cols-2 */}
                   <div>
                     <label className="block text-sm font-medium mb-1 text-slate-300">
@@ -378,7 +395,7 @@ const NominationPage = () => {
                   )}
                   <div>
                     <label className="block text-sm font-medium mb-1 text-slate-300">
-                      Specific Award *
+                      Award *
                     </label>
                     <select
                       name="subCategory"
@@ -402,46 +419,68 @@ const NominationPage = () => {
                   <label className="block text-sm font-medium mb-1 text-slate-300">
                     Picture *
                   </label>
-                  <div className="mt-2 flex justify-center rounded-lg border border-dashed border-white/30 px-6 py-8">
-                    <div className="text-center">
+
+                  {form.imagePreviewUrl ? (
+                    // Show preview if an image is selected
+                    <div className="mt-2 flex justify-center rounded-lg border border-white/30 px-6 py-8">
+                      <div className="relative text-center">
+                        <img
+                          src={form.imagePreviewUrl}
+                          alt="Nominee preview"
+                          className="mx-auto h-32 w-32 object-cover rounded-full border-2 border-slate-500"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveImage(form.id)}
+                          className="absolute -top-2 -right-2 bg-red-600 hover:bg-red-500 text-white rounded-full p-1.5"
+                          aria-label="Remove image"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                        <p className="text-xs text-slate-400 mt-2 truncate max-w-xs mx-auto">
+                          {form.imageFile?.name}
+                        </p>
+                      </div>
+                    </div>
+                  ) : (
+                    // --- UPDATE: The entire upload box is now a clickable label ---
+                    <label
+                      htmlFor={`file-upload-${form.id}`}
+                      className="mt-2 flex cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-white/30 px-6 py-8 text-center transition-colors hover:border-white/50 hover:bg-white/5"
+                    >
                       <UploadCloud className="mx-auto h-10 w-10 text-slate-400" />
                       <div className="mt-4 flex text-sm justify-center">
-                        <label
-                          htmlFor={`file-upload-${form.id}`}
-                          className="cursor-pointer font-semibold text-gray-300 hover:text-white"
-                        >
-                          <span>Upload a file</span>
-                          <input
-                            id={`file-upload-${form.id}`}
-                            type="file"
-                            className="sr-only"
-                            onChange={(e) => handleFileChange(form.id, e)}
-                            accept="image/png, image/jpeg"
-                            required
-                          />
-                        </label>
+                        <span className="font-semibold text-gray-300">
+                          Upload a file
+                        </span>
                       </div>
-                      <p className="text-xs text-slate-500 mt-1 truncate max-w-xs mx-auto">
-                        {form.imageFile
-                          ? form.imageFile.name
-                          : "PNG, JPG up to 5MB (Required)"}
+                      <p className="text-xs text-slate-500 mt-1">
+                        PNG, JPG up to 5MB (Required)
                       </p>
-                    </div>
-                  </div>
+                      <input
+                        id={`file-upload-${form.id}`}
+                        type="file"
+                        className="sr-only"
+                        onChange={(e) => handleFileChange(form.id, e)}
+                        accept="image/png, image/jpeg"
+                        required
+                      />
+                    </label>
+                  )}
                 </div>
               </div>
             );
           })}
 
           <div className="pt-6 border-t border-white/20 flex flex-col-reverse gap-4">
-          {/* sm:flex-row sm:justify-between sm:items-center  */}
+            {/* sm:flex-row sm:justify-between sm:items-center  */}
             {/* <button
-              type="button"
-              onClick={addNominationForm}
-              className="flex items-center justify-center gap-2 text-gray-300 font-semibold hover:text-white transition-colors py-2"
-            >
-              <PlusCircle size={20} /> Add Another Nomination
-            </button> */}
+                type="button"
+                onClick={addNominationForm}
+                className="flex items-center justify-center gap-2 text-gray-300 font-semibold hover:text-white transition-colors py-2"
+              >
+                <PlusCircle size={20} /> Add Another Nomination
+              </button> */}
             <button
               type="submit"
               disabled={status === "loading"}
