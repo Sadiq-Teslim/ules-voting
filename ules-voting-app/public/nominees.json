@@ -64,13 +64,16 @@
             "title": "Best Dressed - Male (Undergraduate)",
             "id": "ug-best-dressed-male",
             "nominees": [
-                { "id": "ug-bdm-1", "name": "Blacko", "image": null },
-                { "id": "ug-bdm-2", "name": "Kabiokwu Khalid", "image": null },
-                { "id": "ug-bdm-3", "name": "Bunmi-Oladeide Moyosore", "image": null },
-                { "id": "ug-bdm-4", "name": "Oladipo David", "image": null },
-                { "id": "ug-bdm-5", "name": "Ayomide Oni", "image": null },
-                { "id": "ug-bdm-6", "name": "Fareed Afolabi", "image": null },
-                { "id": "ug-bdm-7", "name": "Biyi Lawal", "image": null }
+                { "id": "ug-bdm-1", "name": "Oladipupo Ayoola (Blacko)", "image": null },
+                { "id": "ug-bdm-2", "name": "Kabiawu Khaalid", "image": null },
+                { "id": "ug-bdm-3", "name": "Bunmi-oladeide Moyosore", "image": null },
+                { "id": "ug-bdm-4", "name": "Oladipupo David", "image": null },
+                { "id": "ug-bdm-5", "name": "Jedidiah Temitope", "image": null },
+                { "id": "ug-bdm-6", "name": "Fejiro", "image": null },
+                { "id": "ug-bdm-7", "name": "Ayomide Oni", "image": null },
+                { "id": "ug-bdm-8", "name": "Fareed Afolabi", "image": null },
+                { "id": "ug-bdm-9", "name": "Biyi Lawal", "image": null },
+                { "id": "ug-bdm-10", "name": "Damian Emeka", "image": null }
             ]
         },
         {
@@ -78,32 +81,45 @@
             "id": "ug-best-dressed-female",
             "nominees": [
                 { "id": "ug-bdf-1", "name": "Olatunji Yadah", "image": null },
-                { "id": "ug-bdf-2", "name": "Mistura Adeogun", "image": null },
+                { "id": "ug-bdf-2", "name": "Mosturoh Adeogun", "image": null },
                 { "id": "ug-bdf-3", "name": "Winifred Udebhulu", "image": null },
-                { "id": "ug-bdf-4", "name": "Wadidah", "image": null }
+                { "id": "ug-bdf-4", "name": "Wadidah Bajulaiye", "image": null },
+                { "id": "ug-bdf-5", "name": "Abidemi olukoya (Star)", "image": null },
+                { "id": "ug-bdf-6", "name": "Bode Sanusi Khadeejah", "image": null },
+                { "id": "ug-bdf-7", "name": "Success Itohan", "image": null },
+                { "id": "ug-bdf-8", "name": "Akabueze Francess", "image": null },
+                { "id": "ug-bdf-9", "name": "Olojola Kanyinsola", "image": null },
+                { "id": "ug-bdf-10", "name": "Hassan Aliyah Motunrayo", "image": null }
             ]
         },
         {
             "title": "Tech Personality (Undergraduate)",
             "id": "ug-tech-personality",
             "nominees": [
-                { "id": "ug-tp-1", "name": "Sadiq Teslim Adetola", "image": null },
-                { "id": "ug-tp-2", "name": "Motunrayo Sanyaolu", "image": null },
-                {
-                    "id": "ug-tp-3",
-                    "name": "Demitchy",
-                    "image": null
-                },
-                { "id": "ug-tp-4", "name": "Peter Ademola", "image": null },
-                { "id": "ug-tp-5", "name": "Fuad (Aliphatic)", "image": null }
+                { "id": "ug-tp-1", "name": "Motunrayo Sanyaolu", "image": null },
+                { "id": "ug-tp-2", "name": "Sadiq Teslim", "image": null },
+                { "id": "ug-tp-3", "name": "Obiyor Mitchell (Demitchy)", "image": null },
+                { "id": "ug-tp-4", "name": "Adegoke Fuad (Aliphatic)", "image": null },
+                { "id": "ug-tp-5", "name": "Kelvin Ofili", "image": null },
+                { "id": "ug-tp-6", "name": "Peter Ademoluti", "image": null },
+                { "id": "ug-tp-7", "name": "Babatunde omole-ohonsi", "image": null },
+                { "id": "ug-tp-8", "name": "Abdullah Saba", "image": null },
+                { "id": "ug-tp-9", "name": "Samuel Bamgbola", "image": null },
+                { "id": "ug-tp-10", "name": "Moshood Olawale Mustapha", "image": null }
             ]
         },
         {
             "title": "Clique of the Year (Undergraduate)",
             "id": "ug-clique-of-the-year",
             "nominees": [
-                { "id": "ug-coy-1", "name": "The Room", "image": "clique1.jpg" },
-                { "id": "ug-coy-2", "name": "The Mavericks", "image": null }
+                { "id": "ug-coy-1", "name": "The Room", "image": null },
+                { "id": "ug-coy-2", "name": "Mandem (Wale,Michael and Abubs)", "image": null },
+                { "id": "ug-coy-3", "name": "BitNomads", "image": null },
+                { "id": "ug-coy-4", "name": "Frauds", "image": null },
+                { "id": "ug-coy-5", "name": "Chisom, Fortune and Frances", "image": null },
+                { "id": "ug-coy-6", "name": "Adeleye Ibukun, Lawal Waasiat , Odeyemi Motunrayo", "image": null },
+                { "id": "ug-coy-7", "name": "Soffiyah, Busayo and Bami", "image": null },
+                { "id": "ug-coy-8", "name": "Big 4(Khadeejah, Zaynab, Fatimah, Moyin)", "image": null }
             ]
         },
         {
@@ -661,7 +677,13 @@
             "title": "Couple of the Year (Finalist)",
             "id": "fin-couple-of-the-year",
             "nominees": [
-                { "id": "fin-coy-1", "name": "David & Sarah", "image": null }
+                { "id": "fin-coy-1", "name": "Niyi & Ruby", "image": null },
+                { "id": "fin-coy-2", "name": "Ore & Moki", "image": null },
+                { "id": "fin-coy-3", "name": "Tolu & Eniola", "image": null },
+                { "id": "fin-coy-4", "name": "Izu & Ogochukwu", "image": null },
+                { "id": "fin-coy-5", "name": "Funmi & Ericson", "image": null },
+                { "id": "fin-coy-6", "name": "Esther & Stanley", "image": null },
+                { "id": "fin-coy-7", "name": "Nelson & Seun", "image": null }
             ]
         },
         {
@@ -689,13 +711,33 @@
             "title": "Clique of the Year (Finalist)",
             "id": "fin-clique-of-the-year",
             "nominees": [
-                { "id": "fin-cloy-1", "name": "Phoenix Crew", "image": "clique3.jpg" }
+                { "id": "fin-cloy-1", "name": "Ademide, tola, Damilola", "image": null },
+                { "id": "fin-cloy-2", "name": "Deborah, Lola, Folake", "image": null },
+                { "id": "fin-cloy-3", "name": "Raji and Promise", "image": null },
+                { "id": "fin-cloy-4", "name": "Olamide, Boroks, Eniola", "image": null },
+                { "id": "fin-cloy-5", "name": "Taiga squad", "image": null },
+                { "id": "fin-cloy-6", "name": "Gadites", "image": null },
+                { "id": "fin-cloy-7", "name": "Mololuwa, Yetunde and Stephanie", "image": null },
+                { "id": "fin-cloy-8", "name": "Mental Health Boys", "image": null },
+                { "id": "fin-cloy-9", "name": "Marvellous Trio", "image": null },
+                { "id": "fin-cloy-10", "name": "MME Boys (Dej, Clem, Litan, timi)", "image": null }
             ]
         },
         {
             "title": "Tech Personality - Male (Finalist)",
             "id": "fin-tech-personality-male",
-            "nominees": [{ "id": "fin-tpm-1", "name": "Femi Alabi", "image": null }]
+            "nominees": [
+                { "id": "fin-tpm-1", "name": "Damilola Kuye", "image": null },
+                { "id": "fin-tpm-2", "name": "Olamilekan Arimoro", "image": null },
+                { "id": "fin-tpm-3", "name": "Saheed Azeez", "image": null },
+                { "id": "fin-tpm-4", "name": "Ogochukwu Ubah", "image": null },
+                { "id": "fin-tpm-5", "name": "Zack Arowonsola", "image": null },
+                { "id": "fin-tpm-6", "name": "Raji Al-Ameen", "image": null },
+                { "id": "fin-tpm-7", "name": "Adeogo Favor", "image": null },
+                { "id": "fin-tpm-8", "name": "Salim Oyinlola", "image": null },
+                { "id": "fin-tpm-9", "name": "Eniola Awosika", "image": null },
+                { "id": "fin-tpm-10", "name": "Dozie Uzoechi", "image": null }
+            ]
         },
         {
             "title": "Tech Personality - Female (Finalist)",

@@ -396,7 +396,7 @@ const NominationPage = () => {
 
                 <div className="mt-4">
                   <label className="block text-sm font-medium mb-1 text-slate-300">
-                    Profile Picture (Optional)
+                    Picture *
                   </label>
                   <div className="mt-2 flex justify-center rounded-lg border border-dashed border-white/30 px-6 py-8">
                     <div className="text-center">
@@ -413,13 +413,14 @@ const NominationPage = () => {
                             className="sr-only"
                             onChange={(e) => handleFileChange(form.id, e)}
                             accept="image/png, image/jpeg"
+                            required
                           />
                         </label>
                       </div>
                       <p className="text-xs text-slate-500 mt-1 truncate max-w-xs mx-auto">
                         {form.imageFile
                           ? form.imageFile.name
-                          : "PNG, JPG up to 5MB"}
+                          : "PNG, JPG up to 5MB (Required)"}
                       </p>
                     </div>
                   </div>
