@@ -142,6 +142,11 @@ const NomineeCarousel = ({
       >
         {category.nominees.map((nominee) => {
           const isSelected = selections[category.id] === nominee.name;
+          const imageSrc = nominee.image
+            ? nominee.image.startsWith("http")
+              ? nominee.image // It's a full URL, use it directly
+              : `/nominees/${nominee.image}` // It's a local filename, prepend path
+            : `/placeholder.png`; // Fallback to placeholder
           return (
             <div
               key={nominee.id}
@@ -162,11 +167,7 @@ const NomineeCarousel = ({
                 }`}
               >
                 <img
-                  src={
-                    nominee.image
-                      ? `/nominees/${nominee.image}`
-                      : `/placeholder.png`
-                  }
+                  src={imageSrc}
                   alt={nominee.name}
                   className="w-full h-full object-cover"
                 />
