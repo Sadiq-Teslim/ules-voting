@@ -63,8 +63,11 @@
         {
             "title": "Best Dressed - Male (Undergraduate)",
             "id": "ug-best-dressed-male",
-            "nominees": [
-                { "id": "ug-bdm-1", "name": "Oladipupo Ayoola (Blacko)", "image": null },
+            "nominees": [{
+                    "id": "ug-bdm-1",
+                    "name": "Oladipupo Ayoola (Blacko)",
+                    "image": null
+                },
                 { "id": "ug-bdm-2", "name": "Kabiawu Khaalid", "image": null },
                 { "id": "ug-bdm-3", "name": "Bunmi-oladeide Moyosore", "image": null },
                 { "id": "ug-bdm-4", "name": "Oladipupo David", "image": null },
@@ -98,7 +101,11 @@
             "nominees": [
                 { "id": "ug-tp-1", "name": "Motunrayo Sanyaolu", "image": null },
                 { "id": "ug-tp-2", "name": "Sadiq Teslim", "image": null },
-                { "id": "ug-tp-3", "name": "Obiyor Mitchell (Demitchy)", "image": null },
+                {
+                    "id": "ug-tp-3",
+                    "name": "Obiyor Mitchell (Demitchy)",
+                    "image": null
+                },
                 { "id": "ug-tp-4", "name": "Adegoke Fuad (Aliphatic)", "image": null },
                 { "id": "ug-tp-5", "name": "Kelvin Ofili", "image": null },
                 { "id": "ug-tp-6", "name": "Peter Ademoluti", "image": null },
@@ -113,13 +120,33 @@
             "id": "ug-clique-of-the-year",
             "nominees": [
                 { "id": "ug-coy-1", "name": "The Room", "image": null },
-                { "id": "ug-coy-2", "name": "Mandem (Wale,Michael and Abubs)", "image": null },
+                {
+                    "id": "ug-coy-2",
+                    "name": "Mandem (Wale,Michael and Abubs)",
+                    "image": null
+                },
                 { "id": "ug-coy-3", "name": "BitNomads", "image": null },
                 { "id": "ug-coy-4", "name": "Frauds", "image": null },
-                { "id": "ug-coy-5", "name": "Chisom, Fortune and Frances", "image": null },
-                { "id": "ug-coy-6", "name": "Adeleye Ibukun, Lawal Waasiat , Odeyemi Motunrayo", "image": null },
-                { "id": "ug-coy-7", "name": "Soffiyah, Busayo and Bami", "image": null },
-                { "id": "ug-coy-8", "name": "Big 4(Khadeejah, Zaynab, Fatimah, Moyin)", "image": null }
+                {
+                    "id": "ug-coy-5",
+                    "name": "Chisom, Fortune and Frances",
+                    "image": null
+                },
+                {
+                    "id": "ug-coy-6",
+                    "name": "Adeleye Ibukun, Lawal Waasiat , Odeyemi Motunrayo",
+                    "image": null
+                },
+                {
+                    "id": "ug-coy-7",
+                    "name": "Soffiyah, Busayo and Bami",
+                    "image": null
+                },
+                {
+                    "id": "ug-coy-8",
+                    "name": "Big 4(Khadeejah, Zaynab, Fatimah, Moyin)",
+                    "image": null
+                }
             ]
         },
         {
@@ -710,17 +737,32 @@
         {
             "title": "Clique of the Year (Finalist)",
             "id": "fin-clique-of-the-year",
-            "nominees": [
-                { "id": "fin-cloy-1", "name": "Ademide, tola, Damilola", "image": null },
+            "nominees": [{
+                    "id": "fin-cloy-1",
+                    "name": "Ademide, Tola, Damilola",
+                    "image": null
+                },
                 { "id": "fin-cloy-2", "name": "Deborah, Lola, Folake", "image": null },
                 { "id": "fin-cloy-3", "name": "Raji and Promise", "image": null },
-                { "id": "fin-cloy-4", "name": "Olamide, Boroks, Eniola", "image": null },
-                { "id": "fin-cloy-5", "name": "Taiga squad", "image": null },
+                {
+                    "id": "fin-cloy-4",
+                    "name": "Olamide, Boroks, Eniola",
+                    "image": null
+                },
+                { "id": "fin-cloy-5", "name": "Taiga Squad", "image": null },
                 { "id": "fin-cloy-6", "name": "Gadites", "image": null },
-                { "id": "fin-cloy-7", "name": "Mololuwa, Yetunde and Stephanie", "image": null },
+                {
+                    "id": "fin-cloy-7",
+                    "name": "Mololuwa, Yetunde and Stephanie",
+                    "image": null
+                },
                 { "id": "fin-cloy-8", "name": "Mental Health Boys", "image": null },
                 { "id": "fin-cloy-9", "name": "Marvellous Trio", "image": null },
-                { "id": "fin-cloy-10", "name": "MME Boys (Dej, Clem, Litan, timi)", "image": null }
+                {
+                    "id": "fin-cloy-10",
+                    "name": "MME Boys (Dej, Clem, Litan, timi)",
+                    "image": null
+                }
             ]
         },
         {
