@@ -328,7 +328,7 @@ const NominationPage = () => {
                       value={form.fullName}
                       onChange={(e) => handleInputChange(form.id, e)}
                       required
-                      className="w-full bg-black/30 border border-white/20 rounded-md p-2.5 text-white focus:ring-2 focus:ring-white/50 focus:border-white/50 outline-none"
+                      className="w-full bg-slate-800 border border-slate-600 rounded-md p-2.5 text-white focus:ring-2 focus:ring-amber-400 focus:border-amber-400 outline-none"
                     />
                   </div>
                   {/* <div>
@@ -355,7 +355,7 @@ const NominationPage = () => {
                       value={form.mainCategory}
                       onChange={(e) => handleInputChange(form.id, e)}
                       required
-                      className="w-full bg-black/30 border border-white/20 rounded-md p-2.5 text-white focus:ring-2 focus:ring-white/50 focus:border-white/50 outline-none"
+                      className="w-full bg-slate-800 border border-slate-600 rounded-md p-2.5 text-white focus:ring-2 focus:ring-amber-400 focus:border-amber-400 outline-none"
                     >
                       <option value="">-- Select --</option>
                       {categories &&
@@ -381,7 +381,7 @@ const NominationPage = () => {
                         value={form.selectedDepartment}
                         onChange={(e) => handleInputChange(form.id, e)}
                         required
-                        className="w-full bg-black/30 border border-white/20 rounded-md p-2.5 text-white focus:ring-2 focus:ring-white/50 focus:border-white/50 outline-none"
+                        className="w-full bg-slate-800 border border-slate-600 rounded-md p-2.5 text-white focus:ring-2 focus:ring-amber-400 focus:border-amber-400 outline-none"
                       >
                         <option value="">-- Select Department --</option>
                         {departmentsData.map((dept) => (
@@ -402,7 +402,7 @@ const NominationPage = () => {
                       onChange={(e) => handleInputChange(form.id, e)}
                       required
                       disabled={subCategoryOptions.length === 0}
-                      className="w-full bg-black/30 border border-white/20 rounded-md p-2.5 text-white focus:ring-2 focus:ring-white/50 focus:border-white/50 outline-none disabled:bg-black/20 disabled:cursor-not-allowed"
+                      className="w-full bg-slate-800 border border-slate-600 rounded-md p-2.5 text-white focus:ring-2 focus:ring-amber-400 focus:border-amber-400 outline-none disabled:bg-black/20 disabled:cursor-not-allowed"
                     >
                       <option value="">-- Select Above First --</option>
                       {subCategoryOptions.map((subCat) => (
