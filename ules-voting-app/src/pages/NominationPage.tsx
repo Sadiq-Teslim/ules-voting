@@ -1,5 +1,4 @@
 // src/pages/NominationPage.tsx
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
@@ -216,7 +215,7 @@ const NominationPage = () => {
           </h1>
           <p className="text-slate-300 mt-2">{message}</p>
           <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-            <button
+            {/* <button
               onClick={() => {
                 setNominationForms([
                   {
@@ -232,9 +231,9 @@ const NominationPage = () => {
               className="flex items-center justify-center gap-2 bg-white hover:bg-gray-200 text-black font-bold py-3 px-6 rounded-lg w-full sm:w-auto"
             >
               <PlusCircle size={20} /> Submit Another
-            </button>
+            </button> */}
             <Link
-              href="/"
+              href="/nominate"
               className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold py-3 px-6 rounded-lg w-full sm:w-auto border border-white/20"
             >
               <Home size={20} /> Back to Home
