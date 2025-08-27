@@ -717,21 +717,53 @@
             "title": "Sports Person of the Year (Finalist)",
             "id": "fin-sports-person-of-the-year",
             "nominees": [
-                { "id": "fin-spoy-1", "name": "Michael Jordan", "image": null }
+                { "id": "fin-spoy-1", "name": "Alison Chinaza", "image": null },
+                { "id": "fin-spoy-2", "name": "Praise Atakpoto", "image": null },
+                { "id": "fin-spoy-3", "name": "Kehinde Olufade", "image": null },
+                { "id": "fin-spoy-4", "name": "TJ", "image": null },
+                { "id": "fin-spoy-5", "name": "Nelson", "image": null },
+                { "id": "fin-spoy-6", "name": "Raheem", "image": null },
+                { "id": "fin-spoy-7", "name": "Adeniyi Adebayo", "image": null },
+                { "id": "fin-spoy-8", "name": "Samad", "image": null },
+                { "id": "fin-spoy-9", "name": "DaveDel", "image": null }
             ]
         },
         {
             "title": "Creative of the Year (Finalist)",
             "id": "fin-creative-of-the-year",
             "nominees": [
-                { "id": "ug-croy-1", "name": "DavetheCreator", "image": null }
+                { "id": "fin-coyf-1", "name": "Esther (Estaz)", "image": null },
+                { "id": "fin-coyf-2", "name": "Eniola Awosika", "image": null },
+                { "id": "fin-coyf-3", "name": "Demi Gaud", "image": null },
+                { "id": "fin-coyf-4", "name": "Olusanya Ifedapo Ijulu", "image": null },
+                { "id": "fin-coyf-5", "name": "Rukayat Orekoya", "image": null },
+                {
+                    "id": "fin-coyf-6",
+                    "name": "Charles (Theycallme Steezus)",
+                    "image": null
+                },
+                { "id": "fin-coyf-7", "name": "FIGO", "image": null },
+                { "id": "fin-coyf-8", "name": "Okedeji Omotesho", "image": null },
+                { "id": "fin-coyf-9", "name": "Shot by Dej", "image": null }
             ]
         },
         {
             "title": "Entrepreneur of the Year (Finalist)",
             "id": "fin-entrepreneur-of-the-year",
-            "nominees": [
-                { "id": "ug-eoy-1", "name": "Deseralize (Demitchy)", "image": null }
+            "nominees": [{
+                    "id": "fin-eoy-1",
+                    "name": "Divine Utibe-Ubon(Dynamix Gadget)",
+                    "image": null
+                },
+                { "id": "fin-eoy-2", "name": "Hay Jhay's Apparels", "image": null },
+                { "id": "fin-eoy-3", "name": "Estaz", "image": null },
+                { "id": "fin-eoy-4", "name": "Boroks homes", "image": null },
+                { "id": "fin-eoy-5", "name": "A-BY Gadgets", "image": null },
+                { "id": "fin-eoy-6", "name": "J-tech Studio", "image": null },
+                { "id": "fin-eoy-7", "name": "Remmy Footware", "image": null },
+                { "id": "fin-eoy-8", "name": "Made by Essence", "image": null },
+                { "id": "fin-eoy-9", "name": "Tribe the brand (TDB)", "image": null },
+                { "id": "fin-eoy-10", "name": "Kaizen", "image": null }
             ]
         },
         {
@@ -784,31 +816,87 @@
         {
             "title": "Tech Personality - Female (Finalist)",
             "id": "fin-tech-personality-female",
-            "nominees": [{ "id": "fin-tpf-1", "name": "Amara Chukwu", "image": null }]
+            "nominees": [
+                { "id": "fin-tpf-1", "name": "Fijabi Yosola", "image": null },
+                { "id": "fin-tpf-2", "name": "Yinka Atobiloye", "image": null },
+                { "id": "fin-tpf-3", "name": "Makinde Olamide", "image": null },
+                { "id": "fin-tpf-4", "name": "Seun Fadairo", "image": null },
+                { "id": "fin-tpf-5", "name": "Chioma Ibeakanma", "image": null },
+                {
+                    "id": "fin-tpf-6",
+                    "name": "Oluwatobi Folashade Oloyede",
+                    "image": null
+                },
+                { "id": "fin-tpf-7", "name": "Hassanat Busari", "image": null },
+                { "id": "fin-tpf-8", "name": "Funmi Oladapo", "image": null }
+            ]
         },
         {
             "title": "Most Handsome (Finalist)",
             "id": "fin-most-handsome",
-            "nominees": [{ "id": "fin-mh-1", "name": "Ibrahim Musa", "image": null }]
+            "nominees": [
+                { "id": "fin-mh-1", "name": "Raphael Ericsson", "image": null },
+                { "id": "fin-mh-2", "name": "Victor Kadiri", "image": null },
+                { "id": "fin-mh-3", "name": "Derrick Okoro", "image": null },
+                { "id": "fin-mh-4", "name": "Uno Gideon", "image": null },
+                { "id": "fin-mh-5", "name": "Blaise", "image": null },
+                { "id": "fin-mh-6", "name": "Eniola Okubote", "image": null },
+                { "id": "fin-mh-7", "name": "Solomon Madufor", "image": null },
+                { "id": "fin-mh-8", "name": "Olumide Nwosu", "image": null },
+                { "id": "fin-mh-9", "name": "Ogochukwu Ubah", "image": null },
+                { "id": "fin-mh-10", "name": "Ofoegbu Akachukwu", "image": null }
+            ]
         },
         {
             "title": "Most Beautiful (Finalist)",
             "id": "fin-most-beautiful",
             "nominees": [
-                { "id": "fin-mb-1", "name": "Zainab Ibrahim", "image": null }
+                { "id": "fin-mb-1", "name": "Moyin Shabi", "image": null },
+                { "id": "fin-mb-2", "name": "Karina Ololo", "image": null },
+                { "id": "fin-mb-3", "name": "Ginika Olua", "image": null },
+                { "id": "fin-mb-4", "name": "Timilehin Ologundudu", "image": null },
+                { "id": "fin-mb-5", "name": "Lolade Eleja", "image": null },
+                { "id": "fin-mb-6", "name": "Blessing Duke", "image": null },
+                { "id": "fin-mb-7", "name": "Ademide Adedegbe", "image": null },
+                { "id": "fin-mb-8", "name": "Lawal Aishat", "image": null },
+                { "id": "fin-mb-9", "name": "Benita Agbagwara", "image": null },
+                { "id": "fin-mb-10", "name": "Amarachi Okonji", "image": null }
             ]
         },
         {
             "title": "Most Influential (Finalist)",
             "id": "fin-most-influential",
-            "nominees": [
-                { "id": "fin-mi-1", "name": "Adebayo Williams", "image": null }
+            "nominees": [{
+                    "id": "fin-mi-1",
+                    "name": "Adekunle Demilade (Demigaud)",
+                    "image": null
+                },
+                { "id": "fin-mi-2", "name": "Olusanya Ifedapo Ijulu", "image": null },
+                { "id": "fin-mi-3", "name": "Justice Esiri", "image": null },
+                { "id": "fin-mi-4", "name": "Solomon Madufor", "image": null },
+                { "id": "fin-mi-5", "name": "Nofisat Sanni", "image": null },
+                { "id": "fin-mi-6", "name": "Nusaybah Fuad-Gafar", "image": null },
+                { "id": "fin-mi-7", "name": "Sunmisola Ganikale", "image": null }
             ]
         },
         {
             "title": "Most Popular (Finalist)",
             "id": "fin-most-popular",
-            "nominees": [{ "id": "fin-mp-1", "name": "Funke Adeleke", "image": null }]
+            "nominees": [{
+                    "id": "fin-mp-1",
+                    "name": "Adekunle Demilade (Demigaud)",
+                    "image": null
+                },
+                { "id": "fin-mp-2", "name": "Olusanya Ifedapo Ijulu", "image": null },
+                { "id": "fin-mp-3", "name": "Olua Ginika", "image": null },
+                { "id": "fin-mp-4", "name": "Kolawole Temitope", "image": null },
+                { "id": "fin-mp-5", "name": "Solomon Madufor", "image": null },
+                { "id": "fin-mp-6", "name": "Funmi Oladapo", "image": null },
+                { "id": "fin-mp-7", "name": "Sunmisola Ganikale", "image": null },
+                { "id": "fin-mp-8", "name": "Sabatha Joshua", "image": null },
+                { "id": "fin-mp-9", "name": "Obinna Nneji", "image": null },
+                { "id": "fin-mp-10", "name": "Adeniyi Adebayo", "image": null }
+            ]
         }
     ],
     "departments": [{
@@ -908,22 +996,130 @@
             "subcategories": [{
                     "title": "Departmental Image Award",
                     "id": "dept-svy-1",
-                    "nominees": []
+                    "nominees": [{
+                            "id": "dept-svy-img-1",
+                            "name": "Adekunle Demilade",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-svy-img-2",
+                            "name": "Oyewole Ayomide Paul",
+                            "image": null
+                        },
+                        { "id": "dept-svy-img-3", "name": "Hassan Gideon", "image": null },
+                        {
+                            "id": "dept-svy-img-4",
+                            "name": "Bajulaiye Wadidah",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-svy-img-5",
+                            "name": "Kareem Ifeoluwa",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-svy-img-6",
+                            "name": "Kimekwu faith chioma",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-svy-img-7",
+                            "name": "Abiodun Mark Adekunle",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-svy-img-8",
+                            "name": "Ewarami Toritseju Elizabeth",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-svy-img-9",
+                            "name": "Buari Muhammedtoha Shinaayomi",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-svy-img-10",
+                            "name": "Ojajuni Johnson",
+                            "image": null
+                        }
+                    ]
                 },
                 {
                     "title": "Outstanding Academic Performance Award",
                     "id": "dept-svy-2",
-                    "nominees": []
+                    "nominees": [{
+                            "id": "dept-svy-acad-1",
+                            "name": "Azubuike Godswill",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-svy-acad-2",
+                            "name": "Oyewole Ayomide Paul",
+                            "image": null
+                        },
+                        { "id": "dept-svy-acad-3", "name": "Orji Ozioma", "image": null },
+                        { "id": "dept-svy-acad-4", "name": "Adeogun Jamiu", "image": null },
+                        {
+                            "id": "dept-svy-acad-5",
+                            "name": "Awosika Gbotemi",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-svy-acad-6",
+                            "name": "OJAJUNI, Johnson Oladele",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-svy-acad-7",
+                            "name": "OSAKWE, Somayina Isioma",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-svy-acad-8",
+                            "name": "OLUWALOLA, Esther Ifeoluwa",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-svy-acad-9",
+                            "name": "EBERECHUKWU, DavidJesse Chijioke",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-svy-acad-10",
+                            "name": "Ojikutu Omolola",
+                            "image": null
+                        }
+                    ]
                 },
                 {
                     "title": "Athlete of the Year - Male",
                     "id": "dept-svy-3",
-                    "nominees": []
+                    "nominees": [
+                        { "id": "dept-svy-athm-1", "name": "Somto O'Laker", "image": null },
+                        {
+                            "id": "dept-svy-athm-2",
+                            "name": "Richard Olubiyo",
+                            "image": null
+                        },
+                        { "id": "dept-svy-athm-3", "name": "Al -Khaleel", "image": null },
+                        {
+                            "id": "dept-svy-athm-4",
+                            "name": "Olukoya Tobiloba",
+                            "image": null
+                        },
+                        { "id": "dept-svy-athm-5", "name": "Richard", "image": null }
+                    ]
                 },
                 {
                     "title": "Athlete of the Year - Female",
                     "id": "dept-svy-4",
-                    "nominees": []
+                    "nominees": [
+                        { "id": "dept-svy-athf-1", "name": "Osakwe Isioma", "image": null },
+                        { "id": "dept-svy-athf-2", "name": "Doyin Adebisi", "image": null },
+                        { "id": "dept-svy-athf-3", "name": "Kosi prasie", "image": null },
+                        { "id": "dept-svy-athf-4", "name": "Onoeriade", "image": null },
+                        { "id": "dept-svy-athf-5", "name": "Toluwani Doyin", "image": null }
+                    ]
                 }
             ]
         },
