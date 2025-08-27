@@ -1,5 +1,5 @@
-import React from "react";
-import { Users } from "lucide-react";
+import React, { useState } from "react";
+import { Users, Link as LinkIcon, Check } from "lucide-react";
 import type { Nomination } from "../../../types/admin";
 
 interface NominationsTabProps {
@@ -11,9 +11,28 @@ const NominationsTab: React.FC<NominationsTabProps> = ({
   pendingNominations,
   getCategoryTitle,
 }) => {
+  // State to track which URL has been copied to provide user feedback
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  const handleCopyUrl = (url: string, id: string) => {
+    navigator.clipboard
+      .writeText(url)
+      .then(() => {
+        setCopiedId(id);
+        // Reset the "Copied!" message after 2 seconds
+        setTimeout(() => {
+          setCopiedId(null);
+        }, 2000);
+      })
+      .catch((err) => {
+        console.error("Failed to copy text: ", err);
+        alert("Failed to copy URL.");
+      });
+  };
+
   return (
     <section>
-      <h2 className="text-3xl font-bold text-amber-400 mb-4">
+      <h2 className="text-2xl sm:text-3xl font-bold text-amber-400 mb-4">
         Review Nominations
       </h2>
       {pendingNominations.length === 0 ? (
@@ -41,17 +60,43 @@ const NominationsTab: React.FC<NominationsTabProps> = ({
                   {noms.map((nom) => (
                     <li
                       key={nom._id}
-                      className="flex items-center gap-4 bg-slate-700 p-2 rounded"
+                      className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-slate-700 p-3 rounded"
                     >
-                      <img
-                        src={nom.imageUrl || "/placeholder.png"}
-                        alt={nom.fullName}
-                        className="w-12 h-12 rounded-full object-cover"
-                      />
-                      <span className="font-semibold">
-                        {nom.fullName}{" "}
-                        {nom.popularName && `(${nom.popularName})`}
-                      </span>
+                      <div className="flex items-center gap-4">
+                        <img
+                          src={nom.imageUrl || "/placeholder.png"}
+                          alt={nom.fullName}
+                          className="w-12 h-12 rounded-full object-cover flex-shrink-0"
+                        />
+                        <span className="font-semibold">
+                          {nom.fullName}{" "}
+                          {nom.popularName && `(${nom.popularName})`}
+                        </span>
+                      </div>
+
+                      {/* --- NEW: Copy URL Button --- */}
+                      {nom.imageUrl && (
+                        <button
+                          onClick={() => handleCopyUrl(nom.imageUrl!, nom._id)}
+                          className={`flex items-center justify-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-md transition-all duration-200 w-full sm:w-auto ${
+                            copiedId === nom._id
+                              ? "bg-green-500/20 text-green-400"
+                              : "bg-slate-600 hover:bg-slate-500 text-slate-300"
+                          }`}
+                        >
+                          {copiedId === nom._id ? (
+                            <>
+                              <Check size={14} />
+                              Copied!
+                            </>
+                          ) : (
+                            <>
+                              <LinkIcon size={14} />
+                              Copy URL
+                            </>
+                          )}
+                        </button>
+                      )}
                     </li>
                   ))}
                 </ul>
