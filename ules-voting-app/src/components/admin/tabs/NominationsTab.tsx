@@ -92,7 +92,7 @@ const NominationsTab: React.FC<NominationsTabProps> = ({
                           ) : (
                             <>
                               <LinkIcon size={14} />
-                              Copy URL
+                              Copy Image URL
                             </>
                           )}
                         </button>
