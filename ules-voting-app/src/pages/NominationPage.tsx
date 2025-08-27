@@ -262,9 +262,9 @@ const NominationPage = () => {
   return (
     <div
       className="min-h-screen w-full bg-black relative overflow-hidden bg-cover bg-center bg-fixed"
-      style={{ backgroundImage: "url('/ornate_frame_bg.jpg')" }}
+      style={{ backgroundImage: "url('/nombg.png')" }}
     >
-      <div className="absolute inset-0 bg-black/80 backdrop-blur-md"></div>
+      <div className=""></div>
       <div className="relative z-10 w-full max-w-3xl mx-auto p-4 sm:p-8 text-white">
         <header className="text-center mb-10">
           <img
