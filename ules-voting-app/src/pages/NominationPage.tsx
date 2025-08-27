@@ -264,7 +264,6 @@ const NominationPage = () => {
       className="min-h-screen w-full bg-black relative overflow-hidden bg-cover bg-center bg-fixed"
       style={{ backgroundImage: "url('/nombg.png')" }}
     >
-      <div className=""></div>
       <div className="relative z-10 w-full max-w-3xl mx-auto p-4 sm:p-8 text-white">
         <header className="text-center mb-10">
           <img
@@ -298,7 +297,7 @@ const NominationPage = () => {
             return (
               <div
                 key={form.id}
-                className="bg-black/40 border border-white/20 p-6 rounded-xl relative"
+                className="bg-slate-900/70 backdrop-blur-sm border border-slate-700 p-6 rounded-2xl relative shadow-lg"
               >
                 <h3 className="text-lg font-semibold text-white mb-6">
                   Nomination Details
