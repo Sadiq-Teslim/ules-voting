@@ -245,7 +245,7 @@ const NominationPage = () => {
               }}
               className="flex items-center justify-center gap-2 bg-white hover:bg-gray-200 text-black font-bold py-3 px-6 rounded-lg w-full sm:w-auto"
             >
-              <PlusCircle size={20} /> Submit Another
+              <PlusCircle size={20} /> Update Another Nomination
             </button>
             <Link
               href="/"
