@@ -1158,11 +1158,11 @@
                     "id": "dept-eee-1",
                     "nominees": [{
                             "id": "d-eee-img-1",
-                            "name": "Sunmisola Ganikale",
+                            "name": "Ayobami Abubakar(ABUBS)",
                             "image": null
                         },
                         { "id": "d-eee-img-2", "name": "Chisom Edoka", "image": null },
-                        { "id": "d-eee-img-3", "name": "Ayobami Abubakar", "image": null },
+                        { "id": "d-eee-img-3", "name": "Sunmisola Ganikale", "image": null },
                         { "id": "d-eee-img-4", "name": "Victor Mathias", "image": null },
                         {
                             "id": "d-eee-img-5",
@@ -1240,7 +1240,7 @@
                     "id": "dept-eee-3",
                     "nominees": [{
                             "id": "dept-eee-athm-1",
-                            "name": "Ajayi Demilade",
+                            "name": "Opeyemi Yusuf",
                             "image": null
                         },
                         { "id": "dept-eee-athm-2", "name": "Opeyemi Yusuf", "image": null },
