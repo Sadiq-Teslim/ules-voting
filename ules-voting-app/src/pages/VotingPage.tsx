@@ -405,6 +405,12 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
 
   if (!email || !fullName) return <Redirect to="/" />;
 
+  // Logout handler
+  const handleLogout = () => {
+    sessionStorage.removeItem("voter");
+    window.location.href = "/";
+  };
+
   if (isLoading)
     return (
       <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50 backdrop-blur-md">
@@ -440,6 +446,16 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
       className="min-h-screen w-full bg-black relative overflow-hidden bg-cover bg-center bg-fixed"
       style={{ backgroundImage: "url('/ornate_frame_bg.jpg')" }}
     >
+      {view === "hub" && (
+        <div className="absolute top-4 right-4 z-50">
+          <button
+            onClick={handleLogout}
+            className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-5 rounded-lg shadow-lg border border-red-700"
+          >
+            Logout
+          </button>
+        </div>
+      )}
       <div className="absolute inset-0 bg-black/80 backdrop-blur-md"></div>
       <SuccessModal
         isOpen={isModalOpen}
