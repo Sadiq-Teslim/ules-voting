@@ -15,7 +15,6 @@ const ValidationModal: React.FC<ValidationModalProps> = ({
   onClose,
   onSuccess,
 }) => {
-  const [email, setEmail] = useState("");
   const [department, setDepartment] = useState("");
   const [fullName, setFullName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -27,10 +26,9 @@ const ValidationModal: React.FC<ValidationModalProps> = ({
     setIsLoading(true);
     setError(null);
     try {
-      const response = await axios.post(apiUrl, { email, department });
+  const response = await axios.post(apiUrl, { department });
       if (response.data.valid) {
         onSuccess({
-          email,
           fullName,
           department,
         });
@@ -95,23 +93,6 @@ const ValidationModal: React.FC<ValidationModalProps> = ({
                   required
                   className="w-full bg-slate-800 border border-slate-600 rounded-md px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400"
                   placeholder="Enter your full name"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-slate-300 mb-1"
-                >
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="w-full bg-slate-800 border border-slate-600 rounded-md px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400"
-                  placeholder="Enter your email"
                 />
               </div>
               <div>

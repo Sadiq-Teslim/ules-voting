@@ -10,7 +10,6 @@ import NominationPage from "./pages/NominationPage";
 // Define a type for our voter data
 export interface VoterInfo {
   fullName: string;
-  email: string;
   department: string;
 }
 

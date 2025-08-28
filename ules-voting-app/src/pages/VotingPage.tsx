@@ -221,7 +221,7 @@ const NomineeCarousel = ({
 };
 
 const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
-  const { email, fullName, department } = voter;
+  const { fullName, department } = voter;
 
   const [view, setView] = useState<"hub" | "voting">("hub");
   const [currentMainCategory, setCurrentMainCategory] =
@@ -277,9 +277,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
       try {
         const [structureRes, statusRes] = await Promise.all([
           axios.get("/nominees.json"),
-          axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/voter-status`, {
-            email,
-          }),
+          axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/voter-status`, {}),
         ]);
         const jsonData = structureRes.data;
         const ug: Category[] = [],
@@ -318,7 +316,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
       }
     };
     fetchData();
-  }, [email, department]);
+  }, [department]);
 
   const handleSelectCategory = (key: MainCategoryKey) => {
     setCurrentMainCategory(key);
@@ -359,7 +357,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
       );
       const res = await axios.post(
         `${import.meta.env.VITE_API_BASE_URL}/api/submit`,
-        { fullName, email, department, choices, mainCategory: currentMainCategory }
+        { fullName, department, choices, mainCategory: currentMainCategory }
       );
       const updatedVotedList = res.data.votedSubCategoryIds;
       setVotedSubCategoryIds(updatedVotedList);
@@ -403,7 +401,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
     );
   }, [currentMainCategory, groupedCategories, searchTerm]);
 
-  if (!email || !fullName) return <Redirect to="/" />;
+  if (!fullName) return <Redirect to="/" />;
 
   // Logout handler
   const handleLogout = () => {
