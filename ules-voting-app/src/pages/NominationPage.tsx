@@ -278,7 +278,8 @@ const NominationPage = () => {
         </header>
 
         <form onSubmit={handleSubmit} className="space-y-8">
-          {nominationForms.map((form, index) => {
+          {nominationForms.map((form) => {
+            // , index (to be added back to the front of *form after election.)
             let subCategoryOptions: SubCategory[] = [];
             if (form.mainCategory && categories) {
               if (form.mainCategory === "Departmental Awards") {
