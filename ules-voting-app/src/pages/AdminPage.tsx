@@ -662,6 +662,8 @@ const AdminPage = () => {
           <NominationsTab
             pendingNominations={pendingNominations}
             getCategoryTitle={getCategoryTitle}
+            searchTerm={searchTerm}
+            onSearchChange = {setSearchTerm}
           />
         )}
         {activeTab === "settings" && (
