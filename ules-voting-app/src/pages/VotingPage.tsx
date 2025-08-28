@@ -221,7 +221,7 @@ const NomineeCarousel = ({
 };
 
 const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
-  const { matricNumber, fullName, departmentId } = voter;
+  const { email, fullName, department } = voter;
 
   const [view, setView] = useState<"hub" | "voting">("hub");
   const [currentMainCategory, setCurrentMainCategory] =
@@ -278,7 +278,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
         const [structureRes, statusRes] = await Promise.all([
           axios.get("/nominees.json"),
           axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/voter-status`, {
-            matricNumber,
+            email,
           }),
         ]);
         const jsonData = structureRes.data;
@@ -287,7 +287,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
           fin: Category[] = [];
         let deptCats: Category[] = [];
         const userDepartment = jsonData.departments.find(
-          (dept: any) => dept.id === departmentId
+          (dept: any) => dept.id === department
         );
         if (userDepartment) {
           const deptName = userDepartment.title.replace(
@@ -318,7 +318,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
       }
     };
     fetchData();
-  }, [matricNumber, departmentId]);
+  }, [email, department]);
 
   const handleSelectCategory = (key: MainCategoryKey) => {
     setCurrentMainCategory(key);
@@ -359,7 +359,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
       );
       const res = await axios.post(
         `${import.meta.env.VITE_API_BASE_URL}/api/submit`,
-        { fullName, matricNumber, choices, mainCategory: currentMainCategory }
+        { fullName, email, department, choices, mainCategory: currentMainCategory }
       );
       const updatedVotedList = res.data.votedSubCategoryIds;
       setVotedSubCategoryIds(updatedVotedList);
@@ -403,7 +403,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
     );
   }, [currentMainCategory, groupedCategories, searchTerm]);
 
-  if (!matricNumber || !fullName) return <Redirect to="/" />;
+  if (!email || !fullName) return <Redirect to="/" />;
 
   if (isLoading)
     return (

@@ -15,7 +15,8 @@ const ValidationModal: React.FC<ValidationModalProps> = ({
   onClose,
   onSuccess,
 }) => {
-  const [matricNumber, setMatricNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [department, setDepartment] = useState("");
   const [fullName, setFullName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -26,12 +27,12 @@ const ValidationModal: React.FC<ValidationModalProps> = ({
     setIsLoading(true);
     setError(null);
     try {
-      const response = await axios.post(apiUrl, { matricNumber });
+      const response = await axios.post(apiUrl, { email, department });
       if (response.data.valid) {
         onSuccess({
-          matricNumber,
+          email,
           fullName,
-          departmentId: response.data.departmentId,
+          department,
         });
       }
     } catch (err: any) {
@@ -98,21 +99,47 @@ const ValidationModal: React.FC<ValidationModalProps> = ({
               </div>
               <div>
                 <label
-                  htmlFor="matricNumber"
+                  htmlFor="email"
                   className="block text-sm font-medium text-slate-300 mb-1"
                 >
-                  Matriculation Number
+                  Email
                 </label>
                 <input
-                  type="text"
-                  id="matricNumber"
-                  value={matricNumber}
-                  onChange={(e) => setMatricNumber(e.target.value)}
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
-                  maxLength={9}
                   className="w-full bg-slate-800 border border-slate-600 rounded-md px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400"
-                  placeholder="e.g., 200403001"
+                  placeholder="Enter your email"
                 />
+              </div>
+              <div>
+                <label
+                  htmlFor="department"
+                  className="block text-sm font-medium text-slate-300 mb-1"
+                >
+                  Department
+                </label>
+                <select
+                  id="department"
+                  value={department}
+                  onChange={(e) => setDepartment(e.target.value)}
+                  required
+                  className="w-full bg-slate-800 border border-slate-600 rounded-md px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400"
+                >
+                  <option value="" disabled>Select your department</option>
+                  <option value="dept-chemical">Chemical Engineering</option>
+                  <option value="dept-civil">Civil Engineering</option>
+                  <option value="dept-electrical-electronics">Electrical/Electronics Engineering</option>
+                  <option value="dept-mechanical">Mechanical Engineering</option>
+                  <option value="dept-surveying-geoinformatics">Surveying & Geoinformatics</option>
+                  <option value="dept-metallurgical-materials">Metallurgical & Materials Engineering</option>
+                  <option value="dept-systems">Systems Engineering</option>
+                  <option value="dept-computer">Computer Engineering</option>
+                  <option value="dept-petroleum-gas">Petroleum & Gas Engineering</option>
+                  <option value="dept-biomedical">Biomedical Engineering</option>
+                </select>
               </div>
             </div>
 

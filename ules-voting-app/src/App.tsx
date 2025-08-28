@@ -10,8 +10,8 @@ import NominationPage from "./pages/NominationPage";
 // Define a type for our voter data
 export interface VoterInfo {
   fullName: string;
-  matricNumber: string;
-  departmentId: string;
+  email: string;
+  department: string;
 }
 
 function App() {
