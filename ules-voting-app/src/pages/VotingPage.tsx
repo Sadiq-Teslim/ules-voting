@@ -447,7 +447,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
       style={{ backgroundImage: "url('/ornate_frame_bg.jpg')" }}
     >
       {view === "hub" && (
-        <div className="absolute top-4 right-4 z-50">
+        <div className="fixed bottom-4 left-0 right-0 flex justify-center z-50">
           <button
             onClick={handleLogout}
             className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-5 rounded-lg shadow-lg border border-red-700"
