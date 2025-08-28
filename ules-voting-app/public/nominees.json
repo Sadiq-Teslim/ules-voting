@@ -906,28 +906,107 @@
                     "title": "Departmental Image Award",
                     "id": "dept-mechanical-image-award",
                     "nominees": [
-                        { "id": "d-mec-1", "name": "Mech Nominee A", "image": null }
+                        { "id": "d-mech-img-1", "name": "Justice Esiri ", "image": null },
+                        { "id": "d-mech-img-2", "name": "Ademide Adedugbe", "image": null },
+                        { "id": "d-mech-img-3", "name": "Farouk Lawal", "image": null },
+                        { "id": "d-mech-img-4", "name": "Sadiq Teslim", "image": null },
+                        {
+                            "id": "d-mech-img-5",
+                            "name": "Shalom Irewole-Ojo",
+                            "image": null
+                        },
+                        { "id": "d-mech-img-6", "name": "Saheed Azeez", "image": null },
+                        { "id": "d-mech-img-7", "name": "Oluwakorede Joda", "image": null },
+                        { "id": "d-mech-img-8", "name": "Adeolu Treasure", "image": null },
+                        {
+                            "id": "d-mech-img-9",
+                            "name": "Adebayo Adeniyi James",
+                            "image": null
+                        },
+                        {
+                            "id": "d-mech-img-10",
+                            "name": "Emman-Ugheoke Mercy Omokhegbe",
+                            "image": null
+                        }
                     ]
                 },
                 {
                     "title": "Outstanding Academic Performance Award",
                     "id": "dept-mechanical-academic-performance-award",
-                    "nominees": [
-                        { "id": "d-mec-2", "name": "Mech Nominee B", "image": null }
+                    "nominees": [{
+                            "id": "d-mech-acad-1",
+                            "name": "Alagbala Aaliyah Oluwaseun",
+                            "image": null
+                        },
+                        {
+                            "id": "d-mech-acad-2",
+                            "name": "Agetu Ifunanya",
+                            "image": null
+                        },
+                        {
+                            "id": "d-mech-acad-3",
+                            "name": "Ojong-ayuk Shoghi",
+                            "image": null
+                        },
+                        {
+                            "id": "d-mech-acad-4",
+                            "name": "Agobe Oghenero Ferdinand",
+                            "image": null
+                        },
+                        { "id": "d-mech-acad-5", "name": "Jerrie Essen", "image": null },
+                        {
+                            "id": "d-mech-acad-6",
+                            "name": "Adeyemi Abdulateef",
+                            "image": null
+                        },
+                        {
+                            "id": "d-mech-acad-7",
+                            "name": "Adeniran Ridwanullah",
+                            "image": null
+                        },
+                        { "id": "d-mech-acad-8", "name": "Olukotun Joshua", "image": null },
+                        { "id": "d-mech-acad-9", "name": "Salami Habeeb", "image": null },
+                        { "id": "d-mech-acad-10", "name": "Akinjide Tade", "image": null }
                     ]
                 },
                 {
                     "title": "Athlete of the Year - Male",
                     "id": "dept-mechanical-athlete-male",
-                    "nominees": [
-                        { "id": "d-mec-3", "name": "Mech Nominee C", "image": null }
+                    "nominees": [{
+                            "id": "d-mech-athm-1",
+                            "name": "Ojong-Ayuk Shoghi",
+                            "image": null
+                        },
+                        { "id": "d-mech-athm-2", "name": "Ibraheem Anoba", "image": null },
+                        { "id": "d-mech-athm-3", "name": "Anyagwa Obinna", "image": null },
+                        { "id": "d-mech-athm-4", "name": "Osilagun Joshua", "image": null },
+                        {
+                            "id": "d-mech-athm-5",
+                            "name": "Yahya Abdur Raheem",
+                            "image": null
+                        }
                     ]
                 },
                 {
                     "title": "Athlete of the Year - Female",
                     "id": "dept-mechanical-athlete-female",
-                    "nominees": [
-                        { "id": "d-mec-4", "name": "Mech Nominee D", "image": null }
+                    "nominees": [{
+                            "id": "d-mech-athf-1",
+                            "name": "Shalom Irewole-Ojo",
+                            "image": null
+                        },
+                        {
+                            "id": "d-mech-athf-2",
+                            "name": "Mercy Emman-Ugheoke",
+                            "image": null
+                        },
+                        { "id": "d-mech-athf-3", "name": "Deborah Otom", "image": null },
+                        { "id": "d-mech-athf-4", "name": "Nwajei Mitchell", "image": null },
+                        {
+                            "id": "d-mech-athf-5",
+                            "name": "Eninlanioluwa Akinwande",
+                            "image": null
+                        }
                     ]
                 }
             ]
@@ -938,33 +1017,87 @@
             "subcategories": [{
                     "title": "Departmental Image Award",
                     "id": "dept-biomedical-image-award",
-                    "nominees": [
-                        { "id": "dept-bme-img-1", "name": "Emmanuel Arowesan", "image": null },
-                        { "id": "dept-bme-img-2", "name": "Oluwalana Boluwatife", "image": null },
+                    "nominees": [{
+                            "id": "dept-bme-img-1",
+                            "name": "Emmanuel Arowesan",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-bme-img-2",
+                            "name": "Oluwalana Boluwatife",
+                            "image": null
+                        },
                         { "id": "dept-bme-img-3", "name": "Joy Okio", "image": null },
-                        { "id": "dept-bme-img-4", "name": "Kolawole Ayomide", "image": null },
-                        { "id": "dept-bme-img-5", "name": "Folarin Eribake", "image": null },
-                        { "id": "dept-bme-img-6", "name": "Ade-Olunusi Olamide", "image": null },
-                        { "id": "dept-bme-img-7", "name": "Oparawilson Ihuoma", "image": null },
+                        {
+                            "id": "dept-bme-img-4",
+                            "name": "Kolawole Ayomide",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-bme-img-5",
+                            "name": "Folarin Eribake",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-bme-img-6",
+                            "name": "Ade-Olunusi Olamide",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-bme-img-7",
+                            "name": "Oparawilson Ihuoma",
+                            "image": null
+                        },
                         { "id": "dept-bme-img-8", "name": "David Oriaku", "image": null },
-                        { "id": "dept-bme-img-9", "name": "Babatunde Ayokunle Ezekiel", "image": null },
+                        {
+                            "id": "dept-bme-img-9",
+                            "name": "Babatunde Ayokunle Ezekiel",
+                            "image": null
+                        },
                         { "id": "dept-bme-img-10", "name": "Precious Jacob", "image": null }
                     ]
                 },
                 {
                     "title": "Outstanding Academic Performance Award",
                     "id": "dept-biomedical-academic-performance-award",
-                    "nominees": [
-                        { "id": "dept-bme-acad-1", "name": "Emmanuel Arowesan", "image": null },
+                    "nominees": [{
+                            "id": "dept-bme-acad-1",
+                            "name": "Emmanuel Arowesan",
+                            "image": null
+                        },
                         { "id": "dept-bme-acad-2", "name": "Ibeh Esther", "image": null },
-                        { "id": "dept-bme-acad-3", "name": "Precious Jacob", "image": null },
-                        { "id": "dept-bme-acad-4", "name": "Adebayo Gamaliel", "image": null },
+                        {
+                            "id": "dept-bme-acad-3",
+                            "name": "Precious Jacob",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-bme-acad-4",
+                            "name": "Adebayo Gamaliel",
+                            "image": null
+                        },
                         { "id": "dept-bme-acad-5", "name": "Coker John", "image": null },
-                        { "id": "dept-bme-acad-6", "name": "Ade-Olunusi Olamide", "image": null },
-                        { "id": "dept-bme-acad-7", "name": "Oparawilson Ihuoma", "image": null },
+                        {
+                            "id": "dept-bme-acad-6",
+                            "name": "Ade-Olunusi Olamide",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-bme-acad-7",
+                            "name": "Oparawilson Ihuoma",
+                            "image": null
+                        },
                         { "id": "dept-bme-acad-8", "name": "Odiwe Emeka", "image": null },
-                        { "id": "dept-bme-acad-9", "name": "Oyepeju Ireoluwatomiwa Abraham", "image": null },
-                        { "id": "dept-bme-acad-10", "name": "Bankole Oluwatunmise Adedamola", "image": null }
+                        {
+                            "id": "dept-bme-acad-9",
+                            "name": "Oyepeju Ireoluwatomiwa Abraham",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-bme-acad-10",
+                            "name": "Bankole Oluwatunmise Adedamola",
+                            "image": null
+                        }
                     ]
                 },
                 {
@@ -980,10 +1113,21 @@
                 {
                     "title": "Athlete of the Year - Female",
                     "id": "dept-biomedical-athlete-female",
-                    "nominees": [
-                        { "id": "dept-bme-athf-1", "name": "Adefarakan Mofiyinoluwa", "image": null },
-                        { "id": "dept-bme-athf-2", "name": "Ogunnowo Omotola", "image": null },
-                        { "id": "dept-bme-athf-3", "name": "Ogunjimi Anuoluwaposiwa", "image": null }
+                    "nominees": [{
+                            "id": "dept-bme-athf-1",
+                            "name": "Adefarakan Mofiyinoluwa",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-bme-athf-2",
+                            "name": "Ogunnowo Omotola",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-bme-athf-3",
+                            "name": "Ogunjimi Anuoluwaposiwa",
+                            "image": null
+                        }
                     ]
                 }
             ]
@@ -994,15 +1138,83 @@
             "subcategories": [{
                     "title": "Departmental Image Award",
                     "id": "dept-eee-1",
-                    "nominees": [
-                        { "id": "d-eee-1a", "name": "Elect Nominee A", "image": null }
+                    "nominees": [{
+                            "id": "d-eee-img-1",
+                            "name": "Sunmisola Ganikale",
+                            "image": null
+                        },
+                        { "id": "d-eee-img-2", "name": "Chisom Edoka", "image": null },
+                        { "id": "d-eee-img-3", "name": "Ayobami Abubakar", "image": null },
+                        { "id": "d-eee-img-4", "name": "Victor Mathias", "image": null },
+                        {
+                            "id": "d-eee-img-5",
+                            "name": "David Fadeyi (Jesudeyi)",
+                            "image": null
+                        },
+                        {
+                            "id": "d-eee-img-6",
+                            "name": "Damilare Aribisala",
+                            "image": null
+                        },
+                        {
+                            "id": "d-eee-img-7",
+                            "name": "Chinonso Akwari (Creative Zeus)",
+                            "image": null
+                        },
+                        { "id": "d-eee-img-8", "name": "Grace medayedupin", "image": null },
+                        { "id": "d-eee-img-9", "name": "Jinadu Temitope", "image": null },
+                        {
+                            "id": "d-eee-img-10",
+                            "name": "Ugochukwu Ndejukwu",
+                            "image": null
+                        }
                     ]
                 },
                 {
                     "title": "Outstanding Academic Performance Award",
                     "id": "dept-eee-2",
-                    "nominees": [
-                        { "id": "d-eee-2a", "name": "Elect Nominee B", "image": null }
+                    "nominees": [{
+                            "id": "d-eee-acad-1",
+                            "name": "Ogunyemi Oluwatobi",
+                            "image": null
+                        },
+                        { "id": "d-eee-acad-2", "name": "Adeyemo Adetoke", "image": null },
+                        {
+                            "id": "d-eee-acad-3",
+                            "name": "Olonade Kelvin Mobolaji",
+                            "image": null
+                        },
+                        { "id": "d-eee-acad-4", "name": "Oyepitan Fortune", "image": null },
+                        {
+                            "id": "d-eee-acad-5",
+                            "name": "Ugochukwu Ndejukwu",
+                            "image": null
+                        },
+                        {
+                            "id": "d-eee-acad-6",
+                            "name": "Covenant Peace Olubunmi",
+                            "image": null
+                        },
+                        {
+                            "id": "d-eee-acad-7",
+                            "name": "Isokponwu Orobosa",
+                            "image": null
+                        },
+                        {
+                            "id": "d-eee-acad-8",
+                            "name": "Nwoke Emmanuel Emeka",
+                            "image": null
+                        },
+                        {
+                            "id": "d-eee-acad-9",
+                            "name": "Fasasi Abdullah Iyanuoluwa",
+                            "image": null
+                        },
+                        {
+                            "id": "d-eee-acad-10",
+                            "name": "Ajayi Ayodeji Taiwo",
+                            "image": null
+                        }
                     ]
                 },
                 {
@@ -1197,51 +1409,131 @@
             "subcategories": [{
                     "title": "Departmental Image Award",
                     "id": "dept-chem-1",
-                    "nominees": [
-                        { "id": "dept-chem-img-1", "name": "Kenechukwu Okoyechira", "image": null },
+                    "nominees": [{
+                            "id": "dept-chem-img-1",
+                            "name": "Kenechukwu Okoyechira",
+                            "image": null
+                        },
                         { "id": "dept-chem-img-2", "name": "Nofisat Sanni", "image": null },
-                        { "id": "dept-chem-img-3", "name": "Abidemi Olukoya", "image": null },
-                        { "id": "dept-chem-img-4", "name": "Adebola Benson", "image": null },
+                        {
+                            "id": "dept-chem-img-3",
+                            "name": "Abidemi Olukoya",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-chem-img-4",
+                            "name": "Adebola Benson",
+                            "image": null
+                        },
                         { "id": "dept-chem-img-5", "name": "Qareeb Kako", "image": null },
-                        { "id": "dept-chem-img-6", "name": "Dorcas Adedokun", "image": null },
+                        {
+                            "id": "dept-chem-img-6",
+                            "name": "Dorcas Adedokun",
+                            "image": null
+                        },
                         { "id": "dept-chem-img-7", "name": "Majeed Dada", "image": null },
                         { "id": "dept-chem-img-8", "name": "Fortune Njoku", "image": null },
-                        { "id": "dept-chem-img-9", "name": "Abolaji Adesina", "image": null },
-                        { "id": "dept-chem-img-10", "name": "Ifeoluwa Ayeronwi", "image": null }
+                        {
+                            "id": "dept-chem-img-9",
+                            "name": "Abolaji Adesina",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-chem-img-10",
+                            "name": "Ifeoluwa Ayeronwi",
+                            "image": null
+                        }
                     ]
                 },
                 {
                     "title": "Outstanding Academic Performance Award",
                     "id": "dept-chem-2",
-                    "nominees": [
-                        { "id": "dept-chem-acad-1", "name": "Olowu Clinton Ojuoluwa", "image": null },
-                        { "id": "dept-chem-acad-2", "name": "Shittu Mumeen Olabisi", "image": null },
-                        { "id": "dept-chem-acad-3", "name": "Dario Adedoyin", "image": null },
-                        { "id": "dept-chem-acad-4", "name": "Sunmola Elizabeth", "image": null },
-                        { "id": "dept-chem-acad-5", "name": "Ayomide Adeoye", "image": null },
-                        { "id": "dept-chem-acad-6", "name": "Delight Igbinosa", "image": null },
-                        { "id": "dept-chem-acad-7", "name": "Atundaolu Ibukun", "image": null },
-                        { "id": "dept-chem-acad-8", "name": "Adetunji Daniel", "image": null },
-                        { "id": "dept-chem-acad-9", "name": "Blessing Adewuyi", "image": null },
-                        { "id": "dept-chem-acad-10", "name": "Oluwaseyi Amaize", "image": null }
+                    "nominees": [{
+                            "id": "dept-chem-acad-1",
+                            "name": "Olowu Clinton Ojuoluwa",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-chem-acad-2",
+                            "name": "Shittu Mumeen Olabisi",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-chem-acad-3",
+                            "name": "Dario Adedoyin",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-chem-acad-4",
+                            "name": "Sunmola Elizabeth",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-chem-acad-5",
+                            "name": "Ayomide Adeoye",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-chem-acad-6",
+                            "name": "Delight Igbinosa",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-chem-acad-7",
+                            "name": "Atundaolu Ibukun",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-chem-acad-8",
+                            "name": "Adetunji Daniel",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-chem-acad-9",
+                            "name": "Blessing Adewuyi",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-chem-acad-10",
+                            "name": "Oluwaseyi Amaize",
+                            "image": null
+                        }
                     ]
                 },
                 {
                     "title": "Athlete of the Year - Male",
                     "id": "dept-chem-3",
-                    "nominees": [
-                        { "id": "dept-chem-athm-1", "name": "Adesina Abolaji", "image": null },
-                        { "id": "dept-chem-athm-2", "name": "Ajanaku Lateef", "image": null },
-                        { "id": "dept-chem-athm-3", "name": "David Emeruwa", "image": null },
+                    "nominees": [{
+                            "id": "dept-chem-athm-1",
+                            "name": "Adesina Abolaji",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-chem-athm-2",
+                            "name": "Ajanaku Lateef",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-chem-athm-3",
+                            "name": "David Emeruwa",
+                            "image": null
+                        },
                         { "id": "dept-chem-athm-4", "name": "Maleek", "image": null },
-                        { "id": "dept-chem-athm-5", "name": "Richard Samuel", "image": null }
+                        {
+                            "id": "dept-chem-athm-5",
+                            "name": "Richard Samuel",
+                            "image": null
+                        }
                     ]
                 },
                 {
                     "title": "Athlete of the Year - Female",
                     "id": "dept-chem-4",
-                    "nominees": [
-                        { "id": "dept-chem-athf-1", "name": "Omolariola Ebun", "image": null },
+                    "nominees": [{
+                            "id": "dept-chem-athf-1",
+                            "name": "Omolariola Ebun",
+                            "image": null
+                        },
                         { "id": "dept-chem-athf-2", "name": "Enny", "image": null },
                         { "id": "dept-chem-athf-3", "name": "Tofarati", "image": null },
                         { "id": "dept-chem-athf-4", "name": "Adebola", "image": null },
@@ -1263,7 +1555,11 @@
                         { "id": "dept-pge-img-4", "name": "Samuel Uko", "image": null },
                         { "id": "dept-pge-img-5", "name": "Edinyanga Udoh", "image": null },
                         { "id": "dept-pge-img-6", "name": "Ruth Odoemelam", "image": null },
-                        { "id": "dept-pge-img-7", "name": "Nwogu Izuchukwu", "image": null },
+                        {
+                            "id": "dept-pge-img-7",
+                            "name": "Nwogu Izuchukwu",
+                            "image": null
+                        },
                         { "id": "dept-pge-img-8", "name": "Evro Evans", "image": null },
                         { "id": "dept-pge-img-9", "name": "Ojieto Raphael", "image": null },
                         { "id": "dept-pge-img-10", "name": "Adams Blessing", "image": null }
@@ -1272,7 +1568,49 @@
                 {
                     "title": "Outstanding Academic Performance Award",
                     "id": "dept-pet-2",
-                    "nominees": []
+                    "nominees": [{
+                            "id": "d-pge-acad-1",
+                            "name": "Iwuchukwu Ekene(Year 5)",
+                            "image": null
+                        },
+                        {
+                            "id": "d-pge-acad-2",
+                            "name": "Oyegbile Marvellous(Year 5)",
+                            "image": null
+                        },
+                        {
+                            "id": "d-pge-acad-3",
+                            "name": "Ogoke Ugonna (Year 4)",
+                            "image": null
+                        },
+                        {
+                            "id": "d-pge-acad-4",
+                            "name": "Jennifer (Year 4)",
+                            "image": null
+                        },
+                        {
+                            "id": "d-pge-acad-5",
+                            "name": "Gerald Udome( Year 3)",
+                            "image": null
+                        },
+                        {
+                            "id": "d-pge-acad-6",
+                            "name": "Akinbola Roqeeb (Year 3)",
+                            "image": null
+                        },
+                        {
+                            "id": "d-pge-acad-7",
+                            "name": "Ihezuo Chiagoziem Prisca (Year 2)",
+                            "image": null
+                        },
+                        {
+                            "id": "d-pge-acad-8",
+                            "name": "Oginni Victor Chukwuebuka (Year 2)",
+                            "image": null
+                        },
+                        { "id": "d-pge-acad-9", "name": "Ruth Odoemelam", "image": null },
+                        { "id": "d-pge-acad-10", "name": "Akorede", "image": null }
+                    ]
                 },
                 {
                     "title": "Athlete of the Year - Male",
@@ -1292,22 +1630,102 @@
             "subcategories": [{
                     "title": "Departmental Image Award",
                     "id": "dept-civ-1",
-                    "nominees": []
+                    "nominees": [
+                        { "id": "d-civ-img-1", "name": "Seun Ajayi", "image": null },
+                        { "id": "d-civ-img-2", "name": "Ire Babayemi", "image": null },
+                        {
+                            "id": "d-civ-img-3",
+                            "name": "Onasoga Ebunoluwa Adebusayo",
+                            "image": null
+                        },
+                        {
+                            "id": "d-civ-img-4",
+                            "name": "Olaoye Oluwanifemi Daniel",
+                            "image": null
+                        },
+                        { "id": "d-civ-img-5", "name": "Okosun Dianne", "image": null },
+                        { "id": "d-civ-img-6", "name": "Busari Hassanat", "image": null },
+                        {
+                            "id": "d-civ-img-7",
+                            "name": "Kolawole Abdul-samad Temitope",
+                            "image": null
+                        },
+                        {
+                            "id": "d-civ-img-8",
+                            "name": "Komolafe Olajide Abdulramon",
+                            "image": null
+                        },
+                        { "id": "d-civ-img-9", "name": "Olamide Onibalusi", "image": null },
+                        {
+                            "id": "d-civ-img-10",
+                            "name": "Olusanya Ifedapo Ijulu",
+                            "image": null
+                        }
+                    ]
                 },
                 {
                     "title": "Outstanding Academic Performance Award",
                     "id": "dept-civ-2",
-                    "nominees": []
+                    "nominees": [{
+                            "id": "d-civ-acad-1",
+                            "name": "Augustin Ufedo-Ojo",
+                            "image": null
+                        },
+                        { "id": "d-civ-acad-2", "name": "Joshua Atilade", "image": null },
+                        {
+                            "id": "d-civ-acad-3",
+                            "name": "Ndubuisi Stephanie Obiajulum",
+                            "image": null
+                        },
+                        {
+                            "id": "d-civ-acad-4",
+                            "name": "Iwuanyanwu Emmanuel Somtochukwu",
+                            "image": null
+                        },
+                        { "id": "d-civ-acad-5", "name": "Aruna Damilola", "image": null },
+                        { "id": "d-civ-acad-6", "name": "Anuebunwa Ebere", "image": null },
+                        {
+                            "id": "d-civ-acad-7",
+                            "name": "Oloko Khadijat Busayo",
+                            "image": null
+                        },
+                        {
+                            "id": "d-civ-acad-8",
+                            "name": "Obayemi Darasimi Jessie",
+                            "image": null
+                        },
+                        { "id": "d-civ-acad-9", "name": "Divine Chidera", "image": null }
+                    ]
                 },
                 {
                     "title": "Athlete of the Year - Male",
                     "id": "dept-civ-3",
-                    "nominees": []
+                    "nominees": [
+                        { "id": "d-civ-athm-1", "name": "Ilori Emmanuel", "image": null },
+                        {
+                            "id": "d-civ-athm-2",
+                            "name": "Olu-Onifade Kehinde",
+                            "image": null
+                        },
+                        { "id": "d-civ-athm-3", "name": "Oki Ayomikun", "image": null },
+                        {
+                            "id": "d-civ-athm-4",
+                            "name": "Igbegaoluwa Philip",
+                            "image": null
+                        },
+                        { "id": "d-civ-athm-5", "name": "Komolafe Jide", "image": null }
+                    ]
                 },
                 {
                     "title": "Athlete of the Year - Female",
                     "id": "dept-civ-4",
-                    "nominees": []
+                    "nominees": [
+                        { "id": "d-civ-athf-1", "name": "Zurakat Mololuwa", "image": null },
+                        { "id": "d-civ-athf-2", "name": "Aridunu Halimat", "image": null },
+                        { "id": "d-civ-athf-3", "name": "Halimat Shittu", "image": null },
+                        { "id": "d-civ-athf-4", "name": "Jegede Ayobami", "image": null },
+                        { "id": "d-civ-athf-5", "name": "Aminat Fashola", "image": null }
+                    ]
                 }
             ]
         },
@@ -1317,22 +1735,99 @@
             "subcategories": [{
                     "title": "Departmental Image Award",
                     "id": "dept-sys-1",
-                    "nominees": []
+                    "nominees": [
+                        { "id": "d-sys-img-1", "name": "Halimat Ozemoka", "image": null },
+                        {
+                            "id": "d-sys-img-2",
+                            "name": "Ebubechukwu Ezeani",
+                            "image": null
+                        },
+                        { "id": "d-sys-img-3", "name": "Boluwatife Idowu", "image": null },
+                        {
+                            "id": "d-sys-img-4",
+                            "name": "Ekwunife Oluwatomiwa",
+                            "image": null
+                        },
+                        {
+                            "id": "d-sys-img-5",
+                            "name": "Chijindu Oke (Dwae)",
+                            "image": null
+                        },
+                        {
+                            "id": "d-sys-img-6",
+                            "name": "Onabanjo Oluwatomiwa",
+                            "image": null
+                        },
+                        {
+                            "id": "d-sys-img-7",
+                            "name": "Oluwatimilehin Idowu",
+                            "image": null
+                        },
+                        { "id": "d-sys-img-8", "name": "Ibrahim Ammar", "image": null },
+                        {
+                            "id": "d-sys-img-9",
+                            "name": "Ayorinde Bolarinwa Gafar",
+                            "image": null
+                        },
+                        {
+                            "id": "d-sys-img-10",
+                            "name": "Khadeejah Bode-Sanusi",
+                            "image": null
+                        }
+                    ]
                 },
                 {
                     "title": "Outstanding Academic Performance Award",
                     "id": "dept-sys-2",
-                    "nominees": []
+                    "nominees": [
+                        { "id": "d-sys-acad-1", "name": "Odedola Joshua", "image": null },
+                        { "id": "d-sys-acad-2", "name": "Ikogor Gabriel", "image": null },
+                        {
+                            "id": "d-sys-acad-3",
+                            "name": "Ekwunife Oluwatomiwa",
+                            "image": null
+                        },
+                        { "id": "d-sys-acad-4", "name": "Ajibola Matthew", "image": null },
+                        { "id": "d-sys-acad-5", "name": "Daniel Sadiq", "image": null },
+                        { "id": "d-sys-acad-6", "name": "Akinola David", "image": null },
+                        { "id": "d-sys-acad-7", "name": "David Emmanuel", "image": null },
+                        { "id": "d-sys-acad-8", "name": "Osejoro Dejo", "image": null },
+                        {
+                            "id": "d-sys-acad-9",
+                            "name": "Olaiwon Ismail Oladayo",
+                            "image": null
+                        },
+                        {
+                            "id": "d-sys-acad-10",
+                            "name": "Lawal Muhammed Ololade",
+                            "image": null
+                        }
+                    ]
                 },
                 {
                     "title": "Athlete of the Year - Male",
                     "id": "dept-sys-3",
-                    "nominees": []
+                    "nominees": [{
+                            "id": "d-sys-athm-1",
+                            "name": "Abdulsalam kazeem",
+                            "image": null
+                        },
+                        { "id": "d-sys-athm-2", "name": "Victor oke", "image": null },
+                        { "id": "d-sys-athm-3", "name": "Fuad Adegoke", "image": null },
+                        { "id": "d-sys-athm-4", "name": "Ibrahim Opeodu", "image": null },
+                        { "id": "d-sys-athm-5", "name": "Emmanuel Chikamso", "image": null }
+                    ]
                 },
                 {
                     "title": "Athlete of the Year - Female",
                     "id": "dept-sys-4",
-                    "nominees": []
+                    "nominees": [
+                        { "id": "d-sys-athf-1", "name": "Thanna Alamutu", "image": null },
+                        { "id": "d-sys-athf-2", "name": "Fimise omojowolo", "image": null },
+                        { "id": "d-sys-athf-3", "name": "Amah Joanna", "image": null },
+                        { "id": "d-sys-athf-4", "name": "Amina Opeodu", "image": null },
+                        { "id": "d-sys-athf-5", "name": "Udofot ememabasi", "image": null }
+                    ]
                 }
             ]
         },
@@ -1342,14 +1837,29 @@
             "subcategories": [{
                     "title": "Departmental Image Award",
                     "id": "dept-met-1",
-                    "nominees": [
-                        { "id": "dept-mme-img-1", "name": "Onakoya Emmanuel Ayodeji", "image": null },
-                        { "id": "dept-mme-img-2", "name": "Clinton Mekwunye", "image": null },
+                    "nominees": [{
+                            "id": "dept-mme-img-1",
+                            "name": "Onakoya Emmanuel Ayodeji",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-mme-img-2",
+                            "name": "Clinton Mekwunye",
+                            "image": null
+                        },
                         { "id": "dept-mme-img-3", "name": "Ukpete Mary", "image": null },
                         { "id": "dept-mme-img-4", "name": "Augusta Obi", "image": null },
-                        { "id": "dept-mme-img-5", "name": "Tijani-Bello Ghaffar", "image": null },
+                        {
+                            "id": "dept-mme-img-5",
+                            "name": "Tijani-Bello Ghaffar",
+                            "image": null
+                        },
                         { "id": "dept-mme-img-6", "name": "Onifade Rodiat", "image": null },
-                        { "id": "dept-mme-img-7", "name": "Oke David Oluwatunmise", "image": null },
+                        {
+                            "id": "dept-mme-img-7",
+                            "name": "Oke David Oluwatunmise",
+                            "image": null
+                        },
                         { "id": "dept-mme-img-8", "name": "Favour Adura", "image": null },
                         { "id": "dept-mme-img-9", "name": "Lawal Olamide", "image": null },
                         { "id": "dept-mme-img-10", "name": "Peace Udotong", "image": null }
@@ -1358,15 +1868,30 @@
                 {
                     "title": "Outstanding Academic Performance Award",
                     "id": "dept-met-2",
-                    "nominees": [
-                        { "id": "dept-mme-acad-1", "name": "Mekwunye Clinton", "image": null },
+                    "nominees": [{
+                            "id": "dept-mme-acad-1",
+                            "name": "Mekwunye Clinton",
+                            "image": null
+                        },
                         { "id": "dept-mme-acad-2", "name": "Abesin Taiwo", "image": null },
-                        { "id": "dept-mme-acad-3", "name": "Oderanti Samuel", "image": null },
+                        {
+                            "id": "dept-mme-acad-3",
+                            "name": "Oderanti Samuel",
+                            "image": null
+                        },
                         { "id": "dept-mme-acad-4", "name": "Odofin Eniola", "image": null },
                         { "id": "dept-mme-acad-5", "name": "Ohioze Daniel", "image": null },
                         { "id": "dept-mme-acad-6", "name": "Ismail Basit", "image": null },
-                        { "id": "dept-mme-acad-7", "name": "Nwakolobia George", "image": null },
-                        { "id": "dept-mme-acad-8", "name": "Mbah Chiekezie", "image": null },
+                        {
+                            "id": "dept-mme-acad-7",
+                            "name": "Nwakolobia George",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-mme-acad-8",
+                            "name": "Mbah Chiekezie",
+                            "image": null
+                        },
                         { "id": "dept-mme-acad-9", "name": "Mbah Finbarr", "image": null },
                         { "id": "dept-mme-acad-10", "name": "Eniola soyemi", "image": null }
                     ]
@@ -1390,7 +1915,11 @@
                         { "id": "dept-mme-athf-2", "name": "Dami", "image": null },
                         { "id": "dept-mme-athf-3", "name": "Boluwatife", "image": null },
                         { "id": "dept-mme-athf-4", "name": "Rebecca", "image": null },
-                        { "id": "dept-mme-athf-5", "name": "Oghenetejiri akpojotor", "image": null }
+                        {
+                            "id": "dept-mme-athf-5",
+                            "name": "Oghenetejiri akpojotor",
+                            "image": null
+                        }
                     ]
                 }
             ]
