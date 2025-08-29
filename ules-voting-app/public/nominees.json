@@ -773,7 +773,6 @@
                 { "id": "fin-eoy-9", "name": "Tribe the brand (TDB)", "image": null },
                 { "id": "fin-eoy-10", "name": "Kaizen", "image": null },
                 { "id": "fin-eoy-11", "name": "Bright's Gadget", "image": null }
-
             ]
         },
         {
@@ -893,8 +892,8 @@
                 { "id": "fin-mi-5", "name": "Nofisat Sanni", "image": null },
                 { "id": "fin-mi-6", "name": "Nusaybah Fuad-Gafar", "image": null },
                 { "id": "fin-mi-7", "name": "Sunmisola Ganikale", "image": null },
-                { "id": "fin-mi-7", "name": "Kolawole Temitope", "image": null },
-                { "id": "fin-mi-7", "name": "Kamal Adebayo", "image": null }
+                { "id": "fin-mi-8", "name": "Kolawole Temitope", "image": null },
+                { "id": "fin-mi-9", "name": "Kamal Adebayo", "image": null }
             ]
         },
         {
@@ -953,7 +952,7 @@
                     "id": "dept-mechanical-academic-performance-award",
                     "nominees": [{
                             "id": "d-mech-acad-1",
-                            "name": "Alagbala Aaliyah Oluwaseun",
+                            "name": "Ijaware Dawn Moyinoluwa",
                             "image": null
                         },
                         {
@@ -1125,7 +1124,16 @@
                         { "id": "dept-bme-athm-1", "name": "Coker John", "image": null },
                         { "id": "dept-bme-athm-2", "name": "Lateef Musa", "image": null },
                         { "id": "dept-bme-athm-3", "name": "Samson Akande", "image": null },
-                        { "id": "dept-bme-athm-4", "name": "Raheem Balogun", "image": null }
+                        {
+                            "id": "dept-bme-athm-4",
+                            "name": "Raheem Balogun",
+                            "image": null
+                        },
+                        {
+                            "id": "dept-bme-athm-5",
+                            "name": "Egbebu Emmanuel",
+                            "image": null
+                        }
                     ]
                 },
                 {
@@ -1145,6 +1153,11 @@
                             "id": "dept-bme-athf-3",
                             "name": "Ogunjimi Anuoluwaposiwa",
                             "image": null
+                        },
+                        {
+                            "id": "dept-bme-athf-4",
+                            "name": "Olamide Ade-Olunusi",
+                            "image": null
                         }
                     ]
                 }
@@ -1162,7 +1175,11 @@
                             "image": null
                         },
                         { "id": "d-eee-img-2", "name": "Chisom Edoka", "image": null },
-                        { "id": "d-eee-img-3", "name": "Sunmisola Ganikale", "image": null },
+                        {
+                            "id": "d-eee-img-3",
+                            "name": "Sunmisola Ganikale",
+                            "image": null
+                        },
                         { "id": "d-eee-img-4", "name": "Victor Mathias", "image": null },
                         {
                             "id": "d-eee-img-5",
@@ -1230,7 +1247,7 @@
                         },
                         {
                             "id": "d-eee-acad-10",
-                            "name": "Ajayi Ayodeji Taiwo",
+                            "name": "Victor Matthias",
                             "image": null
                         }
                     ]
@@ -1243,7 +1260,11 @@
                             "name": "Opeyemi Yusuf",
                             "image": null
                         },
-                        { "id": "dept-eee-athm-2", "name": "Ajayi Demilade", "image": null },
+                        {
+                            "id": "dept-eee-athm-2",
+                            "name": "Ajayi Demilade",
+                            "image": null
+                        },
                         { "id": "dept-eee-athm-3", "name": "Fawaz Adeboye", "image": null },
                         { "id": "dept-eee-athm-4", "name": "Jamal", "image": null },
                         {
@@ -1404,7 +1425,7 @@
                         { "id": "dept-svy-athf-1", "name": "Osakwe Isioma", "image": null },
                         { "id": "dept-svy-athf-2", "name": "Doyin Adebisi", "image": null },
                         { "id": "dept-svy-athf-3", "name": "Kosi prasie", "image": null },
-                        { "id": "dept-svy-athf-4", "name": "Onoeriade", "image": null },
+                        { "id": "dept-svy-athf-4", "name": "Tofunmi", "image": null },
                         { "id": "dept-svy-athf-5", "name": "Toluwani Doyin", "image": null }
                     ]
                 }
@@ -1576,7 +1597,7 @@
                         },
                         {
                             "id": "dept-chem-img-10",
-                            "name": "Ifeoluwa Ayeronwi",
+                            "name": "Anthony Ihejiamatu",
                             "image": null
                         }
                     ]
@@ -1689,7 +1710,11 @@
                         { "id": "dept-pge-img-2", "name": "Eniola Fowowe", "image": null },
                         { "id": "dept-pge-img-3", "name": "Danielle NSP", "image": null },
                         { "id": "dept-pge-img-4", "name": "Samuel Uko", "image": null },
-                        { "id": "dept-pge-img-5", "name": "Edinyanga Udoh", "image": null },
+                        {
+                            "id": "dept-pge-img-5",
+                            "name": "Abdulazeez Adesina",
+                            "image": null
+                        },
                         { "id": "dept-pge-img-6", "name": "Ruth Odoemelam", "image": null },
                         {
                             "id": "dept-pge-img-7",
@@ -1751,12 +1776,24 @@
                 {
                     "title": "Athlete of the Year - Male",
                     "id": "dept-pet-3",
-                    "nominees": []
+                    "nominees": [
+                        { "id": "d-pge-athm-1", "name": "Adejola Muiz", "image": null },
+                        { "id": "d-pge-athm-2", "name": "Nana", "image": null },
+                        { "id": "d-pge-athm-3", "name": "Abraham", "image": null },
+                        { "id": "d-pge-athm-4", "name": "Sauce kid", "image": null },
+                        { "id": "d-pge-athm-5", "name": "Akinjide (Hay Jay)", "image": null }
+                    ]
                 },
                 {
                     "title": "Athlete of the Year - Female",
                     "id": "dept-pet-4",
-                    "nominees": []
+                    "nominees": [
+                        { "id": "d-pge-athf-1", "name": "Adams Blessing (Katalyst)", "image": null },
+                        { "id": "d-pge-athf-2", "name": "Praise Akatakpo", "image": null },
+                        { "id": "d-pge-athf-3", "name": "Success (Itohan)", "image": null },
+                        { "id": "d-pge-athf-4", "name": "Emj", "image": null },
+                        { "id": "d-pge-athf-5", "name": "Ola", "image": null }
+                    ]
                 }
             ]
         },
@@ -1996,7 +2033,7 @@
                             "name": "Oke David Oluwatunmise",
                             "image": null
                         },
-                        { "id": "dept-mme-img-8", "name": "Favour Adura", "image": null },
+                        { "id": "dept-mme-img-8", "name": "Basit Ismail", "image": null },
                         { "id": "dept-mme-img-9", "name": "Lawal Olamide", "image": null },
                         { "id": "dept-mme-img-10", "name": "Peace Udotong", "image": null }
                     ]
