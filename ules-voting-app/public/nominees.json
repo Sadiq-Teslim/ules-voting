@@ -202,7 +202,7 @@
                 { "id": "ug-seoy-3", "name": "Ms Qing", "image": null },
                 { "id": "ug-seoy-4", "name": "Ajasa", "image": null },
                 { "id": "ug-seoy-5", "name": "MideBliz", "image": null },
-                { "id": "ug-seoy-6", "name": "Berry", "image": null },
+                { "id": "ug-seoy-6", "name": "Berry", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756491304/cej1q2s3csobey4azmnw.jpg" },
                 { "id": "ug-seoy-7", "name": "DJ IFEH", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756484527/eq392pah1nix5h1yjn6n.jpg" },
                 { "id": "ug-seoy-8", "name": "Ackuit", "image": null },
                 { "id": "ug-seoy-9", "name": "DJ Newton", "image": null },
@@ -714,7 +714,7 @@
             "nominees": [
                 { "id": "fin-coy-1", "name": "Niyi & Ruby", "image": null },
                 { "id": "fin-coy-2", "name": "Ore & Moki", "image": null },
-                { "id": "fin-coy-3", "name": "Tolu & Eniola", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756496695/zszkti8huisoonnrebsz.jpg" },
+                { "id": "fin-coy-3", "name": "Tolu & Eniola", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756489416/xbkbyr4pgnsnjob4fqgp.jpg" },
                 { "id": "fin-coy-4", "name": "Izu & Ogochukwu", "image": null },
                 { "id": "fin-coy-5", "name": "Funmi & Ericson", "image": null },
                 { "id": "fin-coy-6", "name": "Esther & Stanley", "image": null },
