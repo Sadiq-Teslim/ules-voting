@@ -78,6 +78,7 @@ const SuccessModal = ({
 };
 
 // --- NEW: Nominee Carousel Component ---
+
 const NomineeCarousel = ({
   category,
   selections,
@@ -92,12 +93,23 @@ const NomineeCarousel = ({
   const scrollContainer = React.useRef<HTMLDivElement>(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
+  const [hoveredNominee, setHoveredNominee] = useState<string | null>(null);
+  const [modalNominee, setModalNominee] = useState<Nominee | null>(null);
+
+  // Mobile detection
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const handleScroll = () => {
     if (scrollContainer.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollContainer.current;
       setShowLeftArrow(scrollLeft > 0);
-      setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 1); // -1 for precision
+      setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 1);
     }
   };
 
@@ -124,6 +136,9 @@ const NomineeCarousel = ({
     }
   }, [category.nominees]);
 
+  // Modal close handler
+  const handleCloseModal = () => setModalNominee(null);
+
   return (
     <div className="relative">
       {/* Left Arrow */}
@@ -144,33 +159,54 @@ const NomineeCarousel = ({
           const isSelected = selections[category.id] === nominee.name;
           const imageSrc = nominee.image
             ? nominee.image.startsWith("http")
-              ? nominee.image // It's a full URL, use it directly
-              : `/nominees/${nominee.image}` // It's a local filename, prepend path
-            : `/placeholder.png`; // Fallback to placeholder
+              ? nominee.image
+              : `/nominees/${nominee.image}`
+            : `/placeholder.png`;
           return (
             <div
               key={nominee.id}
               onClick={
-                isCategoryVoted
-                  ? undefined
-                  : () => onSelectNominee(category.id, nominee.name)
+                isMobile
+                  ? () => setModalNominee(nominee)
+                  : isCategoryVoted
+                    ? undefined
+                    : () => onSelectNominee(category.id, nominee.name)
               }
-              className={`snap-start w-36 sm:w-48 bg-slate-900/50 border rounded-xl p-3 text-center transition-all duration-300 relative group flex flex-col flex-shrink-0 ${
-                isCategoryVoted
+              onMouseEnter={() => {
+                if (!isMobile) setHoveredNominee(nominee.id);
+              }}
+              onMouseLeave={() => {
+                if (!isMobile) setHoveredNominee(null);
+              }}
+              className={`snap-start w-36 sm:w-48 bg-slate-900/50 border rounded-xl p-3 text-center transition-all duration-300 relative group flex flex-col flex-shrink-0 ${isCategoryVoted
                   ? "cursor-not-allowed border-slate-700"
                   : "cursor-pointer border-slate-700 hover:border-amber-400/50 hover:-translate-y-1"
-              } ${isSelected ? "border-amber-400 ring-2 ring-amber-400" : ""}`}
+                } ${isSelected ? "border-amber-400 ring-2 ring-amber-400" : ""}`}
             >
               <div
-                className={`w-24 h-24 mx-auto rounded-full overflow-hidden border-4 shadow-sm mb-3 transition-colors flex-shrink-0 ${
-                  isSelected ? "border-amber-400" : "border-slate-600"
-                }`}
+                className={`w-24 h-24 mx-auto rounded-full overflow-hidden border-4 shadow-sm mb-3 transition-colors flex-shrink-0 ${isSelected ? "border-amber-400" : "border-slate-600"
+                  }`}
+                style={{ position: "relative" }}
               >
                 <img
                   src={imageSrc}
                   alt={nominee.name}
                   className="w-full h-full object-cover"
                 />
+                {/* Desktop: Show full image on hover */}
+                {!isMobile && hoveredNominee === nominee.id && (
+                  <div
+                    className="absolute inset-0 flex items-center justify-center bg-black/70 z-20"
+                    style={{ left: "-60%", top: "-60%", width: "220%", height: "220%", borderRadius: "16px" }}
+                  >
+                    <img
+                      src={imageSrc}
+                      alt={nominee.name}
+                      className="object-contain max-h-80 max-w-80 rounded-xl border-4 border-amber-400 shadow-2xl"
+                      style={{ background: "#fff" }}
+                    />
+                  </div>
+                )}
               </div>
               <div className="flex-grow flex flex-col justify-center">
                 <h3 className="font-bold text-white text-sm md:text-base group-hover:text-base whitespace-normal break-words min-h-[2.5rem]">
@@ -181,13 +217,12 @@ const NomineeCarousel = ({
                 </p>
               </div>
               <div
-                className={`w-full mt-auto py-2 px-3 rounded-lg font-semibold text-xs transition-all duration-300 flex items-center justify-center gap-2 border ${
-                  isSelected
+                className={`w-full mt-auto py-2 px-3 rounded-lg font-semibold text-xs transition-all duration-300 flex items-center justify-center gap-2 border ${isSelected
                     ? "bg-gradient-to-r from-amber-500 to-amber-400 text-black border-amber-400"
                     : isCategoryVoted
-                    ? "bg-slate-700 text-slate-400 border-slate-600"
-                    : "bg-slate-800 text-slate-300 border-slate-600"
-                }`}
+                      ? "bg-slate-700 text-slate-400 border-slate-600"
+                      : "bg-slate-800 text-slate-300 border-slate-600"
+                  }`}
               >
                 {isCategoryVoted ? (
                   <>
@@ -216,6 +251,36 @@ const NomineeCarousel = ({
       >
         <ChevronRight className="text-white" />
       </button>
+
+      {/* Mobile: Modal for full image */}
+      {modalNominee && isMobile && (
+        <div
+          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center"
+          onClick={handleCloseModal}
+        >
+          <div
+            className="bg-white rounded-xl p-4 max-w-xs w-full flex flex-col items-center relative"
+            onClick={e => e.stopPropagation()}
+          >
+            <button
+              className="absolute top-2 right-2 bg-slate-800 text-white rounded px-3 py-1 text-sm font-semibold shadow hover:bg-slate-700"
+              onClick={handleCloseModal}
+            >
+              Close
+            </button>
+            <img
+              src={modalNominee.image ? (modalNominee.image.startsWith("http") ? modalNominee.image : `/nominees/${modalNominee.image}`) : "/placeholder.png"}
+              alt={modalNominee.name}
+              className="object-contain max-h-72 w-full rounded-lg border-4 border-amber-400 mb-2"
+              style={{ background: "#fff" }}
+            />
+            <div className="font-bold text-black text-center mb-1">{modalNominee.name}</div>
+            {modalNominee.description && (
+              <div className="text-slate-700 text-xs text-center">{modalNominee.description}</div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -248,27 +313,27 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
     title: string;
     description: string;
   }[] = [
-    {
-      key: "undergraduate",
-      title: "Undergraduate Awards",
-      description: "Recognizing outstanding undergraduate students.",
-    },
-    {
-      key: "general",
-      title: "General Awards",
-      description: "Awards open to students across all years.",
-    },
-    {
-      key: "finalist",
-      title: "Finalist Awards",
-      description: "Celebrating the achievements of the graduating class.",
-    },
-    {
-      key: "departmental",
-      title: "Departmental Awards",
-      description: "Honoring excellence within your department.",
-    },
-  ];
+      {
+        key: "undergraduate",
+        title: "Undergraduate Awards",
+        description: "Recognizing outstanding undergraduate students.",
+      },
+      {
+        key: "general",
+        title: "General Awards",
+        description: "Awards open to students across all years.",
+      },
+      {
+        key: "finalist",
+        title: "Finalist Awards",
+        description: "Celebrating the achievements of the graduating class.",
+      },
+      {
+        key: "departmental",
+        title: "Departmental Awards",
+        description: "Honoring excellence within your department.",
+      },
+    ];
 
   useEffect(() => {
     document.title = "ULES Dinner & Awards | Voting";
@@ -497,18 +562,16 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                     className="bg-slate-900/50 border border-slate-700 rounded-xl p-6 text-left transition-all duration-300 transform hover:border-amber-400/50 hover:-translate-y-1.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center gap-5 group"
                   >
                     <div
-                      className={`flex-shrink-0 w-16 h-16 rounded-lg flex items-center justify-center border transition-colors ${
-                        isComplete
+                      className={`flex-shrink-0 w-16 h-16 rounded-lg flex items-center justify-center border transition-colors ${isComplete
                           ? "bg-amber-500/10 border-amber-500/30"
                           : "bg-slate-800 border-slate-600"
-                      }`}
+                        }`}
                     >
                       <img
                         src="/nobgules-logo.png"
                         alt="Event Logo"
-                        className={`w-10 h-10 transition-transform duration-300 ${
-                          isComplete ? "" : "group-hover:scale-110"
-                        }`}
+                        className={`w-10 h-10 transition-transform duration-300 ${isComplete ? "" : "group-hover:scale-110"
+                          }`}
                       />
                     </div>
                     <div className="flex-grow">
@@ -586,9 +649,8 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                     return (
                       <section
                         key={category.id}
-                        className={`transition-opacity ${
-                          isCategoryVoted ? "opacity-60" : ""
-                        }`}
+                        className={`transition-opacity ${isCategoryVoted ? "opacity-60" : ""
+                          }`}
                       >
                         <div className="text-center mb-6 relative">
                           <h2 className="text-2xl font-bold text-white">
