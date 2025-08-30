@@ -3,16 +3,16 @@
             "title": "Most Beautiful (Undergraduate)",
             "id": "ug-most-beautiful",
             "nominees": [
-                { "id": "ug-mb-1", "name": "Winifred Udebhulu", "image": null },
-                { "id": "ug-mb-2", "name": "Adewuyi Oluwadamisola", "image": null },
+                { "id": "ug-mb-1", "name": "Winifred Udebhulu", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756481346/josdc6s8xfmuv0w89tow.jpg" },
+                { "id": "ug-mb-2", "name": "Adewuyi Oluwadamisola", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756491642/ga1atsna6ibw3r09riyx.jpg" },
                 { "id": "ug-mb-3", "name": "Oluwaloseyi Farinde", "image": null },
                 { "id": "ug-mb-4", "name": "Ishang Goodness", "image": null },
                 { "id": "ug-mb-5", "name": "Rebecca Odutayo", "image": null },
-                { "id": "ug-mb-6", "name": "Dalegan Kareema Wuraola", "image": null },
+                { "id": "ug-mb-6", "name": "Dalegan Kareema Wuraola", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756496914/fyksgyhfdkttgy7md7e0.jpg" },
                 { "id": "ug-mb-7", "name": "Valerie Akindele", "image": null },
                 { "id": "ug-mb-8", "name": "Aliyah Ogunyemi", "image": null },
                 { "id": "ug-mb-9", "name": "Abidemi Olukoya", "image": null },
-                { "id": "ug-mb-10", "name": "Mercy Emman-Okigbe", "image": null },
+                { "id": "ug-mb-10", "name": "Mercy Emman-Ugheoke", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756485882/iof4dyvnnsopusxb01wb.jpg" },
                 { "id": "ug-mb-11", "name": "Sharon Oga", "image": null }
             ]
         },
@@ -23,11 +23,11 @@
                 { "id": "ug-mh-1", "name": "Coker John", "image": null },
                 { "id": "ug-mh-2", "name": "Adejumo Ibrahim", "image": null },
                 { "id": "ug-mh-3", "name": "Bunmi-Oladeide Moyosore", "image": null },
-                { "id": "ug-mh-4", "name": "Adegoke Abdulhakeem", "image": null },
+                { "id": "ug-mh-4", "name": "Adegoke Abdulhakeem", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756512728/skaat1l7izuyivys5zyk.jpg" },
                 { "id": "ug-mh-5", "name": "Kaka Ibrahim", "image": null },
                 { "id": "ug-mh-6", "name": "Ayomide Oni", "image": null },
                 { "id": "ug-mh-7", "name": "Fareed Afolabi", "image": null },
-                { "id": "ug-mh-8", "name": "Fapojuwo Oluwapelumi", "image": null },
+                { "id": "ug-mh-8", "name": "Fapojuwo Oluwapelumi", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756508038/vqxacroxpa4tjaf2ooac.jpg" },
                 { "id": "ug-mh-9", "name": "Jesse Inyamah", "image": null }
             ]
         },
@@ -38,8 +38,8 @@
                 { "id": "ug-mi-1", "name": "David Fadeyi", "image": null },
                 { "id": "ug-mi-2", "name": "Olawale Ayoola", "image": null },
                 { "id": "ug-mi-3", "name": "Samuel Uko", "image": null },
-                { "id": "ug-mi-4", "name": "Ebube Ezeani", "image": null },
-                { "id": "ug-mi-5", "name": "Olamide Lawal", "image": null },
+                { "id": "ug-mi-4", "name": "Ebube Ezeani", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756510252/pllacdevgaqffxecryhc.jpg" },
+                { "id": "ug-mi-5", "name": "Olamide Lawal", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756481564/zhqzvy8opcd1jmboiwjb.jpg" },
                 { "id": "ug-mi-6", "name": "Damilare Aribisala", "image": null },
                 { "id": "ug-mi-7", "name": "Seun Ajayi", "image": null },
                 { "id": "ug-mi-8", "name": "Halimat Ozemoka", "image": null },
@@ -53,14 +53,14 @@
             "nominees": [
                 { "id": "ug-soty-1", "name": "Moses Samson", "image": null },
                 { "id": "ug-soty-2", "name": "Halimat Ozemoka", "image": null },
-                { "id": "ug-soty-3", "name": "Khadeejah Bode-Sanusi", "image": null },
+                { "id": "ug-soty-3", "name": "Khadeejah Bode-Sanusi", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756481346/josdc6s8xfmuv0w89tow.jpg" },
                 { "id": "ug-soty-4", "name": "Nirere", "image": null },
                 { "id": "ug-soty-5", "name": "Adeola Titilola", "image": null },
                 { "id": "ug-soty-6", "name": "HypemanZaddy", "image": null },
                 { "id": "ug-soty-7", "name": "Ramoney", "image": null },
                 { "id": "ug-soty-8", "name": "Oluwatobiloba Aminat", "image": null },
                 { "id": "ug-soty-9", "name": "Abolaji Adesina", "image": null },
-                { "id": "ug-soty-10", "name": "Michael Wellens", "image": null }
+                { "id": "ug-soty-10", "name": "Michael Wellens", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756499726/utv0db0vmmjdghidkbwl.jpg" }
             ]
         },
         {
@@ -88,13 +88,13 @@
             "nominees": [
                 { "id": "ug-bdf-1", "name": "Olatunji Yadah", "image": null },
                 { "id": "ug-bdf-2", "name": "Mosturoh Adeogun", "image": null },
-                { "id": "ug-bdf-3", "name": "Winifred Udebhulu", "image": null },
+                { "id": "ug-bdf-3", "name": "Winifred Udebhulu", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756481346/josdc6s8xfmuv0w89tow.jpg" },
                 { "id": "ug-bdf-4", "name": "Wadidah Bajulaiye", "image": null },
                 { "id": "ug-bdf-5", "name": "Abidemi olukoya (Star)", "image": null },
-                { "id": "ug-bdf-6", "name": "Bode Sanusi Khadeejah", "image": null },
-                { "id": "ug-bdf-7", "name": "Success Itohan", "image": null },
-                { "id": "ug-bdf-8", "name": "Akabueze Francess", "image": null },
-                { "id": "ug-bdf-9", "name": "Olojola Kanyinsola", "image": null },
+                { "id": "ug-bdf-6", "name": "Bode Sanusi Khadeejah", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756481346/josdc6s8xfmuv0w89tow.jpg" },
+                { "id": "ug-bdf-7", "name": "Odubor Success (Itohan)", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756491457/lcdjeokw5tcokitmjj40.jpg" },
+                { "id": "ug-bdf-8", "name": "Akabueze Francess", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756486786/efwgxxh52pv5p5n0ms6s.jpg" },
+                { "id": "ug-bdf-9", "name": "Olojola Kanyinsola", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756503029/wbvn4dutcqv1hgkv6swg.jpg" },
                 { "id": "ug-bdf-10", "name": "Hassan Aliyah Motunrayo", "image": null }
             ]
         },
@@ -103,11 +103,11 @@
             "id": "ug-tech-personality",
             "nominees": [
                 { "id": "ug-tp-1", "name": "Motunrayo Sanyaolu", "image": null },
-                { "id": "ug-tp-2", "name": "Sadiq Teslim", "image": null },
+                { "id": "ug-tp-2", "name": "Sadiq Teslim", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756491990/ox6pcsltxzyjl5afhkav.jpg" },
                 {
                     "id": "ug-tp-3",
                     "name": "Obiyor Mitchell (Demitchy)",
-                    "image": null
+                    "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756481743/uiyzahi6awidqjoa6jws.jpg"
                 },
                 { "id": "ug-tp-4", "name": "Adegoke Fuad (Aliphatic)", "image": null },
                 { "id": "ug-tp-5", "name": "Kelvin Ofili", "image": null },
@@ -161,17 +161,17 @@
             "title": "Entrepreneur of the Year (Undergraduate)",
             "id": "ug-entrepreneur-of-the-year",
             "nominees": [
-                { "id": "ug-eoy-1", "name": "Deseralize (Demitchy)", "image": null },
+                { "id": "ug-eoy-1", "name": "Deseralize (Demitchy)", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756481743/uiyzahi6awidqjoa6jws.jpg" },
                 { "id": "ug-eoy-2", "name": "Mosimiloluwa Okusanya", "image": null },
                 { "id": "ug-eoy-3", "name": "Adebayo Oluwatobi", "image": null },
-                { "id": "ug-eoy-4", "name": "Dami Shades", "image": null },
+                { "id": "ug-eoy-4", "name": "Dami Shades", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756482734/asxkl8gonriwubme5fjo.jpg" },
                 { "id": "ug-eoy-5", "name": "Mosturoh Adeogun", "image": null },
                 { "id": "ug-eoy-6", "name": "Augusta (Augies Kitchen)", "image": null },
                 { "id": "ug-eoy-7", "name": "Fazzy D", "image": null },
                 {
                     "id": "ug-eoy-8",
                     "name": "The Grand (Gideon Hassan)",
-                    "image": null
+                    "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756500269/embudimopeoutgv7wweb.jpg"
                 },
                 { "id": "ug-eoy-9", "name": "Bethie Enterprise", "image": null },
                 { "id": "ug-eoy-10", "name": "Sauce Gadgets", "image": null }
@@ -203,7 +203,7 @@
                 { "id": "ug-seoy-4", "name": "Ajasa", "image": null },
                 { "id": "ug-seoy-5", "name": "MideBliz", "image": null },
                 { "id": "ug-seoy-6", "name": "Berry", "image": null },
-                { "id": "ug-seoy-7", "name": "DJ IFEH", "image": null },
+                { "id": "ug-seoy-7", "name": "DJ IFEH", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756484527/eq392pah1nix5h1yjn6n.jpg" },
                 { "id": "ug-seoy-8", "name": "Ackuit", "image": null },
                 { "id": "ug-seoy-9", "name": "DJ Newton", "image": null },
                 { "id": "ug-seoy-10", "name": "Toivo", "image": null }
@@ -229,7 +229,7 @@
             "title": "Innovation Award (Start-up Visionary) ",
             "id": "gen-innovation-award",
             "nominees": [
-                { "id": "gen-ia-1", "name": "Demitchy (Deseralize)", "image": null },
+                { "id": "gen-ia-1", "name": "Demitchy (Deseralize)", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756481743/uiyzahi6awidqjoa6jws.jpg" },
                 { "id": "gen-ia-2", "name": "Ojo Daniel (Cyber Chari)", "image": null },
                 {
                     "id": "gen-ia-3",
@@ -304,28 +304,28 @@
             "title": "Content Creator of the Year ",
             "id": "gen-content-creator-of-the-year",
             "nominees": [
-                { "id": "gen-ccoy-1", "name": "Rukayat Orekoya", "image": null },
+                { "id": "gen-ccoy-1", "name": "Rukayat Orekoya", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756485801/uf2rizkldy6jks54tqe8.jpg" },
                 {
                     "id": "gen-ccoy-2",
                     "name": "Ayorinde Bolarinwa (Ajasa)",
                     "image": null
                 },
-                { "id": "gen-ccoy-3", "name": "Chisom Nwosu", "image": null },
+                { "id": "gen-ccoy-3", "name": "Chisom Nwosu", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756491773/w0sj1aqicirpwwwfonbr.jpg" },
                 { "id": "gen-ccoy-4", "name": "Halimat Ozemoka", "image": null },
                 {
                     "id": "gen-ccoy-5",
-                    "name": "Aileru Abdulsamad (Berry)",
-                    "image": null
+                    "name": "(Berry) Aileru Abdulsamad ",
+                    "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756491304/cej1q2s3csobey4azmnw.jpg"
                 },
-                { "id": "gen-ccoy-6", "name": "Abidemi Olukoya (Star)", "image": null },
+                { "id": "gen-ccoy-6", "name": "Abidemi Olukoya (Star)", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756500910/b5wy9s6jszyoc5aaelz2.jpg" },
                 {
                     "id": "gen-ccoy-7",
                     "name": "David Duyile (DaveTheCreator)",
-                    "image": null
+                    "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756481708/uocli6pzhs5a8niw6jij.jpg"
                 },
-                { "id": "gen-ccoy-8", "name": "Hannah Oshinowo", "image": null },
+                { "id": "gen-ccoy-8", "name": "Hannah Oshinowo", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756505927/bbskzf7jfabdsimdhs26.jpg" },
                 { "id": "gen-ccoy-9", "name": "Darasimi Obayemi", "image": null },
-                { "id": "gen-ccoy-10", "name": "Winifred Udebhulu", "image": null }
+                { "id": "gen-ccoy-10", "name": "Winifred Udebhulu", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756481346/josdc6s8xfmuv0w89tow.jpg" }
             ]
         },
         {
@@ -358,7 +358,7 @@
                 },
                 { "id": "gen-sboy-5", "name": "Estaz", "image": null },
                 { "id": "gen-sboy-6", "name": "EZY Gadgets", "image": null },
-                { "id": "gen-sboy-7", "name": "The Grand Accessories", "image": null },
+                { "id": "gen-sboy-7", "name": "The Grand Accessories", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756502923/gt7qmsfoqxiddk1hgrna.jpg" },
                 { "id": "gen-sboy-8", "name": "Chef Reynolds", "image": null },
                 { "id": "gen-sboy-9", "name": "AB Gadgets", "image": null },
                 { "id": "gen-sboy-10", "name": "Mhydeh Gadgets", "image": null }
@@ -446,7 +446,7 @@
                 { "id": "gen-upoy-4", "name": "Olawale Ayoola", "image": null },
                 { "id": "gen-upoy-5", "name": "Adeniyi Adebayo", "image": null },
                 { "id": "gen-upoy-6", "name": "Nofisat Sanni", "image": null },
-                { "id": "gen-upoy-7", "name": "Uko Samuel", "image": null },
+                { "id": "gen-upoy-7", "name": "Uko Samuel", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756482231/s0unwalbocy8qpqhbro2.jpg" },
                 {
                     "id": "gen-upoy-8",
                     "name": "Onakoya Emmanuel Ayodeji (DEJ)",
@@ -461,7 +461,7 @@
             "title": "Rookie of the Year (Male)",
             "id": "gen-rookie-of-the-year-male",
             "nominees": [
-                { "id": "gen-roy-m-1", "name": "Sadiq Teslim Adetola", "image": null },
+                { "id": "gen-roy-m-1", "name": "Sadiq Teslim Adetola", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756491990/ox6pcsltxzyjl5afhkav.jpg" },
                 {
                     "id": "gen-roy-m-2",
                     "name": "Lawal Muhammed (Twilight)",
@@ -540,23 +540,23 @@
             "title": "Sophomore of the Year",
             "id": "gen-sophomore-of-the-year",
             "nominees": [
-                { "id": "gen-soy-1", "name": "Chinonso Akwari (Zeus)", "image": null },
+                { "id": "gen-soy-1", "name": "Chinonso Akwari (Zeus)", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756503306/j0ucaodgrssetcjmt0sx.jpg" },
                 {
                     "id": "gen-soy-2",
                     "name": "David Duyile (DaveTheCreator)",
                     "image": null
                 },
-                { "id": "gen-soy-3", "name": "Khadeejah Bode-Sanusi", "image": null },
-                { "id": "gen-soy-4", "name": "Quadri Mariam Omobola", "image": null },
-                { "id": "gen-soy-5", "name": "Olamide Lawal", "image": null },
-                { "id": "gen-soy-6", "name": "Mercy Emman-Okigbe", "image": null },
+                { "id": "gen-soy-3", "name": "Khadeejah Bode-Sanusi", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756481346/josdc6s8xfmuv0w89tow.jpg" },
+                { "id": "gen-soy-4", "name": "Quadri Mariam Omobola", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756485168/t5gvzonqdifhcmgb7gxp.jpg" },
+                { "id": "gen-soy-5", "name": "Olamide Lawal", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756481564/zhqzvy8opcd1jmboiwjb.jpg" },
+                { "id": "gen-soy-6", "name": "Mercy Emman-Ugheoke", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756485882/iof4dyvnnsopusxb01wb.jpg" },
                 { "id": "gen-soy-7", "name": "Qareeb Kako", "image": null },
                 {
                     "id": "gen-soy-8",
                     "name": "Olaoye Oluwanifemi Daniel",
                     "image": null
                 },
-                { "id": "gen-soy-9", "name": "Buari Muhammedtoa O.", "image": null },
+                { "id": "gen-soy-9", "name": "Buari Muhammedtoa O.", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756481358/upcumwwkn9wto8t8vvbq.jpg" },
                 { "id": "gen-soy-10", "name": "Ihuoma Oparawilson", "image": null }
             ]
         },
@@ -573,7 +573,7 @@
                 },
                 { "id": "gen-fy3-4", "name": "Hannah Ekot", "image": null },
                 { "id": "gen-fy3-5", "name": "Augusta Obi", "image": null },
-                { "id": "gen-fy3-6", "name": "Abidemi Olukoya (Star)", "image": null },
+                { "id": "gen-fy3-6", "name": "Abidemi Olukoya (Star)", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756500910/b5wy9s6jszyoc5aaelz2.jpg" },
                 { "id": "gen-fy3-7", "name": "Olamide Ade-Olunusi", "image": null },
                 { "id": "gen-fy3-8", "name": "Abolaji Adesina", "image": null },
                 { "id": "gen-fy3-9", "name": "Seyi Abe", "image": null },
@@ -625,7 +625,7 @@
                 { "id": "gen-ueoy-7", "name": "Adeniji Adeolu", "image": null },
                 { "id": "gen-ueoy-8", "name": "Izuchukwu Nwogu", "image": null },
                 { "id": "gen-ueoy-9", "name": "Victor Matthias", "image": null },
-                { "id": "gen-ueoy-10", "name": "Abidemi Olukoya", "image": null }
+                { "id": "gen-ueoy-10", "name": "Abidemi Olukoya", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756500910/b5wy9s6jszyoc5aaelz2.jpg" }
             ]
         },
         {
@@ -714,11 +714,11 @@
             "nominees": [
                 { "id": "fin-coy-1", "name": "Niyi & Ruby", "image": null },
                 { "id": "fin-coy-2", "name": "Ore & Moki", "image": null },
-                { "id": "fin-coy-3", "name": "Tolu & Eniola", "image": null },
+                { "id": "fin-coy-3", "name": "Tolu & Eniola", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756496695/zszkti8huisoonnrebsz.jpg" },
                 { "id": "fin-coy-4", "name": "Izu & Ogochukwu", "image": null },
                 { "id": "fin-coy-5", "name": "Funmi & Ericson", "image": null },
                 { "id": "fin-coy-6", "name": "Esther & Stanley", "image": null },
-                { "id": "fin-coy-7", "name": "Nelson & Seun", "image": null }
+                { "id": "fin-coy-7", "name": "Nelson & Seun", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756496695/zszkti8huisoonnrebsz.jpg" }
             ]
         },
         {
@@ -788,7 +788,7 @@
                 {
                     "id": "fin-cloy-4",
                     "name": "Olamide, Boroks, Eniola",
-                    "image": null
+                    "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756481736/fehkcnl4x6vz5w2ro0gs.jpg"
                 },
                 { "id": "fin-cloy-5", "name": "Taiga Squad", "image": null },
                 { "id": "fin-cloy-6", "name": "Gadites", "image": null },
@@ -797,7 +797,7 @@
                     "name": "Mololuwa, Yetunde and Stephanie",
                     "image": null
                 },
-                { "id": "fin-cloy-8", "name": "Mental Health Boys", "image": null },
+                { "id": "fin-cloy-8", "name": "Mental Health Boys", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756506017/xyipr5qyblgzof9bzwyh.jpg" },
                 { "id": "fin-cloy-9", "name": "Marvellous Trio", "image": null },
                 {
                     "id": "fin-cloy-10",
@@ -873,7 +873,7 @@
                 { "id": "fin-mb-5", "name": "Lolade Eleja", "image": null },
                 { "id": "fin-mb-6", "name": "Blessing Duke", "image": null },
                 { "id": "fin-mb-7", "name": "Ademide Adedegbe", "image": null },
-                { "id": "fin-mb-8", "name": "Lawal Aishat", "image": null },
+                { "id": "fin-mb-8", "name": "Lawal Aishat", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756512708/asxauwow2ksxzvmakqdk.jpg" },
                 { "id": "fin-mb-9", "name": "Benita Agbagwara", "image": null },
                 { "id": "fin-mb-10", "name": "Amarachi Okonji", "image": null }
             ]
@@ -926,7 +926,7 @@
                         { "id": "d-mech-img-1", "name": "Justice Esiri ", "image": null },
                         { "id": "d-mech-img-2", "name": "Ademide Adedugbe", "image": null },
                         { "id": "d-mech-img-3", "name": "Farouk Lawal", "image": null },
-                        { "id": "d-mech-img-4", "name": "Sadiq Teslim", "image": null },
+                        { "id": "d-mech-img-4", "name": "Sadiq Teslim", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756491990/ox6pcsltxzyjl5afhkav.jpg" },
                         {
                             "id": "d-mech-img-5",
                             "name": "Shalom Irewole-Ojo",
@@ -943,7 +943,7 @@
                         {
                             "id": "d-mech-img-10",
                             "name": "Emman-Ugheoke Mercy Omokhegbe",
-                            "image": null
+                            "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756485882/iof4dyvnnsopusxb01wb.jpg"
                         }
                     ]
                 },
@@ -953,7 +953,7 @@
                     "nominees": [{
                             "id": "d-mech-acad-1",
                             "name": "Ijaware Dawn Moyinoluwa",
-                            "image": null
+                            "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756499510/yaeuxhn01lwdjpcfde8m.jpg"
                         },
                         {
                             "id": "d-mech-acad-2",
@@ -1015,7 +1015,7 @@
                         {
                             "id": "d-mech-athf-2",
                             "name": "Mercy Emman-Ugheoke",
-                            "image": null
+                            "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756485882/iof4dyvnnsopusxb01wb.jpg"
                         },
                         { "id": "d-mech-athf-3", "name": "Deborah Otom", "image": null },
                         { "id": "d-mech-athf-4", "name": "Nwajei Mitchell", "image": null },
@@ -1194,7 +1194,7 @@
                         {
                             "id": "d-eee-img-7",
                             "name": "Chinonso Akwari (Creative Zeus)",
-                            "image": null
+                            "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756503306/j0ucaodgrssetcjmt0sx.jpg"
                         },
                         { "id": "d-eee-img-8", "name": "Grace medayedupin", "image": null },
                         { "id": "d-eee-img-9", "name": "Jinadu Temitope", "image": null },
@@ -1287,7 +1287,7 @@
                         {
                             "id": "dept-eee-athf-4",
                             "name": "Kareema Dalegan",
-                            "image": null
+                            "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756496914/fyksgyhfdkttgy7md7e0.jpg"
                         },
                         {
                             "id": "dept-eee-athf-5",
@@ -1314,7 +1314,7 @@
                             "name": "Oyewole Ayomide Paul",
                             "image": null
                         },
-                        { "id": "dept-svy-img-3", "name": "Hassan Gideon", "image": null },
+                        { "id": "dept-svy-img-3", "name": "Hassan Gideon", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756500269/embudimopeoutgv7wweb.jpg" },
                         {
                             "id": "dept-svy-img-4",
                             "name": "Bajulaiye Wadidah",
@@ -1466,7 +1466,7 @@
                         {
                             "id": "dept-cpe-img-10",
                             "name": "Obiyor Mitchell (Demitchy)",
-                            "image": null
+                            "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756481743/uiyzahi6awidqjoa6jws.jpg"
                         }
                     ]
                 },
@@ -1575,7 +1575,7 @@
                         {
                             "id": "dept-chem-img-3",
                             "name": "Abidemi Olukoya",
-                            "image": null
+                            "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756500910/b5wy9s6jszyoc5aaelz2.jpg"
                         },
                         {
                             "id": "dept-chem-img-4",
@@ -1706,7 +1706,7 @@
                     "title": "Departmental Image Award",
                     "id": "dept-pet-1",
                     "nominees": [
-                        { "id": "dept-pge-img-1", "name": "Mariam Qadri", "image": null },
+                        { "id": "dept-pge-img-1", "name": "Mariam Qadri", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756485168/t5gvzonqdifhcmgb7gxp.jpg" },
                         { "id": "dept-pge-img-2", "name": "Eniola Fowowe", "image": null },
                         { "id": "dept-pge-img-3", "name": "Danielle NSP", "image": null },
                         { "id": "dept-pge-img-4", "name": "Samuel Uko", "image": null },
@@ -1790,7 +1790,7 @@
                     "nominees": [
                         { "id": "d-pge-athf-1", "name": "Adams Blessing (Katalyst)", "image": null },
                         { "id": "d-pge-athf-2", "name": "Praise Akatakpo", "image": null },
-                        { "id": "d-pge-athf-3", "name": "Success (Itohan)", "image": null },
+                        { "id": "d-pge-athf-3", "name": "Odubor Success (Itohan)", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756491457/lcdjeokw5tcokitmjj40.jpg" },
                         { "id": "d-pge-athf-4", "name": "Emj", "image": null },
                         { "id": "d-pge-athf-5", "name": "Ola", "image": null }
                     ]
@@ -1809,7 +1809,7 @@
                         {
                             "id": "d-civ-img-3",
                             "name": "Onasoga Ebunoluwa Adebusayo",
-                            "image": null
+                            "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756481375/mh97pfvtjzyogyrhltt4.jpg"
                         },
                         {
                             "id": "d-civ-img-4",
@@ -1828,7 +1828,7 @@
                             "name": "Komolafe Olajide Abdulramon",
                             "image": null
                         },
-                        { "id": "d-civ-img-9", "name": "Olamide Onibalusi", "image": null },
+                        { "id": "d-civ-img-9", "name": "Olamide Onibalusi", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756495246/qij9lqitkndctkcwey8l.jpg" },
                         {
                             "id": "d-civ-img-10",
                             "name": "Olusanya Ifedapo Ijulu",
@@ -1893,8 +1893,8 @@
                     "title": "Athlete of the Year - Female",
                     "id": "dept-civ-4",
                     "nominees": [
-                        { "id": "d-civ-athf-1", "name": "Zurakat Mololuwa", "image": null },
-                        { "id": "d-civ-athf-2", "name": "Aridunu Halimat", "image": null },
+                        { "id": "d-civ-athf-1", "name": "Zurakat Mololuwa", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756481367/cpz6wldefm6alvorjjud.jpg" },
+                        { "id": "d-civ-athf-2", "name": "Shittu Aridunu Halimat", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756516302/v8iids9hrsvkc7mcb2g4.jpg" },
                         { "id": "d-civ-athf-3", "name": "Halimat Shittu", "image": null },
                         { "id": "d-civ-athf-4", "name": "Jegede Ayobami", "image": null },
                         { "id": "d-civ-athf-5", "name": "Aminat Fashola", "image": null }
@@ -1913,7 +1913,7 @@
                         {
                             "id": "d-sys-img-2",
                             "name": "Ebubechukwu Ezeani",
-                            "image": null
+                            "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756510252/pllacdevgaqffxecryhc.jpg"
                         },
                         { "id": "d-sys-img-3", "name": "Boluwatife Idowu", "image": null },
                         {
@@ -1945,7 +1945,7 @@
                         {
                             "id": "d-sys-img-10",
                             "name": "Khadeejah Bode-Sanusi",
-                            "image": null
+                            "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756481346/josdc6s8xfmuv0w89tow.jpg"
                         }
                     ]
                 },
@@ -2034,7 +2034,7 @@
                             "image": null
                         },
                         { "id": "dept-mme-img-8", "name": "Basit Ismail", "image": null },
-                        { "id": "dept-mme-img-9", "name": "Lawal Olamide", "image": null },
+                        { "id": "dept-mme-img-9", "name": "Lawal Olamide", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756481564/zhqzvy8opcd1jmboiwjb.jpg" },
                         { "id": "dept-mme-img-10", "name": "Peace Udotong", "image": null }
                     ]
                 },
