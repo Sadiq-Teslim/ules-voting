@@ -3,7 +3,7 @@
             "title": "Most Beautiful (Undergraduate)",
             "id": "ug-most-beautiful",
             "nominees": [
-                { "id": "ug-mb-1", "name": "Winifred Udebhulu", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756481346/josdc6s8xfmuv0w89tow.jpg" },
+                { "id": "ug-mb-1", "name": "Winifred Udebhulu", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756484886/pqbnw68tb7wyuxeeyqaf.jpg" },
                 { "id": "ug-mb-2", "name": "Adewuyi Oluwadamisola", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756491642/ga1atsna6ibw3r09riyx.jpg" },
                 { "id": "ug-mb-3", "name": "Oluwaloseyi Farinde", "image": null },
                 { "id": "ug-mb-4", "name": "Ishang Goodness", "image": null },
@@ -88,7 +88,7 @@
             "nominees": [
                 { "id": "ug-bdf-1", "name": "Olatunji Yadah", "image": null },
                 { "id": "ug-bdf-2", "name": "Mosturoh Adeogun", "image": null },
-                { "id": "ug-bdf-3", "name": "Winifred Udebhulu", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756481346/josdc6s8xfmuv0w89tow.jpg" },
+                { "id": "ug-bdf-3", "name": "Winifred Udebhulu", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756484979/uxvk7dwtd90mfxkm9y4k.jpg" },
                 { "id": "ug-bdf-4", "name": "Wadidah Bajulaiye", "image": null },
                 { "id": "ug-bdf-5", "name": "Abidemi olukoya (Star)", "image": null },
                 { "id": "ug-bdf-6", "name": "Bode Sanusi Khadeejah", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756481346/josdc6s8xfmuv0w89tow.jpg" },
