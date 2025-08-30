@@ -20,7 +20,7 @@
             "title": "Most Handsome (Undergraduate)",
             "id": "ug-most-handsome",
             "nominees": [
-                { "id": "ug-mh-1", "name": "Coker John", "image": null },
+                { "id": "ug-mh-1", "name": "Coker John", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756537106/dng5okkoxsa5yzqdn8cr.jpg" },
                 { "id": "ug-mh-2", "name": "Adejumo Ibrahim", "image": null },
                 { "id": "ug-mh-3", "name": "Bunmi-Oladeide Moyosore", "image": null },
                 { "id": "ug-mh-4", "name": "Adegoke Abdulhakeem", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756512728/skaat1l7izuyivys5zyk.jpg" },
@@ -43,7 +43,7 @@
                 { "id": "ug-mi-6", "name": "Damilare Aribisala", "image": null },
                 { "id": "ug-mi-7", "name": "Seun Ajayi", "image": null },
                 { "id": "ug-mi-8", "name": "Halimat Ozemoka", "image": null },
-                { "id": "ug-mi-9", "name": "Precious Jacob", "image": null },
+                { "id": "ug-mi-9", "name": "Precious Jacob", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756541215/g4jsijntibbkykzzjrfc.jpg" },
                 { "id": "ug-mi-10", "name": "Qareeb Kako", "image": null }
             ]
         },
@@ -133,7 +133,7 @@
                 {
                     "id": "ug-coy-5",
                     "name": "Chisom, Fortune and Frances",
-                    "image": null
+                    "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756562386/ntdol8svud5ooyzvsnuy.jpg"
                 },
                 {
                     "id": "ug-coy-6",
@@ -554,7 +554,8 @@
                 {
                     "id": "gen-soy-8",
                     "name": "Olaoye Oluwanifemi Daniel",
-                    "image": null
+                    "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756551747/irkjbkd0h40ixmhgzuj9.jpg"
+                
                 },
                 { "id": "gen-soy-9", "name": "Buari Muhammedtoa O.", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756481358/upcumwwkn9wto8t8vvbq.jpg" },
                 { "id": "gen-soy-10", "name": "Ihuoma Oparawilson", "image": null }
@@ -574,7 +575,7 @@
                 { "id": "gen-fy3-4", "name": "Hannah Ekot", "image": null },
                 { "id": "gen-fy3-5", "name": "Augusta Obi", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756481340/rmjk7fa4nltobuebreei.jpg" },
                 { "id": "gen-fy3-6", "name": "Abidemi Olukoya (Star)", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756500910/b5wy9s6jszyoc5aaelz2.jpg" },
-                { "id": "gen-fy3-7", "name": "Olamide Ade-Olunusi", "image": null },
+                { "id": "gen-fy3-7", "name": "Olamide Ade-Olunusi", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756482438/qciynwtcj4ys0rjysw9k.jpg" },
                 { "id": "gen-fy3-8", "name": "Abolaji Adesina", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756481121/pdwf8htkuv8fohqok6zz.jpg" },
                 { "id": "gen-fy3-9", "name": "Seyi Abe", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756483836/f4il1jmv8qcxzzccwfdw.jpg" },
                 { "id": "gen-fy3-10", "name": "Roqeeb Akintola", "image": null }
@@ -1058,7 +1059,7 @@
                         {
                             "id": "dept-bme-img-6",
                             "name": "Ade-Olunusi Olamide",
-                            "image": null
+                            "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756482438/qciynwtcj4ys0rjysw9k.jpg"
                         },
                         {
                             "id": "dept-bme-img-7",
@@ -1093,18 +1094,18 @@
                             "name": "Adebayo Gamaliel",
                             "image": null
                         },
-                        { "id": "dept-bme-acad-5", "name": "Coker John", "image": null },
+                        { "id": "dept-bme-acad-5", "name": "Coker John", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756537106/dng5okkoxsa5yzqdn8cr.jpg" },
                         {
                             "id": "dept-bme-acad-6",
                             "name": "Ade-Olunusi Olamide",
-                            "image": null
+                            "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756482438/qciynwtcj4ys0rjysw9k.jpg"
                         },
                         {
                             "id": "dept-bme-acad-7",
                             "name": "Oparawilson Ihuoma",
                             "image": null
                         },
-                        { "id": "dept-bme-acad-8", "name": "Odiwe Emeka", "image": null },
+                        { "id": "dept-bme-acad-8", "name": "Odiwe Emeka", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756556327/lahg2w2hbufjrpnk8m3t.jpg" },
                         {
                             "id": "dept-bme-acad-9",
                             "name": "Oyepeju Ireoluwatomiwa Abraham",
@@ -1121,7 +1122,7 @@
                     "title": "Athlete of the Year - Male",
                     "id": "dept-biomedical-athlete-male",
                     "nominees": [
-                        { "id": "dept-bme-athm-1", "name": "Coker John", "image": null },
+                        { "id": "dept-bme-athm-1", "name": "Coker John", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756537106/dng5okkoxsa5yzqdn8cr.jpg" },
                         { "id": "dept-bme-athm-2", "name": "Lateef Musa", "image": null },
                         { "id": "dept-bme-athm-3", "name": "Samson Akande", "image": null },
                         {
@@ -1157,7 +1158,7 @@
                         {
                             "id": "dept-bme-athf-4",
                             "name": "Olamide Ade-Olunusi",
-                            "image": null
+                            "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756482438/qciynwtcj4ys0rjysw9k.jpg"
                         }
                     ]
                 }
@@ -1438,8 +1439,8 @@
                     "title": "Departmental Image Award",
                     "id": "dept-cpe-1",
                     "nominees": [
-                        { "id": "dept-cpe-img-1", "name": "Ginika Okeke", "image": null },
-                        { "id": "dept-cpe-img-2", "name": "ekot Hannah", "image": null },
+                        { "id": "dept-cpe-img-1", "name": "Ginika Okeke", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756486069/esd2wqpsx8izhqpeuloe.jpg" },
+                        { "id": "dept-cpe-img-2", "name": "Ekot Hannah", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756537106/dng5okkoxsa5yzqdn8cr.jpg" },
                         {
                             "id": "dept-cpe-img-3",
                             "name": "Michael Adekunle(Marshall)",
@@ -1460,7 +1461,7 @@
                         {
                             "id": "dept-cpe-img-8",
                             "name": "Obafemi-Moses Mosinmiloluwa",
-                            "image": null
+                            "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756537106/dng5okkoxsa5yzqdn8cr.jpg"
                         },
                         { "id": "dept-cpe-img-9", "name": "Chi-ife Ileka", "image": null },
                         {
@@ -1528,8 +1529,8 @@
                         },
                         {
                             "id": "dept-cpe-athm-2",
-                            "name": "Michael Adeniyi",
-                            "image": null
+                            "name": "Michael Adeniyi(Marshall)",
+                            "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756501933/mlkbdumfo30uoorvggq1.jpg"
                         },
                         { "id": "dept-cpe-athm-3", "name": "Alvin Ezeocha", "image": null },
                         {
@@ -1814,7 +1815,7 @@
                         {
                             "id": "d-civ-img-4",
                             "name": "Olaoye Oluwanifemi Daniel",
-                            "image": null
+                            "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756551747/irkjbkd0h40ixmhgzuj9.jpg"
                         },
                         { "id": "d-civ-img-5", "name": "Okosun Dianne", "image": null },
                         { "id": "d-civ-img-6", "name": "Busari Hassanat", "image": null },
