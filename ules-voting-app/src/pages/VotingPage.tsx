@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect, useMemo } from "react";
+import ImageZoomModal from "../components/ImageZoomModal";
 import axios from "axios";
 import { Redirect } from "wouter";
 import type { VoterInfo } from "../App";
@@ -15,13 +16,13 @@ import {
 } from "lucide-react";
 
 // --- TypeScript Types ---
-interface Nominee {
+export interface Nominee {
   id: string;
   name: string;
   image: string | null;
   description?: string;
 }
-interface Category {
+export interface Category {
   title: string;
   id: string;
   nominees: Nominee[];
@@ -79,6 +80,7 @@ const SuccessModal = ({
 
 // --- NEW: Nominee Carousel Component ---
 
+// --- MODIFIED: Nominee Carousel Component ---
 const NomineeCarousel = ({
   category,
   selections,
@@ -93,12 +95,15 @@ const NomineeCarousel = ({
   const scrollContainer = React.useRef<HTMLDivElement>(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
+  
+  // --- NEW: State to manage the zoomed-in nominee ---
+  const [zoomedNominee, setZoomedNominee] = useState<Nominee | null>(null);
 
   const handleScroll = () => {
     if (scrollContainer.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollContainer.current;
       setShowLeftArrow(scrollLeft > 0);
-      setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 1); // -1 for precision
+      setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 1);
     }
   };
 
@@ -115,22 +120,35 @@ const NomineeCarousel = ({
   useEffect(() => {
     const container = scrollContainer.current;
     if (container) {
-      const checkArrows = () => handleScroll();
-      const timer = setTimeout(checkArrows, 100);
-      window.addEventListener("resize", checkArrows);
+      handleScroll(); // Initial check
+      container.addEventListener("scroll", handleScroll);
+      window.addEventListener("resize", handleScroll);
       return () => {
-        clearTimeout(timer);
-        window.removeEventListener("resize", checkArrows);
+        container.removeEventListener("scroll", handleScroll);
+        window.removeEventListener("resize", handleScroll);
       };
     }
   }, [category.nominees]);
 
+  // --- NEW: A helper to check if it's a touch device to disable hover ---
+  const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
   return (
     <div className="relative">
+      {/* --- NEW: Render the modal when a nominee is selected for zoom --- */}
+      {zoomedNominee && !isCategoryVoted && (
+        <ImageZoomModal
+          nominee={zoomedNominee}
+          category={category}
+          onClose={() => setZoomedNominee(null)}
+          onVote={onSelectNominee}
+        />
+      )}
+
       {/* Left Arrow */}
       <button
         onClick={() => scroll("left")}
-        className={`absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-600 flex items-center justify-center transition-opacity duration-300 disabled:opacity-0 disabled:cursor-default`}
+        className={`absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-600 flex items-center justify-center transition-opacity duration-300 ${!showLeftArrow ? 'opacity-0 cursor-default' : ''}`}
         disabled={!showLeftArrow}
       >
         <ChevronLeft className="text-white" />
@@ -138,16 +156,15 @@ const NomineeCarousel = ({
 
       <div
         ref={scrollContainer}
-        onScroll={handleScroll}
         className="flex items-stretch gap-4 sm:gap-5 overflow-x-auto snap-x snap-mandatory px-2 py-2 custom-scrollbar"
       >
         {category.nominees.map((nominee) => {
           const isSelected = selections[category.id] === nominee.name;
           const imageSrc = nominee.image
             ? nominee.image.startsWith("http")
-              ? nominee.image // It's a full URL, use it directly
-              : `/nominees/${nominee.image}` // It's a local filename, prepend path
-            : `/placeholder.png`; // Fallback to placeholder
+              ? nominee.image
+              : `/nominees/${nominee.image}`
+            : `/placeholder.png`;
           return (
             <div
               key={nominee.id}
@@ -163,23 +180,39 @@ const NomineeCarousel = ({
               } ${isSelected ? "border-amber-400 ring-2 ring-amber-400" : ""}`}
             >
               <div
-                className={`w-24 h-24 mx-auto rounded-full overflow-hidden border-4 shadow-sm mb-3 transition-colors flex-shrink-0 ${
+                className={`w-24 h-24 mx-auto rounded-full overflow-hidden border-4 shadow-sm mb-3 transition-colors flex-shrink-0 relative ${
                   isSelected ? "border-amber-400" : "border-slate-600"
                 }`}
+                // --- NEW: Event handlers for hover (desktop) ---
+                onMouseEnter={() => {
+                  if (!isTouchDevice() && !isCategoryVoted) {
+                    setZoomedNominee(nominee);
+                  }
+                }}
+                onMouseLeave={() => {
+                   if (!isTouchDevice()) {
+                    setZoomedNominee(null);
+                  }
+                }}
               >
                 <img
                   src={imageSrc}
                   alt={nominee.name}
                   className="w-full h-full object-cover"
+                  // --- NEW: Event handler for click (mobile) ---
+                  // stopPropagation prevents the card's vote onClick from firing
+                  onClick={(e) => {
+                    if (!isCategoryVoted) {
+                      e.stopPropagation(); 
+                      setZoomedNominee(nominee);
+                    }
+                  }}
                 />
               </div>
               <div className="flex-grow flex flex-col justify-center">
                 <h3 className="font-bold text-white text-sm md:text-base group-hover:text-base whitespace-normal break-words min-h-[2.5rem]">
                   {nominee.name}
                 </h3>
-                <p className="text-slate-400 text-xs h-4 mb-3">
-                  {nominee.description || ""}
-                </p>
               </div>
               <div
                 className={`w-full mt-auto py-2 px-3 rounded-lg font-semibold text-xs transition-all duration-300 flex items-center justify-center gap-2 border ${
@@ -191,15 +224,9 @@ const NomineeCarousel = ({
                 }`}
               >
                 {isCategoryVoted ? (
-                  <>
-                    {" "}
-                    <Check size={14} /> Voted{" "}
-                  </>
+                   <><Check size={14} /> Voted</>
                 ) : isSelected ? (
-                  <>
-                    {" "}
-                    <Check size={14} /> Selected{" "}
-                  </>
+                   <><Check size={14} /> Selected</>
                 ) : (
                   "Vote"
                 )}
@@ -212,7 +239,7 @@ const NomineeCarousel = ({
       {/* Right Arrow */}
       <button
         onClick={() => scroll("right")}
-        className={`absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-600 flex items-center justify-center transition-opacity duration-300 disabled:opacity-0 disabled:cursor-default`}
+        className={`absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-600 flex items-center justify-center transition-opacity duration-300 ${!showRightArrow ? 'opacity-0 cursor-default' : ''}`}
         disabled={!showRightArrow}
       >
         <ChevronRight className="text-white" />
