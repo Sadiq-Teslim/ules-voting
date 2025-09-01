@@ -415,7 +415,7 @@
         { "id": "gen-sia-6", "name": "Nusaybah Fuad-Gafar", "image": null },
         { "id": "gen-sia-7", "name": "Hassanat Busari", "image": null },
         { "id": "gen-sia-8", "name": "Kamal Adebayo", "image": null },
-        { "id": "gen-sia-9", "name": "Justice Esiri", "image": null },
+        { "id": "gen-sia-9", "name": "Justice Esiri", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756746724/vb1erutm71vjvlziwy8a.jpg" },
         { "id": "gen-sia-10", "name": "Sunmisola Ganikale", "image": null }
       ]
     },
@@ -465,7 +465,7 @@
           "name": "Sunmisola Ganikale",
           "image": null
         },
-        { "id": "gen-sloy-2", "name": "Justice Esiri", "image": null },
+        { "id": "gen-sloy-2", "name": "Justice Esiri", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756746724/vb1erutm71vjvlziwy8a.jpg" },
         {
           "id": "gen-sloy-3",
           "name": "Nofisat Sanni",
@@ -1315,7 +1315,7 @@
           "image": null
         },
         { "id": "fin-mi-2", "name": "Olusanya Ifedapo Ijulu", "image": null },
-        { "id": "fin-mi-3", "name": "Justice Esiri", "image": null },
+        { "id": "fin-mi-3", "name": "Justice Esiri", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756746724/vb1erutm71vjvlziwy8a.jpg" },
         { "id": "fin-mi-4", "name": "Solomon Madufor", "image": null },
         {
           "id": "fin-mi-5",
@@ -1360,7 +1360,7 @@
           "title": "Departmental Image Award",
           "id": "dept-mechanical-image-award",
           "nominees": [
-            { "id": "d-mech-img-1", "name": "Justice Esiri ", "image": null },
+            { "id": "d-mech-img-1", "name": "Justice Esiri ", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756746724/vb1erutm71vjvlziwy8a.jpg" },
             { "id": "d-mech-img-2", "name": "Sadiq Teslim Adetola", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756491990/ox6pcsltxzyjl5afhkav.jpg" },
             { "id": "d-mech-img-3", "name": "Farouk Lawal", "image": null },
             { "id": "d-mech-img-4", "name": "Ademide Adedugbe", "image": null },
