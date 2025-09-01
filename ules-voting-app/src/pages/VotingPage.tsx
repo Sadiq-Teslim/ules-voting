@@ -132,7 +132,7 @@ const NomineeCarousel = ({ category, selections, isCategoryVoted, onSelectNomine
           return (
             <div key={nominee.id} onClick={isCategoryVoted ? undefined : () => onSelectNominee(category.id, nominee.name)} className={`snap-start w-36 sm:w-48 bg-slate-900/50 border rounded-xl p-3 text-center transition-all duration-300 relative group flex flex-col flex-shrink-0 ${isCategoryVoted ? "cursor-not-allowed border-slate-700" : "cursor-pointer border-slate-700 hover:border-amber-400/50 hover:-translate-y-1"} ${isSelected ? "border-amber-400 ring-2 ring-amber-400" : ""}`}>
               <div className={`relative w-24 h-24 mx-auto rounded-full overflow-hidden border-4 shadow-sm mb-3 transition-colors flex-shrink-0 ${isSelected ? "border-amber-400" : "border-slate-600"}`}>
-                <img src={imageSrc} alt={nominee.name} className="w-full h-full object-cover"/>
+                <img src={imageSrc} alt={nominee.name} className="w-full h-full object-cover" loading="lazy" decoding="async"/>
                 {nominee.image && (
                   <div
                     onClick={(e) => {
