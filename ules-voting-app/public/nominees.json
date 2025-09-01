@@ -556,6 +556,11 @@
           "id": "gen-ccoy-10",
           "name": "Winifred Udebhulu",
           "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756484886/pqbnw68tb7wyuxeeyqaf.jpg"
+        },
+        {
+          "id": "gen-ccoy-11",
+          "name": "Wendy Kalu",
+          "image": null
         }
       ]
     },
@@ -600,7 +605,8 @@
         },
         { "id": "gen-sboy-8", "name": "Chef Reynolds", "image": null },
         { "id": "gen-sboy-9", "name": "AB Gadgets", "image": null },
-        { "id": "gen-sboy-10", "name": "Mhydeh Gadgets", "image": null }
+        { "id": "gen-sboy-10", "name": "Mhydeh Gadgets", "image": null },
+        { "id": "gen-sboy-11", "name": "Tife Paul", "image": null }
       ]
     },
     {
@@ -954,7 +960,8 @@
         },
         { "id": "gen-foy-8", "name": "Boluwatife Idowu", "image": null },
         { "id": "gen-foy-9", "name": "Nusaybah Fuad-Gafar", "image": null },
-        { "id": "gen-foy-10", "name": "Funmi Oladapo", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756674828/n6e5w93k7j4k4m0g1x1o.jpg" }
+        { "id": "gen-foy-10", "name": "Funmi Oladapo", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756674828/n6e5w93k7j4k4m0g1x1o.jpg" },
+        { "id": "gen-foy-11", "name": "Wendy Kalu", "image": null }
       ]
     },
     {
@@ -1131,7 +1138,8 @@
           "name": "Okedeji Omotesho",
           "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756481085/qlcsypv6quccbyn5ud1b.jpg"
         },
-        { "id": "fin-coyf-9", "name": "Shot by Dej", "image": null }
+        { "id": "fin-coyf-9", "name": "Shot by Dej", "image": null },
+        { "id": "fin-coyf-10", "name": "Boluwatife Oluwalana(The Paul)", "image": null }
       ]
     },
     {
@@ -1160,7 +1168,8 @@
         { "id": "fin-eoy-8", "name": "Made by Essence", "image": null },
         { "id": "fin-eoy-9", "name": "Tribe the brand (TDB)", "image": null },
         { "id": "fin-eoy-10", "name": "Kaizen", "image": null },
-        { "id": "fin-eoy-11", "name": "Bright's Gadget", "image": null }
+        { "id": "fin-eoy-11", "name": "Bright's Gadget", "image": null },
+        { "id": "fin-eoy-12", "name": "Boluwatife Oluwalana (Tife Paul)", "image": null }
       ]
     },
     {
@@ -1199,6 +1208,11 @@
         },
         {
           "id": "fin-cloy-11",
+          "name": "Wendy, Esther, Ima",
+          "image": null
+        },
+        {
+          "id": "fin-cloy-12",
           "name": "Hassanat, Uti, Igbega, Mayowa",
           "image": null
         }
@@ -1217,7 +1231,8 @@
         { "id": "fin-tpm-7", "name": "Adeogo Favor", "image": null },
         { "id": "fin-tpm-8", "name": "Salim Oyinlola", "image": null },
         { "id": "fin-tpm-9", "name": "Eniola Awosika", "image": null },
-        { "id": "fin-tpm-10", "name": "Dozie Uzoechi", "image": null }
+        { "id": "fin-tpm-10", "name": "Dozie Uzoechi", "image": null },
+        { "id": "fin-tpm-11", "name": "Joseph Fasanya", "image": null }
       ]
     },
     {
@@ -1239,7 +1254,8 @@
           "image": null
         },
         { "id": "fin-tpf-7", "name": "Hassanat Busari", "image": null },
-        { "id": "fin-tpf-8", "name": "Funmi Oladapo", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756674828/n6e5w93k7j4k4m0g1x1o.jpg" }
+        { "id": "fin-tpf-8", "name": "Funmi Oladapo", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756674828/n6e5w93k7j4k4m0g1x1o.jpg" },
+        { "id": "fin-tpf-9", "name": "Inabong Edet", "image": null }
       ]
     },
     {
@@ -1260,7 +1276,8 @@
         { "id": "fin-mh-8", "name": "Olumide Nwosu", "image": null },
         { "id": "fin-mh-9", "name": "Ogochukwu Ubah", "image": null },
         { "id": "fin-mh-10", "name": "Ofoegbu Akachukwu", "image": null },
-        { "id": "fin-mh-11", "name": "Samuel Hyeman", "image": null }
+        { "id": "fin-mh-11", "name": "Samuel Hyeman", "image": null },
+        { "id": "fin-mh-12", "name": "Bolaji Sulaimon", "image": null }
       ]
     },
     {
@@ -1284,7 +1301,8 @@
           "name": "Benita Agbagwara",
           "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756569884/ijtblbs7v5j3idimorfl.jpg"
         },
-        { "id": "fin-mb-10", "name": "Amarachi Okonji", "image": null }
+        { "id": "fin-mb-10", "name": "Amarachi Okonji", "image": null },
+        { "id": "fin-mb-11", "name": "Esther Ibeh", "image": null }
       ]
     },
     {
@@ -1307,7 +1325,8 @@
         { "id": "fin-mi-6", "name": "Nusaybah Fuad-Gafar", "image": null },
         { "id": "fin-mi-7", "name": "Sunmisola Ganikale", "image": null },
         { "id": "fin-mi-8", "name": "Kolawole Temitope", "image": null },
-        { "id": "fin-mi-9", "name": "Kamal Adebayo", "image": null }
+        { "id": "fin-mi-9", "name": "Kamal Adebayo", "image": null },
+        { "id": "fin-mi-10", "name": "Emmanuel Arowesan", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756480886/upoff3arfu9kmijfihck.jpg" }
       ]
     },
     {
@@ -1327,7 +1346,8 @@
         { "id": "fin-mp-7", "name": "Sunmisola Ganikale", "image": null },
         { "id": "fin-mp-8", "name": "Sabatha Joshua", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756671687/ccso3jqufnley2v42bjk.jpg" },
         { "id": "fin-mp-9", "name": "Obinna Nneji", "image": null },
-        { "id": "fin-mp-10", "name": "Adeniyi Adebayo", "image": null }
+        { "id": "fin-mp-10", "name": "Adeniyi Adebayo", "image": null },
+        { "id": "fin-mp-11", "name": "Wendy Kalu", "image": null }
       ]
     }
   ],
