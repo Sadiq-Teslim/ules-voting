@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import ImageZoomModal from "../components/ImageZoomModal";
 import axios from "axios";
 import { Redirect } from "wouter";
@@ -81,167 +81,81 @@ const SuccessModal = ({
 // --- NEW: Nominee Carousel Component ---
 
 // --- MODIFIED: Nominee Carousel Component ---
-const NomineeCarousel = ({
-  category,
-  selections,
-  isCategoryVoted,
-  onSelectNominee,
-}: {
-  category: Category;
-  selections: Selections;
-  isCategoryVoted: boolean;
-  onSelectNominee: (categoryId: string, nomineeName: string) => void;
-}) => {
-  const scrollContainer = React.useRef<HTMLDivElement>(null);
+// --- Nominee Carousel Component ---
+const NomineeCarousel = ({ category, selections, isCategoryVoted, onSelectNominee, onImageClick, }: { category: Category; selections: Selections; isCategoryVoted: boolean; onSelectNominee: (categoryId: string, nomineeName: string) => void; onImageClick: (nominee: Nominee) => void; }) => {
+  const scrollContainer = useRef<HTMLDivElement>(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
-  
-  // --- NEW: State to manage the zoomed-in nominee ---
-  const [zoomedNominee, setZoomedNominee] = useState<Nominee | null>(null);
 
   const handleScroll = () => {
     if (scrollContainer.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollContainer.current;
-      setShowLeftArrow(scrollLeft > 0);
+      setShowLeftArrow(scrollLeft > 1);
       setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 1);
     }
   };
 
-  const scroll = (direction: "left" | "right") => {
+  const scroll = (direction: 'left' | 'right') => {
     if (scrollContainer.current) {
       const scrollAmount = scrollContainer.current.clientWidth * 0.8;
-      scrollContainer.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      });
+      scrollContainer.current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
     }
   };
 
   useEffect(() => {
     const container = scrollContainer.current;
     if (container) {
-      handleScroll(); // Initial check
-      container.addEventListener("scroll", handleScroll);
-      window.addEventListener("resize", handleScroll);
+      const observer = new ResizeObserver(() => handleScroll());
+      observer.observe(container);
+      const timer = setTimeout(() => handleScroll(), 100);
       return () => {
-        container.removeEventListener("scroll", handleScroll);
-        window.removeEventListener("resize", handleScroll);
+        clearTimeout(timer);
+        observer.disconnect();
       };
     }
   }, [category.nominees]);
 
-  // --- NEW: A helper to check if it's a touch device to disable hover ---
-  const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
   return (
     <div className="relative">
-      {/* --- NEW: Render the modal when a nominee is selected for zoom --- */}
-      {zoomedNominee && !isCategoryVoted && (
-        <ImageZoomModal
-          nominee={zoomedNominee}
-          category={category}
-          onClose={() => setZoomedNominee(null)}
-          onVote={onSelectNominee}
-        />
-      )}
-
-      {/* Left Arrow */}
-      <button
-        onClick={() => scroll("left")}
-        className={`absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-600 flex items-center justify-center transition-opacity duration-300 ${!showLeftArrow ? 'opacity-0 cursor-default' : ''}`}
-        disabled={!showLeftArrow}
-      >
+      <button onClick={() => scroll('left')} className={`absolute -left-4 md:-left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-600 flex items-center justify-center transition-opacity duration-300 disabled:opacity-0 disabled:cursor-default`} disabled={!showLeftArrow}>
         <ChevronLeft className="text-white" />
       </button>
-
+      
       <div
         ref={scrollContainer}
-        className="flex items-stretch gap-4 sm:gap-5 overflow-x-auto snap-x snap-mandatory px-2 py-2 custom-scrollbar"
+        onScroll={handleScroll}
+        className="flex items-stretch gap-4 sm:gap-5 overflow-x-auto snap-x snap-mandatory px-2 py-2 pb-4 custom-scrollbar"
       >
         {category.nominees.map((nominee) => {
           const isSelected = selections[category.id] === nominee.name;
-          const imageSrc = nominee.image
-            ? nominee.image.startsWith("http")
-              ? nominee.image
-              : `/nominees/${nominee.image}`
-            : `/placeholder.png`;
+          const imageSrc = nominee.image ? (nominee.image.startsWith('http') ? nominee.image : `/nominees/${nominee.image}`) : `/placeholder.png`;
           return (
-            <div
-              key={nominee.id}
-              onClick={
-                isCategoryVoted
-                  ? undefined
-                  : () => onSelectNominee(category.id, nominee.name)
-              }
-              className={`snap-start w-36 sm:w-48 bg-slate-900/50 border rounded-xl p-3 text-center transition-all duration-300 relative group flex flex-col flex-shrink-0 ${
-                isCategoryVoted
-                  ? "cursor-not-allowed border-slate-700"
-                  : "cursor-pointer border-slate-700 hover:border-amber-400/50 hover:-translate-y-1"
-              } ${isSelected ? "border-amber-400 ring-2 ring-amber-400" : ""}`}
-            >
-              <div
-                className={`w-24 h-24 mx-auto rounded-full overflow-hidden border-4 shadow-sm mb-3 transition-colors flex-shrink-0 relative ${
-                  isSelected ? "border-amber-400" : "border-slate-600"
-                }`}
-                // --- NEW: Event handlers for hover (desktop) ---
-                onMouseEnter={() => {
-                  if (!isTouchDevice() && !isCategoryVoted) {
-                    setZoomedNominee(nominee);
-                  }
-                }}
-                onMouseLeave={() => {
-                   if (!isTouchDevice()) {
-                    setZoomedNominee(null);
-                  }
-                }}
-              >
-                <img
-                  src={imageSrc}
-                  alt={nominee.name}
-                  className="w-full h-full object-cover"
-                  // --- NEW: Event handler for click (mobile) ---
-                  // stopPropagation prevents the card's vote onClick from firing
-                  onClick={(e) => {
-                    if (!isCategoryVoted) {
-                      e.stopPropagation(); 
-                      setZoomedNominee(nominee);
-                    }
-                  }}
-                />
+            <div key={nominee.id} onClick={isCategoryVoted ? undefined : () => onSelectNominee(category.id, nominee.name)} className={`snap-start w-36 sm:w-48 bg-slate-900/50 border rounded-xl p-3 text-center transition-all duration-300 relative group flex flex-col flex-shrink-0 ${isCategoryVoted ? "cursor-not-allowed border-slate-700" : "cursor-pointer border-slate-700 hover:border-amber-400/50 hover:-translate-y-1"} ${isSelected ? "border-amber-400 ring-2 ring-amber-400" : ""}`}>
+              <div className={`relative w-24 h-24 mx-auto rounded-full overflow-hidden border-4 shadow-sm mb-3 transition-colors flex-shrink-0 ${isSelected ? "border-amber-400" : "border-slate-600"}`}>
+                <img src={imageSrc} alt={nominee.name} className="w-full h-full object-cover"/>
+                {nominee.image && (
+                  <div
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onImageClick(nominee);
+                    }}
+                    className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity cursor-zoom-in"
+                  />
+                )}
               </div>
               <div className="flex-grow flex flex-col justify-center">
-                <h3 className="font-bold text-white text-sm md:text-base group-hover:text-base whitespace-normal break-words min-h-[2.5rem]">
-                  {nominee.name}
-                </h3>
+                  <h3 className="font-bold text-white text-sm md:text-base group-hover:text-base whitespace-normal break-words min-h-[2.5rem]">{nominee.name}</h3>
+                  <p className="text-slate-400 text-xs h-4 mb-3">{nominee.description || ""}</p>
               </div>
-              <div
-                className={`w-full mt-auto py-2 px-3 rounded-lg font-semibold text-xs transition-all duration-300 flex items-center justify-center gap-2 border ${
-                  isSelected
-                    ? "bg-gradient-to-r from-amber-500 to-amber-400 text-black border-amber-400"
-                    : isCategoryVoted
-                    ? "bg-slate-700 text-slate-400 border-slate-600"
-                    : "bg-slate-800 text-slate-300 border-slate-600"
-                }`}
-              >
-                {isCategoryVoted ? (
-                   <><Check size={14} /> Voted</>
-                ) : isSelected ? (
-                   <><Check size={14} /> Selected</>
-                ) : (
-                  "Vote"
-                )}
+              <div className={`w-full mt-auto py-2 px-3 rounded-lg font-semibold text-xs transition-all duration-300 flex items-center justify-center gap-2 border ${isSelected ? "bg-gradient-to-r from-amber-500 to-amber-400 text-black border-amber-400" : isCategoryVoted ? "bg-slate-700 text-slate-400 border-slate-600" : "bg-slate-800 text-slate-300 border-slate-600"}`}>
+                {isCategoryVoted ? (<> <Check size={14} /> Voted </>) : isSelected ? (<> <Check size={14} /> Selected </>) : ("Select")}
               </div>
             </div>
           );
         })}
       </div>
-
-      {/* Right Arrow */}
-      <button
-        onClick={() => scroll("right")}
-        className={`absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-600 flex items-center justify-center transition-opacity duration-300 ${!showRightArrow ? 'opacity-0 cursor-default' : ''}`}
-        disabled={!showRightArrow}
-      >
+      
+      <button onClick={() => scroll('right')} className={`absolute -right-4 md:-right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-600 flex items-center justify-center transition-opacity duration-300 disabled:opacity-0 disabled:cursor-default`} disabled={!showRightArrow}>
         <ChevronRight className="text-white" />
       </button>
     </div>
@@ -270,6 +184,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
   } | null>(null);
 
   const [searchTerm, setSearchTerm] = useState("");
+  const [zoomedNominee, setZoomedNominee] = useState<Nominee | null>(null);
 
   const mainCategories: {
     key: MainCategoryKey;
@@ -413,6 +328,8 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
     setIsModalOpen(false);
     handleBackToHub();
   };
+  const handleOpenZoomModal = (nominee: Nominee) => setZoomedNominee(nominee);
+  const handleCloseZoomModal = () => setZoomedNominee(null);
 
   const filteredCategories = useMemo(() => {
     if (!currentMainCategory) return [];
@@ -491,7 +408,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
         nextCategory={nextCategoryToVote}
         message={modalMessage}
       />
-
+      <ImageZoomModal nominee={zoomedNominee} onClose={handleCloseZoomModal} />
       <div className="relative z-10 max-w-7xl mx-auto p-4 sm:p-8 w-full pt-24 sm:pt-20 pb-48">
         {view === "hub" ? (
           <>
@@ -631,6 +548,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                           selections={selections}
                           isCategoryVoted={isCategoryVoted}
                           onSelectNominee={handleSelectNominee}
+                          onImageClick={handleOpenZoomModal}
                         />
                       </section>
                     );
