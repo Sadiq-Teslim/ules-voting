@@ -210,17 +210,42 @@ const AdminPage = () => {
     return () => clearInterval(interval);
   }, [isAuthenticated, handleRefresh]);
 
-  const handleDownloadPdf = async () => {
+    const handleDownloadPdf = async () => {
     const reportElement = document.getElementById("pdf-report");
     if (!reportElement) {
       alert("Could not find the report element to generate PDF.");
       return;
     }
+
     setIsDownloading(true);
+
+    // --- FIX STARTS HERE ---
+
+    // 1. Store the original inline styles of the report element
+    const originalStyles = {
+      position: reportElement.style.position,
+      left: reportElement.style.left,
+      top: reportElement.style.top,
+      zIndex: reportElement.style.zIndex,
+    };
+
+    // 2. Temporarily move the element into the viewport so html2canvas can see it.
+    //    We make it invisible to the user with a negative z-index.
+    reportElement.style.position = "absolute";
+    reportElement.style.left = "0";
+    reportElement.style.top = "0";
+    reportElement.style.zIndex = "-1";
+
+    // --- END OF FIX PREPARATION ---
+
     try {
+      // Small delay to ensure any images or complex styles have rendered
+      await new Promise(resolve => setTimeout(resolve, 50)); 
+        
       const canvas = await html2canvas(reportElement, {
         scale: 2, // Higher scale for better quality
         useCORS: true,
+        logging: false, // Optional: disable logging in console
       });
 
       const imgData = canvas.toDataURL("image/jpeg", 0.95);
@@ -231,25 +256,21 @@ const AdminPage = () => {
       });
 
       const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = pdf.internal.pageSize.getHeight();
-
       const canvasWidth = canvas.width;
       const canvasHeight = canvas.height;
 
-      // Calculate the height of the image in the PDF's units
       const ratio = canvasWidth / pdfWidth;
       const imgHeight = canvasHeight / ratio;
+      const pdfHeight = pdf.internal.pageSize.getHeight();
 
       let heightLeft = imgHeight;
       let position = 0;
 
-      // Add the first page
       pdf.addImage(imgData, "JPEG", 0, position, pdfWidth, imgHeight);
       heightLeft -= pdfHeight;
 
-      // Loop to add subsequent pages
       while (heightLeft > 0) {
-        position = position - pdfHeight; // Move the image "up" on the next page
+        position = position - pdfHeight;
         pdf.addPage();
         pdf.addImage(imgData, "JPEG", 0, position, pdfWidth, imgHeight);
         heightLeft -= pdfHeight;
@@ -262,6 +283,17 @@ const AdminPage = () => {
       console.error("Error generating PDF:", error);
       alert("An error occurred while generating the PDF.");
     } finally {
+      // --- FIX STARTS HERE ---
+
+      // 3. Restore the original styles to hide the element again.
+      //    This happens whether the PDF generation succeeded or failed.
+      reportElement.style.position = originalStyles.position;
+      reportElement.style.left = originalStyles.left;
+      reportElement.style.top = originalStyles.top;
+      reportElement.style.zIndex = originalStyles.zIndex;
+
+      // --- END OF FIX ---
+
       setIsDownloading(false);
     }
   };
