@@ -236,7 +236,7 @@
       "title": "Tech Personality (Undergraduate)",
       "id": "ug-tech-personality",
       "nominees": [
-        { "id": "ug-tp-1", "name": "Motunrayo Sanyaolu", "image": null },
+        { "id": "ug-tp-1", "name": "Motunrayo Sanyaolu", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756760915/z2pcgxnpziohawmmi6ov.jpg" },
         {
           "id": "ug-tp-2",
           "name": "Sadiq Teslim",
@@ -596,7 +596,7 @@
           "name": "Divine Utibe-Ubon (Dynamix Gadget)",
           "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756587917/c3ksxlmswhjtyuknwzyr.jpg"
         },
-        { "id": "gen-sboy-5", "name": "Estaz", "image": null },
+        { "id": "gen-sboy-5", "name": "Estaz", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756804567/l5n4ptqrur8fqlpcl2il.jpg" },
         { "id": "gen-sboy-6", "name": "EZY Gadgets", "image": null },
         {
           "id": "gen-sboy-7",
@@ -915,7 +915,7 @@
       "title": "Face of Year 4 ",
       "id": "gen-face-of-year-4",
       "nominees": [
-        { "id": "gen-fy4-1", "name": "Temitope Jinadu", "image": null },
+        { "id": "gen-fy4-1", "name": "Temitope Jinadu", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756781572/oactglefwpnijkuqrkiw.jpg" },
         { "id": "gen-fy4-2", "name": "Seun Ajayi", "image": null },
         { "id": "gen-fy4-3", "name": "Olawale Ayoola", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756671453/bjomjykmlk6tbkaysxst.jpg" },
         { "id": "gen-fy4-4", "name": "Olakunle Olatunji", "image": "https://res.cloudinary.com/dq2oyixxs/image/upload/v1756671887/h85ypl75q9l14j7d4k6e.jpg" },
