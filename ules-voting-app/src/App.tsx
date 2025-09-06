@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Switch, Route, Redirect } from "wouter";
 import LandingPage from "./pages/LandingPage";
-import VotingPage from "./pages/new";
+import VotingPage from "./pages/VotingPage";
 import SuccessPage from "./pages/SuccessPage";
 import AdminPage from "./pages/AdminPage";
 import NominationPage from "./pages/NominationPage";
