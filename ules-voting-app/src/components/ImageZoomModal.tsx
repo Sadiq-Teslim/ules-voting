@@ -1,5 +1,5 @@
 // --- NEW: Image Zoom Modal Component ---
-import type { Nominee } from '../pages/VotingPage';
+import type { Nominee } from '../pages/new';
 import { X } from 'lucide-react';
 import { useEffect } from 'react';
 

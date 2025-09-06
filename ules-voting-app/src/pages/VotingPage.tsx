@@ -4,6 +4,7 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import ImageZoomModal from "../components/ImageZoomModal";
 import axios from "axios";
 import { Redirect } from "wouter";
+import EmailConfirmationModal from "../components/EmailConfirmationModal";
 import type { VoterInfo } from "../App";
 import {
   Check,
@@ -36,7 +37,7 @@ interface GroupedCategories {
 }
 type MainCategoryKey = keyof GroupedCategories;
 
-// --- Success Modal Component ---
+// --- Success Modal Component (Unchanged) ---
 const SuccessModal = ({
   isOpen,
   onGoToHome,
@@ -55,7 +56,7 @@ const SuccessModal = ({
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div className="bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md w-full text-center">
         <ShieldCheck className="w-16 h-16 text-green-400 mx-auto mb-4" />
-        <h2 className="text-2xl font-bold text-white">Vote Submitted!</h2>
+        <h2 className="text-2xl font-bold text-white">Action Required</h2>
         <p className="text-slate-300 mt-2 mb-8">{message}</p>
         <div className="space-y-3">
           {nextCategory && (
@@ -70,7 +71,7 @@ const SuccessModal = ({
             onClick={onGoToHome}
             className="bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 px-6 rounded-lg w-full transition-colors border border-slate-600"
           >
-            Go to Home
+            Back to Categories Hub
           </button>
         </div>
       </div>
@@ -78,11 +79,20 @@ const SuccessModal = ({
   );
 };
 
-// --- NEW: Nominee Carousel Component ---
-
-// --- MODIFIED: Nominee Carousel Component ---
-// --- Nominee Carousel Component ---
-const NomineeCarousel = ({ category, selections, isCategoryVoted, onSelectNominee, onImageClick, }: { category: Category; selections: Selections; isCategoryVoted: boolean; onSelectNominee: (categoryId: string, nomineeName: string) => void; onImageClick: (nominee: Nominee) => void; }) => {
+// --- Nominee Carousel Component (Unchanged) ---
+const NomineeCarousel = ({
+  category,
+  selections,
+  isCategoryVoted,
+  onSelectNominee,
+  onImageClick,
+}: {
+  category: Category;
+  selections: Selections;
+  isCategoryVoted: boolean;
+  onSelectNominee: (categoryId: string, nomineeName: string) => void;
+  onImageClick: (nominee: Nominee) => void;
+}) => {
   const scrollContainer = useRef<HTMLDivElement>(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
@@ -95,10 +105,13 @@ const NomineeCarousel = ({ category, selections, isCategoryVoted, onSelectNomine
     }
   };
 
-  const scroll = (direction: 'left' | 'right') => {
+  const scroll = (direction: "left" | "right") => {
     if (scrollContainer.current) {
       const scrollAmount = scrollContainer.current.clientWidth * 0.8;
-      scrollContainer.current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
+      scrollContainer.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
     }
   };
 
@@ -117,10 +130,13 @@ const NomineeCarousel = ({ category, selections, isCategoryVoted, onSelectNomine
 
   return (
     <div className="relative">
-      <button onClick={() => scroll('left')} className={`absolute -left-4 md:-left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-600 flex items-center justify-center transition-opacity duration-300 disabled:opacity-0 disabled:cursor-default`} disabled={!showLeftArrow}>
+      <button
+        onClick={() => scroll("left")}
+        className={`absolute -left-4 md:-left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-600 flex items-center justify-center transition-opacity duration-300 disabled:opacity-0 disabled:cursor-default`}
+        disabled={!showLeftArrow}
+      >
         <ChevronLeft className="text-white" />
       </button>
-      
       <div
         ref={scrollContainer}
         onScroll={handleScroll}
@@ -128,11 +144,37 @@ const NomineeCarousel = ({ category, selections, isCategoryVoted, onSelectNomine
       >
         {category.nominees.map((nominee) => {
           const isSelected = selections[category.id] === nominee.name;
-          const imageSrc = nominee.image ? (nominee.image.startsWith('http') ? nominee.image : `/nominees/${nominee.image}`) : `/placeholder.png`;
+          const imageSrc = nominee.image
+            ? nominee.image.startsWith("http")
+              ? nominee.image
+              : `/nominees/${nominee.image}`
+            : `/placeholder.png`;
           return (
-            <div key={nominee.id} onClick={isCategoryVoted ? undefined : () => onSelectNominee(category.id, nominee.name)} className={`snap-start w-36 sm:w-48 bg-slate-900/50 border rounded-xl p-3 text-center transition-all duration-300 relative group flex flex-col flex-shrink-0 ${isCategoryVoted ? "cursor-not-allowed border-slate-700" : "cursor-pointer border-slate-700 hover:border-amber-400/50 hover:-translate-y-1"} ${isSelected ? "border-amber-400 ring-2 ring-amber-400" : ""}`}>
-              <div className={`relative w-24 h-24 mx-auto rounded-full overflow-hidden border-4 shadow-sm mb-3 transition-colors flex-shrink-0 ${isSelected ? "border-amber-400" : "border-slate-600"}`}>
-                <img src={imageSrc} alt={nominee.name} className="w-full h-full object-cover" loading="lazy" decoding="async"/>
+            <div
+              key={nominee.id}
+              onClick={
+                isCategoryVoted
+                  ? undefined
+                  : () => onSelectNominee(category.id, nominee.name)
+              }
+              className={`snap-start w-36 sm:w-48 bg-slate-900/50 border rounded-xl p-3 text-center transition-all duration-300 relative group flex flex-col flex-shrink-0 ${
+                isCategoryVoted
+                  ? "cursor-not-allowed border-slate-700"
+                  : "cursor-pointer border-slate-700 hover:border-amber-400/50 hover:-translate-y-1"
+              } ${isSelected ? "border-amber-400 ring-2 ring-amber-400" : ""}`}
+            >
+              <div
+                className={`relative w-24 h-24 mx-auto rounded-full overflow-hidden border-4 shadow-sm mb-3 transition-colors flex-shrink-0 ${
+                  isSelected ? "border-amber-400" : "border-slate-600"
+                }`}
+              >
+                <img
+                  src={imageSrc}
+                  alt={nominee.name}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
                 {nominee.image && (
                   <div
                     onClick={(e) => {
@@ -144,24 +186,52 @@ const NomineeCarousel = ({ category, selections, isCategoryVoted, onSelectNomine
                 )}
               </div>
               <div className="flex-grow flex flex-col justify-center">
-                  <h3 className="font-bold text-white text-sm md:text-base group-hover:text-base whitespace-normal break-words min-h-[2.5rem]">{nominee.name}</h3>
-                  <p className="text-slate-400 text-xs h-4 mb-3">{nominee.description || ""}</p>
+                <h3 className="font-bold text-white text-sm md:text-base group-hover:text-base whitespace-normal break-words min-h-[2.5rem]">
+                  {nominee.name}
+                </h3>
+                <p className="text-slate-400 text-xs h-4 mb-3">
+                  {nominee.description || ""}
+                </p>
               </div>
-              <div className={`w-full mt-auto py-2 px-3 rounded-lg font-semibold text-xs transition-all duration-300 flex items-center justify-center gap-2 border ${isSelected ? "bg-gradient-to-r from-amber-500 to-amber-400 text-black border-amber-400" : isCategoryVoted ? "bg-slate-700 text-slate-400 border-slate-600" : "bg-slate-800 text-slate-300 border-slate-600"}`}>
-                {isCategoryVoted ? (<> <Check size={14} /> Voted </>) : isSelected ? (<> <Check size={14} /> Selected </>) : ("Select")}
+              <div
+                className={`w-full mt-auto py-2 px-3 rounded-lg font-semibold text-xs transition-all duration-300 flex items-center justify-center gap-2 border ${
+                  isSelected
+                    ? "bg-gradient-to-r from-amber-500 to-amber-400 text-black border-amber-400"
+                    : isCategoryVoted
+                    ? "bg-slate-700 text-slate-400 border-slate-600"
+                    : "bg-slate-800 text-slate-300 border-slate-600"
+                }`}
+              >
+                {isCategoryVoted ? (
+                  <>
+                    {" "}
+                    <Check size={14} /> Voted{" "}
+                  </>
+                ) : isSelected ? (
+                  <>
+                    {" "}
+                    <Check size={14} /> Selected{" "}
+                  </>
+                ) : (
+                  "Select"
+                )}
               </div>
             </div>
           );
         })}
       </div>
-      
-      <button onClick={() => scroll('right')} className={`absolute -right-4 md:-right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-600 flex items-center justify-center transition-opacity duration-300 disabled:opacity-0 disabled:cursor-default`} disabled={!showRightArrow}>
+      <button
+        onClick={() => scroll("right")}
+        className={`absolute -right-4 md:-right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-600 flex items-center justify-center transition-opacity duration-300 disabled:opacity-0 disabled:cursor-default`}
+        disabled={!showRightArrow}
+      >
         <ChevronRight className="text-white" />
       </button>
     </div>
   );
 };
 
+// --- Main Voting Page Component (Corrected and Finalized) ---
 const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
   const { fullName, department } = voter;
 
@@ -171,17 +241,26 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
   const [groupedCategories, setGroupedCategories] = useState<GroupedCategories>(
     { undergraduate: [], general: [], finalist: [], departmental: [] }
   );
+
+  // FIX 1: This state is now managed by localStorage for better UX
   const [votedSubCategoryIds, setVotedSubCategoryIds] = useState<string[]>([]);
+
   const [selections, setSelections] = useState<Selections>({});
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Success Modal State
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [nextCategoryToVote, setNextCategoryToVote] = useState<{
     key: MainCategoryKey;
     title: string;
   } | null>(null);
+
+  // FIX 2: Added state for the new Email Confirmation Modal
+  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
+  const [submissionError, setSubmissionError] = useState<string | null>(null);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [zoomedNominee, setZoomedNominee] = useState<Nominee | null>(null);
@@ -191,37 +270,36 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
     title: string;
     description: string;
   }[] = [
-      {
-        key: "undergraduate",
-        title: "Undergraduate Awards",
-        description: "Recognizing outstanding undergraduate students.",
-      },
-      {
-        key: "general",
-        title: "General Awards",
-        description: "Awards open to students across all years.",
-      },
-      {
-        key: "finalist",
-        title: "Finalist Awards",
-        description: "Celebrating the achievements of the graduating class.",
-      },
-      {
-        key: "departmental",
-        title: "Departmental Awards",
-        description: "Honoring excellence within your department.",
-      },
-    ];
+    {
+      key: "undergraduate",
+      title: "Undergraduate Awards",
+      description: "Recognizing outstanding undergraduate students.",
+    },
+    {
+      key: "general",
+      title: "General Awards",
+      description: "Awards open to students across all years.",
+    },
+    {
+      key: "finalist",
+      title: "Finalist Awards",
+      description: "Celebrating the achievements of the graduating class.",
+    },
+    {
+      key: "departmental",
+      title: "Departmental Awards",
+      description: "Honoring excellence within your department.",
+    },
+  ];
 
   useEffect(() => {
     document.title = "ULES Dinner & Awards | Voting";
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const [structureRes, statusRes] = await Promise.all([
-          axios.get("/nominees.json"),
-          axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/voter-status`, {}),
-        ]);
+        const structureRes = await axios.get("/nominees.json");
+        // The insecure '/voter-status' call has been correctly removed.
+
         const jsonData = structureRes.data;
         const ug: Category[] = [],
           gen: Category[] = [],
@@ -251,7 +329,12 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
           finalist: fin,
           departmental: deptCats,
         });
-        setVotedSubCategoryIds(statusRes.data.votedSubCategoryIds);
+
+        // FIX 3: Load voted IDs from localStorage on component mount
+        const storedVotedIds = localStorage.getItem("votedCategoryIds");
+        if (storedVotedIds) {
+          setVotedSubCategoryIds(JSON.parse(storedVotedIds));
+        }
       } catch (err) {
         setError("Could not load voting data. Please try refreshing.");
       } finally {
@@ -280,37 +363,55 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
   const findNextCategoryToVote = (updatedVotedIds: string[]) => {
     return (
       mainCategories.find((mc) => {
-        const t = groupedCategories[mc.key]?.length || 0;
-        if (t === 0) return false;
-        const v = groupedCategories[mc.key].filter((c) =>
+        const total = groupedCategories[mc.key]?.length || 0;
+        if (total === 0) return false;
+        const votedCount = groupedCategories[mc.key].filter((c) =>
           updatedVotedIds.includes(c.id)
         ).length;
-        return v < t;
+        return votedCount < total;
       }) || null
     );
   };
 
-  const handleSubmitVote = async () => {
+  const handleSecureSubmit = async (email: string) => {
     if (!currentMainCategory || Object.keys(selections).length === 0) return;
+
     setIsSubmitting(true);
-    setError(null);
+    setSubmissionError(null);
+
     try {
+      const tokenRes = await axios.get(
+        `${(import.meta as any).env.VITE_API_BASE_URL}/api/csrf-token`
+      );
+      const csrfToken = tokenRes.data.csrfToken;
       const choices = Object.entries(selections).map(
         ([categoryId, nomineeName]) => ({ categoryId, nomineeName })
       );
-      const res = await axios.post(
-        `${import.meta.env.VITE_API_BASE_URL}/api/submit`,
-        { fullName, department, choices, mainCategory: currentMainCategory }
+      const payload = { email, fullName, department, choices };
+
+      await axios.post(
+        `${(import.meta as any).env.VITE_API_BASE_URL}/api/initiate-vote`,
+        payload,
+        { headers: { "X-CSRF-Token": csrfToken } }
       );
-      const updatedVotedList = res.data.votedSubCategoryIds;
-      setVotedSubCategoryIds(updatedVotedList);
-      const nextCat = findNextCategoryToVote(updatedVotedList);
+
+      // FIX 4: Update localStorage with newly submitted category IDs for instant UI feedback
+      const newVotedIds = [...votedSubCategoryIds, ...Object.keys(selections)];
+      setVotedSubCategoryIds(newVotedIds);
+      localStorage.setItem("votedCategoryIds", JSON.stringify(newVotedIds));
+
+      setIsEmailModalOpen(false);
+      setModalMessage(
+        "Please check your email to confirm and finalize your vote(s). Your vote is not counted until you verify."
+      );
+
+      const nextCat = findNextCategoryToVote(newVotedIds);
       setNextCategoryToVote(nextCat);
-      setModalMessage("Your selections for this category have been recorded.");
-      setIsModalOpen(true);
+      setIsSuccessModalOpen(true);
+      setSelections({}); // Clear selections for the next round
     } catch (err: any) {
-      setError(
-        err.response?.data?.message || "An error occurred while submitting."
+      setSubmissionError(
+        err.response?.data?.message || "An error occurred. Please try again."
       );
     } finally {
       setIsSubmitting(false);
@@ -318,24 +419,22 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
   };
 
   const handleGoToNextCategory = (key: MainCategoryKey) => {
-    setIsModalOpen(false);
+    setIsSuccessModalOpen(false);
     setView("voting");
     setCurrentMainCategory(key);
-    setSelections({});
   };
 
   const closeModalAndGoHome = () => {
-    setIsModalOpen(false);
+    setIsSuccessModalOpen(false);
     handleBackToHub();
   };
+
   const handleOpenZoomModal = (nominee: Nominee) => setZoomedNominee(nominee);
   const handleCloseZoomModal = () => setZoomedNominee(null);
 
   const filteredCategories = useMemo(() => {
     if (!currentMainCategory) return [];
-    if (!searchTerm.trim()) {
-      return groupedCategories[currentMainCategory] || [];
-    }
+    if (!searchTerm.trim()) return groupedCategories[currentMainCategory] || [];
     const lowercasedSearchTerm = searchTerm.toLowerCase();
     return (groupedCategories[currentMainCategory] || []).filter(
       (category) =>
@@ -348,9 +447,9 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
 
   if (!fullName) return <Redirect to="/" />;
 
-  // Logout handler
   const handleLogout = () => {
     sessionStorage.removeItem("voter");
+    localStorage.removeItem("votedCategoryIds"); // Clear voted status on logout
     window.location.href = "/";
   };
 
@@ -373,7 +472,6 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
         </div>
       </div>
     );
-
   if (error)
     return (
       <div className="flex items-center justify-center min-h-screen bg-black p-4">
@@ -389,30 +487,31 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
       className="min-h-screen w-full bg-black relative overflow-hidden bg-cover bg-center bg-fixed"
       style={{ backgroundImage: "url('/ornate_frame_bg.jpg')" }}
     >
-      {view === "hub" && (
-        <div className="flex flex-col items-center gap-6 mt-8">
-          {/* ...existing hub content... */}
-          <button
-            onClick={handleLogout}
-            className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-5 rounded-lg shadow-lg border border-red-700"
-          >
-            Logout
-          </button>
-        </div>
-      )}
       <div className="absolute inset-0 bg-black/80 backdrop-blur-md"></div>
+
+      {/* FIX 5: Add the new EmailConfirmationModal to the JSX tree */}
+      <EmailConfirmationModal
+        isOpen={isEmailModalOpen}
+        onClose={() => setIsEmailModalOpen(false)}
+        onSubmit={handleSecureSubmit}
+        isLoading={isSubmitting}
+        error={submissionError}
+      />
+
       <SuccessModal
-        isOpen={isModalOpen}
+        isOpen={isSuccessModalOpen}
         onGoToHome={closeModalAndGoHome}
         onGoToNext={handleGoToNextCategory}
         nextCategory={nextCategoryToVote}
         message={modalMessage}
       />
+
       <ImageZoomModal nominee={zoomedNominee} onClose={handleCloseZoomModal} />
+
       <div className="relative z-10 max-w-7xl mx-auto p-4 sm:p-8 w-full pt-24 sm:pt-20 pb-48">
         {view === "hub" ? (
           <>
-            <header className="text-center mb-12">
+            <header className="text-center mb-12 relative">
               <img
                 src="/ules_dinner_banner.png"
                 alt="Ules Dinner & Awards 2025"
@@ -425,6 +524,12 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                 </span>
                 .
               </p>
+              <button
+                onClick={handleLogout}
+                className="absolute top-0 right-0 mt-2 mr-2 bg-red-800/50 hover:bg-red-700/50 text-white text-xs font-bold py-2 px-4 rounded-lg shadow border border-red-700"
+              >
+                Logout
+              </button>
             </header>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {mainCategories.map(({ key, title, description }) => {
@@ -442,16 +547,18 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                     className="bg-slate-900/50 border border-slate-700 rounded-xl p-6 text-left transition-all duration-300 transform hover:border-amber-400/50 hover:-translate-y-1.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center gap-5 group"
                   >
                     <div
-                      className={`flex-shrink-0 w-16 h-16 rounded-lg flex items-center justify-center border transition-colors ${isComplete
+                      className={`flex-shrink-0 w-16 h-16 rounded-lg flex items-center justify-center border transition-colors ${
+                        isComplete
                           ? "bg-amber-500/10 border-amber-500/30"
                           : "bg-slate-800 border-slate-600"
-                        }`}
+                      }`}
                     >
                       <img
                         src="/nobgules-logo.png"
                         alt="Event Logo"
-                        className={`w-10 h-10 transition-transform duration-300 ${isComplete ? "" : "group-hover:scale-110"
-                          }`}
+                        className={`w-10 h-10 transition-transform duration-300 ${
+                          isComplete ? "" : "group-hover:scale-110"
+                        }`}
                       />
                     </div>
                     <div className="flex-grow">
@@ -506,7 +613,6 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                   </div>
                 </div>
               </header>
-
               <main>
                 <div className="text-center bg-slate-900/50 backdrop-blur-md rounded-xl shadow-lg p-6 border border-slate-700 mt-6 mb-12">
                   <h1 className="text-3xl sm:text-4xl font-bold tracking-tight bg-gradient-to-r from-amber-200 to-amber-500 bg-clip-text text-transparent">
@@ -520,7 +626,6 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                     Select one nominee for each available award below.
                   </p>
                 </div>
-
                 <div className="space-y-12">
                   {filteredCategories.map((category) => {
                     const isCategoryVoted = votedSubCategoryIds.includes(
@@ -529,8 +634,9 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                     return (
                       <section
                         key={category.id}
-                        className={`transition-opacity ${isCategoryVoted ? "opacity-60" : ""
-                          }`}
+                        className={`transition-opacity ${
+                          isCategoryVoted ? "opacity-60" : ""
+                        }`}
                       >
                         <div className="text-center mb-6 relative">
                           <h2 className="text-2xl font-bold text-white">
@@ -542,7 +648,6 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                             </p>
                           )}
                         </div>
-
                         <NomineeCarousel
                           category={category}
                           selections={selections}
@@ -553,7 +658,6 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                       </section>
                     );
                   })}
-
                   {filteredCategories.length === 0 && searchTerm && (
                     <div className="text-center py-16">
                       <p className="text-slate-400 text-lg">
@@ -563,19 +667,19 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                   )}
                 </div>
               </main>
-
               <footer className="fixed bottom-0 left-0 right-0 z-20 bg-black/50 backdrop-blur-md border-t border-white/10 p-4">
                 <div className="max-w-5xl mx-auto flex items-center justify-center">
+                  {/* FIX 6: The submit button now opens the email modal */}
                   <button
-                    onClick={handleSubmitVote}
+                    onClick={() => setIsEmailModalOpen(true)}
                     disabled={
                       isSubmitting || Object.keys(selections).length === 0
                     }
                     className="w-full sm:w-auto bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-500 disabled:from-slate-600 disabled:to-slate-700 disabled:text-slate-400 disabled:cursor-not-allowed transition-all duration-300 text-black font-bold py-3 px-12 rounded-lg flex items-center justify-center gap-2 shadow-lg"
                   >
-                    {isSubmitting && (
+                    {isSubmitting ? (
                       <Loader2 className="w-5 h-5 animate-spin" />
-                    )}
+                    ) : null}
                     {isSubmitting
                       ? "Submitting..."
                       : `Submit ${Object.keys(selections).length} Vote(s)`}
