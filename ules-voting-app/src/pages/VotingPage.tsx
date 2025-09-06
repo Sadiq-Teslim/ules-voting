@@ -381,7 +381,8 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
 
     try {
       const tokenRes = await axios.get(
-        `${(import.meta as any).env.VITE_API_BASE_URL}/api/csrf-token`
+        `${(import.meta as any).env.VITE_API_BASE_URL}/api/csrf-token`,
+        { withCredentials: true }
       );
       const csrfToken = tokenRes.data.csrfToken;
       const choices = Object.entries(selections).map(
@@ -389,11 +390,14 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
       );
       const payload = { email, fullName, department, choices };
 
-      await axios.post(
-        `${(import.meta as any).env.VITE_API_BASE_URL}/api/initiate-vote`,
-        payload,
-        { headers: { "X-CSRF-Token": csrfToken } }
-      );
+       await axios.post(
+            `${import.meta.env.VITE_API_BASE_URL}/api/initiate-vote`,
+            payload,
+            { 
+                headers: { 'X-CSRF-Token': csrfToken },
+                withCredentials: true
+            }
+        );
 
       // FIX 4: Update localStorage with newly submitted category IDs for instant UI feedback
       const newVotedIds = [...votedSubCategoryIds, ...Object.keys(selections)];
