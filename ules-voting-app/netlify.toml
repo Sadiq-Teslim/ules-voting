@@ -8,6 +8,9 @@
   # The command to build your site.
   command = "npm run build"
 
+  [build.environment]
+  NODE_VERSION = "18.17.0"
+
 # This is the crucial redirect rule for Single-Page Applications
 [[redirects]]
   # The source path: '*' is a wildcard for any path
