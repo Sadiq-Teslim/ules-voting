@@ -6,6 +6,8 @@ import VotingPage from "./pages/VotingPage";
 import SuccessPage from "./pages/SuccessPage";
 import AdminPage from "./pages/AdminPage";
 import NominationPage from "./pages/NominationPage";
+import VoteSuccessPage from "./pages/vote-success";
+import VerifyVotePage from "./pages/verify-vote";
 
 // Define a type for our voter data
 export interface VoterInfo {
@@ -42,6 +44,9 @@ function App() {
           {/* This is the key change: Pass the 'voter' object as a prop */}
           {voter ? <VotingPage voter={voter} /> : <Redirect to="/" />}
         </Route>
+
+        <Route path="/vote-success" component={VoteSuccessPage} />
+        <Route path="/verify-vote" component={VerifyVotePage} />
 
         <Route path="/nominate" component={NominationPage} />
         <Route path="/success" component={SuccessPage} />
