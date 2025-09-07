@@ -14,6 +14,7 @@ import {
   Search,
   ChevronRight,
   ChevronLeft,
+  ShoppingCart,
 } from "lucide-react";
 
 // --- TypeScript Types ---
@@ -41,14 +42,10 @@ type MainCategoryKey = keyof GroupedCategories;
 const SuccessModal = ({
   isOpen,
   onGoToHome,
-  onGoToNext,
-  nextCategory,
   message,
 }: {
   isOpen: boolean;
   onGoToHome: () => void;
-  onGoToNext: (key: MainCategoryKey) => void;
-  nextCategory: { key: MainCategoryKey; title: string } | null;
   message: string;
 }) => {
   if (!isOpen) return null;
@@ -59,17 +56,9 @@ const SuccessModal = ({
         <h2 className="text-2xl font-bold text-white">Action Required</h2>
         <p className="text-slate-300 mt-2 mb-8">{message}</p>
         <div className="space-y-3">
-          {nextCategory && (
-            <button
-              onClick={() => onGoToNext(nextCategory.key)}
-              className="w-full bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-500 transition-all duration-300 text-black font-bold py-3 rounded-lg"
-            >
-              Go to {nextCategory.title}
-            </button>
-          )}
           <button
             onClick={onGoToHome}
-            className="bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 px-6 rounded-lg w-full transition-colors border border-slate-600"
+            className="w-full bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors border border-slate-600"
           >
             Back to Categories Hub
           </button>
@@ -241,27 +230,15 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
   const [groupedCategories, setGroupedCategories] = useState<GroupedCategories>(
     { undergraduate: [], general: [], finalist: [], departmental: [] }
   );
-
-  // FIX 1: This state is now managed by localStorage for better UX
   const [votedSubCategoryIds, setVotedSubCategoryIds] = useState<string[]>([]);
-
   const [selections, setSelections] = useState<Selections>({});
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  // Success Modal State
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
-  const [modalMessage, setModalMessage] = useState("");
-  const [nextCategoryToVote, setNextCategoryToVote] = useState<{
-    key: MainCategoryKey;
-    title: string;
-  } | null>(null);
-
-  // FIX 2: Added state for the new Email Confirmation Modal
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
   const [submissionError, setSubmissionError] = useState<string | null>(null);
-
+  const [modalMessage, setModalMessage] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [zoomedNominee, setZoomedNominee] = useState<Nominee | null>(null);
 
@@ -353,7 +330,6 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
   const handleBackToHub = () => {
     setView("hub");
     setCurrentMainCategory(null);
-    setSelections({});
   };
 
   const handleSelectNominee = (categoryId: string, nomineeName: string) => {
@@ -372,47 +348,51 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
       }) || null
     );
   };
-
-  const handleSecureSubmit = async (email: string) => {
-    if (!currentMainCategory || Object.keys(selections).length === 0) return;
-
+  // MODIFIED: This function now submits the entire "cart" of selections
+  const handleSubmitAllVotes = async (email: string) => {
+    if (Object.keys(selections).length === 0) return;
     setIsSubmitting(true);
     setSubmissionError(null);
-
     try {
       const tokenRes = await axios.get(
-        `${(import.meta as any).env.VITE_API_BASE_URL}/api/csrf-token`,
+        `${import.meta.env.VITE_API_BASE_URL}/api/csrf-token`,
         { withCredentials: true }
       );
-      const csrfToken = tokenRes.data.csrfToken;
       const choices = Object.entries(selections).map(
-        ([categoryId, nomineeName]) => ({ categoryId, nomineeName })
+        ([categoryId, nomineeName]) => {
+          const category = Object.values(groupedCategories)
+            .flat()
+            .find((c) => c.id === categoryId);
+          return {
+            categoryId,
+            nomineeName,
+            categoryTitle: category?.title || "Award",
+          };
+        }
       );
       const payload = { email, fullName, department, choices };
-
-       await axios.post(
-            `${import.meta.env.VITE_API_BASE_URL}/api/initiate-vote`,
-            payload,
-            { 
-                headers: { 'X-CSRF-Token': csrfToken },
-                withCredentials: true
-            }
-        );
-
-      // FIX 4: Update localStorage with newly submitted category IDs for instant UI feedback
-      const newVotedIds = [...votedSubCategoryIds, ...Object.keys(selections)];
-      setVotedSubCategoryIds(newVotedIds);
-      localStorage.setItem("votedCategoryIds", JSON.stringify(newVotedIds));
-
-      setIsEmailModalOpen(false);
-      setModalMessage(
-        "Please check your email to confirm and finalize your vote(s). Your vote is not counted until you verify."
+      await axios.post(
+        `${import.meta.env.VITE_API_BASE_URL}/api/initiate-vote`,
+        payload,
+        {
+          headers: { "X-CSRF-Token": tokenRes.data.csrfToken },
+          withCredentials: true,
+        }
       );
 
-      const nextCat = findNextCategoryToVote(newVotedIds);
-      setNextCategoryToVote(nextCat);
+      const newlyVotedIds = [
+        ...votedSubCategoryIds,
+        ...Object.keys(selections),
+      ];
+      setVotedSubCategoryIds(newlyVotedIds);
+      localStorage.setItem("votedCategoryIds", JSON.stringify(newlyVotedIds));
+
+      setSelections({}); // Empty the cart after successful submission
+      setIsEmailModalOpen(false);
+      setModalMessage(
+        "Please check your email (and spam folder) to confirm your entire ballot. Your votes are not counted until you click the link."
+      );
       setIsSuccessModalOpen(true);
-      setSelections({}); // Clear selections for the next round
     } catch (err: any) {
       setSubmissionError(
         err.response?.data?.message || "An error occurred. Please try again."
@@ -421,6 +401,55 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
       setIsSubmitting(false);
     }
   };
+
+  // const handleSecureSubmit = async (email: string) => {
+  //   if (!currentMainCategory || Object.keys(selections).length === 0) return;
+
+  //   setIsSubmitting(true);
+  //   setSubmissionError(null);
+
+  //   try {
+  //     const tokenRes = await axios.get(
+  //       `${(import.meta as any).env.VITE_API_BASE_URL}/api/csrf-token`,
+  //       { withCredentials: true }
+  //     );
+  //     const csrfToken = tokenRes.data.csrfToken;
+  //     const choices = Object.entries(selections).map(
+  //       ([categoryId, nomineeName]) => ({ categoryId, nomineeName })
+  //     );
+  //     const payload = { email, fullName, department, choices };
+
+  //     await axios.post(
+  //       `${import.meta.env.VITE_API_BASE_URL}/api/initiate-vote`,
+  //       payload,
+  //       {
+  //         headers: { "X-CSRF-Token": csrfToken },
+  //         withCredentials: true,
+  //       }
+  //     );
+
+  //     // FIX 4: Update localStorage with newly submitted category IDs for instant UI feedback
+  //     const newVotedIds = [...votedSubCategoryIds, ...Object.keys(selections)];
+  //     setVotedSubCategoryIds(newVotedIds);
+  //     localStorage.setItem("votedCategoryIds", JSON.stringify(newVotedIds));
+
+  //     setIsEmailModalOpen(false);
+  //     setModalMessage(
+  //       "Please check your email (spam folder) to confirm and finalize your vote(s). Your vote is not counted until you verify."
+  //     );
+
+  //     const nextCat = findNextCategoryToVote(newVotedIds);
+  //     setNextCategoryToVote(nextCat);
+  //     setIsSuccessModalOpen(true);
+  //     setSelections({}); // Clear selections for the next round
+  //   } catch (err: any) {
+  //     setSubmissionError(
+  //       err.response?.data?.message || "An error occurred. Please try again."
+  //     );
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
 
   const handleGoToNextCategory = (key: MainCategoryKey) => {
     setIsSuccessModalOpen(false);
@@ -451,11 +480,11 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
 
   if (!fullName) return <Redirect to="/" />;
 
-  const handleLogout = () => {
-    sessionStorage.removeItem("voter");
-    localStorage.removeItem("votedCategoryIds"); // Clear voted status on logout
-    window.location.href = "/";
-  };
+  // const handleLogout = () => {
+  //   sessionStorage.removeItem("voter");
+  //   localStorage.removeItem("votedCategoryIds"); // Clear voted status on   
+  //   window.location.href = "/";
+  // };
 
   if (isLoading)
     return (
@@ -478,14 +507,17 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
     );
   if (error)
     return (
-      <div className="flex items-center justify-center min-h-screen bg-black p-4">
+      <div
+        className="flex items-center justify-center p-4"
+        style={{ backgroundImage: "url('/ornate_frame_bg.jpg')" }}
+      >
         <div className="p-6 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-center shadow-md">
           <h3 className="font-bold text-lg mb-2">An Error Occurred</h3>
           <p>{error}</p>
         </div>
       </div>
     );
-
+  const selectionCount = Object.keys(selections).length;
   return (
     <div
       className="min-h-screen w-full bg-black relative overflow-hidden bg-cover bg-center bg-fixed"
@@ -497,7 +529,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
       <EmailConfirmationModal
         isOpen={isEmailModalOpen}
         onClose={() => setIsEmailModalOpen(false)}
-        onSubmit={handleSecureSubmit}
+        onSubmit={handleSubmitAllVotes}
         isLoading={isSubmitting}
         error={submissionError}
       />
@@ -505,14 +537,14 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
       <SuccessModal
         isOpen={isSuccessModalOpen}
         onGoToHome={closeModalAndGoHome}
-        onGoToNext={handleGoToNextCategory}
-        nextCategory={nextCategoryToVote}
+        // onGoToNext={handleGoToNextCategory}
+        // nextCategory={nextCategoryToVote}
         message={modalMessage}
       />
 
       <ImageZoomModal nominee={zoomedNominee} onClose={handleCloseZoomModal} />
 
-      <div className="relative z-10 max-w-7xl mx-auto p-4 sm:p-8 w-full pt-24 sm:pt-20 pb-48">
+      <div className="relative z-10 max-w-7xl mx-auto p-4 sm:p-8 w-full pt-24 sm:pt-20 pb-64">
         {view === "hub" ? (
           <>
             <header className="text-center mb-12 relative">
@@ -528,12 +560,12 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                 </span>
                 .
               </p>
-              <button
+              {/* <button
                 onClick={handleLogout}
                 className="absolute top-0 right-0 mt-2 mr-2 bg-red-800/50 hover:bg-red-700/50 text-white text-xs font-bold py-2 px-4 rounded-lg shadow border border-red-700"
               >
                 Logout
-              </button>
+              </button> */}
             </header>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {mainCategories.map(({ key, title, description }) => {
@@ -671,29 +703,29 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                   )}
                 </div>
               </main>
-              <footer className="fixed bottom-0 left-0 right-0 z-20 bg-black/50 backdrop-blur-md border-t border-white/10 p-4">
-                <div className="max-w-5xl mx-auto flex items-center justify-center">
-                  {/* FIX 6: The submit button now opens the email modal */}
-                  <button
-                    onClick={() => setIsEmailModalOpen(true)}
-                    disabled={
-                      isSubmitting || Object.keys(selections).length === 0
-                    }
-                    className="w-full sm:w-auto bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-500 disabled:from-slate-600 disabled:to-slate-700 disabled:text-slate-400 disabled:cursor-not-allowed transition-all duration-300 text-black font-bold py-3 px-12 rounded-lg flex items-center justify-center gap-2 shadow-lg"
-                  >
-                    {isSubmitting ? (
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                    ) : null}
-                    {isSubmitting
-                      ? "Submitting..."
-                      : `Submit ${Object.keys(selections).length} Vote(s)`}
-                  </button>
-                </div>
-              </footer>
+          
             </>
           )
         )}
       </div>
+      <footer className="fixed bottom-0 left-0 right-0 z-20 bg-black/50 backdrop-blur-md border-t border-white/10 p-4 transition-transform duration-300">
+          <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+            <div className="text-left">
+              <h3 className="font-bold text-white">Your Ballot</h3>
+              <p className="text-sm text-amber-300">{selectionCount} vote(s) selected.</p>
+            </div>
+            <button
+              onClick={() => setIsEmailModalOpen(true)}
+              disabled={selectionCount === 0 || isSubmitting}
+              className="group w-auto bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-500 transition-all duration-300 text-black font-bold text-base py-3 px-6 sm:px-10 rounded-lg shadow-lg shadow-amber-500/10 disabled:from-slate-600 disabled:to-slate-700 disabled:text-slate-400 disabled:cursor-not-allowed flex items-center justify-center gap-2.5"
+            >
+              <ShoppingCart className="w-5 h-5"/>
+              <span>
+                {isSubmitting ? "Submitting..." : `Submit ${selectionCount} Vote(s)`}
+              </span>
+            </button>
+          </div>
+        </footer>
     </div>
   );
 };
