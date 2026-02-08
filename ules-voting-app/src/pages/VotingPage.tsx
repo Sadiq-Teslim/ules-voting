@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import ImageZoomModal from "../components/ImageZoomModal";
 import axios from "axios";
 import { Redirect } from "wouter";
-import EmailConfirmationModal from "../components/EmailConfirmationModal";
+import { generateFingerprint } from "../utils/fingerprint";
+import { retryWithBackoff } from "../utils/retry";
 import type { VoterInfo } from "../App";
 import {
   Check,
@@ -38,7 +38,20 @@ interface GroupedCategories {
 }
 type MainCategoryKey = keyof GroupedCategories;
 
-// --- Success Modal Component (Unchanged) ---
+const API = import.meta.env.VITE_API_BASE_URL;
+
+// --- CSRF token cache (Fix #5: avoid double round-trip) ---
+let cachedCsrfToken: string | null = null;
+async function getCsrfToken(): Promise<string> {
+  if (cachedCsrfToken) return cachedCsrfToken;
+  const res = await retryWithBackoff(() =>
+    axios.get(`${API}/api/csrf-token`, { withCredentials: true })
+  );
+  cachedCsrfToken = res.data.csrfToken;
+  return cachedCsrfToken!;
+}
+
+// --- Success Modal Component ---
 const SuccessModal = ({
   isOpen,
   onGoToHome,
@@ -53,7 +66,7 @@ const SuccessModal = ({
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div className="bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md w-full text-center">
         <ShieldCheck className="w-16 h-16 text-green-400 mx-auto mb-4" />
-        <h2 className="text-2xl font-bold text-white">Action Required</h2>
+        <h2 className="text-2xl font-bold text-white">Votes Recorded!</h2>
         <p className="text-slate-300 mt-2 mb-8">{message}</p>
         <div className="space-y-3">
           <button
@@ -68,7 +81,7 @@ const SuccessModal = ({
   );
 };
 
-// --- Nominee Carousel Component (Unchanged) ---
+// --- Nominee Carousel Component ---
 const NomineeCarousel = ({
   category,
   selections,
@@ -86,13 +99,13 @@ const NomineeCarousel = ({
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     if (scrollContainer.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollContainer.current;
       setShowLeftArrow(scrollLeft > 1);
       setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 1);
     }
-  };
+  }, []);
 
   const scroll = (direction: "left" | "right") => {
     if (scrollContainer.current) {
@@ -106,22 +119,21 @@ const NomineeCarousel = ({
 
   useEffect(() => {
     const container = scrollContainer.current;
-    if (container) {
-      const observer = new ResizeObserver(() => handleScroll());
-      observer.observe(container);
-      const timer = setTimeout(() => handleScroll(), 100);
-      return () => {
-        clearTimeout(timer);
-        observer.disconnect();
-      };
-    }
-  }, [category.nominees]);
+    if (!container) return;
+    const observer = new ResizeObserver(() => handleScroll());
+    observer.observe(container);
+    const timer = setTimeout(() => handleScroll(), 100);
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
+  }, [category.nominees, handleScroll]);
 
   return (
     <div className="relative">
       <button
         onClick={() => scroll("left")}
-        className={`absolute -left-4 md:-left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-600 flex items-center justify-center transition-opacity duration-300 disabled:opacity-0 disabled:cursor-default`}
+        className="absolute -left-4 md:-left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-600 flex items-center justify-center transition-opacity duration-300 disabled:opacity-0 disabled:cursor-default"
         disabled={!showLeftArrow}
       >
         <ChevronLeft className="text-white" />
@@ -192,15 +204,9 @@ const NomineeCarousel = ({
                 }`}
               >
                 {isCategoryVoted ? (
-                  <>
-                    {" "}
-                    <Check size={14} /> Voted{" "}
-                  </>
+                  <><Check size={14} /> Voted</>
                 ) : isSelected ? (
-                  <>
-                    {" "}
-                    <Check size={14} /> Selected{" "}
-                  </>
+                  <><Check size={14} /> Selected</>
                 ) : (
                   "Select"
                 )}
@@ -211,7 +217,7 @@ const NomineeCarousel = ({
       </div>
       <button
         onClick={() => scroll("right")}
-        className={`absolute -right-4 md:-right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-600 flex items-center justify-center transition-opacity duration-300 disabled:opacity-0 disabled:cursor-default`}
+        className="absolute -right-4 md:-right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-600 flex items-center justify-center transition-opacity duration-300 disabled:opacity-0 disabled:cursor-default"
         disabled={!showRightArrow}
       >
         <ChevronRight className="text-white" />
@@ -220,7 +226,7 @@ const NomineeCarousel = ({
   );
 };
 
-// --- Main Voting Page Component (Corrected and Finalized) ---
+// --- Main Voting Page Component ---
 const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
   const { fullName, department } = voter;
 
@@ -236,37 +242,21 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
-  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
   const [submissionError, setSubmissionError] = useState<string | null>(null);
   const [modalMessage, setModalMessage] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [zoomedNominee, setZoomedNominee] = useState<Nominee | null>(null);
+  const fingerprintRef = useRef<string | null>(null);
 
   const mainCategories: {
     key: MainCategoryKey;
     title: string;
     description: string;
   }[] = [
-    {
-      key: "undergraduate",
-      title: "Undergraduate Awards",
-      description: "Recognizing outstanding undergraduate students.",
-    },
-    {
-      key: "general",
-      title: "General Awards",
-      description: "Awards open to students across all years.",
-    },
-    {
-      key: "finalist",
-      title: "Finalist Awards",
-      description: "Celebrating the achievements of the graduating class.",
-    },
-    {
-      key: "departmental",
-      title: "Departmental Awards",
-      description: "Honoring excellence within your department.",
-    },
+    { key: "undergraduate", title: "Undergraduate Awards", description: "Recognizing outstanding undergraduate students." },
+    { key: "general", title: "General Awards", description: "Awards open to students across all years." },
+    { key: "finalist", title: "Finalist Awards", description: "Celebrating the achievements of the graduating class." },
+    { key: "departmental", title: "Departmental Awards", description: "Honoring excellence within your department." },
   ];
 
   useEffect(() => {
@@ -274,22 +264,23 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const structureRes = await axios.get("/nominees.json");
-        // The insecure '/voter-status' call has been correctly removed.
+        // Fetch nominees, server-side voted state, and fingerprint in parallel
+        const [structureRes, votedRes, fp] = await Promise.all([
+          retryWithBackoff(() => axios.get("/nominees.json")),
+          retryWithBackoff(() => axios.get(`${API}/api/voted-categories`, { withCredentials: true })),
+          generateFingerprint(),
+        ]);
+
+        fingerprintRef.current = fp;
 
         const jsonData = structureRes.data;
-        const ug: Category[] = [],
-          gen: Category[] = [],
-          fin: Category[] = [];
+        const ug: Category[] = [], gen: Category[] = [], fin: Category[] = [];
         let deptCats: Category[] = [];
         const userDepartment = jsonData.departments.find(
           (dept: any) => dept.id === department
         );
         if (userDepartment) {
-          const deptName = userDepartment.title.replace(
-            "Departmental Awards - ",
-            ""
-          );
+          const deptName = userDepartment.title.replace("Departmental Awards - ", "");
           deptCats = userDepartment.subcategories.map((subCat: any) => ({
             ...subCat,
             title: `${deptName} - ${subCat.title}`,
@@ -300,19 +291,11 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
           else if (cat.id.startsWith("gen-")) gen.push(cat);
           else if (cat.id.startsWith("fin-")) fin.push(cat);
         });
-        setGroupedCategories({
-          undergraduate: ug,
-          general: gen,
-          finalist: fin,
-          departmental: deptCats,
-        });
+        setGroupedCategories({ undergraduate: ug, general: gen, finalist: fin, departmental: deptCats });
 
-        // FIX 3: Load voted IDs from localStorage on component mount
-        const storedVotedIds = localStorage.getItem("votedCategoryIds");
-        if (storedVotedIds) {
-          setVotedSubCategoryIds(JSON.parse(storedVotedIds));
-        }
-      } catch (err) {
+        // Use server-side cookie as source of truth for voted categories
+        setVotedSubCategoryIds(votedRes.data.votedCategoryIds || []);
+      } catch {
         setError("Could not load voting data. Please try refreshing.");
       } finally {
         setIsLoading(false);
@@ -336,125 +319,53 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
     setSelections((prev) => ({ ...prev, [categoryId]: nomineeName }));
   };
 
-  const findNextCategoryToVote = (updatedVotedIds: string[]) => {
-    return (
-      mainCategories.find((mc) => {
-        const total = groupedCategories[mc.key]?.length || 0;
-        if (total === 0) return false;
-        const votedCount = groupedCategories[mc.key].filter((c) =>
-          updatedVotedIds.includes(c.id)
-        ).length;
-        return votedCount < total;
-      }) || null
-    );
-  };
-  // MODIFIED: This function now submits the entire "cart" of selections
-  const handleSubmitAllVotes = async (email: string) => {
-    if (Object.keys(selections).length === 0) return;
+  // Submit votes — fingerprint + cookie, no email, immediate counting
+  const handleSubmitVotes = async () => {
+    if (Object.keys(selections).length === 0 || isSubmitting) return;
     setIsSubmitting(true);
     setSubmissionError(null);
+
     try {
-      const tokenRes = await axios.get(
-        `${import.meta.env.VITE_API_BASE_URL}/api/csrf-token`,
-        { withCredentials: true }
-      );
+      const csrfToken = await getCsrfToken();
       const choices = Object.entries(selections).map(
-        ([categoryId, nomineeName]) => {
-          const category = Object.values(groupedCategories)
-            .flat()
-            .find((c) => c.id === categoryId);
-          return {
-            categoryId,
-            nomineeName,
-            categoryTitle: category?.title || "Award",
-          };
-        }
+        ([categoryId, nomineeName]) => ({ categoryId, nomineeName })
       );
-      const payload = { email, fullName, department, choices };
-      await axios.post(
-        `${import.meta.env.VITE_API_BASE_URL}/api/initiate-vote`,
-        payload,
-        {
-          headers: { "X-CSRF-Token": tokenRes.data.csrfToken },
+      const payload = {
+        fingerprint: fingerprintRef.current,
+        department,
+        choices,
+      };
+
+      const res = await retryWithBackoff(() =>
+        axios.post(`${API}/api/submit-votes`, payload, {
+          headers: { "X-CSRF-Token": csrfToken },
           withCredentials: true,
-        }
+        })
       );
 
-      const newlyVotedIds = [
-        ...votedSubCategoryIds,
-        ...Object.keys(selections),
-      ];
-      setVotedSubCategoryIds(newlyVotedIds);
-      localStorage.setItem("votedCategoryIds", JSON.stringify(newlyVotedIds));
+      // Server returns the authoritative list of voted category IDs
+      setVotedSubCategoryIds(res.data.votedCategoryIds || []);
+      setSelections({});
 
-      setSelections({}); // Empty the cart after successful submission
-      setIsEmailModalOpen(false);
-      setModalMessage(
-        "Please check your email (and spam folder) to confirm your entire ballot. Your votes are not counted until you click the link."
-      );
+      const recordedCount = res.data.recorded?.length || 0;
+      const skippedCount = res.data.skipped?.length || 0;
+      if (skippedCount > 0 && recordedCount === 0) {
+        setModalMessage("You have already voted in all selected categories.");
+      } else if (skippedCount > 0) {
+        setModalMessage(`${recordedCount} vote(s) recorded. ${skippedCount} category(ies) were already voted in.`);
+      } else {
+        setModalMessage("Your votes have been recorded successfully. Thank you for voting!");
+      }
       setIsSuccessModalOpen(true);
     } catch (err: any) {
+      // If CSRF token expired, clear cache and show error
+      cachedCsrfToken = null;
       setSubmissionError(
         err.response?.data?.message || "An error occurred. Please try again."
       );
     } finally {
       setIsSubmitting(false);
     }
-  };
-
-  // const handleSecureSubmit = async (email: string) => {
-  //   if (!currentMainCategory || Object.keys(selections).length === 0) return;
-
-  //   setIsSubmitting(true);
-  //   setSubmissionError(null);
-
-  //   try {
-  //     const tokenRes = await axios.get(
-  //       `${(import.meta as any).env.VITE_API_BASE_URL}/api/csrf-token`,
-  //       { withCredentials: true }
-  //     );
-  //     const csrfToken = tokenRes.data.csrfToken;
-  //     const choices = Object.entries(selections).map(
-  //       ([categoryId, nomineeName]) => ({ categoryId, nomineeName })
-  //     );
-  //     const payload = { email, fullName, department, choices };
-
-  //     await axios.post(
-  //       `${import.meta.env.VITE_API_BASE_URL}/api/initiate-vote`,
-  //       payload,
-  //       {
-  //         headers: { "X-CSRF-Token": csrfToken },
-  //         withCredentials: true,
-  //       }
-  //     );
-
-  //     // FIX 4: Update localStorage with newly submitted category IDs for instant UI feedback
-  //     const newVotedIds = [...votedSubCategoryIds, ...Object.keys(selections)];
-  //     setVotedSubCategoryIds(newVotedIds);
-  //     localStorage.setItem("votedCategoryIds", JSON.stringify(newVotedIds));
-
-  //     setIsEmailModalOpen(false);
-  //     setModalMessage(
-  //       "Please check your email (spam folder) to confirm and finalize your vote(s). Your vote is not counted until you verify."
-  //     );
-
-  //     const nextCat = findNextCategoryToVote(newVotedIds);
-  //     setNextCategoryToVote(nextCat);
-  //     setIsSuccessModalOpen(true);
-  //     setSelections({}); // Clear selections for the next round
-  //   } catch (err: any) {
-  //     setSubmissionError(
-  //       err.response?.data?.message || "An error occurred. Please try again."
-  //     );
-  //   } finally {
-  //     setIsSubmitting(false);
-  //   }
-  // };
-
-  const handleGoToNextCategory = (key: MainCategoryKey) => {
-    setIsSuccessModalOpen(false);
-    setView("voting");
-    setCurrentMainCategory(key);
   };
 
   const closeModalAndGoHome = () => {
@@ -479,12 +390,6 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
   }, [currentMainCategory, groupedCategories, searchTerm]);
 
   if (!fullName) return <Redirect to="/" />;
-
-  // const handleLogout = () => {
-  //   sessionStorage.removeItem("voter");
-  //   localStorage.removeItem("votedCategoryIds"); // Clear voted status on   
-  //   window.location.href = "/";
-  // };
 
   if (isLoading)
     return (
@@ -525,20 +430,9 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
     >
       <div className="absolute inset-0 bg-black/80 backdrop-blur-md"></div>
 
-      {/* FIX 5: Add the new EmailConfirmationModal to the JSX tree */}
-      <EmailConfirmationModal
-        isOpen={isEmailModalOpen}
-        onClose={() => setIsEmailModalOpen(false)}
-        onSubmit={handleSubmitAllVotes}
-        isLoading={isSubmitting}
-        error={submissionError}
-      />
-
       <SuccessModal
         isOpen={isSuccessModalOpen}
         onGoToHome={closeModalAndGoHome}
-        // onGoToNext={handleGoToNextCategory}
-        // nextCategory={nextCategoryToVote}
         message={modalMessage}
       />
 
@@ -560,12 +454,6 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                 </span>
                 .
               </p>
-              {/* <button
-                onClick={handleLogout}
-                className="absolute top-0 right-0 mt-2 mr-2 bg-red-800/50 hover:bg-red-700/50 text-white text-xs font-bold py-2 px-4 rounded-lg shadow border border-red-700"
-              >
-                Logout
-              </button> */}
             </header>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {mainCategories.map(({ key, title, description }) => {
@@ -605,14 +493,10 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                       <div className="text-sm font-semibold text-slate-400 mt-2">
                         {isComplete ? (
                           <span className="text-amber-400 flex items-center gap-1.5">
-                            {" "}
-                            <ShieldCheck size={16} /> COMPLETED{" "}
+                            <ShieldCheck size={16} /> COMPLETED
                           </span>
                         ) : totalInCat > 0 ? (
-                          <span>
-                            {" "}
-                            Voted {votedInCat} of {totalInCat}{" "}
-                          </span>
+                          <span>Voted {votedInCat} of {totalInCat}</span>
                         ) : (
                           <span>No awards available</span>
                         )}
@@ -652,11 +536,7 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
               <main>
                 <div className="text-center bg-slate-900/50 backdrop-blur-md rounded-xl shadow-lg p-6 border border-slate-700 mt-6 mb-12">
                   <h1 className="text-3xl sm:text-4xl font-bold tracking-tight bg-gradient-to-r from-amber-200 to-amber-500 bg-clip-text text-transparent">
-                    {
-                      mainCategories.find(
-                        (mc) => mc.key === currentMainCategory
-                      )?.title
-                    }
+                    {mainCategories.find((mc) => mc.key === currentMainCategory)?.title}
                   </h1>
                   <p className="text-slate-400 mt-2 max-w-2xl mx-auto">
                     Select one nominee for each available award below.
@@ -664,20 +544,14 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                 </div>
                 <div className="space-y-12">
                   {filteredCategories.map((category) => {
-                    const isCategoryVoted = votedSubCategoryIds.includes(
-                      category.id
-                    );
+                    const isCategoryVoted = votedSubCategoryIds.includes(category.id);
                     return (
                       <section
                         key={category.id}
-                        className={`transition-opacity ${
-                          isCategoryVoted ? "opacity-60" : ""
-                        }`}
+                        className={`transition-opacity ${isCategoryVoted ? "opacity-60" : ""}`}
                       >
                         <div className="text-center mb-6 relative">
-                          <h2 className="text-2xl font-bold text-white">
-                            {category.title}
-                          </h2>
+                          <h2 className="text-2xl font-bold text-white">{category.title}</h2>
                           {isCategoryVoted && (
                             <p className="text-sm font-semibold text-amber-400 mt-1">
                               You have already voted in this award
@@ -696,36 +570,40 @@ const VotingPage: React.FC<{ voter: VoterInfo }> = ({ voter }) => {
                   })}
                   {filteredCategories.length === 0 && searchTerm && (
                     <div className="text-center py-16">
-                      <p className="text-slate-400 text-lg">
-                        No results found for "{searchTerm}".
-                      </p>
+                      <p className="text-slate-400 text-lg">No results found for "{searchTerm}".</p>
                     </div>
                   )}
                 </div>
               </main>
-          
             </>
           )
         )}
       </div>
       <footer className="fixed bottom-0 left-0 right-0 z-20 bg-black/50 backdrop-blur-md border-t border-white/10 p-4 transition-transform duration-300">
-          <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-            <div className="text-left">
-              <h3 className="font-bold text-white">Your Ballot</h3>
-              <p className="text-sm text-amber-300">{selectionCount} vote(s) selected.</p>
-            </div>
-            <button
-              onClick={() => setIsEmailModalOpen(true)}
-              disabled={selectionCount === 0 || isSubmitting}
-              className="group w-auto bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-500 transition-all duration-300 text-black font-bold text-base py-3 px-6 sm:px-10 rounded-lg shadow-lg shadow-amber-500/10 disabled:from-slate-600 disabled:to-slate-700 disabled:text-slate-400 disabled:cursor-not-allowed flex items-center justify-center gap-2.5"
-            >
-              <ShoppingCart className="w-5 h-5"/>
-              <span>
-                {isSubmitting ? "Submitting..." : `Submit ${selectionCount} Vote(s)`}
-              </span>
-            </button>
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+          <div className="text-left">
+            <h3 className="font-bold text-white">Your Ballot</h3>
+            <p className="text-sm text-amber-300">{selectionCount} vote(s) selected.</p>
+            {submissionError && (
+              <p className="text-xs text-red-400 mt-1">{submissionError}</p>
+            )}
           </div>
-        </footer>
+          <button
+            onClick={handleSubmitVotes}
+            disabled={selectionCount === 0 || isSubmitting}
+            className="group w-auto bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-500 transition-all duration-300 text-black font-bold text-base py-3 px-6 sm:px-10 rounded-lg shadow-lg shadow-amber-500/10 disabled:from-slate-600 disabled:to-slate-700 disabled:text-slate-400 disabled:cursor-not-allowed flex items-center justify-center gap-2.5"
+          >
+            {isSubmitting ? (
+              <Loader2 className="w-5 h-5 animate-spin" />
+            ) : (
+              <ShoppingCart className="w-5 h-5" />
+            )}
+            <span>
+              {isSubmitting ? "Submitting..." : `Submit ${selectionCount} Vote(s)`}
+            </span>
+          </button>
+        </div>
+      </footer>
     </div>
   );
 };

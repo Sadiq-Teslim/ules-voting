@@ -11,11 +11,29 @@
   [build.environment]
   NODE_VERSION = "20.19.0"
 
-# This is the crucial redirect rule for Single-Page Applications
+# Cache static nominee data and images (Fix #12)
+[[headers]]
+  for = "/nominees.json"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/nominees/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# SPA redirect rule
 [[redirects]]
-  # The source path: '*' is a wildcard for any path
   from = "/*"
-  # The destination: serve the main index.html file
   to = "/index.html"
-  # The status code: 200 means "OK", which handles the rewrite correctly for SPAs
   status = 200

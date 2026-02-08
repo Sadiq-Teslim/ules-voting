@@ -44,7 +44,7 @@ ChartJS.register(
 
 const AdminPage = () => {
   // --- STATE MANAGEMENT ---
-  const [password, setPassword] = useState("");
+  const [adminToken, setAdminToken] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
   const [results, setResults] = useState<CategoryResult[]>([]);
@@ -86,38 +86,25 @@ const AdminPage = () => {
     departmental: "Departmental Awards",
   };
 
-  // --- NEW: useEffect to check for persisted session on component mount ---
+  // --- Check for persisted JWT session on mount ---
   useEffect(() => {
-    const storedPassword = sessionStorage.getItem("adminPassword");
-    const storedTimestamp = sessionStorage.getItem("loginTimestamp");
-
-    if (storedPassword && storedTimestamp) {
-      const loginTime = parseInt(storedTimestamp, 10);
-      const now = Date.now();
-      const minutesElapsed = (now - loginTime) / (1000 * 60);
-
-      // Check if the session is less than 25 minutes old
-      if (minutesElapsed < 25) {
-        // If valid, restore the session
-        setPassword(storedPassword);
-        setIsAuthenticated(true);
-        fetchAllAdminData(storedPassword); // Re-fetch data
-      } else {
-        // If expired, clear storage
-        sessionStorage.removeItem("adminPassword");
-        sessionStorage.removeItem("loginTimestamp");
-      }
+    const storedToken = sessionStorage.getItem("adminToken");
+    if (storedToken) {
+      setAdminToken(storedToken);
+      setIsAuthenticated(true);
+      fetchAllAdminData(storedToken);
     }
-    // Finished checking, we can now show either login or dashboard
     setIsCheckingAuth(false);
   }, []);
 
   // --- LOGIC & DATA HANDLING ---
 
+  const authHeaders = useCallback((token: string) => ({
+    headers: { Authorization: `Bearer ${token}` }
+  }), []);
+
   const handleResetElection = async () => {
-    const response = await axios.post(`${API_BASE_URL}/api/reset-election`, {
-      password,
-    });
+    const response = await axios.post(`${API_BASE_URL}/api/reset-election`, {}, authHeaders(adminToken));
     handleRefresh();
     return response.data;
   };
@@ -143,17 +130,14 @@ const AdminPage = () => {
   );
 
   const fetchAllAdminData = useCallback(
-    async (currentPassword: string) => {
+    async (token: string) => {
       setIsInitialLoading(true);
+      const headers = { headers: { Authorization: `Bearer ${token}` } };
       try {
         const [resultsRes, nominationsRes, categoriesRes, statusRes] =
           await Promise.all([
-            axios.post(`${API_BASE_URL}/api/results`, {
-              password: currentPassword,
-            }),
-            axios.post(`${API_BASE_URL}/api/pending-nominations`, {
-              password: currentPassword,
-            }),
+            axios.post(`${API_BASE_URL}/api/results`, {}, headers),
+            axios.post(`${API_BASE_URL}/api/pending-nominations`, {}, headers),
             axios.get("/nominees.json"),
             axios.get(`${API_BASE_URL}/api/election-status`),
           ]);
@@ -164,8 +148,9 @@ const AdminPage = () => {
         setElectionStatus(statusRes.data.status);
         return true;
       } catch (err) {
-        setError("Access Denied. Invalid Password.");
+        setError("Session expired or invalid. Please log in again.");
         setIsAuthenticated(false);
+        sessionStorage.removeItem("adminToken");
         return false;
       } finally {
         setIsInitialLoading(false);
@@ -177,23 +162,28 @@ const AdminPage = () => {
   const handleLogin = async (submittedPassword: string) => {
     setIsLoggingIn(true);
     setError("");
-    const success = await fetchAllAdminData(submittedPassword);
-    if (success) {
-      setPassword(submittedPassword);
-      setIsAuthenticated(true);
-      // --- NEW: Persist session to Session Storage on successful login ---
-      sessionStorage.setItem("adminPassword", submittedPassword);
-      sessionStorage.setItem("loginTimestamp", Date.now().toString());
+    try {
+      const loginRes = await axios.post(`${API_BASE_URL}/api/admin-login`, { password: submittedPassword });
+      const token = loginRes.data.token;
+      setAdminToken(token);
+      sessionStorage.setItem("adminToken", token);
+      const success = await fetchAllAdminData(token);
+      if (success) {
+        setIsAuthenticated(true);
+      }
+    } catch (err) {
+      setError("Access Denied. Invalid Password.");
     }
     setIsLoggingIn(false);
   };
 
   const handleRefresh = useCallback(async () => {
     setIsRefreshing(true);
+    const headers = { headers: { Authorization: `Bearer ${adminToken}` } };
     try {
       const [resultsRes, nominationsRes] = await Promise.all([
-        axios.post(`${API_BASE_URL}/api/results`, { password }),
-        axios.post(`${API_BASE_URL}/api/pending-nominations`, { password }),
+        axios.post(`${API_BASE_URL}/api/results`, {}, headers),
+        axios.post(`${API_BASE_URL}/api/pending-nominations`, {}, headers),
       ]);
       setResults(resultsRes.data);
       setPendingNominations(nominationsRes.data || []);
@@ -202,7 +192,7 @@ const AdminPage = () => {
     } finally {
       setIsRefreshing(false);
     }
-  }, [API_BASE_URL, password]);
+  }, [API_BASE_URL, adminToken]);
 
   useEffect(() => {
     if (!isAuthenticated) return;
@@ -351,9 +341,7 @@ const AdminPage = () => {
   const handleToggleElectionStatus = async () => {
     setIsProcessingModal(true);
     try {
-      const res = await axios.post(`${API_BASE_URL}/api/toggle-election`, {
-        password,
-      });
+      const res = await axios.post(`${API_BASE_URL}/api/toggle-election`, {}, authHeaders(adminToken));
       setElectionStatus(res.data.newStatus);
     } catch (err) {
       alert("Failed to change status.");
@@ -366,9 +354,7 @@ const AdminPage = () => {
   const handleDeleteAllNominations = async () => {
     setIsProcessingModal(true);
     try {
-      const res = await axios.post(`${API_BASE_URL}/api/delete-nominations`, {
-        password,
-      });
+      const res = await axios.post(`${API_BASE_URL}/api/delete-nominations`, {}, authHeaders(adminToken));
       alert(res.data.message);
       setPendingNominations([]);
     } catch (err) {
@@ -591,7 +577,8 @@ const AdminPage = () => {
             <button
               onClick={() => {
                 setIsAuthenticated(false);
-                setPassword("");
+                setAdminToken("");
+                sessionStorage.removeItem("adminToken");
               }}
               className="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-semibold py-2 px-4 rounded-lg text-sm flex items-center gap-2"
             >
